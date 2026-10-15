@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  PORTAL DE PROYECTOS PIA — Institución Universitaria Pascual Bravo
+  ----------------------------------------------------------------------------
+  Esta página reúne las 33 aplicaciones web de los proyectos.
+  Al publicar esta carpeta se publican todas de una sola vez.
+
+  Cómo usarlo:
+    · En el computador: abre este archivo con doble clic.
+    · En internet: sube TODA la carpeta a GitHub Pages o a Netlify.
+    · En la red del colegio: abre http://<ip-del-equipo>:3220/web/
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyectos PIA · IU Pascual Bravo</title>
+  <meta name="description" content="Aplicaciones web de los proyectos integradores de aula del Técnico Auxiliar en Desarrollo de Software.">
+  <style>
+    /* ---- variables del diseño ---- */
+    :root { --vino: #5B2C86; --lima: #C4D600; --gris: #6b6b76; --linea: #e6e6ec; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Roboto, system-ui, sans-serif; color: #23232b; background: #f5f5f8; line-height: 1.5; }
+
+    /* ---- encabezado ---- */
+    header { background: linear-gradient(135deg, var(--vino) 0%, #3f1d60 100%); color: #fff; padding: 46px 24px 40px; text-align: center; }
+    header h1 { font-size: 32px; margin-bottom: 8px; }
+    header p { color: #e8ddf5; font-size: 15px; }
+    header .programa { display: inline-block; margin-top: 14px; background: rgba(255,255,255,.14); padding: 7px 16px; border-radius: 20px; font-size: 13px; }
+
+    /* ---- contenido ---- */
+    main { max-width: 1180px; margin: 0 auto; padding: 30px 22px 60px; }
+    .grupo { font-size: 17px; color: var(--vino); margin: 34px 0 14px; display: flex; align-items: baseline; gap: 10px; }
+    .grupo span { font-size: 13px; color: var(--gris); font-weight: 400; }
+    .grupo:first-child { margin-top: 6px; }
+
+    /* ---- rejilla de tarjetas ---- */
+    .rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+    .tarjeta {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      background: #fff; border-radius: 14px; padding: 22px 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06); text-decoration: none; color: inherit;
+      border-top: 4px solid var(--c, var(--vino)); transition: transform .15s, box-shadow .15s;
+    }
+    .tarjeta:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,.12); }
+    .tarjeta img { width: 78px; height: 78px; object-fit: contain; margin-bottom: 12px; }
+    .sin-logo { width: 78px; height: 78px; border-radius: 16px; background: var(--c); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 700; margin-bottom: 12px; }
+    .tarjeta b { font-size: 15px; color: var(--vino); }
+    .tarjeta span { font-size: 12px; color: var(--gris); margin: 6px 0 10px; min-height: 34px; }
+    .tarjeta small { font-size: 11px; color: #9a9aa5; border-top: 1px solid var(--linea); padding-top: 8px; width: 100%; }
+
+    /* ---- pie ---- */
+    footer { text-align: center; padding: 26px; color: var(--gris); font-size: 12px; border-top: 1px solid var(--linea); }
+
+    /* ---- celulares ---- */
+    @media (max-width: 600px) {
+      header h1 { font-size: 24px; }
+      .rejilla { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      .tarjeta img, .sin-logo { width: 60px; height: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Proyectos PIA</h1>
+    <p>Aplicaciones web construidas por los estudiantes de Media Técnica</p>
+    <div class="programa">Técnico Auxiliar en Desarrollo de Software · IU Pascual Bravo</div>
+  </header>
+
+  <main>
+    <div style="background:#fff;border-radius:12px;padding:16px 20px;font-size:13px;color:#5a5a66;border-left:4px solid var(--lima)">
+      <b style="color:#5B2C86">33 proyectos</b> listos para consultar. Elige uno para abrir su aplicación:
+      tiene registro de usuarios, módulos con formularios, búsqueda y exportación a Excel.
+    </div>
+  <h2 class="grupo">I.E. Sol de Oriente <span>2025 · 12 proyectos</span></h2>
+  <div class="rejilla">
+    <a class="tarjeta" href="Cine_conCiencia_2025/index.html" style="--c:#a8be2d">
+      <img src="Cine_conCiencia_2025/logo.png" alt="Logo de Cine conCiencia" loading="lazy">
+      <b>Cine conCiencia</b>
+      <span>Aprender ciencia, sintiendo el cine</span>
+      <small>Grado 11° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="ConvivIA_2025/index.html" style="--c:#2dbe56">
+      <img src="ConvivIA_2025/logo.png" alt="Logo de ConvivIA" loading="lazy">
+      <b>ConvivIA</b>
+      <span>Normas claras, convivencia tranquila</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="EcoChain_Verde_2025/index.html" style="--c:#2dbe84">
+      <img src="EcoChain_Verde_2025/logo.png" alt="Logo de EcoChain Verde" loading="lazy">
+      <b>EcoChain Verde</b>
+      <span>Cada residuo cuenta, cada acción suma</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="EduCompu_2025/index.html" style="--c:#40be2d">
+      <img src="EduCompu_2025/logo.png" alt="Logo de EduCompu" loading="lazy">
+      <b>EduCompu</b>
+      <span>La tecnología institucional, siempre disponible</span>
+      <small>Grado 11° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="EduConnectIA_2025/index.html" style="--c:#9cbe2d">
+      <img src="EduConnectIA_2025/logo.png" alt="Logo de EduConnect.IA" loading="lazy">
+      <b>EduConnect.IA</b>
+      <span>Un tutor inteligente que nunca cierra</span>
+      <small>Grado 11° · 7 módulos</small>
+    </a>
+    <a class="tarjeta" href="EduViajes_2025/index.html" style="--c:#2dbeb4">
+      <img src="EduViajes_2025/logo.png" alt="Logo de EduViajes" loading="lazy">
+      <b>EduViajes</b>
+      <span>Salir a aprender, sin perder el papeleo</span>
+      <small>Grado 11° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="Hunter_Food_2025/index.html" style="--c:#2d6cbe">
+      <img src="Hunter_Food_2025/logo.png" alt="Logo de Hunter Food" loading="lazy">
+      <b>Hunter Food</b>
+      <span>Come rico, sin filas</span>
+      <small>Grado 11° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="Hyper_Emotion_2025/index.html" style="--c:#2dbe64">
+      <img src="Hyper_Emotion_2025/logo.png" alt="Logo de Hyper Emotion" loading="lazy">
+      <b>Hyper Emotion</b>
+      <span>Entender lo que sientes es el primer paso</span>
+      <small>Grado 11° · 7 módulos</small>
+    </a>
+    <a class="tarjeta" href="Imagen_School_2025/index.html" style="--c:#902dbe">
+      <img src="Imagen_School_2025/logo.png" alt="Logo de Imagen School" loading="lazy">
+      <b>Imagen School</b>
+      <span>La mejor versión de ti empieza por tu imagen</span>
+      <small>Grado 10° · 7 módulos</small>
+    </a>
+    <a class="tarjeta" href="Master_Acudiente_2025/index.html" style="--c:#2dbe84">
+      <img src="Master_Acudiente_2025/logo.png" alt="Logo de Master Acudiente" loading="lazy">
+      <b>Master Acudiente</b>
+      <span>La familia informada, el estudiante acompañado</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="Mindsport_2025/index.html" style="--c:#75be2d">
+      <img src="Mindsport_2025/logo.png" alt="Logo de Mindsport" loading="lazy">
+      <b>Mindsport</b>
+      <span>El deporte que nos une</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="SolBox_2025/index.html" style="--c:#2dbebc">
+      <img src="SolBox_2025/logo.png" alt="Logo de SolBox" loading="lazy">
+      <b>SolBox</b>
+      <span>Tu voz, escuchada y atendida</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+  </div>
+  <h2 class="grupo">I.E. Lola González <span>2026 · 9 proyectos</span></h2>
+  <div class="rejilla">
+    <a class="tarjeta" href="Alfabetizadores_Lola_2026/index.html" style="--c:#2dbeb4">
+      <img src="Alfabetizadores_Lola_2026/logo.png" alt="Logo de Alfabetizadores Lola" loading="lazy">
+      <b>Alfabetizadores Lola</b>
+      <span>Leer abre mundos</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="Great_Food_App_2026/index.html" style="--c:#9cbe2d">
+      <img src="Great_Food_App_2026/logo.png" alt="Logo de Great Food App" loading="lazy">
+      <b>Great Food App</b>
+      <span>Pide fácil, recibe rápido</span>
+      <small>Grado 10° · 7 módulos</small>
+    </a>
+    <a class="tarjeta" href="Inventory_School_2026/index.html" style="--c:#be7a2d">
+      <img src="Inventory_School_2026/logo.png" alt="Logo de Inventory School" loading="lazy">
+      <b>Inventory School</b>
+      <span>Todo lo que hay, donde debe estar</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="LolaConnect_2026/index.html" style="--c:#6c2dbe">
+      <img src="LolaConnect_2026/logo.png" alt="Logo de LolaConnect" loading="lazy">
+      <b>LolaConnect</b>
+      <span>La institución, conectada</span>
+      <small>Grado 10° · 7 módulos</small>
+    </a>
+    <a class="tarjeta" href="RADE_2026/index.html" style="--c:#312dbe">
+      <img src="RADE_2026/logo.png" alt="Logo de R.A.D.E" loading="lazy">
+      <b>R.A.D.E</b>
+      <span>Alimentación escolar, sin fichos</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="SOMOS_Potencialidades_2026/index.html" style="--c:#2d7abe">
+      <img src="SOMOS_Potencialidades_2026/logo.png" alt="Logo de SOMOS Potencialidades" loading="lazy">
+      <b>SOMOS Potencialidades</b>
+      <span>Aquí todos tenemos algo que dar</span>
+      <small>Grado 10° · 7 módulos</small>
+    </a>
+    <a class="tarjeta" href="TDL_Easy_2026/index.html" style="--c:#b9be2d">
+      <img src="TDL_Easy_2026/logo.png" alt="Logo de TDL Easy" loading="lazy">
+      <b>TDL Easy</b>
+      <span>Trámites simples, respuestas rápidas</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="TimeFocus_2026/index.html" style="--c:#472dbe">
+      <img src="TimeFocus_2026/logo.png" alt="Logo de TimeFocus" loading="lazy">
+      <b>TimeFocus</b>
+      <span>Tu tiempo, bajo control</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="Tu_Opinion_Cuenta_2026/index.html" style="--c:#be9a2d">
+      <img src="Tu_Opinion_Cuenta_2026/logo.png" alt="Logo de Tu Opinion Cuenta" loading="lazy">
+      <b>Tu Opinion Cuenta</b>
+      <span>Tu opinión sí cambia las cosas</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+  </div>
+  <h2 class="grupo">I.E. Sol de Oriente <span>2026 · 12 proyectos</span></h2>
+  <div class="rejilla">
+    <a class="tarjeta" href="Cine_conCiencia_2026/index.html" style="--c:#a8be2d">
+      <img src="Cine_conCiencia_2026/logo.png" alt="Logo de Cine conCiencia" loading="lazy">
+      <b>Cine conCiencia</b>
+      <span>Aprender ciencia, sintiendo el cine</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="ConvivIA_2026/index.html" style="--c:#2dbe56">
+      <img src="ConvivIA_2026/logo.png" alt="Logo de ConvivIA" loading="lazy">
+      <b>ConvivIA</b>
+      <span>Normas claras, convivencia tranquila</span>
+      <small>Grado 11° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="Dual_Language_Center_2026/index.html" style="--c:#2d64be">
+      <img src="Dual_Language_Center_2026/logo.png" alt="Logo de Dual Language Center" loading="lazy">
+      <b>Dual Language Center</b>
+      <span>Un idioma más, un mundo más</span>
+      <small>Grado 10° · 7 módulos</small>
+    </a>
+    <a class="tarjeta" href="EcoChain_Verde_2026/index.html" style="--c:#2dbe84">
+      <img src="EcoChain_Verde_2026/logo.png" alt="Logo de EcoChain Verde" loading="lazy">
+      <b>EcoChain Verde</b>
+      <span>Cada residuo cuenta, cada acción suma</span>
+      <small>Grado 11° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="EduConnectIA_2026/index.html" style="--c:#9cbe2d">
+      <img src="EduConnectIA_2026/logo.png" alt="Logo de EduConnect.IA" loading="lazy">
+      <b>EduConnect.IA</b>
+      <span>Un tutor inteligente que nunca cierra</span>
+      <small>Grado 10° · 7 módulos</small>
+    </a>
+    <a class="tarjeta" href="EduViajes_2026/index.html" style="--c:#2dbeb4">
+      <img src="EduViajes_2026/logo.png" alt="Logo de EduViajes" loading="lazy">
+      <b>EduViajes</b>
+      <span>Salir a aprender, sin perder el papeleo</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="Imagen_School_2026/index.html" style="--c:#902dbe">
+      <img src="Imagen_School_2026/logo.png" alt="Logo de Imagen School" loading="lazy">
+      <b>Imagen School</b>
+      <span>La mejor versión de ti empieza por tu imagen</span>
+      <small>Grado 11° · 7 módulos</small>
+    </a>
+    <a class="tarjeta" href="Master_Acudiente_2026/index.html" style="--c:#2dbe84">
+      <img src="Master_Acudiente_2026/logo.png" alt="Logo de Master Acudiente" loading="lazy">
+      <b>Master Acudiente</b>
+      <span>La familia informada, el estudiante acompañado</span>
+      <small>Grado 11° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="Mindsport_2026/index.html" style="--c:#75be2d">
+      <img src="Mindsport_2026/logo.png" alt="Logo de Mindsport" loading="lazy">
+      <b>Mindsport</b>
+      <span>El deporte que nos une</span>
+      <small>Grado 11° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="SolBox_2026/index.html" style="--c:#2dbebc">
+      <img src="SolBox_2026/logo.png" alt="Logo de SolBox" loading="lazy">
+      <b>SolBox</b>
+      <span>Tu voz, escuchada y atendida</span>
+      <small>Grado 11° · 8 módulos</small>
+    </a>
+    <a class="tarjeta" href="The_School_of_The_Lost_Souls_2026/index.html" style="--c:#2fbe2d">
+      <img src="The_School_of_The_Lost_Souls_2026/logo.png" alt="Logo de The School of The Lost Souls" loading="lazy">
+      <b>The School of The Lost Souls</b>
+      <span>Ningún estudiante se queda atrás</span>
+      <small>Grado 10° · 7 módulos</small>
+    </a>
+    <a class="tarjeta" href="The_TechFlow_2026/index.html" style="--c:#2dadbe">
+      <img src="The_TechFlow_2026/logo.png" alt="Logo de The TechFlow" loading="lazy">
+      <b>The TechFlow</b>
+      <span>La tecnología, fluyendo</span>
+      <small>Grado 10° · 8 módulos</small>
+    </a>
+  </div>
+  </main>
+
+  <footer>
+    Institución Universitaria Pascual Bravo · Media Técnica · Medellín, Antioquia<br>
+    Portal generado por Project Manager PasculIA
+  </footer>
+
+</body>
+</html>

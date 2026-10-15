@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  EcoChain Verde — aplicación web
+  Proyecto Integrador de Aula (PIA) · I.E. Sol de Oriente · Grado 11° · 2026
+  Programa: Técnico Auxiliar en Desarrollo de Software — IU Pascual Bravo
+
+  Este archivo es la ESTRUCTURA de la aplicación (el esqueleto).
+  Aquí solo va el contenido: las pantallas y sus contenedores.
+  El diseño está en css/estilos.css y la lógica en la carpeta js/.
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <!-- Codificación y adaptación a celulares y tabletas -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de Gestión Inteligente de Residuos con Tecnología Blockchain">
+  <meta name="author" content="ADRIAN FELIPE LUGO MORENO, JAROL ANDREY MORA MORENO, JULIAN ALEXANDER QUICENO DAVID, MARIA DANIELA RAMIREZ LOAIZA, JUAN PABLO RAMIREZ RENTERIA">
+  <title>EcoChain Verde · PIA 2026</title>
+
+  <!-- El icono de la pestaña es el logo del proyecto -->
+  <link rel="icon" href="logo.png">
+  <!-- Hoja de estilos propia de la aplicación -->
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- ================= PANTALLA DE INGRESO ================= -->
+  <!-- Se muestra cuando no hay una sesión iniciada -->
+  <section id="pantallaIngreso" class="ingreso">
+    <div class="ingreso-caja">
+      <img src="logo.png" alt="Logo de EcoChain Verde" class="ingreso-logo">
+      <h1>EcoChain Verde</h1>
+      <p class="lema">Cada residuo cuenta, cada acción suma</p>
+
+      <!-- Formulario de ingreso -->
+      <form id="formIngreso" autocomplete="off">
+        <label for="ingCorreo">Correo electrónico</label>
+        <input type="email" id="ingCorreo" placeholder="tu.correo@ejemplo.com" required>
+
+        <label for="ingClave">Contraseña</label>
+        <input type="password" id="ingClave" placeholder="Tu contraseña" required>
+
+        <button type="submit" class="boton grande">Ingresar</button>
+      </form>
+
+      <!-- Enlace para crear la cuenta -->
+      <p class="ingreso-pie">
+        ¿No tienes cuenta? <a href="#" id="enlaceRegistro">Crear una cuenta</a>
+      </p>
+
+      <!-- Formulario de registro (oculto hasta que se pide) -->
+      <form id="formRegistro" class="oculto" autocomplete="off">
+        <label for="regNombre">Nombre completo</label>
+        <input type="text" id="regNombre" placeholder="Nombres y apellidos" required>
+
+        <label for="regCorreo">Correo electrónico</label>
+        <input type="email" id="regCorreo" placeholder="tu.correo@ejemplo.com" required>
+
+        <label for="regClave">Contraseña</label>
+        <input type="password" id="regClave" placeholder="Mínimo 6 caracteres" minlength="6" required>
+
+        <label for="regRol">¿Cómo vas a usar la aplicación?</label>
+        <select id="regRol">
+          <option>Estudiante</option>
+          <option>Docente</option>
+          <option>Directivo</option>
+          <option>Acudiente</option>
+        </select>
+
+        <button type="submit" class="boton grande">Crear la cuenta</button>
+        <button type="button" class="boton claro" id="cancelarRegistro">Volver</button>
+      </form>
+
+      <p class="creditos">
+        Proyecto Integrador de Aula · I.E. Sol de Oriente · 2026
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= APLICACIÓN ================= -->
+  <!-- Se muestra cuando ya hay una sesión iniciada -->
+  <div id="aplicacion" class="aplicacion oculto">
+
+    <!-- ---------- menú lateral ---------- -->
+    <aside class="lateral">
+      <div class="marca">
+        <img src="logo.png" alt="Logo" class="marca-logo">
+        <div>
+          <b>EcoChain Verde</b>
+          <span>I.E. Sol de Oriente</span>
+        </div>
+      </div>
+
+      <!-- Los módulos se dibujan desde js/modulos.js -->
+      <nav id="menu"></nav>
+
+      <div class="lateral-pie">
+        <div id="usuarioActual" class="usuario"></div>
+        <button class="boton claro chico" id="botonSalir">Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <!-- ---------- contenido ---------- -->
+    <main class="contenido">
+      <header class="cabecera">
+        <h1 id="tituloModulo">Inicio</h1>
+        <button class="boton solo-movil" id="botonMenu" aria-label="Abrir el menú">☰</button>
+      </header>
+
+      <!-- Aquí se dibuja cada módulo -->
+      <section id="vista" class="vista"></section>
+    </main>
+  </div>
+
+  <!-- Aviso flotante para confirmar las acciones -->
+  <div id="aviso" class="aviso oculto"></div>
+
+  <!-- Los scripts van al final para que la página cargue más rápido -->
+  <!-- 1. la "base de datos" del navegador -->
+  <script src="js/almacen.js"></script>
+  <!-- 2. los módulos del proyecto, generados desde sus requisitos funcionales -->
+  <script src="js/modulos.js"></script>
+  <!-- 3. la lógica de la aplicación -->
+  <script src="js/app.js"></script>
+</body>
+</html>
