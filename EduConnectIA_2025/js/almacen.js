@@ -142,8 +142,28 @@ function verificarUsuario(correo, clave) {
 /* --------------------------------------------------------------------------
    SESIÓN: recuerda quién está usando la aplicación mientras navega
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   CUENTA DE PRUEBA
+   La primera vez que se abre la aplicación se crea una cuenta para que
+   cualquier persona pueda revisarla sin tener que registrarse. Es la misma
+   en todas las aplicaciones de los proyectos.
+   -------------------------------------------------------------------------- */
+var CUENTA_PRUEBA = { correo: 'pruebas@pasculia.edu.co', clave: 'PascualBravo2026', nombre: 'Cuenta de prueba', rol: 'Docente' };
+
+/**
+ * Crea la cuenta de prueba si la aplicación todavía no tiene usuarios.
+ * Si ya hay cuentas creadas no se toca nada: los datos de verdad manda.
+ */
+function prepararCuentaDePrueba() {
+  if (listar('usuarios').length > 0) return;
+  crearUsuario(CUENTA_PRUEBA.nombre, CUENTA_PRUEBA.correo, CUENTA_PRUEBA.clave, CUENTA_PRUEBA.rol);
+}
+
 function guardarSesion(usuario) { sessionStorage.setItem(CLAVE + '_sesion', JSON.stringify(usuario)); }
 function leerSesion() {
   try { return JSON.parse(sessionStorage.getItem(CLAVE + '_sesion') || 'null'); } catch (e) { return null; }
 }
 function cerrarSesion() { sessionStorage.removeItem(CLAVE + '_sesion'); }
+
+/* Se prepara la cuenta de prueba al abrir la aplicación. */
+prepararCuentaDePrueba();

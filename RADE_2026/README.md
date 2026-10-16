@@ -11,14 +11,26 @@ Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascu
 
 Registro de Alimentación de Estudiantes (PAE)
 
+## Cuenta de prueba
+
+Para revisarla **no hace falta registrarse**: la aplicación crea sola una cuenta la primera vez que se abre.
+
+| | |
+|---|---|
+| **Correo** | `pruebas@pasculia.edu.co` |
+| **Contraseña** | `PascualBravo2026` |
+| **Rol** | Docente |
+
+> Es la **misma cuenta en las 33 aplicaciones**, para que quien las revise no tenga que memorizar nada.
+> También se puede crear una cuenta propia con el botón *Crear una cuenta*.
+
 ## Cómo se usa
 
 1. Abre el archivo **index.html** con doble clic (o sírvelo con un servidor local).
-2. Pulsa **Crear una cuenta** y regístrate.
-3. Entra con tu correo y tu contraseña.
-4. Elige un módulo en el menú de la izquierda.
-5. Llena el formulario y pulsa **Guardar**. El registro aparece en la tabla.
-6. Puedes **buscar**, **editar**, **eliminar** y **exportar** a Excel.
+2. Entra con la **cuenta de prueba** de arriba, o pulsa **Crear una cuenta** y regístrate.
+3. Elige un módulo en el menú de la izquierda.
+4. Llena el formulario y pulsa **Guardar**. El registro aparece en la tabla.
+5. Puedes **buscar**, **editar**, **eliminar** y **exportar** a Excel.
 
 Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar la página.
 
