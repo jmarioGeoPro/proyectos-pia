@@ -1,0 +1,63 @@
+/* ==========================================================================
+   components.css
+   --------------------------------------------------------------------------
+   Las piezas visuales de la tienda: tarjetas de producto, líneas del carrito,
+   ficho virtual, tarjetas de la cola y la pantalla de turnos.
+   ========================================================================== */
+
+/* ---- 1. TARJETAS DE PRODUCTO ---- */
+.producto { border: 1px solid var(--linea); border-radius: 12px; padding: 13px; background: var(--blanco);
+  display: flex; flex-direction: column; gap: 7px; }
+.producto .icono { font-size: 30px; line-height: 1; }
+.producto h3 { font-size: 14px; margin: 0; line-height: 1.3; }
+.producto .descripcion { min-height: 32px; }
+.producto .precio { font-size: 16px; color: var(--primario); }
+.producto .pie-producto { justify-content: space-between; margin-top: auto; }
+.producto.agotado { opacity: .68; background: #fbfcfd; }
+
+/* ---- 2. CARRITO ---- */
+.linea-carrito { display: flex; align-items: center; gap: 10px; padding: 9px 0;
+  border-bottom: 1px solid var(--linea); font-size: 13px; }
+.linea-carrito .crece { flex: 1; min-width: 0; }
+.total-carrito { justify-content: space-between; border-top: 2px solid var(--linea);
+  padding-top: 10px; margin-top: 10px; font-size: 15px; }
+.total-carrito b { font-size: 20px; color: var(--primario); }
+
+/* ---- 3. FICHO VIRTUAL ---- */
+.ficho { max-width: 380px; margin: 18px auto; background: var(--blanco); border-radius: 14px;
+  border: 2px dashed var(--primario); padding: 20px; box-shadow: var(--sombra); text-align: left; }
+.ficho .turno-grande { font-size: 44px; font-weight: 700; text-align: center; color: var(--primario);
+  letter-spacing: 1px; line-height: 1.1; margin: 4px 0 8px; }
+.lista-ficho { list-style: none; margin: 10px 0; font-size: 13px; }
+.lista-ficho li { display: flex; justify-content: space-between; padding: 4px 0;
+  border-bottom: 1px dotted var(--linea); }
+.total-ficho { border-top: 2px solid var(--linea); padding-top: 8px; margin-top: 8px; }
+
+/* ---- 4. COLA DEL TENDERO ---- */
+.cola { display: flex; flex-direction: column; gap: 10px; }
+.pedido-cola { border: 1px solid var(--linea); border-left: 4px solid var(--primario);
+  border-radius: 10px; padding: 11px 13px; background: var(--blanco); }
+.turno-mini { font-size: 18px; color: var(--primario); }
+.lista-cola { list-style: none; font-size: 12.5px; color: var(--gris); margin: 4px 0 6px; }
+.lista-cola li { padding: 1px 0; }
+
+/* ---- 5. PANTALLA DE TURNOS (KDS) ---- */
+.pantalla-turnos { display: flex; gap: 12px; flex-wrap: wrap; background: #0f172a;
+  border-radius: 12px; padding: 16px; min-height: 96px; align-items: center; }
+.turno-pantalla { background: #16a34a; color: #fff; border-radius: 10px; padding: 10px 18px;
+  text-align: center; min-width: 104px; }
+.turno-pantalla b { display: block; font-size: 26px; line-height: 1.1; }
+.turno-pantalla span { font-size: 11.5px; opacity: .92; }
+.pantalla-vacia { color: #94a3b8; font-size: 13px; width: 100%; text-align: center; padding: 10px; }
+
+/* ---- 6. BARRAS DE LAS GRÁFICAS ---- */
+.barra-fila { display: grid; grid-template-columns: 150px 1fr 44px; gap: 10px; align-items: center;
+  margin-bottom: 9px; font-size: 12.5px; }
+.pista-barra { height: 12px; background: #e8eef5; border-radius: 20px; overflow: hidden; }
+.pista-barra i { display: block; height: 100%; border-radius: 20px; background: var(--primario); }
+.pista-barra i.acento { background: var(--acento); }
+
+@media (max-width: 780px) {
+  .ficho .turno-grande { font-size: 34px; }
+  .barra-fila { grid-template-columns: 96px 1fr 36px; }
+}

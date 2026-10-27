@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  Great Food App — Catálogo
+  PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  Menú filtrable por categoría y buscador, con stock en vivo y carrito.
+
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Great Food App · Catálogo</title>
+  <meta name="description" content="Aplicación web de pre-pedidos para la tienda escolar: el estudiante arma su pedido desde el celular, el sistema descuenta el stock, calcula el total y le entrega un ficho virtual numerado por franja de descanso; el tendero ve la cola y avisa cuando está listo.">
+  <meta name="author" content="Jesús Alberto Pineda Pino, Sofía Tangarife Olaya, Daniel Felipe Ramírez Gómez, Miguel Ángel Moreno Piedrahíta, Deiner Fabián Cáceres Zapata">
+  <meta name="theme-color" content="#b91c1c">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23b91c1c'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3EGF%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/global.css?v=179170">
+  <link rel="stylesheet" href="css/components.css?v=179170">
+</head>
+<body class="layout-top">
+
+  <div class="armazon">
+
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="logo.png" alt="Logo de Great Food App">
+        <div class="marca-texto">
+          <b>Great Food App</b>
+          <span>I.E. Lola González · Pre-pedidos y turnos</span>
+        </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
+
+    <!-- ================= MENÚ ================= -->
+    <nav class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="pedido-turno.html">Mi pedido</a>
+      <a href="modo-tienda-admin.html">Modo tienda</a>
+    </nav>
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="contenido">
+      <section class="portada anim">
+        <h1>El menú de la tienda</h1>
+        <p>Busca, filtra por categoría y arma tu pedido. El stock se descuenta en el momento en que confirmas.</p>
+        <div class="sellos">
+          <span class="sello">I.E. Lola González</span>
+          <span class="sello">Grado 10°</span>
+          <span class="sello">Tienda escolar</span>
+        </div>
+      </section>
+
+    <section class="tarjeta">
+      <div class="fila">
+        <div class="campo" style="margin:0;flex:1;min-width:220px">
+          <label for="cBuscar">Buscar en el menú</label>
+          <input id="cBuscar" placeholder="Hamburguesa, jugo, combo…" oninput="pintarCatalogo()">
+        </div>
+        <div class="campo" style="margin:0;min-width:190px">
+          <label for="cCategoria">Categoría</label>
+          <select id="cCategoria" onchange="pintarCatalogo()"><option value="">Todas</option></select>
+        </div>
+        <div class="campo" style="margin:0;min-width:170px">
+          <label for="cMenuDia">Filtro rápido</label>
+          <label class="pequeno" style="display:flex;gap:6px;align-items:center;padding:9px 0">
+            <input type="checkbox" id="cMenuDia" onchange="pintarCatalogo()"> Solo menú del día
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <div class="rejilla g2" style="align-items:start">
+      <section class="tarjeta">
+        <h2>Menú de la tienda</h2>
+        <p class="ayuda">Cada tarjeta muestra el precio y las unidades que quedan. Si se agota, el botón se bloquea solo.</p>
+        <div id="catalogo" class="rejilla g3"></div>
+      </section>
+      <aside class="tarjeta">
+        <h2>Tu pedido</h2>
+        <div id="carrito"></div>
+        <div class="fila total-carrito"><span>Total</span><b id="totalCarrito">$0</b></div>
+        <p class="pequeno gris"><span id="unidadesCarrito">0</span> unidades en el carrito</p>
+        <a class="btn p" href="pedido-turno.html">Confirmar el pedido</a>
+      </aside>
+    </div>
+    </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      <img src="equipo.jpg" alt="Foto del equipo de Great Food App" style="max-width:340px;width:100%;border-radius:12px;margin:0 auto 14px">
+      <div><b>Great Food App</b> — Pide antes del timbre, recoge sin fila</div>
+      <div class="equipo">
+        <span>Jesús Alberto Pineda Pino</span>
+        <span>Sofía Tangarife Olaya</span>
+        <span>Daniel Felipe Ramírez Gómez</span>
+        <span>Miguel Ángel Moreno Piedrahíta</span>
+        <span>Deiner Fabián Cáceres Zapata</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="piaToast"></div>
+  <script src="js/catalog.js?v=179170"></script>
+  <script src="js/orders-cart.js?v=179170"></script>
+  <script src="js/queue-turnos.js?v=179170"></script>
+  <script src="js/admin-stats.js?v=179170"></script>
+</body>
+</html>

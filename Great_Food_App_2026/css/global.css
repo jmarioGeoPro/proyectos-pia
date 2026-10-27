@@ -1,0 +1,318 @@
+/* ==========================================================================
+   Great Food App — hoja de estilos
+   PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+   --------------------------------------------------------------------------
+   Estilo: 08-foodie
+   Este archivo se arma con dos partes:
+     1. el carácter del proyecto (colores, tipografía, formas, detalles)
+     2. la base estructural que comparten los nueve proyectos
+   Cambiando las variables de :root cambia todo el aspecto sin tocar el resto.
+   ========================================================================== */
+/* ==========================================================================
+   BASE ESTRUCTURAL — la comparten los nueve proyectos.
+   Aquí va solo la ESTRUCTURA y los componentes. Los colores, la tipografía,
+   las formas y el menú los pone el tema de cada proyecto.
+   ========================================================================== */
+
+/* ---- 1. reinicio ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { min-height: 100vh; font-family: var(--fuente); color: var(--tinta); background: var(--fondo); line-height: 1.6; }
+img { max-width: 100%; display: block; }
+a { color: var(--acento-texto, var(--primario)); text-decoration: none; }
+button, input, select, textarea { font-family: inherit; font-size: inherit; }
+.oculto { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ---- 2. armazón: cuatro formas de organizar la página ---- */
+/* Cada proyecto usa una: barra arriba, menú lateral, pestañas abajo o mixto. */
+.armazon { display: grid; min-height: 100vh; grid-template-columns: 1fr; }
+
+/* (a) barra arriba: el menú va debajo de la cabecera */
+.layout-top .armazon {
+  grid-template-areas: 'cab' 'menu' 'con' 'pie';
+  grid-template-rows: auto auto 1fr auto;
+}
+
+/* (b) menú lateral: una columna fija a la izquierda */
+.layout-sidebar .armazon {
+  grid-template-areas: 'cab cab' 'menu con' 'pie pie';
+  grid-template-columns: var(--ancho-menu) 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* (c) pestañas abajo: como una aplicación de teléfono */
+.layout-tabs .armazon {
+  grid-template-areas: 'cab' 'con' 'tabs';
+  grid-template-rows: auto 1fr auto;
+}
+
+.barra-sup { grid-area: cab; }
+.menu { grid-area: menu; }
+.contenido { grid-area: con; }
+.pie { grid-area: pie; }
+.menu-tabs { grid-area: tabs; }
+
+/* ---- 3. barra superior ---- */
+.barra-sup { display: flex; align-items: center; gap: 14px; padding: 10px 20px; flex-wrap: wrap; position: sticky; top: 0; z-index: 60; background: var(--barra-fondo); color: var(--barra-tinta); backdrop-filter: blur(8px); }
+.layout-sidebar .barra-sup, .layout-split .barra-sup { grid-column: 1 / -1; }
+.marca { display: flex; align-items: center; gap: 12px; color: inherit; }
+.marca-logo { width: 46px; height: 46px; object-fit: contain; border-radius: var(--radio-logo); background: var(--logo-fondo); padding: 4px; flex: none; }
+.marca-texto b { display: block; font-size: 15.5px; line-height: 1.15; letter-spacing: var(--letra-titulo); }
+.marca-texto span { font-size: 11px; opacity: .72; }
+
+/* ---- 4. menú ---- */
+/* (a) y (c): barra horizontal bajo la cabecera */
+.layout-top .menu { display: flex; gap: 4px; flex-wrap: wrap; padding: 8px clamp(14px, 3vw, 34px); background: var(--barra-fondo); border-bottom: 1px solid var(--linea); }
+
+/* (b) menú lateral: columna completa */
+.layout-sidebar .menu { display: flex; flex-direction: column; gap: 3px; padding: 16px 12px; background: var(--superficie); border-right: 1px solid var(--linea); }
+.menu a { padding: 8px 14px; border-radius: var(--radio-boton); font-size: var(--menu-tam); font-weight: var(--menu-peso); color: inherit; opacity: .74; white-space: nowrap; transition: background .18s, opacity .18s, transform .18s; }
+.menu a:hover { opacity: 1; background: var(--menu-hover); }
+.menu a.activo { opacity: 1; background: var(--menu-activo-fondo); color: var(--menu-activo-tinta); box-shadow: var(--menu-activo-sombra); }
+
+/* el menú lateral ocupa todo el ancho de su columna */
+.layout-sidebar .menu a { width: 100%; }
+
+/* menú inferior tipo aplicación */
+.menu-tabs { position: sticky; bottom: 0; z-index: 60; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); background: var(--barra-fondo); border-top: 1px solid var(--linea); }
+.menu-tabs a { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 7px 4px; border-radius: 12px; font-size: 10.5px; color: var(--barra-tinta); opacity: .6; }
+.menu-tabs a b { font-size: 17px; font-weight: 400; line-height: 1; }
+.menu-tabs a.activo { opacity: 1; background: var(--menu-activo-fondo); color: var(--menu-activo-tinta); }
+
+/* ---- 5. contenido ---- */
+.contenido { padding: var(--espacio) clamp(14px, 3vw, 34px) calc(var(--espacio) * 2); max-width: var(--ancho-contenido); width: 100%; margin: 0 auto; }
+.volanta { display: flex; align-items: center; gap: 10px; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--acento-texto); margin-bottom: 8px; }
+.volanta::before { content: ''; width: 26px; height: 2px; background: currentColor; border-radius: 2px; }
+
+/* ---- 6. pie ---- */
+.pie { padding: 26px 20px; text-align: center; font-size: 12px; color: var(--pie-tinta); background: var(--pie-fondo); border-top: 1px solid var(--linea); }
+.pie .equipo { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.pie .equipo span { background: var(--chip-fondo); padding: 3px 11px; border-radius: 20px; font-size: 11px; }
+.pie .linea { margin-top: 5px; opacity: .82; }
+
+/* ---- 7. tarjetas ---- */
+.tarjeta { background: var(--superficie); border: var(--borde-tarjeta); border-radius: var(--radio-tarjeta); box-shadow: var(--sombra); padding: clamp(16px, 2vw, 24px); margin-bottom: 18px; position: relative; transition: box-shadow .2s, transform .2s; }
+.tarjeta:hover { box-shadow: var(--sombra-alta); }
+.tarjeta > h2 { font-size: var(--h2); margin-bottom: 4px; letter-spacing: var(--letra-titulo); }
+.tarjeta > h2 + .ayuda { margin-top: 0; }
+.tarjeta .ayuda { font-size: 13.5px; color: var(--gris); margin-bottom: 16px; }
+.tarjeta h3 { font-size: 14.5px; margin: 18px 0 8px; }
+.tarjeta.destacada { border: var(--borde-destacado); }
+
+/* ---- 8. rejillas ---- */
+.rejilla { display: grid; gap: var(--hueco); }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.g3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
+.g4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+
+/* ---- 9. formularios ---- */
+.campo { display: flex; flex-direction: column; gap: 5px; margin-bottom: 13px; }
+.campo label { font-size: 12.5px; font-weight: var(--label-peso); color: var(--label-color); letter-spacing: .01em; }
+.campo label .req { color: var(--peligro); }
+.campo input, .campo select, .campo textarea { width: 100%; border: var(--borde-campo); border-radius: var(--radio-campo); padding: 10px 13px; background: var(--campo-fondo); color: var(--tinta); transition: border-color .16s, box-shadow .16s; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--primario); box-shadow: 0 0 0 3px var(--foco); }
+.campo textarea { min-height: 92px; resize: vertical; }
+.campo .pista { font-size: 11.5px; color: var(--gris); }
+
+/* ---- 10. botones ---- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: var(--borde-boton); background: var(--boton-fondo); color: var(--boton-tinta); border-radius: var(--radio-boton); padding: 10px 18px; font-size: 13.5px; font-weight: var(--boton-peso); cursor: pointer; text-decoration: none; transition: transform .14s, box-shadow .14s, background .14s, border-color .14s; letter-spacing: var(--letra-boton); }
+.btn:hover { transform: var(--boton-hover); box-shadow: var(--sombra); }
+.btn:active { transform: translateY(0) scale(.985); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.btn.p { background: var(--primario); border-color: var(--primario); color: var(--primario-tinta); }
+.btn.a { background: var(--acento); border-color: var(--acento); color: var(--acento-tinta); }
+.btn.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
+.btn.pel { background: var(--peligro); border-color: var(--peligro); color: #fff; }
+.btn.fantasma { background: transparent; border-color: var(--linea-fuerte); }
+.btn.pq { padding: 5px 11px; font-size: 12px; }
+.btn.gr { width: 100%; }
+
+/* ---- 11. tablas ---- */
+.tabla-envoltura { overflow-x: auto; border-radius: var(--radio-tabla); border: 1px solid var(--linea); }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--superficie); }
+th, td { padding: 10px 13px; text-align: left; border-bottom: 1px solid var(--linea); vertical-align: top; }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--th-tinta); background: var(--th-fondo); font-weight: 700; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+tbody tr { transition: background .12s; }
+tbody tr:hover td { background: var(--fila-hover); }
+td .acciones { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* ---- 12. etiquetas de estado ---- */
+.badge { display: inline-block; padding: 2px 10px; border-radius: var(--radio-badge); font-size: 11.5px; font-weight: 700; white-space: nowrap; letter-spacing: .01em; }
+.badge.ok, .badge.ok { background: var(--ok-suave); color: var(--ok-texto); }
+.badge.warn { background: var(--alerta-suave); color: var(--alerta-texto); }
+.badge.mal { background: var(--peligro-suave); color: var(--peligro-texto); }
+.badge.info { background: var(--info-suave); color: var(--info-texto); }
+.badge.neutro { background: var(--neutro-suave); color: var(--gris); }
+
+/* ---- 13. avisos ---- */
+.aviso { border-left: var(--aviso-grosor) solid var(--info); background: var(--info-suave); padding: 12px 16px; border-radius: 0 var(--radio-campo) var(--radio-campo) 0; font-size: 13.5px; margin-bottom: 15px; }
+.aviso.ok { border-color: var(--ok); background: var(--ok-suave); color: var(--ok-texto); }
+.aviso.mal { border-color: var(--peligro); background: var(--peligro-suave); color: var(--peligro-texto); }
+.aviso.warn { border-color: var(--alerta); background: var(--alerta-suave); color: var(--alerta-texto); }
+
+/* ---- 14. indicadores ---- */
+.indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: var(--hueco); margin-bottom: 20px; }
+.indicador { background: var(--superficie); border-radius: var(--radio-tarjeta); padding: 16px 18px; border: var(--borde-tarjeta); box-shadow: var(--sombra); position: relative; overflow: hidden; }
+.indicador b { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .09em; color: var(--gris); font-weight: 700; }
+.indicador strong { display: block; font-size: clamp(24px, 3vw, 32px); color: var(--primario); line-height: 1.15; letter-spacing: -0.02em; }
+.indicador span { font-size: 11.5px; color: var(--gris); }
+
+/* ---- 15. aviso flotante ---- */
+.toast { position: fixed; right: 20px; bottom: 20px; z-index: 900; background: var(--ok); color: #fff; padding: 13px 20px; border-radius: var(--radio-toast); font-size: 13.5px; box-shadow: var(--sombra-alta); max-width: min(380px, calc(100vw - 40px)); animation: toastEntra .26s cubic-bezier(.2,.9,.3,1.2); }
+.toast.mal { background: var(--peligro); }
+.toast.warn { background: var(--alerta); }
+@keyframes toastEntra { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
+
+/* ---- 16. ventana ---- */
+.modal-fondo { position: fixed; inset: 0; background: rgba(8, 12, 22, .55); z-index: 1000; display: flex; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow-y: auto; backdrop-filter: blur(3px); animation: funde .18s; }
+@keyframes funde { from { opacity: 0; } to { opacity: 1; } }
+.modal { background: var(--superficie); border-radius: var(--radio-modal); width: 100%; max-width: 640px; box-shadow: var(--sombra-alta); animation: sube .22s cubic-bezier(.2,.9,.3,1.1); }
+@keyframes sube { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: none; } }
+.modal .cabeza { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--linea); }
+.modal .cabeza h3 { font-size: 16px; margin: 0; }
+.modal .cuerpo { padding: 18px 20px; max-height: 66vh; overflow-y: auto; }
+.modal .pie2 { display: flex; justify-content: flex-end; gap: 9px; padding: 14px 20px; border-top: 1px solid var(--linea); background: var(--fondo); border-radius: 0 0 var(--radio-modal) var(--radio-modal); }
+.cerrar { border: 0; background: transparent; font-size: 16px; cursor: pointer; color: var(--gris); padding: 5px 9px; border-radius: 8px; }
+.cerrar:hover { background: var(--fila-hover); }
+
+/* ---- 17. barra de progreso ---- */
+.barra { height: 9px; background: var(--linea); border-radius: 20px; overflow: hidden; }
+.barra i { display: block; height: 100%; background: var(--primario); border-radius: 20px; transition: width .5s cubic-bezier(.3,.9,.3,1); }
+
+/* ---- 18. utilidades ---- */
+.fila { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.derecha { margin-left: auto; }
+.centro { text-align: center; }
+.gris { color: var(--gris); }
+.pequeno { font-size: 12px; }
+.mono { font-family: var(--fuente-mono); letter-spacing: .04em; }
+.vacio { text-align: center; color: var(--gris); padding: 30px 20px; font-size: 13.5px; }
+.vacio::before { content: '○'; display: block; font-size: 30px; opacity: .4; margin-bottom: 6px; }
+.oculto-impresion { }
+
+/* ---- 18b. bloque de pseudocódigo ---- */
+.codigo {
+  background: var(--superficie); border: var(--borde-tarjeta); border-radius: var(--radio-tarjeta);
+  padding: 16px 18px; overflow-x: auto; margin: 0;
+  font-family: var(--fuente-mono); font-size: 12.5px; line-height: 1.7;
+  white-space: pre; color: var(--tinta); tab-size: 2;
+}
+
+/* ---- 19. animaciones de entrada ---- */
+@keyframes aparece { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.anim { animation: aparece .34s ease-out both; }
+
+/* ---- 20. adaptación ---- */
+@media (max-width: 900px) {
+  /* en pantallas pequeñas el menú lateral se vuelve una barra arriba */
+  .layout-sidebar .armazon { grid-template-areas: 'cab' 'menu' 'con' 'pie'; grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; }
+  .layout-sidebar .menu { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--linea); padding: 8px 12px; }
+  .layout-sidebar .menu a { width: auto; padding: 8px 13px; white-space: nowrap; }
+}
+@media (max-width: 640px) {
+  .contenido { padding: 16px 13px 46px; }
+  .barra-sup { padding: 9px 13px; gap: 9px; }
+  .marca-logo { width: 38px; height: 38px; }
+  .marca-texto b { font-size: 14px; }
+  .menu { width: 100%; margin-left: 0; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 3px; }
+  .btn { width: 100%; }
+  .fila .btn { width: auto; }
+}
+@media print {
+  .barra-sup, .pie, .menu, .menu-tabs, .btn, .toast, .modal-fondo, .no-impresion { display: none !important; }
+  body { background: #fff; }
+  .tarjeta { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+}
+
+/* ==========================================================================
+   TEMA FOODIE — Great Food App
+   Antojo: rojo profundo y crema, formas muy redondeadas, fotos grandes y
+   precios que se leen fácil. Se siente como un menú de restaurante.
+   ========================================================================== */
+:root {
+  --fuente: 'Segoe UI', system-ui, sans-serif;
+  --fuente-mono: 'Cascadia Mono', Consolas, monospace;
+  --tinta: #3b1208;
+  --fondo: #fff8ee;
+  --superficie: #ffffff;
+  --gris: #8b6a57;
+  --linea: #f6e6d2;
+  --linea-fuerte: #ecd3b5;
+
+  --primario: #b91c1c;
+  --primario-tinta: #ffffff;
+  --acento: #f59e0b;
+  --acento-tinta: #2b1a00;
+  --acento-texto: #b45309;
+
+  --ok: #15803d;  --ok-suave: #dcfce7;  --ok-texto: #14532d;
+  --alerta: #b45309;  --alerta-suave: #fef3c7;  --alerta-texto: #78350f;
+  --peligro: #b91c1c;  --peligro-suave: #fee2e2;  --peligro-texto: #7f1d1d;
+  --info: #b45309;  --info-suave: #ffedd5;  --info-texto: #7c2d12;
+  --neutro-suave: #f8eee0;
+
+  --barra-fondo: #ffffff;  --barra-tinta: #3b1208;
+  --menu-hover: #fff8ee;  --menu-activo-fondo: #b91c1c;  --menu-activo-tinta: #ffffff;
+  --menu-activo-sombra: 0 4px 14px rgba(185,28,28,.32);
+  --pie-fondo: #3b1208;  --pie-tinta: #e2c9b6;  --chip-fondo: rgba(255,255,255,.1);
+
+  --radio-tarjeta: 26px;  --radio-boton: 999px;  --radio-campo: 18px;
+  --radio-modal: 28px;  --radio-tabla: 20px;  --radio-badge: 999px;
+  --radio-toast: 999px;  --radio-logo: 26px;
+
+  --sombra: 0 3px 14px rgba(59,18,8,.09);
+  --sombra-alta: 0 20px 50px rgba(59,18,8,.2);
+  --borde-tarjeta: 1px solid #f6e6d2;
+  --borde-destacado: 2px solid #b91c1c;
+  --borde-campo: 1px solid #ecd3b5;
+  --borde-boton: 1px solid #f6e6d2;
+  --campo-fondo: #fffdf9;
+  --th-fondo: #fff4e6;  --th-tinta: #8b6a57;
+  --fila-hover: #fffaf3;
+  --foco: rgba(185,28,28,.2);
+  --logo-fondo: #ffffff;
+
+  --boton-fondo: #ffffff;  --boton-tinta: #3b1208;  --boton-peso: 700;
+  --boton-hover: translateY(-2px);  --letra-boton: .01em;
+  --h2: 19px;  --letra-titulo: -.015em;
+  --menu-tam: 13.5px;  --menu-peso: 700;
+  --label-peso: 700;  --label-color: #6b4534;
+  --espacio: 26px;  --hueco: 18px;
+  --ancho-contenido: 1140px;  --ancho-menu: 240px;
+  --aviso-grosor: 4px;
+}
+
+/* la barra superior lleva un hilo de color */
+.barra-sup { border-bottom: 1px solid #f6e6d2; box-shadow: 0 1px 0 #f59e0b; }
+.marca-texto b { color: #b91c1c; font-size: 17px; }
+
+/* portada con apetito */
+.portada { background: linear-gradient(135deg, #b91c1c 0%, #dc2626 52%, #f59e0b 140%); color: #fff;
+  border-radius: 30px; padding: clamp(24px, 4vw, 42px); margin-bottom: 24px; position: relative; overflow: hidden; }
+.portada::after { content: '🍔'; position: absolute; right: 20px; bottom: -22px; font-size: 130px; opacity: .13; line-height: 1; }
+.portada h1 { font-size: clamp(24px, 3.8vw, 36px); line-height: 1.12; margin-bottom: 8px; letter-spacing: -.025em; position: relative; }
+.portada p { color: rgba(255,255,255,.94); max-width: 56ch; position: relative; }
+.portada .sellos { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; position: relative; }
+.portada .sello { background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.34); padding: 5px 14px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+
+/* la tarjeta de producto del catálogo */
+.producto { background: #fff; border: 1px solid #f6e6d2; border-radius: 22px; overflow: hidden; transition: transform .22s, box-shadow .22s; }
+.producto:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(59,18,8,.14); }
+.producto .foto { aspect-ratio: 16/10; background: linear-gradient(135deg, #fef3c7, #fde68a); display: grid; place-items: center; font-size: 46px; }
+.producto .info { padding: 14px 16px 18px; }
+.producto .nombre { font-weight: 700; font-size: 15px; }
+.producto .precio { font-size: 20px; font-weight: 800; color: #b91c1c; letter-spacing: -.02em; }
+
+/* el ficho virtual */
+.ficho { background: linear-gradient(135deg, #b91c1c, #dc2626); color: #fff; border-radius: 22px; padding: 20px; text-align: center; }
+.ficho strong { display: block; font-size: 42px; letter-spacing: .04em; line-height: 1; font-family: var(--fuente-mono); }
+.ficho span { font-size: 12px; opacity: .85; letter-spacing: .14em; text-transform: uppercase; }
+
+.indicador { border-top: 0; border-radius: 24px; }
+.indicador strong { color: #b91c1c; }
+.btn { box-shadow: 0 3px 12px rgba(59,18,8,.07); }
+
+@media (max-width: 640px) { .portada { border-radius: 22px; padding: 20px 17px; } .portada::after { font-size: 84px; } }
+

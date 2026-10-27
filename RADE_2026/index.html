@@ -1,135 +1,140 @@
 <!DOCTYPE html>
 <!--
   ============================================================================
-  R.A.D.E — aplicación web
-  Proyecto Integrador de Aula (PIA) · I.E. Lola González · Grado 10° · 2026
-  Programa: Técnico Auxiliar en Desarrollo de Software — IU Pascual Bravo
+  R.A.D.E — Inicio
+  PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  Portada con el estado del menú del día, el ingreso por rol y el resumen de la jornada.
 
-  Este archivo es la ESTRUCTURA de la aplicación (el esqueleto).
-  Aquí solo va el contenido: las pantallas y sus contenedores.
-  El diseño está en css/estilos.css y la lógica en la carpeta js/.
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
   ============================================================================
 -->
 <html lang="es">
 <head>
-  <!-- Codificación y adaptación a celulares y tabletas -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Registro de Alimentación de Estudiantes (PAE)">
-  <meta name="author" content="JERONIMO CAICEDO PATIÑO, THOMAS ALEXIS LOPEZ ROBLES, DAVID MEJIA MENESES, EMMANUEL ORTIZ LÓPEZ, SEBASTIAN ALEXIS PULIDO CABRERA">
-  <title>R.A.D.E · PIA 2026</title>
-
-  <!-- El icono de la pestaña es el logo del proyecto -->
-  <link rel="icon" href="logo.png">
-  <!-- Hoja de estilos propia de la aplicación -->
-  <link rel="stylesheet" href="css/estilos.css">
+  <title>R.A.D.E · Inicio</title>
+  <meta name="description" content="Aplicación web que reemplaza los fichos de papel del restaurante escolar: valida el carnet del estudiante en segundos, bloquea el doble reclamo del mismo día, descuenta la ración de la modalidad que le corresponde y concilia al cierre cuántos titulares faltaron y cuántas raciones sobraron para reasignación.">
+  <meta name="author" content="Thomas Alexis López Robles, Emmanuel Ortiz López, Sebastián Alexis Pulido Cabrera, David Mejía Meneses, Jerónimo Caicedo Patiño">
+  <meta name="theme-color" content="#4d7c0f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234d7c0f'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3ERD%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css?v=177924">
 </head>
-<body>
+<body class="layout-tabs">
 
-  <!-- ================= PANTALLA DE INGRESO ================= -->
-  <!-- Se muestra cuando no hay una sesión iniciada -->
-  <section id="pantallaIngreso" class="ingreso">
-    <div class="ingreso-caja">
-      <img src="logo.png" alt="Logo de R.A.D.E" class="ingreso-logo">
-      <h1>R.A.D.E</h1>
-      <p class="lema">Alimentación escolar, sin fichos</p>
+  <div class="armazon">
 
-      <!-- Formulario de ingreso -->
-      <form id="formIngreso" autocomplete="off">
-        <label for="ingCorreo">Correo electrónico</label>
-        <input type="email" id="ingCorreo" placeholder="tu.correo@ejemplo.com" required>
-
-        <label for="ingClave">Contraseña</label>
-        <input type="password" id="ingClave" placeholder="Tu contraseña" required>
-
-        <button type="submit" class="boton grande">Ingresar</button>
-      </form>
-
-      <!-- Enlace para crear la cuenta -->
-      <p class="ingreso-pie">
-        ¿No tienes cuenta? <a href="#" id="enlaceRegistro">Crear una cuenta</a>
-      </p>
-
-      <!-- Cuenta de prueba: sirve para revisar la aplicación sin registrarse -->
-      <div class="pista-prueba">
-        <b>Para revisarla</b>
-        <span class="pista-par"><label>Correo</label> <code>pruebas@pasculia.edu.co</code></span>
-        <span class="pista-par"><label>Contraseña</label> <code>PascualBravo2026</code></span>
-      </div>
-
-      <!-- Formulario de registro (oculto hasta que se pide) -->
-      <form id="formRegistro" class="oculto" autocomplete="off">
-        <label for="regNombre">Nombre completo</label>
-        <input type="text" id="regNombre" placeholder="Nombres y apellidos" required>
-
-        <label for="regCorreo">Correo electrónico</label>
-        <input type="email" id="regCorreo" placeholder="tu.correo@ejemplo.com" required>
-
-        <label for="regClave">Contraseña</label>
-        <input type="password" id="regClave" placeholder="Mínimo 6 caracteres" minlength="6" required>
-
-        <label for="regRol">¿Cómo vas a usar la aplicación?</label>
-        <select id="regRol">
-          <option>Estudiante</option>
-          <option>Docente</option>
-          <option>Directivo</option>
-          <option>Acudiente</option>
-        </select>
-
-        <button type="submit" class="boton grande">Crear la cuenta</button>
-        <button type="button" class="boton claro" id="cancelarRegistro">Volver</button>
-      </form>
-
-      <p class="creditos">
-        Proyecto Integrador de Aula · I.E. Lola González · 2026
-      </p>
-    </div>
-  </section>
-
-  <!-- ================= APLICACIÓN ================= -->
-  <!-- Se muestra cuando ya hay una sesión iniciada -->
-  <div id="aplicacion" class="aplicacion oculto">
-
-    <!-- ---------- menú lateral ---------- -->
-    <aside class="lateral">
-      <div class="marca">
-        <img src="logo.png" alt="Logo" class="marca-logo">
-        <div>
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="logo.png" alt="Logo de R.A.D.E">
+        <div class="marca-texto">
           <b>R.A.D.E</b>
-          <span>I.E. Lola González</span>
+          <span>I.E. Lola González · Registro PAE por carnet</span>
         </div>
-      </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
 
-      <!-- Los módulos se dibujan desde js/modulos.js -->
-      <nav id="menu"></nav>
+    <!-- ================= MENÚ ================= -->
+    
 
-      <div class="lateral-pie">
-        <div id="usuarioActual" class="usuario"></div>
-        <button class="boton claro chico" id="botonSalir">Cerrar sesión</button>
-      </div>
-    </aside>
-
-    <!-- ---------- contenido ---------- -->
+    <!-- ================= CONTENIDO ================= -->
     <main class="contenido">
-      <header class="cabecera">
-        <h1 id="tituloModulo">Inicio</h1>
-        <button class="boton solo-movil" id="botonMenu" aria-label="Abrir el menú">☰</button>
-      </header>
+      <section class="portada anim">
+        <h1>R.A.D.E — Restaurante escolar bajo control</h1>
+        <p>El carnet reemplaza el ficho de papel: una ración por estudiante al día y un cierre de jornada con cuentas exactas.</p>
+        <div class="sellos">
+          <span class="sello">I.E. Lola González</span>
+          <span class="sello">Grado 10°</span>
+          <span class="sello">PAE escolar</span>
+        </div>
+      </section>
 
-      <!-- Aquí se dibuja cada módulo -->
-      <section id="vista" class="vista"></section>
+    <div class="indicadores">
+      <div class="indicador"><b>Beneficiarios activos</b><strong id="kInscritos">0</strong><span>inscritos al PAE</span></div>
+      <div class="indicador"><b>Reclamaron hoy</b><strong id="kReclamaron">0</strong><span>raciones entregadas</span></div>
+      <div class="indicador"><b>Inasistentes</b><strong id="kInasistentes">0</strong><span>titulares que faltaron</span></div>
+      <div class="indicador"><b>Sobrantes</b><strong id="kSobrantes">0</strong><span>raciones disponibles</span></div>
+    </div>
+
+    <div class="rejilla g2">
+      <section class="tarjeta">
+        <h2>Menú y lote del día</h2>
+        <p class="ayuda">Lo que recibió el restaurante hoy y cuántas raciones hay por modalidad.</p>
+        <div id="menuHoy"></div>
+      </section>
+      <section class="tarjeta">
+        <h2>Ingreso por rol</h2>
+        <p class="ayuda">Operador PAE, docente del restaurante o estudiante: cada uno entra a su vista.</p>
+        <div id="accesoRade"></div>
+      </section>
+    </div>
+
+    <section class="tarjeta">
+      <h2>Ruta rápida</h2>
+      <div class="rejilla g3">
+        <a class="btn p" href="validador-carnet.html">Terminal de carnet</a>
+        <a class="btn" href="lotes-dashboard.html">Panel de lotes y sobrantes</a>
+        <a class="btn" href="mi-pae.html">Portal del estudiante</a>
+      </div>
+      <p class="pequeno gris" style="margin-top:10px">El carnet reemplaza el ficho de papel: un solo reclamo por día y por estudiante.</p>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Últimos cierres de jornada</h2>
+      <p class="ayuda">Cada lote se concilia con las entregas reales: inscritos, inasistentes y sobrantes.</p>
+      <div id="ultimosCierres"></div>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Las cuentas del cierre, sin números negativos</h2>
+      <p class="ayuda">La prueba de escritorio del PDF: 140 inscritos, 120 reclamos y un lote de 200 raciones.</p>
+      <div class="aviso ok">Inasistentes = 140 − 120 = <b>20</b> · Sobrantes = 200 − 120 = <b>80</b> raciones disponibles para reasignación.</div>
+      <div class="aviso warn">El primer algoritmo restaba 120 − 140 y daba negativo. La corrección unió la validación del carnet con el conteo del lote y cambió el orden: siempre lote − entregas.</div>
+    </section>
     </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      <img src="equipo.jpg" alt="Foto del equipo de R.A.D.E" style="max-width:340px;width:100%;border-radius:12px;margin:0 auto 14px">
+      <div><b>R.A.D.E</b> — Un carnet, una ración, cero fichos</div>
+      <div class="equipo">
+        <span>Thomas Alexis López Robles</span>
+        <span>Emmanuel Ortiz López</span>
+        <span>Sebastián Alexis Pulido Cabrera</span>
+        <span>David Mejía Meneses</span>
+        <span>Jerónimo Caicedo Patiño</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
   </div>
 
-  <!-- Aviso flotante para confirmar las acciones -->
-  <div id="aviso" class="aviso oculto"></div>
-
-  <!-- Los scripts van al final para que la página cargue más rápido -->
-  <!-- 1. la "base de datos" del navegador -->
-  <script src="js/almacen.js"></script>
-  <!-- 2. los módulos del proyecto, generados desde sus requisitos funcionales -->
-  <script src="js/modulos.js"></script>
-  <!-- 3. la lógica de la aplicación -->
-  <script src="js/app.js"></script>
+  <div id="piaToast"></div>
+  <script src="js/validador-unico.js?v=177924"></script>
+  <script src="js/conciliacion-lotes.js?v=177924"></script>
+    <nav class="menu-tabs">
+      <a href="index.html"><b>•</b>Inicio</a>
+      <a href="validador-carnet.html"><b>•</b>Terminal de carnet</a>
+      <a href="lotes-dashboard.html"><b>•</b>Lotes y sobrantes</a>
+      <a href="mi-pae.html"><b>•</b>Mi PAE</a>
+    </nav>
 </body>
 </html>

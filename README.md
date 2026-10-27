@@ -26,7 +26,7 @@ del proyecto y su código está **comentado línea por línea**.
 
 | # | Proyecto | Institución | Grado | Año | Módulos |
 |---|---|---|---|---|---|
-| 1 | [Alfabetizadores Lola](Alfabetizadores_Lola_2026/) | I.E. Lola González | 10° | 2026 | 8 |
+| 1 | [Alfabetizadores Lola](Alfabetizadores_Lola_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 2 | [Cine conCiencia](Cine_conCiencia_2025/) | I.E. Sol de Oriente | 11° | 2025 | 8 |
 | 3 | [Cine conCiencia](Cine_conCiencia_2026/) | I.E. Sol de Oriente | 10° | 2026 | 8 |
 | 4 | [ConvivIA](ConvivIA_2025/) | I.E. Sol de Oriente | 10° | 2025 | 8 |
@@ -39,26 +39,26 @@ del proyecto y su código está **comentado línea por línea**.
 | 11 | [EduConnect.IA](EduConnectIA_2026/) | I.E. Sol de Oriente | 10° | 2026 | 7 |
 | 12 | [EduViajes](EduViajes_2025/) | I.E. Sol de Oriente | 11° | 2025 | 8 |
 | 13 | [EduViajes](EduViajes_2026/) | I.E. Sol de Oriente | 10° | 2026 | 8 |
-| 14 | [Great Food App](Great_Food_App_2026/) | I.E. Lola González | 10° | 2026 | 7 |
+| 14 | [Great Food App](Great_Food_App_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 15 | [Hunter Food](Hunter_Food_2025/) | I.E. Sol de Oriente | 11° | 2025 | 8 |
 | 16 | [Hyper Emotion](Hyper_Emotion_2025/) | I.E. Sol de Oriente | 11° | 2025 | 7 |
 | 17 | [Imagen School](Imagen_School_2025/) | I.E. Sol de Oriente | 10° | 2025 | 7 |
 | 18 | [Imagen School](Imagen_School_2026/) | I.E. Sol de Oriente | 11° | 2026 | 7 |
-| 19 | [Inventory School](Inventory_School_2026/) | I.E. Lola González | 10° | 2026 | 8 |
-| 20 | [LolaConnect](LolaConnect_2026/) | I.E. Lola González | 10° | 2026 | 7 |
+| 19 | [Inventory School](Inventory_School_2026/) | I.E. Lola González | 10° | 2026 | 0 |
+| 20 | [LolaConnect](LolaConnect_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 21 | [Master Acudiente](Master_Acudiente_2025/) | I.E. Sol de Oriente | 10° | 2025 | 8 |
 | 22 | [Master Acudiente](Master_Acudiente_2026/) | I.E. Sol de Oriente | 11° | 2026 | 8 |
 | 23 | [Mindsport](Mindsport_2025/) | I.E. Sol de Oriente | 10° | 2025 | 8 |
 | 24 | [Mindsport](Mindsport_2026/) | I.E. Sol de Oriente | 11° | 2026 | 8 |
-| 25 | [R.A.D.E](RADE_2026/) | I.E. Lola González | 10° | 2026 | 8 |
+| 25 | [R.A.D.E](RADE_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 26 | [SolBox](SolBox_2025/) | I.E. Sol de Oriente | 10° | 2025 | 8 |
 | 27 | [SolBox](SolBox_2026/) | I.E. Sol de Oriente | 11° | 2026 | 8 |
-| 28 | [SOMOS Potencialidades](SOMOS_Potencialidades_2026/) | I.E. Lola González | 10° | 2026 | 7 |
-| 29 | [TDL Easy](TDL_Easy_2026/) | I.E. Lola González | 10° | 2026 | 8 |
+| 28 | [SOMOS Potencialidades](SOMOS_Potencialidades_2026/) | I.E. Lola González | 10° | 2026 | 0 |
+| 29 | [TDL Easy](TDL_Easy_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 30 | [The School of The Lost Souls](The_School_of_The_Lost_Souls_2026/) | I.E. Sol de Oriente | 10° | 2026 | 7 |
 | 31 | [The TechFlow](The_TechFlow_2026/) | I.E. Sol de Oriente | 10° | 2026 | 8 |
-| 32 | [TimeFocus](TimeFocus_2026/) | I.E. Lola González | 10° | 2026 | 8 |
-| 33 | [Tu Opinion Cuenta](Tu_Opinion_Cuenta_2026/) | I.E. Lola González | 10° | 2026 | 8 |
+| 32 | [TimeFocus](TimeFocus_2026/) | I.E. Lola González | 10° | 2026 | 0 |
+| 33 | [Tu Opinion Cuenta](Tu_Opinion_Cuenta_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 
 ## Cómo se construyeron
 

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  R.A.D.E — Mi PAE
+  PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  Portal del estudiante: modalidad, historial de raciones y buzón de sugerencias nutricionales.
+
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R.A.D.E · Mi PAE</title>
+  <meta name="description" content="Aplicación web que reemplaza los fichos de papel del restaurante escolar: valida el carnet del estudiante en segundos, bloquea el doble reclamo del mismo día, descuenta la ración de la modalidad que le corresponde y concilia al cierre cuántos titulares faltaron y cuántas raciones sobraron para reasignación.">
+  <meta name="author" content="Thomas Alexis López Robles, Emmanuel Ortiz López, Sebastián Alexis Pulido Cabrera, David Mejía Meneses, Jerónimo Caicedo Patiño">
+  <meta name="theme-color" content="#4d7c0f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234d7c0f'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3ERD%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css?v=177924">
+</head>
+<body class="layout-tabs">
+
+  <div class="armazon">
+
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="logo.png" alt="Logo de R.A.D.E">
+        <div class="marca-texto">
+          <b>R.A.D.E</b>
+          <span>I.E. Lola González · Registro PAE por carnet</span>
+        </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
+
+    <!-- ================= MENÚ ================= -->
+    
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="contenido">
+      <section class="portada anim">
+        <h1>Mi PAE</h1>
+        <p>Consulta tu modalidad, revisa tu historial y cuéntale al restaurante qué te pareció el menú.</p>
+        <div class="sellos">
+          <span class="sello">I.E. Lola González</span>
+          <span class="sello">Grado 10°</span>
+          <span class="sello">PAE escolar</span>
+        </div>
+      </section>
+
+    <section class="tarjeta">
+      <h2>Consulta tu PAE</h2>
+      <p class="ayuda">Escribe el código de tu carnet para ver tu modalidad, tu historial y si ya reclamaste hoy.</p>
+      <div class="fila">
+        <input id="miCarnet" placeholder="LG-2026-0101" style="max-width:260px;text-transform:uppercase" autocomplete="off">
+        <button class="btn p" onclick="consultarMiPae()">Consultar</button>
+      </div>
+      <p class="pista pequeno" style="margin-top:8px">El documento y el teléfono no se muestran nunca en esta vista: solo el nombre, el grado y la modalidad.</p>
+    </section>
+
+    <div id="miResultado"></div>
+    <div id="miSugerencias"></div>
+    </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      <img src="equipo.jpg" alt="Foto del equipo de R.A.D.E" style="max-width:340px;width:100%;border-radius:12px;margin:0 auto 14px">
+      <div><b>R.A.D.E</b> — Un carnet, una ración, cero fichos</div>
+      <div class="equipo">
+        <span>Thomas Alexis López Robles</span>
+        <span>Emmanuel Ortiz López</span>
+        <span>Sebastián Alexis Pulido Cabrera</span>
+        <span>David Mejía Meneses</span>
+        <span>Jerónimo Caicedo Patiño</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="piaToast"></div>
+  <script src="js/validador-unico.js?v=177924"></script>
+  <script src="js/conciliacion-lotes.js?v=177924"></script>
+    <nav class="menu-tabs">
+      <a href="index.html"><b>•</b>Inicio</a>
+      <a href="validador-carnet.html"><b>•</b>Terminal de carnet</a>
+      <a href="lotes-dashboard.html"><b>•</b>Lotes y sobrantes</a>
+      <a href="mi-pae.html"><b>•</b>Mi PAE</a>
+    </nav>
+</body>
+</html>

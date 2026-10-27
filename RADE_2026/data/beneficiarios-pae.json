@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "codigo_carnet": "LG-2026-0101",
+    "documento_ti": "1.025.887.441",
+    "nombre": "Alejandro Sepúlveda Álvarez",
+    "grado": "10°01",
+    "modalidad": "VASO_LECHE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-02"
+  },
+  {
+    "id": 2,
+    "codigo_carnet": "LG-2026-0102",
+    "documento_ti": "1.036.221.558",
+    "nombre": "Isabella Torres Madrid",
+    "grado": "11°01",
+    "modalidad": "PLATO_VERDE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-02"
+  },
+  {
+    "id": 3,
+    "codigo_carnet": "LG-2026-0103",
+    "documento_ti": "1.020.774.309",
+    "nombre": "Samuel Cárdenas Osorio",
+    "grado": "10°01",
+    "modalidad": "VASO_LECHE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-03"
+  },
+  {
+    "id": 4,
+    "codigo_carnet": "LG-2026-0104",
+    "documento_ti": "1.038.512.667",
+    "nombre": "Valentina Ríos Zapata",
+    "grado": "10°02",
+    "modalidad": "PLATO_VERDE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-03"
+  },
+  {
+    "id": 5,
+    "codigo_carnet": "LG-2026-0105",
+    "documento_ti": "1.123.908.214",
+    "nombre": "Mateo Restrepo Agudelo",
+    "grado": "10°03",
+    "modalidad": "VASO_LECHE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-04"
+  },
+  {
+    "id": 6,
+    "codigo_carnet": "LG-2026-0106",
+    "documento_ti": "1.017.336.902",
+    "nombre": "Salomé Vélez Quintero",
+    "grado": "9°02",
+    "modalidad": "PLATO_VERDE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-04"
+  },
+  {
+    "id": 7,
+    "codigo_carnet": "LG-2026-0107",
+    "documento_ti": "1.039.447.815",
+    "nombre": "Jerónimo Salazar Peña",
+    "grado": "11°02",
+    "modalidad": "VASO_LECHE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-05"
+  },
+  {
+    "id": 8,
+    "codigo_carnet": "LG-2026-0108",
+    "documento_ti": "1.040.118.336",
+    "nombre": "Manuela Arango Betancur",
+    "grado": "10°02",
+    "modalidad": "PLATO_VERDE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-05"
+  },
+  {
+    "id": 9,
+    "codigo_carnet": "LG-2026-0109",
+    "documento_ti": "1.041.775.220",
+    "nombre": "Laura Castaño Molina",
+    "grado": "11°03",
+    "modalidad": "VASO_LECHE",
+    "activo": false,
+    "fecha_inscripcion": "2026-02-06"
+  }
+]

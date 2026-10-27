@@ -1,0 +1,42 @@
+/* ==========================================================================
+   dashboard.css
+   --------------------------------------------------------------------------
+   Lo propio del tablero: la etiqueta QR imprimible, el semáforo del estado
+   físico, las barras de las gráficas y las fichas del catálogo.
+   ========================================================================== */
+
+/* ---- 1. ETIQUETA QR ---- */
+.qr-caja { text-align: center; padding: 8px; background: #fff; border: 1px dashed var(--linea); border-radius: 12px; }
+.qr-cuadricula { display: grid; gap: 2px; width: 168px; margin: 0 auto; background: #fff;
+  padding: 9px; border: 1px solid var(--linea); border-radius: 10px; }
+.qr-cuadricula i { display: block; aspect-ratio: 1 / 1; border-radius: 1px; background: transparent; }
+.qr-cuadricula i.on { background: #1f2430; }
+
+/* ---- 2. FICHAS DEL CATÁLOGO ---- */
+.ficha { border: 1px solid var(--linea); border-radius: 12px; padding: 14px; background: var(--blanco);
+  display: flex; flex-direction: column; gap: 6px; }
+.ficha h3 { font-size: 14px; margin: 0; }
+.ficha .codigo { font-family: ui-monospace, Consolas, monospace; font-size: 11.5px; color: var(--gris); }
+.ficha .pie-ficha { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; padding-top: 8px; }
+.semaforo { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+.semaforo.ok { background: var(--ok); }
+.semaforo.warn { background: var(--alerta); }
+.semaforo.mal { background: var(--peligro); }
+.semaforo.info { background: var(--info); }
+
+/* ---- 3. BARRAS DE LAS GRÁFICAS ---- */
+.barra-fila { display: grid; grid-template-columns: 118px 1fr 44px; gap: 10px; align-items: center;
+  margin-bottom: 9px; font-size: 12.5px; }
+.pista-barra { height: 12px; background: #e8eef5; border-radius: 20px; overflow: hidden; }
+.pista-barra i { display: block; height: 100%; border-radius: 20px; background: var(--primario); }
+.pista-barra i.acento { background: var(--acento); }
+.pista-barra i.alerta { background: var(--alerta); }
+
+/* ---- 4. ESCÁNER ---- */
+.panel-escaner { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.turno-limite { font-size: 30px; font-weight: 700; color: var(--primario); line-height: 1.1; }
+.turno-limite.tarde { color: var(--peligro); }
+
+@media (max-width: 780px) {
+  .panel-escaner { grid-template-columns: 1fr; }
+}

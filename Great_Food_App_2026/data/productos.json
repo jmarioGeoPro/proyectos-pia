@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "nombre": "Hamburguesa clásica",
+    "categoria": "Comida_Rapida",
+    "precio": 5000,
+    "stock": 24,
+    "menu_dia": true,
+    "descripcion": "Carne de res, lechuga, tomate y salsa de la casa.",
+    "icono": "🍔",
+    "ventas": 58
+  },
+  {
+    "id": 2,
+    "nombre": "Perro caliente con papas",
+    "categoria": "Comida_Rapida",
+    "precio": 4500,
+    "stock": 30,
+    "menu_dia": true,
+    "descripcion": "Salchicha, cebolla caramelizada y papas a la francesa.",
+    "icono": "🌭",
+    "ventas": 44
+  },
+  {
+    "id": 3,
+    "nombre": "Arepa rellena de queso",
+    "categoria": "Comida_Rapida",
+    "precio": 3500,
+    "stock": 18,
+    "menu_dia": true,
+    "descripcion": "Arepa asada con queso campesino derretido.",
+    "icono": "🫓",
+    "ventas": 39
+  },
+  {
+    "id": 4,
+    "nombre": "Pizza personal",
+    "categoria": "Comida_Rapida",
+    "precio": 6000,
+    "stock": 0,
+    "menu_dia": false,
+    "descripcion": "Porción individual de pizza de pepperoni.",
+    "icono": "🍕",
+    "ventas": 21
+  },
+  {
+    "id": 5,
+    "nombre": "Jugo natural 12 oz",
+    "categoria": "Bebidas",
+    "precio": 3000,
+    "stock": 20,
+    "menu_dia": true,
+    "descripcion": "Jugo de mora, mango o lulo recién hecho.",
+    "icono": "🥤",
+    "ventas": 61
+  },
+  {
+    "id": 6,
+    "nombre": "Gaseosa personal",
+    "categoria": "Bebidas",
+    "precio": 2500,
+    "stock": 40,
+    "menu_dia": false,
+    "descripcion": "Botella de 400 ml bien fría.",
+    "icono": "🥫",
+    "ventas": 73
+  },
+  {
+    "id": 7,
+    "nombre": "Agua sin gas 600 ml",
+    "categoria": "Bebidas",
+    "precio": 2000,
+    "stock": 35,
+    "menu_dia": false,
+    "descripcion": "Agua embotellada para después de Educación Física.",
+    "icono": "💧",
+    "ventas": 28
+  },
+  {
+    "id": 8,
+    "nombre": "Papas a la francesa",
+    "categoria": "Mecato",
+    "precio": 3500,
+    "stock": 15,
+    "menu_dia": false,
+    "descripcion": "Porción mediana con sal y limón.",
+    "icono": "🍟",
+    "ventas": 47
+  },
+  {
+    "id": 9,
+    "nombre": "Maní tostado",
+    "categoria": "Mecato",
+    "precio": 1500,
+    "stock": 50,
+    "menu_dia": false,
+    "descripcion": "Bolsa de 50 gramos, el mecato clásico del descanso.",
+    "icono": "🥜",
+    "ventas": 33
+  },
+  {
+    "id": 10,
+    "nombre": "Combo del día: hamburguesa + jugo + papas",
+    "categoria": "Combo_Dia",
+    "precio": 8900,
+    "stock": 10,
+    "menu_dia": true,
+    "descripcion": "El combo completo del primer descanso.",
+    "icono": "🍱",
+    "ventas": 52
+  },
+  {
+    "id": 11,
+    "nombre": "Combo escolar: arepa + gaseosa",
+    "categoria": "Combo_Dia",
+    "precio": 5500,
+    "stock": 14,
+    "menu_dia": true,
+    "descripcion": "La opción más económica para el segundo descanso.",
+    "icono": "🥡",
+    "ventas": 25
+  }
+]

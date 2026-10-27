@@ -1,0 +1,145 @@
+{
+  "desafios": [
+    {
+      "id": 1,
+      "titulo": "Retrato con la mano no dominante",
+      "descripcion": "Dibuja un retrato usando la mano con la que no escribes. El trazo torpe es parte del reto.",
+      "categoria": "Dibujo",
+      "fecha_inicio": "2026-10-26",
+      "fecha_fin": "2026-11-01",
+      "insignia": "Pulso valiente",
+      "participantes": 4,
+      "participantes_ids": [
+        1,
+        3,
+        6,
+        7
+      ],
+      "meta": 20,
+      "estado": "VIGENTE",
+      "puntos": 50
+    },
+    {
+      "id": 2,
+      "titulo": "Mi barrio en seis fotos",
+      "descripcion": "Cuenta tu barrio en seis fotografías tomadas a la misma hora durante seis días.",
+      "categoria": "Fotografía",
+      "fecha_inicio": "2026-10-12",
+      "fecha_fin": "2026-10-18",
+      "insignia": "Ojo del barrio",
+      "participantes": 9,
+      "participantes_ids": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "meta": 15,
+      "estado": "CERRADO",
+      "puntos": 40
+    },
+    {
+      "id": 3,
+      "titulo": "Doce versos para la Lola",
+      "descripcion": "Escribe doce versos sobre un lugar del colegio que nadie más haya elegido.",
+      "categoria": "Poesía",
+      "fecha_inicio": "2026-10-26",
+      "fecha_fin": "2026-11-01",
+      "insignia": "Pluma constante",
+      "participantes": 3,
+      "participantes_ids": [
+        1,
+        7
+      ],
+      "meta": 15,
+      "estado": "VIGENTE",
+      "puntos": 40
+    },
+    {
+      "id": 4,
+      "titulo": "Dúo artístico: dos manos, una obra",
+      "descripcion": "Busca un compañero de otro grado y hagan una sola obra entre los dos.",
+      "categoria": "Pintura",
+      "fecha_inicio": "2026-10-26",
+      "fecha_fin": "2026-11-02",
+      "insignia": "Dúo artístico",
+      "participantes": 2,
+      "participantes_ids": [
+        2,
+        4
+      ],
+      "meta": 10,
+      "estado": "VIGENTE",
+      "puntos": 60
+    },
+    {
+      "id": 5,
+      "titulo": "El sonido del recreo",
+      "descripcion": "Graba un audio de un minuto del recreo y cuéntalo solo con sonidos.",
+      "categoria": "Música",
+      "fecha_inicio": "2026-10-05",
+      "fecha_fin": "2026-10-11",
+      "insignia": "Oído atento",
+      "participantes": 6,
+      "participantes_ids": [
+        2,
+        4
+      ],
+      "meta": 12,
+      "estado": "CERRADO",
+      "puntos": 35
+    }
+  ],
+  "insignias": [
+    {
+      "id": 1,
+      "id_estudiante": 1,
+      "nombre": "Pluma constante",
+      "descripcion": "Publicó tres textos en el mes",
+      "fecha": "2026-10-10",
+      "tipo": "CONSTANCIA"
+    },
+    {
+      "id": 2,
+      "id_estudiante": 2,
+      "nombre": "Ojo del barrio",
+      "descripcion": "Ganó el reto de fotografía",
+      "fecha": "2026-10-18",
+      "tipo": "CREATIVIDAD"
+    },
+    {
+      "id": 3,
+      "id_estudiante": 3,
+      "nombre": "Trazo valiente",
+      "descripcion": "Primera obra en la galería",
+      "fecha": "2026-10-05",
+      "tipo": "CREATIVIDAD"
+    },
+    {
+      "id": 4,
+      "id_estudiante": 4,
+      "nombre": "Dúo artístico",
+      "descripcion": "Colaboró en una obra en pareja",
+      "fecha": "2026-10-16",
+      "tipo": "COLABORACION"
+    },
+    {
+      "id": 5,
+      "id_estudiante": 5,
+      "nombre": "Raíz viva",
+      "descripcion": "Representó a 10°04 en el reto",
+      "fecha": "2026-10-13",
+      "tipo": "PARTICIPACION"
+    },
+    {
+      "id": 6,
+      "id_estudiante": 7,
+      "nombre": "Voz nueva",
+      "descripcion": "Primer comentario positivo del grupo",
+      "fecha": "2026-10-11",
+      "tipo": "PARTICIPACION"
+    }
+  ]
+}

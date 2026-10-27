@@ -1,0 +1,206 @@
+{
+  "tareas": [
+    {
+      "id": 1,
+      "titulo": "Taller de algoritmos en PSeInt",
+      "materia": "Herramientas Algorítmicas I",
+      "fecha": "2026-10-27",
+      "prioridad": 1,
+      "duracion": 120,
+      "pomodoros": 5,
+      "estado": "PENDIENTE",
+      "subtareas": [
+        "Leer la guía",
+        "Hacer el diagrama de flujo",
+        "Probar con 3 casos"
+      ]
+    },
+    {
+      "id": 2,
+      "titulo": "Exposición de sistemas operativos",
+      "materia": "Sistemas Operativos",
+      "fecha": "2026-10-30",
+      "prioridad": 1,
+      "duracion": 90,
+      "pomodoros": 4,
+      "estado": "EN_CURSO",
+      "subtareas": [
+        "Buscar información",
+        "Armar diapositivas",
+        "Ensayar 10 minutos"
+      ]
+    },
+    {
+      "id": 3,
+      "titulo": "Ejercicios de lógica matemática",
+      "materia": "Herramientas Lógicas Matemáticas",
+      "fecha": "2026-11-02",
+      "prioridad": 2,
+      "duracion": 60,
+      "pomodoros": 3,
+      "estado": "PENDIENTE",
+      "subtareas": [
+        "Páginas 40 a 55"
+      ]
+    },
+    {
+      "id": 4,
+      "titulo": "Informe de la práctica de redes",
+      "materia": "Sistemas Operativos y Red",
+      "fecha": "2026-11-05",
+      "prioridad": 2,
+      "duracion": 150,
+      "pomodoros": 6,
+      "estado": "PENDIENTE",
+      "subtareas": [
+        "Tomar fotos",
+        "Redactar introducción",
+        "Conclusiones"
+      ]
+    },
+    {
+      "id": 5,
+      "titulo": "Maqueta del proyecto PIA",
+      "materia": "Herramientas TIC",
+      "fecha": "2026-11-09",
+      "prioridad": 3,
+      "duracion": 180,
+      "pomodoros": 8,
+      "estado": "PENDIENTE",
+      "subtareas": [
+        "Comprar materiales",
+        "Armar la base",
+        "Presentar al equipo"
+      ]
+    },
+    {
+      "id": 6,
+      "titulo": "Repaso de pensamiento computacional",
+      "materia": "Pensamiento Computacional",
+      "fecha": "2026-10-25",
+      "prioridad": 2,
+      "duracion": 45,
+      "pomodoros": 2,
+      "estado": "CUMPLIDA",
+      "subtareas": [
+        "Repasar apuntes"
+      ]
+    }
+  ],
+  "horario": [
+    {
+      "id": 1,
+      "dia": "Lunes",
+      "inicio": "06:00",
+      "fin": "12:00",
+      "actividad": "Colegio",
+      "tipo": "colegio"
+    },
+    {
+      "id": 2,
+      "dia": "Lunes",
+      "inicio": "15:00",
+      "fin": "17:00",
+      "actividad": "Entrenamiento de fútbol",
+      "tipo": "deporte"
+    },
+    {
+      "id": 3,
+      "dia": "Martes",
+      "inicio": "06:00",
+      "fin": "12:00",
+      "actividad": "Colegio",
+      "tipo": "colegio"
+    },
+    {
+      "id": 4,
+      "dia": "Martes",
+      "inicio": "14:00",
+      "fin": "16:00",
+      "actividad": "Clases de inglés",
+      "tipo": "estudio"
+    },
+    {
+      "id": 5,
+      "dia": "Miércoles",
+      "inicio": "06:00",
+      "fin": "12:00",
+      "actividad": "Colegio",
+      "tipo": "colegio"
+    },
+    {
+      "id": 6,
+      "dia": "Miércoles",
+      "inicio": "16:00",
+      "fin": "18:00",
+      "actividad": "Entrenamiento de fútbol",
+      "tipo": "deporte"
+    },
+    {
+      "id": 7,
+      "dia": "Jueves",
+      "inicio": "06:00",
+      "fin": "12:00",
+      "actividad": "Colegio",
+      "tipo": "colegio"
+    },
+    {
+      "id": 8,
+      "dia": "Viernes",
+      "inicio": "06:00",
+      "fin": "12:00",
+      "actividad": "Colegio",
+      "tipo": "colegio"
+    },
+    {
+      "id": 9,
+      "dia": "Sábado",
+      "inicio": "08:00",
+      "fin": "11:00",
+      "actividad": "Refuerzo de matemáticas",
+      "tipo": "estudio"
+    }
+  ],
+  "enfoques": [
+    {
+      "id": 1,
+      "fecha": "2026-10-23",
+      "materia": "Herramientas Algorítmicas I",
+      "minutos": 50,
+      "racha": 3,
+      "logro": "Primera semana"
+    },
+    {
+      "id": 2,
+      "fecha": "2026-10-24",
+      "materia": "Sistemas Operativos",
+      "minutos": 75,
+      "racha": 4,
+      "logro": ""
+    },
+    {
+      "id": 3,
+      "fecha": "2026-10-25",
+      "materia": "Pensamiento Computacional",
+      "minutos": 25,
+      "racha": 5,
+      "logro": "Cinco días seguidos"
+    },
+    {
+      "id": 4,
+      "fecha": "2026-10-26",
+      "materia": "Herramientas Algorítmicas I",
+      "minutos": 50,
+      "racha": 6,
+      "logro": ""
+    },
+    {
+      "id": 5,
+      "fecha": "2026-10-27",
+      "materia": "Sistemas Operativos y Red",
+      "minutos": 75,
+      "racha": 7,
+      "logro": "Dos horas de enfoque"
+    }
+  ]
+}

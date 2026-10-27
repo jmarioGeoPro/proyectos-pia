@@ -1,0 +1,648 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "codigo_institucional": "EST-1005-01",
+      "nombre_completo": "Nicolás Arteaga Mazo",
+      "username_publico": "nico.arteaga",
+      "grado": "10°05",
+      "rol": "estudiante",
+      "avatar": "🦊",
+      "documento_ti": "1.036.111.001",
+      "telefono": "300 111 2233",
+      "correo": "nicolas.arteaga@lola.edu.co",
+      "clave": "1234",
+      "debe_cambiar_clave": true,
+      "activo": true,
+      "intereses": [
+        "Tecnología",
+        "Robótica",
+        "Deportes"
+      ],
+      "privacidad": {
+        "mostrar_grado": true,
+        "permitir_mensajes": true,
+        "perfil_publico": true
+      }
+    },
+    {
+      "id": 2,
+      "codigo_institucional": "EST-1005-02",
+      "nombre_completo": "Juan Fernando Gómez Hernández",
+      "username_publico": "juan.gomez",
+      "grado": "10°05",
+      "rol": "estudiante",
+      "avatar": "🐼",
+      "documento_ti": "1.020.222.002",
+      "telefono": "300 222 3344",
+      "correo": "juan.gomezhe@lola.edu.co",
+      "clave": "1234",
+      "debe_cambiar_clave": true,
+      "activo": true,
+      "intereses": [
+        "Tecnología",
+        "Lectura",
+        "Música"
+      ],
+      "privacidad": {
+        "mostrar_grado": true,
+        "permitir_mensajes": true,
+        "perfil_publico": true
+      }
+    },
+    {
+      "id": 3,
+      "codigo_institucional": "EST-1005-03",
+      "nombre_completo": "Luis Yair Vallenilla Tovar",
+      "username_publico": "yair.vallenilla",
+      "grado": "10°05",
+      "rol": "estudiante",
+      "avatar": "🐙",
+      "documento_ti": "1.112.333.003",
+      "telefono": "300 333 4455",
+      "correo": "luis.vallenilla@lola.edu.co",
+      "clave": "1234",
+      "debe_cambiar_clave": true,
+      "activo": true,
+      "intereses": [
+        "Arte",
+        "Música",
+        "Teatro"
+      ],
+      "privacidad": {
+        "mostrar_grado": true,
+        "permitir_mensajes": true,
+        "perfil_publico": true
+      }
+    },
+    {
+      "id": 4,
+      "codigo_institucional": "EST-1005-04",
+      "nombre_completo": "Susana Zapata Tobón",
+      "username_publico": "susana.zapata",
+      "grado": "10°05",
+      "rol": "moderador",
+      "avatar": "🦉",
+      "documento_ti": "1.020.444.004",
+      "telefono": "300 444 5566",
+      "correo": "susana.zapata@lola.edu.co",
+      "clave": "1234",
+      "debe_cambiar_clave": true,
+      "activo": true,
+      "intereses": [
+        "Lectura",
+        "Medio ambiente",
+        "Arte"
+      ],
+      "privacidad": {
+        "mostrar_grado": true,
+        "permitir_mensajes": true,
+        "perfil_publico": true
+      }
+    },
+    {
+      "id": 5,
+      "codigo_institucional": "DOC-001",
+      "nombre_completo": "Jorge Mario Patiño Marín",
+      "username_publico": "prof.patino",
+      "grado": "Docente",
+      "rol": "docente",
+      "avatar": "🐝",
+      "documento_ti": "71.555.005",
+      "telefono": "310 555 6677",
+      "correo": "jorge.patino@lola.edu.co",
+      "clave": "Lola2026*",
+      "debe_cambiar_clave": false,
+      "activo": true,
+      "intereses": [
+        "Tecnología",
+        "Lectura"
+      ],
+      "privacidad": {
+        "mostrar_grado": true,
+        "permitir_mensajes": true,
+        "perfil_publico": true
+      }
+    },
+    {
+      "id": 6,
+      "codigo_institucional": "DOC-002",
+      "nombre_completo": "Alejo Villa A",
+      "username_publico": "prof.villa",
+      "grado": "Docente",
+      "rol": "docente",
+      "avatar": "🐢",
+      "documento_ti": "71.555.006",
+      "telefono": "310 666 7788",
+      "correo": "alejo.villa@lola.edu.co",
+      "clave": "Lola2026*",
+      "debe_cambiar_clave": false,
+      "activo": true,
+      "intereses": [
+        "Deportes",
+        "Medio ambiente"
+      ],
+      "privacidad": {
+        "mostrar_grado": true,
+        "permitir_mensajes": true,
+        "perfil_publico": true
+      }
+    },
+    {
+      "id": 7,
+      "codigo_institucional": "ADM-001",
+      "nombre_completo": "Coordinación Académica Lola González",
+      "username_publico": "coordinacion",
+      "grado": "Coordinación",
+      "rol": "admin",
+      "avatar": "🦄",
+      "documento_ti": "43.555.007",
+      "telefono": "320 777 8899",
+      "correo": "coordinacion@lola.edu.co",
+      "clave": "Lola2026*",
+      "debe_cambiar_clave": false,
+      "activo": true,
+      "intereses": [
+        "Lectura",
+        "Arte"
+      ],
+      "privacidad": {
+        "mostrar_grado": true,
+        "permitir_mensajes": true,
+        "perfil_publico": true
+      }
+    }
+  ],
+  "publicaciones": [
+    {
+      "id": 1,
+      "codigo": "LC-2026-0001",
+      "autor_id": 5,
+      "autor_publico": "prof.patino",
+      "avatar": "🐝",
+      "rol_autor": "docente",
+      "categoria": "Institucional",
+      "titulo": "Cambio de horario para el jueves 14 de mayo",
+      "contenido": "El jueves 14 de mayo la jornada termina a las 11:30 a.m. por la reunión de docentes del PIA. Las clases de la tarde se cancelan y se recuperan el viernes con el horario del miércoles. Por favor avisen en casa y revisen el cronograma publicado en la cartelera.",
+      "es_aviso": true,
+      "prioridad": "Urgente",
+      "estado": "Activo",
+      "fecha": "2026-05-11T06:40:00"
+    },
+    {
+      "id": 2,
+      "codigo": "LC-2026-0002",
+      "autor_id": 7,
+      "autor_publico": "coordinacion",
+      "avatar": "🦄",
+      "rol_autor": "admin",
+      "categoria": "Institucional",
+      "titulo": "Entrega de boletines del primer periodo",
+      "contenido": "La entrega de boletines del primer periodo será el viernes 22 de mayo de 7:00 a 10:00 a.m. Debe asistir el acudiente con el documento de identidad. Los estudiantes que no puedan asistir deben solicitar la cita por coordinación antes del 20 de mayo.",
+      "es_aviso": true,
+      "prioridad": "General",
+      "estado": "Activo",
+      "fecha": "2026-05-11T07:05:00"
+    },
+    {
+      "id": 3,
+      "codigo": "LC-2026-0003",
+      "autor_id": 1,
+      "autor_publico": "nico.arteaga",
+      "avatar": "🦊",
+      "rol_autor": "estudiante",
+      "categoria": "Academico",
+      "titulo": "Grupo de estudio para el taller de algoritmos",
+      "contenido": "Estamos armando un grupo para resolver el taller de algoritmos del profe Patiño. Nos reunimos el martes y el jueves en la biblioteca durante el descanso. La idea es resolver los ejercicios en parejas y compartir las dudas antes de la entrega. Si quieren unirse, respondan este hilo.",
+      "es_aviso": false,
+      "prioridad": "General",
+      "estado": "Activo",
+      "fecha": "2026-05-11T15:20:00"
+    },
+    {
+      "id": 4,
+      "codigo": "LC-2026-0004",
+      "autor_id": 3,
+      "autor_publico": "yair.vallenilla",
+      "avatar": "🐙",
+      "rol_autor": "estudiante",
+      "categoria": "Deporte",
+      "titulo": "Torneo relámpago de fútbol en el descanso",
+      "contenido": "Propongo un torneo relámpago de fútbol para los descansos de la próxima semana. Serían equipos de cinco, partidos de diez minutos y arbitraje de los mismos estudiantes. Necesitamos que alguien del área de deportes nos preste los petos y los balones.",
+      "es_aviso": false,
+      "prioridad": "General",
+      "estado": "Activo",
+      "fecha": "2026-05-12T09:10:00"
+    },
+    {
+      "id": 5,
+      "codigo": "LC-2026-0005",
+      "autor_id": 6,
+      "autor_publico": "prof.villa",
+      "avatar": "🐢",
+      "rol_autor": "docente",
+      "categoria": "Institucional",
+      "titulo": "Feria de la Ciencia: inscripciones abiertas",
+      "contenido": "La Feria de la Ciencia será el viernes 5 de junio en el coliseo. Cada grupo de décimo puede inscribir hasta dos proyectos. La inscripción se hace con el director de grupo y cierra el 25 de mayo. Los mejores tres proyectos representan al colegio en el encuentro de la Pascual Bravo.",
+      "es_aviso": true,
+      "prioridad": "Evento",
+      "estado": "Activo",
+      "fecha": "2026-05-12T10:00:00"
+    },
+    {
+      "id": 6,
+      "codigo": "LC-2026-0006",
+      "autor_id": 4,
+      "autor_publico": "susana.zapata",
+      "avatar": "🦉",
+      "rol_autor": "moderador",
+      "categoria": "Bienestar",
+      "titulo": "Campaña de convivencia: palabras que construyen",
+      "contenido": "Esta semana lanzamos la campaña de convivencia en el feed. La idea es dejar un mensaje de reconocimiento a alguien del colegio y evitar las burlas en los comentarios. El Comité de Convivencia revisará los reportes y publicará un resumen el viernes.",
+      "es_aviso": false,
+      "prioridad": "General",
+      "estado": "Activo",
+      "fecha": "2026-05-12T11:30:00"
+    },
+    {
+      "id": 7,
+      "codigo": "LC-2026-0007",
+      "autor_id": 2,
+      "autor_publico": "juan.gomez",
+      "avatar": "🐼",
+      "rol_autor": "estudiante",
+      "categoria": "Cultura",
+      "titulo": "Banda sonora para la izada de bandera",
+      "contenido": "El grupo de música está buscando canciones para la izada de bandera del próximo lunes. Queremos incluir algo de rock colombiano y una pieza instrumental. Si tienen recomendaciones, déjenlas en los comentarios con el nombre del artista y el motivo.",
+      "es_aviso": false,
+      "prioridad": "General",
+      "estado": "Activo",
+      "fecha": "2026-05-13T08:15:00"
+    },
+    {
+      "id": 8,
+      "codigo": "LC-2026-0008",
+      "autor_id": 2,
+      "autor_publico": "juan.gomez",
+      "avatar": "🐼",
+      "rol_autor": "estudiante",
+      "categoria": "Academico",
+      "titulo": "Los del otro grupo son unos lentos",
+      "contenido": "Otra vez los del 10°02 quedaron de últimos en la prueba y todos sabemos por qué. Son unos lentos y no deberían estar en el mismo nivel que nosotros. Que se dediquen a otra cosa.",
+      "es_aviso": false,
+      "prioridad": "General",
+      "estado": "OCULTO_MODERACION",
+      "fecha": "2026-05-13T09:40:00",
+      "motivo_moderacion": "Acoso o burla"
+    },
+    {
+      "id": 9,
+      "codigo": "LC-2026-0009",
+      "autor_id": 1,
+      "autor_publico": "nico.arteaga",
+      "avatar": "🦊",
+      "rol_autor": "estudiante",
+      "categoria": "Academico",
+      "titulo": "Recursos de repaso para la evaluación de redes",
+      "contenido": "Comparto tres recursos que nos sirvieron para la evaluación de redes: el resumen de protocolos, el video de subredes y la lista de ejercicios resueltos. Los dejo en la carpeta del grupo de estudio. Si alguien tiene otro material, lo sumamos.",
+      "es_aviso": false,
+      "prioridad": "General",
+      "estado": "Activo",
+      "fecha": "2026-05-14T16:10:00"
+    }
+  ],
+  "comentarios": [
+    {
+      "id": 1,
+      "id_publicacion": 3,
+      "autor_id": 2,
+      "autor_publico": "juan.gomez",
+      "avatar": "🐼",
+      "contenido": "Cuenten conmigo el martes. Llevo los ejercicios del primer bloque resueltos.",
+      "fecha": "2026-05-11T16:00:00",
+      "estado": "Activo"
+    },
+    {
+      "id": 2,
+      "id_publicacion": 3,
+      "autor_id": 3,
+      "autor_publico": "yair.vallenilla",
+      "avatar": "🐙",
+      "contenido": "Yo puedo el jueves y llevo el computador para probar el código.",
+      "fecha": "2026-05-11T16:25:00",
+      "estado": "Activo"
+    },
+    {
+      "id": 3,
+      "id_publicacion": 4,
+      "autor_id": 1,
+      "autor_publico": "nico.arteaga",
+      "avatar": "🦊",
+      "contenido": "Me apunto con el equipo de décimo, pero necesitamos los petos.",
+      "fecha": "2026-05-12T09:35:00",
+      "estado": "Activo"
+    },
+    {
+      "id": 4,
+      "id_publicacion": 6,
+      "autor_id": 1,
+      "autor_publico": "nico.arteaga",
+      "avatar": "🦊",
+      "contenido": "Reconozco al profe Villa por acompañarnos en la feria el año pasado.",
+      "fecha": "2026-05-12T12:10:00",
+      "estado": "Activo"
+    },
+    {
+      "id": 5,
+      "id_publicacion": 7,
+      "autor_id": 4,
+      "autor_publico": "susana.zapata",
+      "avatar": "🦉",
+      "contenido": "Sugiero una canción de Bomba Estéreo y una pieza de guitarra clásica.",
+      "fecha": "2026-05-13T09:00:00",
+      "estado": "Activo"
+    },
+    {
+      "id": 6,
+      "id_publicacion": 9,
+      "autor_id": 2,
+      "autor_publico": "juan.gomez",
+      "avatar": "🐼",
+      "contenido": "Gracias, el resumen de protocolos me sirvió para el quiz.",
+      "fecha": "2026-05-14T17:00:00",
+      "estado": "Activo"
+    }
+  ],
+  "grupos": [
+    {
+      "id": 1,
+      "nombre": "Club de Robótica Lola",
+      "categoria": "Academico",
+      "descripcion": "Construimos prototipos con Arduino y preparamos el proyecto para la Feria de la Ciencia.",
+      "horario": "Martes 2:00 p.m.",
+      "lugar": "Aula de tecnología 301",
+      "lider": "juan.gomez",
+      "integrantes": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Semillero de Fútbol",
+      "categoria": "Deporte",
+      "descripcion": "Entrenamientos y torneos internos para los grados noveno, décimo y once.",
+      "horario": "Miércoles 3:00 p.m.",
+      "lugar": "Cancha principal",
+      "lider": "yair.vallenilla",
+      "integrantes": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Colectivo Ambiental Verde",
+      "categoria": "Bienestar",
+      "descripcion": "Jornadas de siembra, reciclaje y cuidado de las zonas verdes del colegio.",
+      "horario": "Viernes 1:00 p.m.",
+      "lugar": "Zonas verdes",
+      "lider": "susana.zapata",
+      "integrantes": [
+        2,
+        4
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Grupo de Teatro",
+      "categoria": "Cultura",
+      "descripcion": "Montaje de obras cortas para las izadas de bandera y el festival cultural.",
+      "horario": "Jueves 2:30 p.m.",
+      "lugar": "Aula múltiple",
+      "lider": "susana.zapata",
+      "integrantes": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "Club de Lectura",
+      "categoria": "Academico",
+      "descripcion": "Leemos un libro al mes y conversamos sobre lo que nos dejó cada historia.",
+      "horario": "Lunes 1:00 p.m.",
+      "lugar": "Biblioteca",
+      "lider": "prof.patino",
+      "integrantes": [
+        2,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 6,
+      "nombre": "Consejo Estudiantil Digital",
+      "categoria": "Bienestar",
+      "descripcion": "Canal de propuestas de los estudiantes y enlace con la coordinación del colegio.",
+      "horario": "Viernes 11:00 a.m.",
+      "lugar": "Aula 204",
+      "lider": "nico.arteaga",
+      "integrantes": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "eventos": [
+    {
+      "id": 1,
+      "titulo": "Feria de la Ciencia 2026",
+      "fecha": "2026-06-05",
+      "hora": "08:00",
+      "lugar": "Coliseo",
+      "organiza": "prof.villa",
+      "descripcion": "Exposición de los proyectos PIA de grado décimo.",
+      "asistentes": [
+        1,
+        2,
+        3,
+        5,
+        6
+      ]
+    },
+    {
+      "id": 2,
+      "titulo": "Encuentro deportivo intercursos",
+      "fecha": "2026-06-10",
+      "hora": "09:00",
+      "lugar": "Cancha principal",
+      "organiza": "prof.villa",
+      "descripcion": "Torneo de fútbol y baloncesto entre los grados 9, 10 y 11.",
+      "asistentes": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": 3,
+      "titulo": "Festival cultural lolista",
+      "fecha": "2026-06-18",
+      "hora": "14:00",
+      "lugar": "Aula múltiple",
+      "organiza": "susana.zapata",
+      "descripcion": "Música, teatro y danza preparados por los grupos de interés.",
+      "asistentes": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "id": 4,
+      "titulo": "Jornada de convivencia digital",
+      "fecha": "2026-06-24",
+      "hora": "10:00",
+      "lugar": "Biblioteca",
+      "organiza": "prof.patino",
+      "descripcion": "Taller sobre datos personales y ciberacoso con el Consejo Estudiantil Digital.",
+      "asistentes": [
+        1,
+        2,
+        4
+      ]
+    },
+    {
+      "id": 5,
+      "titulo": "Feria universitaria Pascual Bravo",
+      "fecha": "2026-07-02",
+      "hora": "08:30",
+      "lugar": "Coliseo",
+      "organiza": "coordinacion",
+      "descripcion": "Oferta de programas técnicos y profesionales para grado once.",
+      "asistentes": [
+        3
+      ]
+    }
+  ],
+  "reportes": [
+    {
+      "id": 1,
+      "id_publicacion": 8,
+      "codigo_pub": "LC-2026-0008",
+      "motivo": "Acoso o burla",
+      "detalle": "Se burla de todo un grupo y los llama lentos en público.",
+      "reportado_por": "susana.zapata",
+      "rol_reporta": "moderador",
+      "fecha": "2026-05-13T10:05:00",
+      "estado": "PENDIENTE",
+      "moderador": "",
+      "resolucion": ""
+    },
+    {
+      "id": 2,
+      "id_publicacion": 4,
+      "codigo_pub": "LC-2026-0004",
+      "motivo": "Spam o publicidad",
+      "detalle": "Repite el mismo mensaje en tres hilos distintos.",
+      "reportado_por": "juan.gomez",
+      "rol_reporta": "estudiante",
+      "fecha": "2026-05-12T10:20:00",
+      "estado": "ARCHIVADO",
+      "moderador": "prof.patino",
+      "resolucion": "Se revisó el hilo y no es spam: es una propuesta deportiva válida."
+    },
+    {
+      "id": 3,
+      "id_publicacion": 7,
+      "codigo_pub": "LC-2026-0007",
+      "motivo": "Datos personales",
+      "detalle": "Un comentario incluía un número de celular.",
+      "reportado_por": "nico.arteaga",
+      "rol_reporta": "estudiante",
+      "fecha": "2026-05-13T09:20:00",
+      "estado": "RESUELTO_OCULTO",
+      "moderador": "susana.zapata",
+      "resolucion": "Se ocultó el comentario y se recordó la norma de no publicar celulares."
+    },
+    {
+      "id": 4,
+      "id_publicacion": 9,
+      "codigo_pub": "LC-2026-0009",
+      "motivo": "Lenguaje ofensivo",
+      "detalle": "Un comentario respondió con una burla.",
+      "reportado_por": "yair.vallenilla",
+      "rol_reporta": "estudiante",
+      "fecha": "2026-05-14T17:30:00",
+      "estado": "EN_REVISION",
+      "moderador": "prof.villa",
+      "resolucion": "Pendiente de escuchar a las dos partes antes de decidir."
+    },
+    {
+      "id": 5,
+      "id_publicacion": 3,
+      "codigo_pub": "LC-2026-0003",
+      "motivo": "Datos personales",
+      "detalle": "Alguien compartió un correo personal en el hilo de estudio.",
+      "reportado_por": "susana.zapata",
+      "rol_reporta": "moderador",
+      "fecha": "2026-05-11T17:10:00",
+      "estado": "PENDIENTE",
+      "moderador": "",
+      "resolucion": ""
+    }
+  ],
+  "bitacora": [
+    {
+      "id": 1,
+      "fecha": "2026-05-11T06:40:00",
+      "accion": "Publicación",
+      "detalle": "Aviso oficial LC-2026-0001: Cambio de horario para el jueves 14 de mayo",
+      "moderador": "prof.patino",
+      "rol": "docente"
+    },
+    {
+      "id": 2,
+      "fecha": "2026-05-13T09:20:00",
+      "accion": "Reporte",
+      "detalle": "Se reportó LC-2026-0007 por Datos personales.",
+      "moderador": "nico.arteaga",
+      "rol": "estudiante"
+    },
+    {
+      "id": 3,
+      "fecha": "2026-05-13T09:35:00",
+      "accion": "Ocultamiento",
+      "detalle": "Se ocultó la publicación LC-2026-0008 (Los del otro grupo son unos lentos).",
+      "moderador": "susana.zapata",
+      "rol": "moderador"
+    },
+    {
+      "id": 4,
+      "fecha": "2026-05-13T09:36:00",
+      "accion": "Moderación",
+      "detalle": "Caso de Acoso o burla en LC-2026-0008: se ocultó y se citó a las partes.",
+      "moderador": "susana.zapata",
+      "rol": "moderador"
+    },
+    {
+      "id": 5,
+      "fecha": "2026-05-14T10:15:00",
+      "accion": "Ingreso",
+      "detalle": "Entró con el rol de Docente.",
+      "moderador": "prof.villa",
+      "rol": "docente"
+    },
+    {
+      "id": 6,
+      "fecha": "2026-05-14T16:10:00",
+      "accion": "Publicación",
+      "detalle": "Hilo LC-2026-0009: Recursos de repaso para la evaluación de redes",
+      "moderador": "nico.arteaga",
+      "rol": "estudiante"
+    }
+  ]
+}

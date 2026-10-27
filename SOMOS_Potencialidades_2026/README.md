@@ -1,78 +1,77 @@
-# SOMOS Potencialidades — aplicación web
+# SOMOS Potencialidades
 
-> Aquí todos tenemos algo que dar
+> Potenciamos talentos, compartimos arte, transformamos realidades
 
-**Proyecto Integrador de Aula (PIA) · I.E. Lola González · Grado 10° · 2026**
+**Proyecto Integrador de Aula (PIA) 2026** · I.E. Lola González · Grado 10° · Grupo 10°05
 Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
 
 ---
 
 ## Qué es
 
-Visibilización de Talentos y Potencialidades
+Plataforma web que identifica, impulsa y da reconocimiento a los talentos artísticos y expresivos de los estudiantes de la I.E. Lola González, con privacidad por niveles, moderación docente y el sello de la Calidad Humana.
 
-## Cuenta de prueba
+**Problema que resuelve:** El talento artístico de los estudiantes se queda en el salón o en el cuaderno: no hay un lugar donde se vea, se comparta y se reconozca, y muchos prefieren no mostrar lo que hacen por miedo a la burla.
 
-Para revisarla **no hace falta registrarse**: la aplicación crea sola una cuenta la primera vez que se abre.
+**Estilo visual:** 04-somos · menú top
 
-| | |
-|---|---|
-| **Correo** | `pruebas@pasculia.edu.co` |
-| **Contraseña** | `PascualBravo2026` |
-| **Rol** | Docente |
+## Cómo abrirlo
 
-> Es la **misma cuenta en las 33 aplicaciones**, para que quien las revise no tenga que memorizar nada.
-> También se puede crear una cuenta propia con el botón *Crear una cuenta*.
+1. Abre **`index.html`** con doble clic (no necesita servidor ni internet).
+2. La primera vez se cargan solos los **datos de ejemplo** (37 registros).
+3. Navega con el menú de arriba.
 
-## Cómo se usa
+Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar.
+Para volver a los datos de ejemplo: abre la consola del navegador y escribe `PIA.reiniciar()`.
 
-1. Abre el archivo **index.html** con doble clic (o sírvelo con un servidor local).
-2. Entra con la **cuenta de prueba** de arriba, o pulsa **Crear una cuenta** y regístrate.
-3. Elige un módulo en el menú de la izquierda.
-4. Llena el formulario y pulsa **Guardar**. El registro aparece en la tabla.
-5. Puedes **buscar**, **editar**, **eliminar** y **exportar** a Excel.
+## Las páginas
 
-Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar la página.
+- **Inicio** (`index.html`) — Portada: bienvenida compacta y la galería de trabajos con filtros por categoría y me gusta.
+- **Favoritos** (`favoritos.html`) — Las obras que el estudiante apoyó con me gusta.
+- **Explorar** (`explorar.html`) — Galería filtrable por categoría artística, técnica y grado, con apoyos y comentarios.
+- **Portafolio** (`portafolio.html`) — Perfil del estudiante con sus obras, el diario de proceso y las insignias.
+- **Publicar** (`publicar.html`) — Subida de obra con privacidad, texto alternativo obligatorio y Mentor Art.
+- **Desafíos** (`desafios.html`) — Retos semanales, colaboraciones en dúo e insignias por constancia.
+- **Moderación** (`moderacion-docente.html`) — Panel docente: cola de aprobación, reportes y bloqueo preventivo.
 
-## Módulos
-
-- **👤 Usuarios** — 5 campos
-- **📋 Registros** — 5 campos
-- **🏆 Progreso y logros** — 5 campos
-- **📋 Subir obras en foto o video,** — 5 campos
-- **👤 Que cualquier persona dé «Me gusta»** — 5 campos
-- **📝 Publicaciones** — 5 campos
-- **📋 Sistema debe reconocer y visibilizar las** — 5 campos
-
-## Archivos
+## Los archivos
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | La estructura: las pantallas y sus contenedores. |
-| `css/estilos.css` | El diseño. Arriba están las variables de color: cambiar una cambia todo. |
-| `js/almacen.js` | Los datos: guardar, listar, editar y eliminar. |
-| `js/modulos.js` | Los módulos y sus campos. Aquí se agrega un campo nuevo. |
-| `js/app.js` | La lógica: menú, formularios, tablas y búsqueda. |
-| `logo.png` | El logo del proyecto. |
+| `index.html` | Portada: bienvenida compacta, categorías y galería con me gusta.
+| `favoritos.html` | Las obras que el estudiante apoyó.
+| `explorar.html` | Galería filtrable por categoría, técnica y grado.
+| `portafolio.html` | Perfil del estudiante, diario de proceso e insignias.
+| `publicar.html` | Subida con privacidad, texto alternativo y Mentor Art.
+| `desafios.html` | Retos semanales y colaboraciones en dúo.
+| `moderacion-docente.html` | Cola de aprobación y reportes con bloqueo preventivo.
+| `construccion.html` | Archivo del proyecto.
+| `css/estilos.css` | Sistema de diseño con la paleta amarilla, azul y blanca.
+| `js/galeria.js` | Núcleo común + obras, apoyos con voto único y publicación.
+| `js/moderacion.js` | Aprobar, pedir cambios, reportar y avisar el umbral de apoyos.
+| `js/comentarios-guiados.js` | Plantillas positivas y validación contra el ciberacoso.
+| `js/gamificacion.js` | Desafíos, participaciones e insignias por constancia.
+| `js/mentor-art.js` | Asistente formativo por reglas y texto alternativo sugerido.
+| `js/inicio.js` | Galería de la portada, filtros, me gusta con pulso y favoritos.
+| `data/obras-semilla.json` | 7 estudiantes, 8 obras, 6 comentarios y 5 apoyos.
+| `data/desafios.json` | 5 desafíos semanales y 6 insignias otorgadas.
 
-## Cómo publicarlo en internet
+## El equipo
 
-**Opción 1 — GitHub Pages (gratis):**
-1. Crea un repositorio en GitHub.
-2. Sube todos los archivos.
-3. Ve a *Settings → Pages* y elige la rama principal.
-4. GitHub te da una dirección pública.
+| Integrante | Rol en el proyecto |
+|---|---|
+| Ana Lucía Romero Pardo | Product Owner · privacidad por niveles, anonimato gradual y enfoque pedagógico |
+| Juan José Doria Ossa | Scrum Master · repositorio, entregables y coordinación de los sprints |
+| María Kamila Piedrahíta Ochoa | Líder UI/UX · identidad amarillo/azul/blanco, wireframes y accesibilidad WCAG 2.2 |
+| Mark Santiago Betancourt López | Líder de lógica JS y datos · galería, moderación, gamificación y Mentor Art |
 
-**Opción 2 — Netlify (gratis):**
-1. Entra a netlify.com y elige *Add new site → Deploy manually*.
-2. Arrastra la carpeta del proyecto.
+**Docente articulador:** Jorge Mario Patiño Marín  
+**Docente par:** Alejo Villa A
 
-## Cómo continuarlo
+## Cómo continuar en grado 11°
 
-- Los **campos** de cada módulo están en `js/modulos.js`: es lo primero que se cambia.
-- Los **colores** están en las variables de `css/estilos.css`.
-- Para pasar de localStorage a una base de datos real, solo hay que cambiar `js/almacen.js`.
+En grado 11° la galería pasa a PHP 8 y MySQL 8 con almacenamiento real de archivos, notificación al acudiente y un panel de moderación con historial. El modelo de datos y la moderación ya están resueltos en el prototipo.
 
 ---
 
-Generado por **Project Manager PasculIA** a partir de los requisitos funcionales del proyecto.
+Generado con **Project Manager PasculIA** · datos de ejemplo incluidos.

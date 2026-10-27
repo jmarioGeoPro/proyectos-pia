@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  TimeFocus — Tareas
+  PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  Gestor de tareas: crear, editar, eliminar y descomponer en subtareas.
+
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimeFocus · Tareas</title>
+  <meta name="description" content="Aplicación web que organiza las tareas del colegio en un tablero Hoy/Próximo, detecta los huecos libres del horario semanal y acompaña el estudio con un reloj Pomodoro que acumula rachas y logros.">
+  <meta name="author" content="Sara Isabel Restrepo Mejía, Andrés Felipe Cárdenas Ríos, Valentina Ospina Arango">
+  <meta name="theme-color" content="#a78bfa">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23a78bfa'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3ETF%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css?v=175868">
+</head>
+<body class="layout-sidebar">
+
+  <div class="armazon">
+
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="logo.png" alt="Logo de TimeFocus">
+        <div class="marca-texto">
+          <b>TimeFocus</b>
+          <span>I.E. Lola González · Tareas y concentración</span>
+        </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
+
+    <!-- ================= MENÚ ================= -->
+    <nav class="menu">
+      <a href="index.html">Hoy</a>
+      <a href="tareas.html">Tareas</a>
+      <a href="horario.html">Horario</a>
+      <a href="enfoque.html">Enfoque</a>
+      <a href="estadisticas.html">Estadísticas</a>
+    </nav>
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="contenido">
+      <section class="portada anim">
+        <h1>Gestor de tareas</h1>
+        <p>Cada tarea se convierte en pasos pequeños. Una tarea grande da pereza; cinco pasos se hacen hoy.</p>
+        <div class="sellos">
+          <span class="sello">I.E. Lola González</span>
+          <span class="sello">Grado 10°</span>
+          <span class="sello">Enfoque y tareas</span>
+        </div>
+      </section>
+
+    <div class="rejilla g2">
+      <section class="tarjeta">
+        <h2 id="tituloForm">Nueva tarea</h2>
+        <div class="campo"><label for="tTitulo">Título <span class="req">*</span></label><input id="tTitulo" placeholder="Qué debes hacer"></div>
+        <div class="rejilla g2">
+          <div class="campo"><label for="tMateria">Materia <span class="req">*</span></label><select id="tMateria"><option value="">— Seleccione —</option><option>Herramientas Algorítmicas I</option><option>Sistemas Operativos</option><option>Pensamiento Computacional</option><option>Herramientas Lógicas Matemáticas</option><option>Herramientas TIC</option><option>Sistemas Operativos y Red</option></select></div>
+          <div class="campo"><label for="tFecha">Fecha límite <span class="req">*</span></label><input type="date" id="tFecha"></div>
+        </div>
+        <div class="rejilla g3">
+          <div class="campo"><label for="tPrioridad">Prioridad</label><select id="tPrioridad"><option value="1">Alta</option><option value="2" selected>Media</option><option value="3">Baja</option></select></div>
+          <div class="campo"><label for="tDuracion">Minutos estimados</label><input type="number" id="tDuracion" value="60" min="15" step="15"></div>
+          <div class="campo"><label for="tEstado">Estado</label><select id="tEstado"><option>PENDIENTE</option><option>EN_CURSO</option><option>CUMPLIDA</option></select></div>
+        </div>
+        <div class="campo"><label for="tSubtareas">Pasos o subtareas (uno por línea)</label><textarea id="tSubtareas" placeholder="Leer la guía&#10;Hacer el diagrama&#10;Probar los casos"></textarea></div>
+        <div class="fila">
+          <button class="btn p" id="tGuardar" onclick="guardarTarea()">Guardar tarea</button>
+          <button class="btn" onclick="limpiarTarea()">Limpiar</button>
+        </div>
+      </section>
+      <section class="tarjeta">
+        <h2>Cómo se descompone</h2>
+        <p class="ayuda">Escribe el título y el asistente te propone los pasos.</p>
+        <div class="campo"><label for="aTitulo">Título de la tarea</label><input id="aTitulo" placeholder="Ej. Informe de la práctica de redes"></div>
+        <button class="btn a" onclick="proponerPasos()">Proponer pasos</button>
+        <div id="aPasos" style="margin-top:14px"></div>
+      </section>
+    </div>
+    <section class="tarjeta">
+      <h2>Tus tareas</h2>
+      <p class="ayuda">Haz clic en Editar para cambiarlas o en Cumplir para cerrarlas.</p>
+      <div id="tablaTareas"></div>
+    </section>
+    </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      <img src="equipo.jpg" alt="Foto del equipo de TimeFocus" style="max-width:340px;width:100%;border-radius:12px;margin:0 auto 14px">
+      <div><b>TimeFocus</b> — Tu tiempo, tu foco, tu logro</div>
+      <div class="equipo">
+        <span>Sara Isabel Restrepo Mejía</span>
+        <span>Andrés Felipe Cárdenas Ríos</span>
+        <span>Valentina Ospina Arango</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="piaToast"></div>
+  <script src="js/tareas-crud.js?v=175868"></script>
+  <script src="js/planificador-horarios.js?v=175868"></script>
+  <script src="js/pomodoro-rachas.js?v=175868"></script>
+  <script src="js/asistente-pasos.js?v=175868"></script>
+</body>
+</html>

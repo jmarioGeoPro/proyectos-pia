@@ -1,135 +1,163 @@
 <!DOCTYPE html>
 <!--
   ============================================================================
-  TDL Easy — aplicación web
-  Proyecto Integrador de Aula (PIA) · I.E. Lola González · Grado 10° · 2026
-  Programa: Técnico Auxiliar en Desarrollo de Software — IU Pascual Bravo
+  TDL Easy — Ingresar
+  PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  Login con documento y clave, política de cierre automático de sesión y botón de ayuda.
 
-  Este archivo es la ESTRUCTURA de la aplicación (el esqueleto).
-  Aquí solo va el contenido: las pantallas y sus contenedores.
-  El diseño está en css/estilos.css y la lógica en la carpeta js/.
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
   ============================================================================
 -->
 <html lang="es">
 <head>
-  <!-- Codificación y adaptación a celulares y tabletas -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Trámites y Documentos en Línea">
-  <meta name="author" content="JUSTIN ANDRES CASTILLO SEGURO, MIGUEL ANGEL RUIZ GIRALDO, FELIPE VALLEJO ARIAS">
-  <title>TDL Easy · PIA 2026</title>
-
-  <!-- El icono de la pestaña es el logo del proyecto -->
-  <link rel="icon" href="logo.png">
-  <!-- Hoja de estilos propia de la aplicación -->
-  <link rel="stylesheet" href="css/estilos.css">
+  <title>TDL Easy · Ingresar</title>
+  <meta name="description" content="Aplicación web que reemplaza el llamado de lista por un código QR de 10 minutos por clase: el docente lo proyecta, cada estudiante lo escanea una sola vez desde su celular y la planilla se consolida en segundos, con semáforo verde o rojo, porcentaje semanal y mensual y alerta inmediata al acudiente cuando hay inasistencia.">
+  <meta name="author" content="Miguel Ángel Ruiz Giraldo, Justin Andrés Castillo Seguro, Felipe Vallejo Arias, José Miguel Ledezma Benítez">
+  <meta name="theme-color" content="#22c55e">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2322c55e'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3ETDL%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css?v=176383">
 </head>
-<body>
+<body class="layout-top">
 
-  <!-- ================= PANTALLA DE INGRESO ================= -->
-  <!-- Se muestra cuando no hay una sesión iniciada -->
-  <section id="pantallaIngreso" class="ingreso">
-    <div class="ingreso-caja">
-      <img src="logo.png" alt="Logo de TDL Easy" class="ingreso-logo">
-      <h1>TDL Easy</h1>
-      <p class="lema">Trámites simples, respuestas rápidas</p>
+  <div class="armazon">
 
-      <!-- Formulario de ingreso -->
-      <form id="formIngreso" autocomplete="off">
-        <label for="ingCorreo">Correo electrónico</label>
-        <input type="email" id="ingCorreo" placeholder="tu.correo@ejemplo.com" required>
-
-        <label for="ingClave">Contraseña</label>
-        <input type="password" id="ingClave" placeholder="Tu contraseña" required>
-
-        <button type="submit" class="boton grande">Ingresar</button>
-      </form>
-
-      <!-- Enlace para crear la cuenta -->
-      <p class="ingreso-pie">
-        ¿No tienes cuenta? <a href="#" id="enlaceRegistro">Crear una cuenta</a>
-      </p>
-
-      <!-- Cuenta de prueba: sirve para revisar la aplicación sin registrarse -->
-      <div class="pista-prueba">
-        <b>Para revisarla</b>
-        <span class="pista-par"><label>Correo</label> <code>pruebas@pasculia.edu.co</code></span>
-        <span class="pista-par"><label>Contraseña</label> <code>PascualBravo2026</code></span>
-      </div>
-
-      <!-- Formulario de registro (oculto hasta que se pide) -->
-      <form id="formRegistro" class="oculto" autocomplete="off">
-        <label for="regNombre">Nombre completo</label>
-        <input type="text" id="regNombre" placeholder="Nombres y apellidos" required>
-
-        <label for="regCorreo">Correo electrónico</label>
-        <input type="email" id="regCorreo" placeholder="tu.correo@ejemplo.com" required>
-
-        <label for="regClave">Contraseña</label>
-        <input type="password" id="regClave" placeholder="Mínimo 6 caracteres" minlength="6" required>
-
-        <label for="regRol">¿Cómo vas a usar la aplicación?</label>
-        <select id="regRol">
-          <option>Estudiante</option>
-          <option>Docente</option>
-          <option>Directivo</option>
-          <option>Acudiente</option>
-        </select>
-
-        <button type="submit" class="boton grande">Crear la cuenta</button>
-        <button type="button" class="boton claro" id="cancelarRegistro">Volver</button>
-      </form>
-
-      <p class="creditos">
-        Proyecto Integrador de Aula · I.E. Lola González · 2026
-      </p>
-    </div>
-  </section>
-
-  <!-- ================= APLICACIÓN ================= -->
-  <!-- Se muestra cuando ya hay una sesión iniciada -->
-  <div id="aplicacion" class="aplicacion oculto">
-
-    <!-- ---------- menú lateral ---------- -->
-    <aside class="lateral">
-      <div class="marca">
-        <img src="logo.png" alt="Logo" class="marca-logo">
-        <div>
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="logo.png" alt="Logo de TDL Easy">
+        <div class="marca-texto">
           <b>TDL Easy</b>
-          <span>I.E. Lola González</span>
+          <span>I.E. Lola González · Toma de lista por QR</span>
+        </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
+
+    <!-- ================= MENÚ ================= -->
+    <nav class="menu">
+      <a href="index.html">Ingresar</a>
+      <a href="escaner-estudiante.html">Escáner</a>
+      <a href="panel-docente.html">Panel docente</a>
+      <a href="portal-acudiente.html">Portal acudiente</a>
+    </nav>
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="contenido">
+      <section class="portada anim">
+        <h1>TDL Easy: tomar lista ya no cuesta clase</h1>
+        <p>Cada docente abre un QR de 10 minutos, el estudiante lo escanea una sola vez y la asistencia queda consolidada al instante.</p>
+        <div class="sellos">
+          <span class="sello">I.E. Lola González</span>
+          <span class="sello">Grado 10°</span>
+          <span class="sello">Asistencia QR</span>
+        </div>
+      </section>
+
+    <div class="rejilla g2">
+      <section class="tarjeta">
+        <h2>Entrar a TDL Easy</h2>
+        <p class="ayuda">Documento y clave personal. La sesión se cierra al cerrar la pestaña, para que nadie pueda tomar lista por ti.</p>
+        <div id="loginError" class="oculto"></div>
+        <form id="formLogin" onsubmit="entrar(); return false;">
+          <div class="campo">
+            <label for="documento">Documento o código <span class="req">*</span></label>
+            <input id="documento" inputmode="numeric" placeholder="Ej. 1036259276" autocomplete="off">
+          </div>
+          <div class="campo">
+            <label for="clave">Clave <span class="req">*</span></label>
+            <input id="clave" type="password" placeholder="Tu clave personal">
+          </div>
+          <div class="fila">
+            <button class="btn p" type="submit">Entrar</button>
+            <button class="btn" type="button" onclick="ayudaLogin()">? Ayuda</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="tarjeta">
+        <h2>Entrar con un perfil de ejemplo</h2>
+        <p class="ayuda">Tres usuarios con datos cargados, para revisar el prototipo sin escribir claves.</p>
+        <div class="fila">
+          <button class="btn" onclick="entrarDemo('estudiante')">Estudiante</button>
+          <button class="btn" onclick="entrarDemo('docente')">Docente</button>
+          <button class="btn" onclick="entrarDemo('acudiente')">Acudiente</button>
+        </div>
+        <div class="aviso" style="margin-top:16px">
+          <b>Flujo completo para probar:</b>
+          <ol style="margin:8px 0 0 18px;line-height:1.9;font-size:12.5px">
+            <li>Entra como <b>docente</b> y abre la sesión de una clase.</li>
+            <li>Cierra sesión y entra como <b>estudiante</b>: escanea el token.</li>
+            <li>Entra como <b>acudiente</b> y revisa el semáforo y el porcentaje.</li>
+          </ol>
+        </div>
+      </section>
+    </div>
+
+    <div class="indicadores">
+      <div class="indicador"><b>Ventana del QR</b><strong>10</strong><span>minutos por clase</span></div>
+      <div class="indicador"><b>Escaneos</b><strong>1</strong><span>por estudiante y bloque</span></div>
+      <div class="indicador"><b>Vistas</b><strong>4</strong><span>login, escáner, panel, portal</span></div>
+      <div class="indicador"><b>Lista</b><strong>0</strong><span>minutos perdidos llamando</span></div>
+    </div>
+
+    <section class="tarjeta">
+      <h2>Qué hace TDL Easy</h2>
+      <div class="rejilla g3">
+        <div>
+          <h3>Toma de lista en segundos</h3>
+          <p class="pequeno gris">El docente proyecta un QR y la planilla se arma sola mientras el grupo escanea. Se acaban los 5 a 8 minutos de llamado verbal.</p>
+        </div>
+        <div>
+          <h3>Un escaneo por bloque</h3>
+          <p class="pequeno gris">El token vale 10 minutos y solo se acepta una vez por estudiante, así nadie puede pasarle la foto del QR a un compañero.</p>
+        </div>
+        <div>
+          <h3>El acudiente se entera</h3>
+          <p class="pequeno gris">Al cerrar la ventana, quien no escaneó queda en rojo y su acudiente recibe la alerta el mismo día.</p>
         </div>
       </div>
+    </section>
 
-      <!-- Los módulos se dibujan desde js/modulos.js -->
-      <nav id="menu"></nav>
-
-      <div class="lateral-pie">
-        <div id="usuarioActual" class="usuario"></div>
-        <button class="boton claro chico" id="botonSalir">Cerrar sesión</button>
-      </div>
-    </aside>
-
-    <!-- ---------- contenido ---------- -->
-    <main class="contenido">
-      <header class="cabecera">
-        <h1 id="tituloModulo">Inicio</h1>
-        <button class="boton solo-movil" id="botonMenu" aria-label="Abrir el menú">☰</button>
-      </header>
-
-      <!-- Aquí se dibuja cada módulo -->
-      <section id="vista" class="vista"></section>
     </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      <img src="equipo.jpg" alt="Foto del equipo de TDL Easy" style="max-width:340px;width:100%;border-radius:12px;margin:0 auto 14px">
+      <div><b>TDL Easy</b> — Toma de lista eficaz y fácil</div>
+      <div class="equipo">
+        <span>Miguel Ángel Ruiz Giraldo</span>
+        <span>Justin Andrés Castillo Seguro</span>
+        <span>Felipe Vallejo Arias</span>
+        <span>José Miguel Ledezma Benítez</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
   </div>
 
-  <!-- Aviso flotante para confirmar las acciones -->
-  <div id="aviso" class="aviso oculto"></div>
-
-  <!-- Los scripts van al final para que la página cargue más rápido -->
-  <!-- 1. la "base de datos" del navegador -->
-  <script src="js/almacen.js"></script>
-  <!-- 2. los módulos del proyecto, generados desde sus requisitos funcionales -->
-  <script src="js/modulos.js"></script>
-  <!-- 3. la lógica de la aplicación -->
-  <script src="js/app.js"></script>
+  <div id="piaToast"></div>
+  <script src="js/auth-sesion.js?v=176383"></script>
+  <script src="js/escaner-qr.js?v=176383"></script>
+  <script src="js/panel-docente.js?v=176383"></script>
+  <script src="js/portal-acudiente.js?v=176383"></script>
 </body>
 </html>

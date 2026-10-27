@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  Tu Opinión Cuenta — Radicar
+  PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  Formulario de radicación con validación del dominio institucional y del lenguaje.
+
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu Opinión Cuenta · Radicar</title>
+  <meta name="description" content="Plataforma web de participación democrática que reemplaza el buzón de madera por un canal digital trazable: valida el correo institucional, modera el lenguaje, asigna un código de radicado único y garantiza respuesta en 3 días hábiles.">
+  <meta name="author" content="Jeidy Giraldo Montoya, María Alejandra Gutiérrez Orozco, Juan José Holguín García">
+  <meta name="theme-color" content="#1d4ed8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231d4ed8'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3ETOC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css?v=175336">
+</head>
+<body class="layout-top">
+
+  <div class="armazon">
+
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="logo.png" alt="Logo de Tu Opinión Cuenta">
+        <div class="marca-texto">
+          <b>Tu Opinión Cuenta</b>
+          <span>I.E. Lola González · Buzón virtual PQRS</span>
+        </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
+
+    <!-- ================= MENÚ ================= -->
+    <nav class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="radicar.html">Radicar</a>
+      <a href="seguimiento.html">Seguimiento</a>
+      <a href="comite-admin.html">Panel del Comité</a>
+    </nav>
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="contenido">
+      <section class="portada anim">
+        <h1>Escribir una solicitud</h1>
+        <p>Recuerda: solo se acepta el correo institucional y el mensaje debe tener entre 5 y 150 palabras.</p>
+        <div class="sellos">
+          <span class="sello">I.E. Lola González</span>
+          <span class="sello">Grado 10°</span>
+          <span class="sello">Buzón virtual</span>
+        </div>
+      </section>
+
+    <div class="rejilla g2">
+      <section class="tarjeta">
+        <h2>Datos de la solicitud</h2>
+        <p class="ayuda">Los campos con <span class="req">*</span> son obligatorios.</p>
+
+        <div class="campo">
+          <label for="correo">Correo institucional <span class="req">*</span></label>
+          <input id="correo" type="email" placeholder="nombre.apellido@lola.edu.co" autocomplete="off">
+          <span class="pista" id="pistaCorreo">Debe terminar en @lola.edu.co</span>
+        </div>
+
+        <div class="campo">
+          <label for="nombre">Nombre completo <span class="req">*</span></label>
+          <input id="nombre" placeholder="Nombres y apellidos">
+        </div>
+
+        <div class="campo">
+          <label for="anonimo">¿Quieres reservar tu identidad?</label>
+          <select id="anonimo">
+            <option value="no">No, pueden ver mi nombre</option>
+            <option value="si">Sí, mostrar «Estudiante Verificado»</option>
+          </select>
+          <span class="pista">El Comité siempre conoce el correo; el público no.</span>
+        </div>
+
+        <div class="rejilla g2">
+          <div class="campo">
+            <label for="tipo">Tipo de solicitud <span class="req">*</span></label>
+            <select id="tipo">
+              <option value="">— Seleccione —</option>
+              <option>Queja</option>
+              <option>Sugerencia</option>
+              <option>Petición</option>
+              <option>Reconocimiento</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="lugar">Lugar del colegio <span class="req">*</span></label>
+            <select id="lugar">
+              <option value="">— Seleccione —</option>
+              <option>Microondas</option>
+              <option>Aulas/Paredes</option>
+              <option>Zonas Verdes</option>
+              <option>Deportes</option>
+              <option>Biblioteca</option>
+              <option>Baños</option>
+              <option>Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="mensaje">Cuéntanos qué pasa <span class="req">*</span></label>
+          <textarea id="mensaje" placeholder="Describe la situación con tus palabras (entre 5 y 150 palabras)."></textarea>
+          <span class="pista"><b id="contador">0</b> de 150 palabras · mínimo 5</span>
+        </div>
+
+        <div class="fila">
+          <button class="btn p" onclick="radicar()">Enviar la solicitud</button>
+          <button class="btn" onclick="limpiarFormulario()">Limpiar</button>
+        </div>
+      </section>
+
+      <aside>
+        <div id="resultado" class="oculto"></div>
+        <section class="tarjeta">
+          <h2>Antes de enviar</h2>
+          <p class="ayuda">El sistema revisa tres cosas, igual que en el algoritmo del proyecto.</p>
+          <div id="revision" class="pequeno"></div>
+        </section>
+      </aside>
+    </div>
+    </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      <img src="equipo.jpg" alt="Foto del equipo de Tu Opinión Cuenta" style="max-width:340px;width:100%;border-radius:12px;margin:0 auto 14px">
+      <div><b>Tu Opinión Cuenta</b> — Tu voz construye la Lola</div>
+      <div class="equipo">
+        <span>Jeidy Giraldo Montoya</span>
+        <span>María Alejandra Gutiérrez Orozco</span>
+        <span>Juan José Holguín García</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="piaToast"></div>
+  <script src="js/validador-dominio.js?v=175336"></script>
+  <script src="js/filtro-lexico.js?v=175336"></script>
+  <script src="js/radicador.js?v=175336"></script>
+</body>
+</html>

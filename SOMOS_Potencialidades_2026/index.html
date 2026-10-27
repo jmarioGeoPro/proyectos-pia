@@ -1,135 +1,161 @@
 <!DOCTYPE html>
 <!--
   ============================================================================
-  SOMOS Potencialidades — aplicación web
-  Proyecto Integrador de Aula (PIA) · I.E. Lola González · Grado 10° · 2026
-  Programa: Técnico Auxiliar en Desarrollo de Software — IU Pascual Bravo
+  SOMOS Potencialidades — Inicio
+  PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  Portada: bienvenida compacta y la galería de trabajos con filtros por categoría y me gusta.
 
-  Este archivo es la ESTRUCTURA de la aplicación (el esqueleto).
-  Aquí solo va el contenido: las pantallas y sus contenedores.
-  El diseño está en css/estilos.css y la lógica en la carpeta js/.
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
   ============================================================================
 -->
 <html lang="es">
 <head>
-  <!-- Codificación y adaptación a celulares y tabletas -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Visibilización de Talentos y Potencialidades">
-  <meta name="author" content="MARK SANTIAGO BETANCOURT LÓPEZ, JUAN JOSE DORIA OSSA, MARIA KAMILA PIEDRAHITA OCHOA, ANA LUCÍA ROMERO PARDO">
-  <title>SOMOS Potencialidades · PIA 2026</title>
-
-  <!-- El icono de la pestaña es el logo del proyecto -->
-  <link rel="icon" href="logo.png">
-  <!-- Hoja de estilos propia de la aplicación -->
-  <link rel="stylesheet" href="css/estilos.css">
+  <title>SOMOS Potencialidades · Inicio</title>
+  <meta name="description" content="Plataforma web que identifica, impulsa y da reconocimiento a los talentos artísticos y expresivos de los estudiantes de la I.E. Lola González, con privacidad por niveles, moderación docente y el sello de la Calidad Humana.">
+  <meta name="author" content="Ana Lucía Romero Pardo, Juan José Doria Ossa, María Kamila Piedrahíta Ochoa, Mark Santiago Betancourt López">
+  <meta name="theme-color" content="#b45309">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23b45309'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3ESP%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css?v=176926">
 </head>
-<body>
+<body class="layout-top">
 
-  <!-- ================= PANTALLA DE INGRESO ================= -->
-  <!-- Se muestra cuando no hay una sesión iniciada -->
-  <section id="pantallaIngreso" class="ingreso">
-    <div class="ingreso-caja">
-      <img src="logo.png" alt="Logo de SOMOS Potencialidades" class="ingreso-logo">
-      <h1>SOMOS Potencialidades</h1>
-      <p class="lema">Aquí todos tenemos algo que dar</p>
+  <div class="armazon">
 
-      <!-- Formulario de ingreso -->
-      <form id="formIngreso" autocomplete="off">
-        <label for="ingCorreo">Correo electrónico</label>
-        <input type="email" id="ingCorreo" placeholder="tu.correo@ejemplo.com" required>
-
-        <label for="ingClave">Contraseña</label>
-        <input type="password" id="ingClave" placeholder="Tu contraseña" required>
-
-        <button type="submit" class="boton grande">Ingresar</button>
-      </form>
-
-      <!-- Enlace para crear la cuenta -->
-      <p class="ingreso-pie">
-        ¿No tienes cuenta? <a href="#" id="enlaceRegistro">Crear una cuenta</a>
-      </p>
-
-      <!-- Cuenta de prueba: sirve para revisar la aplicación sin registrarse -->
-      <div class="pista-prueba">
-        <b>Para revisarla</b>
-        <span class="pista-par"><label>Correo</label> <code>pruebas@pasculia.edu.co</code></span>
-        <span class="pista-par"><label>Contraseña</label> <code>PascualBravo2026</code></span>
-      </div>
-
-      <!-- Formulario de registro (oculto hasta que se pide) -->
-      <form id="formRegistro" class="oculto" autocomplete="off">
-        <label for="regNombre">Nombre completo</label>
-        <input type="text" id="regNombre" placeholder="Nombres y apellidos" required>
-
-        <label for="regCorreo">Correo electrónico</label>
-        <input type="email" id="regCorreo" placeholder="tu.correo@ejemplo.com" required>
-
-        <label for="regClave">Contraseña</label>
-        <input type="password" id="regClave" placeholder="Mínimo 6 caracteres" minlength="6" required>
-
-        <label for="regRol">¿Cómo vas a usar la aplicación?</label>
-        <select id="regRol">
-          <option>Estudiante</option>
-          <option>Docente</option>
-          <option>Directivo</option>
-          <option>Acudiente</option>
-        </select>
-
-        <button type="submit" class="boton grande">Crear la cuenta</button>
-        <button type="button" class="boton claro" id="cancelarRegistro">Volver</button>
-      </form>
-
-      <p class="creditos">
-        Proyecto Integrador de Aula · I.E. Lola González · 2026
-      </p>
-    </div>
-  </section>
-
-  <!-- ================= APLICACIÓN ================= -->
-  <!-- Se muestra cuando ya hay una sesión iniciada -->
-  <div id="aplicacion" class="aplicacion oculto">
-
-    <!-- ---------- menú lateral ---------- -->
-    <aside class="lateral">
-      <div class="marca">
-        <img src="logo.png" alt="Logo" class="marca-logo">
-        <div>
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="logo.png" alt="Logo de SOMOS Potencialidades">
+        <div class="marca-texto">
           <b>SOMOS Potencialidades</b>
-          <span>I.E. Lola González</span>
+          <span>I.E. Lola González · Talento y Calidad Humana</span>
         </div>
-      </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
 
-      <!-- Los módulos se dibujan desde js/modulos.js -->
-      <nav id="menu"></nav>
+    <!-- ================= MENÚ ================= -->
+    <nav class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="explorar.html">Explorar</a>
+      <a href="publicar.html">Publicar</a>
+      <a href="favoritos.html">Favoritos</a>
+      <a href="portafolio.html">Perfil</a>
+      <a href="desafios.html">Desafíos</a>
+      <a href="moderacion-docente.html">Moderación</a>
+    </nav>
 
-      <div class="lateral-pie">
-        <div id="usuarioActual" class="usuario"></div>
-        <button class="boton claro chico" id="botonSalir">Cerrar sesión</button>
-      </div>
-    </aside>
-
-    <!-- ---------- contenido ---------- -->
+    <!-- ================= CONTENIDO ================= -->
     <main class="contenido">
-      <header class="cabecera">
-        <h1 id="tituloModulo">Inicio</h1>
-        <button class="boton solo-movil" id="botonMenu" aria-label="Abrir el menú">☰</button>
-      </header>
 
-      <!-- Aquí se dibuja cada módulo -->
-      <section id="vista" class="vista"></section>
+<section class="bienvenida" aria-label="Bienvenida">
+  <div class="saludo">
+    <p class="lema">Calidad Humana</p>
+    <h1>SOMOS Potencialidades</h1>
+    <p>El talento de la I.E. Lola González, en un solo lugar. Mira lo que están creando tus compañeros y comparte lo tuyo.</p>
+  </div>
+  <div class="acciones">
+    <a class="btn a" href="#galeriaPortada">Ver la galería</a>
+    <a class="btn" href="publicar.html">Publicar mi obra</a>
+  </div>
+</section>
+<section id="galeriaPortada" aria-label="Galería de trabajos">
+  <nav class="chips" id="chipsCategorias" aria-label="Categorías artísticas"></nav>
+  <p class="pequeno gris" id="cuentaGaleria" style="margin:2px 0 12px"></p>
+  <div class="galeria-rejilla" id="portadaGaleria"></div>
+</section>
+<section class="seccion" aria-label="Más de la plataforma">
+  <div class="rejilla g4">
+    <a class="servicio" href="desafios.html" style="text-decoration:none"><div class="ico">🏆</div><h3>Desafíos</h3><p>Retos semanales e insignias por participar.</p></a>
+    <a class="servicio" href="portafolio.html" style="text-decoration:none"><div class="ico">🎒</div><h3>Mi portafolio</h3><p>Tu proceso, tus logros y tu evolución.</p></a>
+    <a class="servicio" href="moderacion-docente.html" style="text-decoration:none"><div class="ico">🛡</div><h3>Moderación</h3><p>Aprobación de obras y bitácora docente.</p></a>
+    <a class="servicio" href="publicar.html" style="text-decoration:none"><div class="ico">🎨</div><h3>Publicar</h3><p>Sube tu obra con privacidad por niveles.</p></a>
+  </div>
+</section>
+<section id="nosotros" class="seccion suave">
+  <div class="titular"><h2>Nosotros</h2><p>Un proyecto de aula con propósito: que nadie se quede sin mostrar lo que sabe hacer.</p></div>
+  <div class="rejilla g2" style="margin-bottom:28px">
+    <div class="tarjeta"><h3 style="color:#1B4079">¿Qué es SOMOS Potencialidades?</h3><p style="font-size:14px;line-height:1.75">Es una plataforma web creada para <b>identificar, impulsar y dar reconocimiento</b> a los talentos artísticos y expresivos de los estudiantes de la Institución Educativa Lola González. Ofrece un espacio más amplio, participativo y humano, y fomenta el pensamiento crítico al ver o realizar cualquier tipo de talento, relacionándolo con el lema institucional: <b style="color:#1B4079">CALIDAD HUMANA</b>.</p></div>
+    <div class="tarjeta"><h3 style="color:#1B4079">Nuestros objetivos</h3><ol style="margin-left:18px;line-height:1.9;font-size:13.5px"><li>Dar a conocer los talentos que hoy se quedan en el salón.</li><li>Cuidar la identidad de cada estudiante con privacidad por niveles.</li><li>Acompañar la creación con el Mentor Art y los comentarios guiados.</li><li>Reconocer el esfuerzo con insignias y desafíos semanales.</li><li>Vivir la Calidad Humana en cada publicación y cada comentario.</li></ol></div>
+  </div>
+  <h3 class="centro" style="color:#1B4079;margin-bottom:18px;font-size:15px">El equipo</h3>
+  <div class="rejilla g4" id="equipo"></div>
+</section>
+<section id="estadisticas" class="seccion">
+  <div class="titular"><h2>Estadísticas</h2><p>Lo que la comunidad ya compartió, en números.</p></div>
+  <div class="rejilla g4" id="cifras" style="margin-bottom:22px"></div>
+  <div class="rejilla g2">
+    <div class="tarjeta"><h3 style="color:#1B4079">Obras por categoría</h3><p class="ayuda">Cuántas obras se han publicado en cada tipo de arte.</p><div class="grafico" id="graficoCategorias"></div></div>
+    <div class="tarjeta"><h3 style="color:#1B4079">Participación por grado</h3><p class="ayuda">De dónde vienen los talentos que participan.</p><div class="grafico" id="graficoGrados"></div></div>
+  </div>
+  <div class="tarjeta" style="margin-top:16px"><h3 style="color:#1B4079">Los desafíos más activos</h3><div id="tablaDesafios"></div></div>
+</section>
+<section id="contacto" class="seccion">
+  <div class="contacto">
+    <div class="rejilla g2" style="align-items:start">
+      <div>
+        <h2>Hablemos</h2>
+        <p>¿Tienes un talento por mostrar, una idea para un desafío o quieres llevar el proyecto a tu grupo? Escríbenos.</p>
+        <p class="pequeno gris">I.E. Lola González · Medellín<br>Técnico Auxiliar en Desarrollo de Software · I.U. Pascual Bravo</p>
+        <p class="pequeno gris">Docente articulador: <b>Jorge Mario Patiño Marín</b><br>Docente par: <b>Alejo Villa A</b></p>
+      </div>
+      <form id="formContacto" onsubmit="return false">
+        <div class="campo"><label for="cNombre">Tu nombre <span class="req">*</span></label><input id="cNombre" placeholder="Nombres y apellidos"></div>
+        <div class="campo"><label for="cCorreo">Correo <span class="req">*</span></label><input id="cCorreo" type="email" placeholder="nombre@lola.edu.co"></div>
+        <div class="campo"><label for="cMensaje">Mensaje <span class="req">*</span></label><textarea id="cMensaje" placeholder="Cuéntanos en pocas palabras"></textarea></div>
+        <button class="btn a gr" onclick="enviarContacto()">Enviar mensaje</button>
+        <div id="contactoAviso" style="margin-top:12px"></div>
+      </form>
+    </div>
+  </div>
+</section>
     </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+    <nav class="barra-movil" aria-label="Navegación principal en móvil">
+      <a href="index.html"><i aria-hidden="true">⌂</i><span>Inicio</span></a>
+      <a href="explorar.html"><i aria-hidden="true">⌕</i><span>Explorar</span></a>
+      <a href="publicar.html"><i aria-hidden="true">＋</i><span>Publicar</span></a>
+      <a href="favoritos.html"><i aria-hidden="true">♥</i><span>Favoritos</span></a>
+      <a href="portafolio.html"><i aria-hidden="true">☺</i><span>Perfil</span></a>
+    </nav>
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      <img src="equipo.jpg" alt="Foto del equipo de SOMOS Potencialidades" style="max-width:340px;width:100%;border-radius:12px;margin:0 auto 14px">
+      <div><b>SOMOS Potencialidades</b> — Potenciamos talentos, compartimos arte, transformamos realidades</div>
+      <div class="equipo">
+        <span>Ana Lucía Romero Pardo</span>
+        <span>Juan José Doria Ossa</span>
+        <span>María Kamila Piedrahíta Ochoa</span>
+        <span>Mark Santiago Betancourt López</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
   </div>
 
-  <!-- Aviso flotante para confirmar las acciones -->
-  <div id="aviso" class="aviso oculto"></div>
-
-  <!-- Los scripts van al final para que la página cargue más rápido -->
-  <!-- 1. la "base de datos" del navegador -->
-  <script src="js/almacen.js"></script>
-  <!-- 2. los módulos del proyecto, generados desde sus requisitos funcionales -->
-  <script src="js/modulos.js"></script>
-  <!-- 3. la lógica de la aplicación -->
-  <script src="js/app.js"></script>
+  <div id="piaToast"></div>
+  <script src="js/galeria.js?v=176926"></script>
+  <script src="js/moderacion.js?v=176926"></script>
+  <script src="js/comentarios-guiados.js?v=176926"></script>
+  <script src="js/gamificacion.js?v=176926"></script>
+  <script src="js/mentor-art.js?v=176926"></script>
+  <script src="js/inicio.js?v=176926"></script>
 </body>
 </html>

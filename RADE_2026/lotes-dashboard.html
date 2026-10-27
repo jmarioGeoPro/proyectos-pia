@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  R.A.D.E — Lotes y sobrantes
+  PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  Panel del operador PAE: recepción del lote, conciliación, monitor de entregas y beneficiarios.
+
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R.A.D.E · Lotes y sobrantes</title>
+  <meta name="description" content="Aplicación web que reemplaza los fichos de papel del restaurante escolar: valida el carnet del estudiante en segundos, bloquea el doble reclamo del mismo día, descuenta la ración de la modalidad que le corresponde y concilia al cierre cuántos titulares faltaron y cuántas raciones sobraron para reasignación.">
+  <meta name="author" content="Thomas Alexis López Robles, Emmanuel Ortiz López, Sebastián Alexis Pulido Cabrera, David Mejía Meneses, Jerónimo Caicedo Patiño">
+  <meta name="theme-color" content="#4d7c0f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234d7c0f'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3ERD%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css?v=177924">
+</head>
+<body class="layout-tabs">
+
+  <div class="armazon">
+
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="logo.png" alt="Logo de R.A.D.E">
+        <div class="marca-texto">
+          <b>R.A.D.E</b>
+          <span>I.E. Lola González · Registro PAE por carnet</span>
+        </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
+
+    <!-- ================= MENÚ ================= -->
+    
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="contenido">
+      <section class="portada anim">
+        <h1>Panel del operador del PAE</h1>
+        <p>Cuánto llegó, cuánto se entregó, quién faltó y cuánto sobró. Las cuentas del cierre sin números negativos.</p>
+        <div class="sellos">
+          <span class="sello">I.E. Lola González</span>
+          <span class="sello">Grado 10°</span>
+          <span class="sello">PAE escolar</span>
+        </div>
+      </section>
+
+    <section class="tarjeta">
+      <h2>Jornada de hoy</h2>
+      <p class="ayuda">Antes de validar carnets hay que recibir el lote del día. Sin lote no hay contra qué conciliar.</p>
+      <div id="jornadaHoy"></div>
+    </section>
+
+    <div class="rejilla g2">
+      <section class="tarjeta">
+        <h2>Recepción del lote</h2>
+        <p class="ayuda">Los campos con <span class="req">*</span> son obligatorios. Si la fecha ya existe, el lote se actualiza.</p>
+        <div class="rejilla g2">
+          <div class="campo"><label for="lFecha">Fecha <span class="req">*</span></label><input type="date" id="lFecha"></div>
+          <div class="campo"><label for="lHora">Hora de llegada</label><input type="time" id="lHora" value="06:30"></div>
+        </div>
+        <div class="campo"><label for="lResponsable">Quién recibe <span class="req">*</span></label><input id="lResponsable" placeholder="Docente o alfabetizador del PAE"></div>
+        <div class="campo"><label for="lMenu">Menú del día <span class="req">*</span></label><input id="lMenu" placeholder="Arroz con pollo, ensalada y jugo natural"></div>
+        <div class="rejilla g3">
+          <div class="campo"><label for="lLeche">Vasos recibidos <span class="req">*</span></label><input type="number" id="lLeche" min="0" value="120"></div>
+          <div class="campo"><label for="lPlato">Platos recibidos <span class="req">*</span></label><input type="number" id="lPlato" min="0" value="60"></div>
+          <div class="campo"><label for="lInscritos">Inscritos PAE <span class="req">*</span></label><input type="number" id="lInscritos" min="1" value="0"></div>
+        </div>
+        <div class="campo"><label for="lVence">Vencimiento del complemento</label><input type="date" id="lVence"></div>
+        <div class="fila">
+          <button class="btn p" onclick="guardarLote()">Guardar lote</button>
+          <button class="btn" onclick="limpiarLote()">Limpiar</button>
+        </div>
+      </section>
+      <section class="tarjeta">
+        <h2>Conciliación de la jornada</h2>
+        <p class="ayuda">El cierre del algoritmo, con las fórmulas corregidas.</p>
+        <div class="campo"><label for="cFecha">Fecha a conciliar</label><select id="cFecha" onchange="pintarConciliacion()"></select></div>
+        <div id="conciliacion"></div>
+      </section>
+    </div>
+
+    <section class="tarjeta">
+      <h2>Monitor de entregas</h2>
+      <p class="ayuda">Quién reclamó, a qué hora y con qué modalidad. Aquí se registra la devolución de los platos.</p>
+      <div id="monitor"></div>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Titulares inasistentes</h2>
+      <p class="ayuda">Inscritos activos que no reclamaron en la fecha conciliada. Sus raciones quedan disponibles para reasignación (Ley 1990 de 2019).</p>
+      <div id="inasistentes"></div>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Beneficiarios del PAE</h2>
+      <p class="ayuda">Inscripción, cambio de modalidad y retiro. Un carnet retirado no puede reclamar.</p>
+      <div class="rejilla g2">
+        <div>
+          <div class="campo"><label for="bCarnet">Código de carnet <span class="req">*</span></label><input id="bCarnet" placeholder="LG-2026-0110"></div>
+          <div class="campo"><label for="bNombre">Nombre completo <span class="req">*</span></label><input id="bNombre" placeholder="Nombres y apellidos"></div>
+          <div class="rejilla g2">
+            <div class="campo"><label for="bDocumento">Tarjeta de identidad</label><input id="bDocumento" placeholder="1.0xx.xxx.xxx"></div>
+            <div class="campo"><label for="bGrado">Grado y grupo</label><select id="bGrado"><option>9°01</option><option>9°02</option><option>10°01</option><option>10°02</option><option>10°03</option><option>11°01</option><option>11°02</option><option>11°03</option></select></div>
+          </div>
+          <div class="rejilla g2">
+            <div class="campo"><label for="bModalidad">Modalidad</label><select id="bModalidad"><option value="VASO_LECHE">Vaso de leche (industrializado)</option><option value="PLATO_VERDE">Plato verde (preparado en sitio)</option></select></div>
+            <div class="campo"><label for="bActivo">Estado</label><select id="bActivo"><option value="si">Activo</option><option value="no">Retirado</option></select></div>
+          </div>
+          <div class="fila">
+            <button class="btn p" id="bGuardar" onclick="guardarBeneficiario()">Inscribir beneficiario</button>
+            <button class="btn" onclick="cancelarBeneficiario()">Cancelar</button>
+          </div>
+        </div>
+        <div id="tablaBeneficiarios"></div>
+      </div>
+    </section>
+    </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      <img src="equipo.jpg" alt="Foto del equipo de R.A.D.E" style="max-width:340px;width:100%;border-radius:12px;margin:0 auto 14px">
+      <div><b>R.A.D.E</b> — Un carnet, una ración, cero fichos</div>
+      <div class="equipo">
+        <span>Thomas Alexis López Robles</span>
+        <span>Emmanuel Ortiz López</span>
+        <span>Sebastián Alexis Pulido Cabrera</span>
+        <span>David Mejía Meneses</span>
+        <span>Jerónimo Caicedo Patiño</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="piaToast"></div>
+  <script src="js/validador-unico.js?v=177924"></script>
+  <script src="js/conciliacion-lotes.js?v=177924"></script>
+    <nav class="menu-tabs">
+      <a href="index.html"><b>•</b>Inicio</a>
+      <a href="validador-carnet.html"><b>•</b>Terminal de carnet</a>
+      <a href="lotes-dashboard.html"><b>•</b>Lotes y sobrantes</a>
+      <a href="mi-pae.html"><b>•</b>Mi PAE</a>
+    </nav>
+</body>
+</html>

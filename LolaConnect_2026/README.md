@@ -1,78 +1,70 @@
-# LolaConnect — aplicación web
+# LolaConnect
 
-> La institución, conectada
+> Conectamos, aprendemos, crecemos
 
-**Proyecto Integrador de Aula (PIA) · I.E. Lola González · Grado 10° · 2026**
+**Proyecto Integrador de Aula (PIA) 2026** · I.E. Lola González · Grado 10° · Grupo 10°05
 Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
 
 ---
 
 ## Qué es
 
-Red Escolar de Comunicación y Recursos
+Red escolar privada que une dos necesidades en un solo entorno: un canal oficial de avisos verificados para directivos y docentes, y una red de hilos temáticos y grupos de interés para estudiantes. Antes de publicar revisa datos privados, analiza el lenguaje, abre una pausa reflexiva y deja todo en una bitácora de moderación auditable.
 
-## Cuenta de prueba
+**Problema que resuelve:** Los avisos del Lola viajan de voz en voz o por grupos informales de WhatsApp, así que muchos se enteran tarde y con la información distorsionada. Los estudiantes terminan en redes abiertas donde exponen su celular y su documento, y los casos de burla no tienen un canal formal ni una trazabilidad.
 
-Para revisarla **no hace falta registrarse**: la aplicación crea sola una cuenta la primera vez que se abre.
+**Estilo visual:** 06-social · menú top
 
-| | |
-|---|---|
-| **Correo** | `pruebas@pasculia.edu.co` |
-| **Contraseña** | `PascualBravo2026` |
-| **Rol** | Docente |
+## Cómo abrirlo
 
-> Es la **misma cuenta en las 33 aplicaciones**, para que quien las revise no tenga que memorizar nada.
-> También se puede crear una cuenta propia con el botón *Crear una cuenta*.
+1. Abre **`index.html`** con doble clic (no necesita servidor ni internet).
+2. La primera vez se cargan solos los **datos de ejemplo** (44 registros).
+3. Navega con el menú de arriba.
 
-## Cómo se usa
+Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar.
+Para volver a los datos de ejemplo: abre la consola del navegador y escribe `PIA.reiniciar()`.
 
-1. Abre el archivo **index.html** con doble clic (o sírvelo con un servidor local).
-2. Entra con la **cuenta de prueba** de arriba, o pulsa **Crear una cuenta** y regístrate.
-3. Elige un módulo en el menú de la izquierda.
-4. Llena el formulario y pulsa **Guardar**. El registro aparece en la tabla.
-5. Puedes **buscar**, **editar**, **eliminar** y **exportar** a Excel.
+## Las páginas
 
-Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar la página.
+- **Inicio** (`index.html`) — Bienvenida, normas de convivencia, acceso seguro y matriz de permisos por rol.
+- **Feed** (`feed.html`) — Feed cronológico dual: avisos oficiales verificados e hilos de la comunidad, con comentarios y reportes.
+- **Grupos y eventos** (`grupos-eventos.html`) — Clubes escolares, calendario de eventos y confirmación de asistencia.
+- **Mi perfil** (`perfil.html`) — Perfil público con avatar, intereses y reglas de privacidad; documento y teléfono siempre ocultos.
+- **Moderación** (`moderacion.html`) — Cola de reportes, bitácora auditable y validador preventivo de convivencia.
 
-## Módulos
-
-- **📋 Registros** — 5 campos
-- **👤 Usuarios** — 5 campos
-- **✉️ Mensajes y solicitudes** — 7 campos
-- **📝 Publicaciones** — 5 campos
-- **📝 Sistema de reportes para el contenido** — 5 campos
-- **📝 Sistema debe publicar avisos** — 5 campos
-- **📋 Sistema debe estar restringido a la** — 5 campos
-
-## Archivos
+## Los archivos
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | La estructura: las pantallas y sus contenedores. |
-| `css/estilos.css` | El diseño. Arriba están las variables de color: cambiar una cambia todo. |
-| `js/almacen.js` | Los datos: guardar, listar, editar y eliminar. |
-| `js/modulos.js` | Los módulos y sus campos. Aquí se agrega un campo nuevo. |
-| `js/app.js` | La lógica: menú, formularios, tablas y búsqueda. |
-| `logo.png` | El logo del proyecto. |
+| `index.html` | Bienvenida, normas de convivencia, acceso seguro y matriz de permisos.
+| `feed.html` | Avisos verificados, hilos por categoría, comentarios y reportes.
+| `grupos-eventos.html` | Clubes escolares, calendario de eventos y confirmación de asistencia.
+| `perfil.html` | Avatar, intereses, privacidad y vista previa del perfil público.
+| `moderacion.html` | Cola de reportes, bitácora auditable y validador preventivo.
+| `construccion.html` | Archivo del proyecto.
+| `css/estilos.css` | Sistema de diseño con la paleta azul y amarilla institucional.
+| `css/responsive.css` | Ajustes mobile-first y navegación cómoda en el celular.
+| `js/auth-roles.js` | Núcleo común + usuarios, sesión, roles y matriz de permisos.
+| `js/feed-hilos.js` | Motor de publicación del algoritmo, feed, comentarios, grupos y perfil.
+| `js/moderador-preventivo.js` | Filtro anti-acoso y de datos privados, pausa reflexiva y bitácora.
+| `data/semilla-lolaconnect.json` | 7 usuarios, 9 publicaciones, 6 comentarios, 6 grupos, 5 eventos, 5 reportes y 6 movimientos.
 
-## Cómo publicarlo en internet
+## El equipo
 
-**Opción 1 — GitHub Pages (gratis):**
-1. Crea un repositorio en GitHub.
-2. Sube todos los archivos.
-3. Ve a *Settings → Pages* y elige la rama principal.
-4. GitHub te da una dirección pública.
+| Integrante | Rol en el proyecto |
+|---|---|
+| Nicolás Arteaga Mazo | Líder de producto y FrontEnd · arquitectura de las vistas y visión de producto |
+| Juan Fernando Gómez Hernández | Arquitecto JavaScript y base de datos · hilos, avisos y moderación |
+| Luis Yair Vallenilla Tovar | Líder UI/UX · diseño mobile-first e identidad visual |
+| Susana Zapata Tobón | Calidad y convivencia · marco teórico, ética digital y pruebas del filtro |
 
-**Opción 2 — Netlify (gratis):**
-1. Entra a netlify.com y elige *Add new site → Deploy manually*.
-2. Arrastra la carpeta del proyecto.
+**Docente articulador:** Jorge Mario Patiño Marín  
+**Docente par:** Alejo Villa A
 
-## Cómo continuarlo
+## Cómo continuar en grado 11°
 
-- Los **campos** de cada módulo están en `js/modulos.js`: es lo primero que se cambia.
-- Los **colores** están en las variables de `css/estilos.css`.
-- Para pasar de localStorage a una base de datos real, solo hay que cambiar `js/almacen.js`.
+En grado 11° el prototipo pasa a PHP 8 y MySQL 8 con las tablas usuarios, avisos_oficiales, hilos_comunidad, comentarios_hilo y reportes_convivencia. El hash de contraseñas se hace con password_hash() y la verificación de identidad con el correo institucional.
 
 ---
 
-Generado por **Project Manager PasculIA** a partir de los requisitos funcionales del proyecto.
+Generado con **Project Manager PasculIA** · datos de ejemplo incluidos.

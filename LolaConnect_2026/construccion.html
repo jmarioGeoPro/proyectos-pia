@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  LolaConnect — Cómo se construyó
+  PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  El pseudocódigo del algoritmo y el modelo de tablas que describe el documento PIA.
+
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LolaConnect · Cómo se construyó</title>
+  <meta name="description" content="Red escolar privada que une dos necesidades en un solo entorno: un canal oficial de avisos verificados para directivos y docentes, y una red de hilos temáticos y grupos de interés para estudiantes. Antes de publicar revisa datos privados, analiza el lenguaje, abre una pausa reflexiva y deja todo en una bitácora de moderación auditable.">
+  <meta name="author" content="Nicolás Arteaga Mazo, Juan Fernando Gómez Hernández, Luis Yair Vallenilla Tovar, Susana Zapata Tobón">
+  <meta name="theme-color" content="#0284c7">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230284c7'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3ELC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css?v=178285">
+  <link rel="stylesheet" href="css/responsive.css?v=178285">
+</head>
+<body class="layout-top">
+
+  <div class="armazon">
+
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="logo.png" alt="Logo de LolaConnect">
+        <div class="marca-texto">
+          <b>LolaConnect</b>
+          <span>I.E. Lola González · Red escolar segura</span>
+        </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
+
+    <!-- ================= MENÚ ================= -->
+    <nav class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="feed.html">Feed</a>
+      <a href="grupos-eventos.html">Grupos y eventos</a>
+      <a href="perfil.html">Mi perfil</a>
+      <a href="moderacion.html">Moderación</a>
+    </nav>
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="contenido">
+
+<section id="construccion" aria-label="Cómo se construyó"></section>
+    </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      <img src="equipo.jpg" alt="Foto del equipo de LolaConnect" style="max-width:340px;width:100%;border-radius:12px;margin:0 auto 14px">
+      <div><b>LolaConnect</b> — Conectamos, aprendemos, crecemos</div>
+      <div class="equipo">
+        <span>Nicolás Arteaga Mazo</span>
+        <span>Juan Fernando Gómez Hernández</span>
+        <span>Luis Yair Vallenilla Tovar</span>
+        <span>Susana Zapata Tobón</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="piaToast"></div>
+  <script src="js/auth-roles.js?v=178285"></script>
+  <script src="js/feed-hilos.js?v=178285"></script>
+  <script src="js/moderador-preventivo.js?v=178285"></script>
+</body>
+</html>

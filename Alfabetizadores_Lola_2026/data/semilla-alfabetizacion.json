@@ -1,0 +1,330 @@
+{
+  "estudiantes": [
+    {
+      "id": 1,
+      "documento": "1035979039",
+      "nombre": "Juan Sebastián Cardona Ríos",
+      "grado": "11-1",
+      "correo": "juan.cardona@lola.edu.co",
+      "horas_aprobadas": 24,
+      "estado": "EN_PROCESO"
+    },
+    {
+      "id": 2,
+      "documento": "1020118919",
+      "nombre": "Salomé Restrepo Agudelo",
+      "grado": "11-2",
+      "correo": "salome.restrepo@lola.edu.co",
+      "horas_aprobadas": 46,
+      "estado": "EN_PROCESO"
+    },
+    {
+      "id": 3,
+      "documento": "1020261470",
+      "nombre": "Andrés Mauricio Peña Lopera",
+      "grado": "10-3",
+      "correo": "andres.pena@lola.edu.co",
+      "horas_aprobadas": 12,
+      "estado": "EN_PROCESO"
+    },
+    {
+      "id": 4,
+      "documento": "1025380117",
+      "nombre": "Valentina Ospina Herrera",
+      "grado": "11-1",
+      "correo": "valentina.ospina@lola.edu.co",
+      "horas_aprobadas": 80,
+      "estado": "COMPLETADO_80_HORAS"
+    },
+    {
+      "id": 5,
+      "documento": "1013463625",
+      "nombre": "Samuel Restrepo Úsuga",
+      "grado": "10-2",
+      "correo": "samuel.restrepo@lola.edu.co",
+      "horas_aprobadas": 8,
+      "estado": "EN_PROCESO"
+    },
+    {
+      "id": 6,
+      "documento": "1059243429",
+      "nombre": "Manuela Zapata Salgado",
+      "grado": "11-2",
+      "correo": "manuela.zapata@lola.edu.co",
+      "horas_aprobadas": 62,
+      "estado": "EN_PROCESO"
+    }
+  ],
+  "oportunidades": [
+    {
+      "id": 1,
+      "dependencia": "Biblioteca Escolar",
+      "responsable": "Prof. Leidiana Gómez",
+      "dias": "Lunes y miércoles · 12:30 a 14:30",
+      "cupos_totales": 4,
+      "cupos_disponibles": 2,
+      "descripcion": "Acompañamiento en lectura guiada y organización de la colección infantil."
+    },
+    {
+      "id": 2,
+      "dependencia": "Secretaría Académica",
+      "responsable": "Sra. Marta Lucía Benítez",
+      "dias": "Martes y jueves · 07:00 a 09:00",
+      "cupos_totales": 3,
+      "cupos_disponibles": 1,
+      "descripcion": "Archivo de matrículas, certificados y atención en ventanilla."
+    },
+    {
+      "id": 3,
+      "dependencia": "Restaurante Escolar (PAE)",
+      "responsable": "Don Álvaro Mosquera",
+      "dias": "Lunes a viernes · 10:00 a 12:00",
+      "cupos_totales": 6,
+      "cupos_disponibles": 4,
+      "descripcion": "Apoyo en el servicio del restaurante y conteo de raciones."
+    },
+    {
+      "id": 4,
+      "dependencia": "Proyectos Ambientales",
+      "responsable": "Prof. Diana Ospina",
+      "dias": "Miércoles · 14:00 a 16:00",
+      "cupos_totales": 5,
+      "cupos_disponibles": 3,
+      "descripcion": "Huerta escolar, siembra y campañas de la Ley Empatía."
+    },
+    {
+      "id": 5,
+      "dependencia": "Coordinación de Convivencia",
+      "responsable": "Coord. Hernán Giraldo",
+      "dias": "Viernes · 09:00 a 11:00",
+      "cupos_totales": 2,
+      "cupos_disponibles": 2,
+      "descripcion": "Apoyo en la bitácora de convivencia y en las jornadas de mediación."
+    },
+    {
+      "id": 6,
+      "dependencia": "Deportes y Recreación",
+      "responsable": "Prof. Camilo Restrepo",
+      "dias": "Martes y jueves · 15:00 a 17:00",
+      "cupos_totales": 4,
+      "cupos_disponibles": 0,
+      "descripcion": "Organización de torneos internos y préstamo de implementos."
+    }
+  ],
+  "registros": [
+    {
+      "id": 1,
+      "documento": "1035979039",
+      "estudiante": "Juan Sebastián Cardona Ríos",
+      "dependencia": "Biblioteca Escolar",
+      "fecha": "2026-05-11",
+      "hora_entrada": "12:30",
+      "hora_salida": "14:30",
+      "horas": 2,
+      "labor": "Apoyo en lectura guiada a estudiantes de sexto",
+      "estado": "APROBADO",
+      "validador": "1030101010",
+      "calificacion": 5,
+      "observacion": "Muy puntual y paciente con los niños."
+    },
+    {
+      "id": 2,
+      "documento": "1035979039",
+      "estudiante": "Juan Sebastián Cardona Ríos",
+      "dependencia": "Biblioteca Escolar",
+      "fecha": "2026-05-13",
+      "hora_entrada": "12:30",
+      "hora_salida": "14:00",
+      "horas": 1.5,
+      "labor": "Organización de la colección infantil",
+      "estado": "APROBADO",
+      "validador": "1030101010",
+      "calificacion": 4,
+      "observacion": "Buen trabajo de clasificación."
+    },
+    {
+      "id": 3,
+      "documento": "1020118919",
+      "estudiante": "Salomé Restrepo Agudelo",
+      "dependencia": "Restaurante Escolar (PAE)",
+      "fecha": "2026-05-12",
+      "hora_entrada": "10:00",
+      "hora_salida": "12:00",
+      "horas": 2,
+      "labor": "Apoyo en el servicio del restaurante",
+      "estado": "APROBADO",
+      "validador": "1020202020",
+      "calificacion": 5,
+      "observacion": "Excelente actitud con los compañeros."
+    },
+    {
+      "id": 4,
+      "documento": "1020118919",
+      "estudiante": "Salomé Restrepo Agudelo",
+      "dependencia": "Restaurante Escolar (PAE)",
+      "fecha": "2026-05-14",
+      "hora_entrada": "10:00",
+      "hora_salida": "12:00",
+      "horas": 2,
+      "labor": "Conteo de raciones del día",
+      "estado": "PENDIENTE",
+      "validador": "",
+      "calificacion": 0,
+      "observacion": ""
+    },
+    {
+      "id": 5,
+      "documento": "1020261470",
+      "estudiante": "Andrés Mauricio Peña Lopera",
+      "dependencia": "Secretaría Académica",
+      "fecha": "2026-05-13",
+      "hora_entrada": "07:00",
+      "hora_salida": "09:00",
+      "horas": 2,
+      "labor": "Archivo de carpetas de matrícula",
+      "estado": "PENDIENTE",
+      "validador": "",
+      "calificacion": 0,
+      "observacion": ""
+    },
+    {
+      "id": 6,
+      "documento": "1013463625",
+      "estudiante": "Samuel Restrepo Úsuga",
+      "dependencia": "Proyectos Ambientales",
+      "fecha": "2026-05-14",
+      "hora_entrada": "14:00",
+      "hora_salida": "16:00",
+      "horas": 2,
+      "labor": "Jornada de siembra en la huerta escolar",
+      "estado": "PENDIENTE",
+      "validador": "",
+      "calificacion": 0,
+      "observacion": ""
+    },
+    {
+      "id": 7,
+      "documento": "1025380117",
+      "estudiante": "Valentina Ospina Herrera",
+      "dependencia": "Biblioteca Escolar",
+      "fecha": "2026-05-12",
+      "hora_entrada": "12:30",
+      "hora_salida": "14:30",
+      "horas": 2,
+      "labor": "Acompañamiento en la sala de lectura",
+      "estado": "APROBADO",
+      "validador": "1030101010",
+      "calificacion": 5,
+      "observacion": "Cumplió las 80 horas con excelente desempeño."
+    }
+  ],
+  "novedades": [
+    {
+      "id": 1,
+      "documento": "1020261470",
+      "estudiante": "Andrés Mauricio Peña Lopera",
+      "dependencia": "Secretaría Académica",
+      "fecha": "2026-05-14",
+      "motivo": "Incapacidad médica de un día",
+      "estado": "VACANTE_POR_EXCUSA",
+      "reemplazo": "",
+      "publicado": "Publicado en la bolsa de reemplazos"
+    },
+    {
+      "id": 2,
+      "documento": "1013463625",
+      "estudiante": "Samuel Restrepo Úsuga",
+      "dependencia": "Proyectos Ambientales",
+      "fecha": "2026-05-13",
+      "motivo": "Cita médica en la mañana",
+      "estado": "CUBIERTO",
+      "reemplazo": "Salomé Restrepo Agudelo",
+      "publicado": "Cubierto por Salomé Restrepo Agudelo"
+    },
+    {
+      "id": 3,
+      "documento": "1059243429",
+      "estudiante": "Manuela Zapata Salgado",
+      "dependencia": "Deportes y Recreación",
+      "fecha": "2026-05-12",
+      "motivo": "Viaje familiar autorizado",
+      "estado": "CUBIERTO",
+      "reemplazo": "Valentina Ospina Herrera",
+      "publicado": "Cubierto por Valentina Ospina Herrera"
+    },
+    {
+      "id": 4,
+      "documento": "1020118919",
+      "estudiante": "Salomé Restrepo Agudelo",
+      "dependencia": "Restaurante Escolar (PAE)",
+      "fecha": "2026-05-14",
+      "motivo": "Cita odontológica",
+      "estado": "VACANTE_POR_EXCUSA",
+      "reemplazo": "",
+      "publicado": "Publicado en la bolsa de reemplazos"
+    },
+    {
+      "id": 5,
+      "documento": "1020261470",
+      "estudiante": "Andrés Mauricio Peña Lopera",
+      "dependencia": "Biblioteca Escolar",
+      "fecha": "2026-05-08",
+      "motivo": "No pudo asistir por calamidad doméstica",
+      "estado": "SIN_CUBRIR",
+      "reemplazo": "",
+      "publicado": "Nadie cubrió la vacante"
+    }
+  ],
+  "inscripciones": [
+    {
+      "id": 1,
+      "documento": "1035979039",
+      "estudiante": "Juan Sebastián Cardona Ríos",
+      "dependencia": "Biblioteca Escolar",
+      "dia": "Lunes",
+      "hora": "12:30 a 14:30",
+      "estado": "ACTIVA",
+      "fecha": "2026-02-16"
+    },
+    {
+      "id": 2,
+      "documento": "1020118919",
+      "estudiante": "Salomé Restrepo Agudelo",
+      "dependencia": "Restaurante Escolar (PAE)",
+      "dia": "Martes",
+      "hora": "10:00 a 12:00",
+      "estado": "ACTIVA",
+      "fecha": "2026-02-17"
+    },
+    {
+      "id": 3,
+      "documento": "1025380117",
+      "estudiante": "Valentina Ospina Herrera",
+      "dependencia": "Biblioteca Escolar",
+      "dia": "Miércoles",
+      "hora": "12:30 a 14:30",
+      "estado": "ACTIVA",
+      "fecha": "2026-02-18"
+    },
+    {
+      "id": 4,
+      "documento": "1059243429",
+      "estudiante": "Manuela Zapata Salgado",
+      "dependencia": "Deportes y Recreación",
+      "dia": "Jueves",
+      "hora": "15:00 a 17:00",
+      "estado": "ACTIVA",
+      "fecha": "2026-02-19"
+    },
+    {
+      "id": 5,
+      "documento": "1020261470",
+      "estudiante": "Andrés Mauricio Peña Lopera",
+      "dependencia": "Secretaría Académica",
+      "dia": "Miércoles",
+      "hora": "07:00 a 09:00",
+      "estado": "ACTIVA",
+      "fecha": "2026-02-20"
+    }
+  ]
+}

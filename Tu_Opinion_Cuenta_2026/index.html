@@ -1,135 +1,133 @@
 <!DOCTYPE html>
 <!--
   ============================================================================
-  Tu Opinion Cuenta — aplicación web
-  Proyecto Integrador de Aula (PIA) · I.E. Lola González · Grado 10° · 2026
-  Programa: Técnico Auxiliar en Desarrollo de Software — IU Pascual Bravo
+  Tu Opinión Cuenta — Inicio
+  PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  Portada del sistema y consulta rápida del estado de un radicado.
 
-  Este archivo es la ESTRUCTURA de la aplicación (el esqueleto).
-  Aquí solo va el contenido: las pantallas y sus contenedores.
-  El diseño está en css/estilos.css y la lógica en la carpeta js/.
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
   ============================================================================
 -->
 <html lang="es">
 <head>
-  <!-- Codificación y adaptación a celulares y tabletas -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Buzón Virtual de Sugerencias y Quejas">
-  <meta name="author" content="JEIDY GIRALDO MONTOYA, MARÍA ALEJANDRA GUTIÉRREZ OROZCO, JUAN JOSE HOLGUIN GARCIA">
-  <title>Tu Opinion Cuenta · PIA 2026</title>
-
-  <!-- El icono de la pestaña es el logo del proyecto -->
-  <link rel="icon" href="logo.png">
-  <!-- Hoja de estilos propia de la aplicación -->
-  <link rel="stylesheet" href="css/estilos.css">
+  <title>Tu Opinión Cuenta · Inicio</title>
+  <meta name="description" content="Plataforma web de participación democrática que reemplaza el buzón de madera por un canal digital trazable: valida el correo institucional, modera el lenguaje, asigna un código de radicado único y garantiza respuesta en 3 días hábiles.">
+  <meta name="author" content="Jeidy Giraldo Montoya, María Alejandra Gutiérrez Orozco, Juan José Holguín García">
+  <meta name="theme-color" content="#1d4ed8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231d4ed8'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3ETOC%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css?v=175336">
 </head>
-<body>
+<body class="layout-top">
 
-  <!-- ================= PANTALLA DE INGRESO ================= -->
-  <!-- Se muestra cuando no hay una sesión iniciada -->
-  <section id="pantallaIngreso" class="ingreso">
-    <div class="ingreso-caja">
-      <img src="logo.png" alt="Logo de Tu Opinion Cuenta" class="ingreso-logo">
-      <h1>Tu Opinion Cuenta</h1>
-      <p class="lema">Tu opinión sí cambia las cosas</p>
+  <div class="armazon">
 
-      <!-- Formulario de ingreso -->
-      <form id="formIngreso" autocomplete="off">
-        <label for="ingCorreo">Correo electrónico</label>
-        <input type="email" id="ingCorreo" placeholder="tu.correo@ejemplo.com" required>
-
-        <label for="ingClave">Contraseña</label>
-        <input type="password" id="ingClave" placeholder="Tu contraseña" required>
-
-        <button type="submit" class="boton grande">Ingresar</button>
-      </form>
-
-      <!-- Enlace para crear la cuenta -->
-      <p class="ingreso-pie">
-        ¿No tienes cuenta? <a href="#" id="enlaceRegistro">Crear una cuenta</a>
-      </p>
-
-      <!-- Cuenta de prueba: sirve para revisar la aplicación sin registrarse -->
-      <div class="pista-prueba">
-        <b>Para revisarla</b>
-        <span class="pista-par"><label>Correo</label> <code>pruebas@pasculia.edu.co</code></span>
-        <span class="pista-par"><label>Contraseña</label> <code>PascualBravo2026</code></span>
-      </div>
-
-      <!-- Formulario de registro (oculto hasta que se pide) -->
-      <form id="formRegistro" class="oculto" autocomplete="off">
-        <label for="regNombre">Nombre completo</label>
-        <input type="text" id="regNombre" placeholder="Nombres y apellidos" required>
-
-        <label for="regCorreo">Correo electrónico</label>
-        <input type="email" id="regCorreo" placeholder="tu.correo@ejemplo.com" required>
-
-        <label for="regClave">Contraseña</label>
-        <input type="password" id="regClave" placeholder="Mínimo 6 caracteres" minlength="6" required>
-
-        <label for="regRol">¿Cómo vas a usar la aplicación?</label>
-        <select id="regRol">
-          <option>Estudiante</option>
-          <option>Docente</option>
-          <option>Directivo</option>
-          <option>Acudiente</option>
-        </select>
-
-        <button type="submit" class="boton grande">Crear la cuenta</button>
-        <button type="button" class="boton claro" id="cancelarRegistro">Volver</button>
-      </form>
-
-      <p class="creditos">
-        Proyecto Integrador de Aula · I.E. Lola González · 2026
-      </p>
-    </div>
-  </section>
-
-  <!-- ================= APLICACIÓN ================= -->
-  <!-- Se muestra cuando ya hay una sesión iniciada -->
-  <div id="aplicacion" class="aplicacion oculto">
-
-    <!-- ---------- menú lateral ---------- -->
-    <aside class="lateral">
-      <div class="marca">
-        <img src="logo.png" alt="Logo" class="marca-logo">
-        <div>
-          <b>Tu Opinion Cuenta</b>
-          <span>I.E. Lola González</span>
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <img class="marca-logo" src="logo.png" alt="Logo de Tu Opinión Cuenta">
+        <div class="marca-texto">
+          <b>Tu Opinión Cuenta</b>
+          <span>I.E. Lola González · Buzón virtual PQRS</span>
         </div>
-      </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
 
-      <!-- Los módulos se dibujan desde js/modulos.js -->
-      <nav id="menu"></nav>
+    <!-- ================= MENÚ ================= -->
+    <nav class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="radicar.html">Radicar</a>
+      <a href="seguimiento.html">Seguimiento</a>
+      <a href="comite-admin.html">Panel del Comité</a>
+    </nav>
 
-      <div class="lateral-pie">
-        <div id="usuarioActual" class="usuario"></div>
-        <button class="boton claro chico" id="botonSalir">Cerrar sesión</button>
-      </div>
-    </aside>
-
-    <!-- ---------- contenido ---------- -->
+    <!-- ================= CONTENIDO ================= -->
     <main class="contenido">
-      <header class="cabecera">
-        <h1 id="tituloModulo">Inicio</h1>
-        <button class="boton solo-movil" id="botonMenu" aria-label="Abrir el menú">☰</button>
-      </header>
+      <section class="portada anim">
+        <h1>Tu Opinión Cuenta</h1>
+        <p>El buzón virtual de la I.E. Lola González: escribes, te dan un código y te responden en 3 días hábiles.</p>
+        <div class="sellos">
+          <span class="sello">I.E. Lola González</span>
+          <span class="sello">Grado 10°</span>
+          <span class="sello">Buzón virtual</span>
+        </div>
+      </section>
 
-      <!-- Aquí se dibuja cada módulo -->
-      <section id="vista" class="vista"></section>
+    <div class="indicadores">
+      <div class="indicador"><b>Radicados</b><strong id="kpiTotal">0</strong><span>en total</span></div>
+      <div class="indicador"><b>Pendientes</b><strong id="kpiPendientes">0</strong><span>por atender</span></div>
+      <div class="indicador"><b>Respondidos</b><strong id="kpiRespondidos">0</strong><span>con respuesta</span></div>
+      <div class="indicador"><b>Plazo</b><strong>3</strong><span>días hábiles</span></div>
+    </div>
+
+    <div class="rejilla g2">
+      <section class="tarjeta">
+        <h2>Radica tu solicitud</h2>
+        <p class="ayuda">Quejas, sugerencias, peticiones y reconocimientos sobre la infraestructura y la convivencia del colegio.</p>
+        <a class="btn p" href="radicar.html">Escribir una solicitud</a>
+        <h3>Las cuatro reglas de oro</h3>
+        <ol class="pequeno" style="margin-left:18px;line-height:1.8">
+          <li>Solo con correo institucional <b>@lola.edu.co</b>.</li>
+          <li>Filtro automático de lenguaje ofensivo.</li>
+          <li>Código único de seguimiento para cada reporte.</li>
+          <li>Respuesta en <b>3 días hábiles</b>.</li>
+        </ol>
+      </section>
+      <section class="tarjeta">
+        <h2>Consulta tu radicado</h2>
+        <p class="ayuda">Escribe el código que te entregaron, por ejemplo <b class="mono">TOC-2026-0001</b>.</p>
+        <div class="campo">
+          <label for="qCodigo">Código de radicado</label>
+          <input id="qCodigo" placeholder="TOC-2026-0001" autocomplete="off">
+        </div>
+        <button class="btn p" onclick="consultarRapido()">Consultar</button>
+        <div id="qResultado" style="margin-top:14px"></div>
+      </section>
+    </div>
+
+    <section class="tarjeta">
+      <h2>Lo último que reportaron</h2>
+      <p class="ayuda">Los radicados más recientes, sin mostrar la identidad de quien los escribió.</p>
+      <div id="ultimos"></div>
+    </section>
     </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      <img src="equipo.jpg" alt="Foto del equipo de Tu Opinión Cuenta" style="max-width:340px;width:100%;border-radius:12px;margin:0 auto 14px">
+      <div><b>Tu Opinión Cuenta</b> — Tu voz construye la Lola</div>
+      <div class="equipo">
+        <span>Jeidy Giraldo Montoya</span>
+        <span>María Alejandra Gutiérrez Orozco</span>
+        <span>Juan José Holguín García</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
   </div>
 
-  <!-- Aviso flotante para confirmar las acciones -->
-  <div id="aviso" class="aviso oculto"></div>
-
-  <!-- Los scripts van al final para que la página cargue más rápido -->
-  <!-- 1. la "base de datos" del navegador -->
-  <script src="js/almacen.js"></script>
-  <!-- 2. los módulos del proyecto, generados desde sus requisitos funcionales -->
-  <script src="js/modulos.js"></script>
-  <!-- 3. la lógica de la aplicación -->
-  <script src="js/app.js"></script>
+  <div id="piaToast"></div>
+  <script src="js/validador-dominio.js?v=175336"></script>
+  <script src="js/filtro-lexico.js?v=175336"></script>
+  <script src="js/radicador.js?v=175336"></script>
 </body>
 </html>

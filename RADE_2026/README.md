@@ -1,79 +1,68 @@
-# R.A.D.E — aplicación web
+# R.A.D.E
 
-> Alimentación escolar, sin fichos
+> Un carnet, una ración, cero fichos
 
-**Proyecto Integrador de Aula (PIA) · I.E. Lola González · Grado 10° · 2026**
+**Proyecto Integrador de Aula (PIA) 2026** · I.E. Lola González · Grado 10° · Grupo 10°05
 Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
 
 ---
 
 ## Qué es
 
-Registro de Alimentación de Estudiantes (PAE)
+Aplicación web que reemplaza los fichos de papel del restaurante escolar: valida el carnet del estudiante en segundos, bloquea el doble reclamo del mismo día, descuenta la ración de la modalidad que le corresponde y concilia al cierre cuántos titulares faltaron y cuántas raciones sobraron para reasignación.
 
-## Cuenta de prueba
+**Problema que resuelve:** El restaurante del Lola reparte fichos de cartón que se pierden, se dañan o se prestan para reclamar dos veces. Al cierre nadie sabe con exactitud cuántas raciones llegaron, cuántos titulares faltaron y cuánto sobró, así que los alfabetizadores gastan el descanso contando a mano y los alimentos se pierden.
 
-Para revisarla **no hace falta registrarse**: la aplicación crea sola una cuenta la primera vez que se abre.
+**Estilo visual:** 05-calido · menú tabs
 
-| | |
-|---|---|
-| **Correo** | `pruebas@pasculia.edu.co` |
-| **Contraseña** | `PascualBravo2026` |
-| **Rol** | Docente |
+## Cómo abrirlo
 
-> Es la **misma cuenta en las 33 aplicaciones**, para que quien las revise no tenga que memorizar nada.
-> También se puede crear una cuenta propia con el botón *Crear una cuenta*.
+1. Abre **`index.html`** con doble clic (no necesita servidor ni internet).
+2. La primera vez se cargan solos los **datos de ejemplo** (39 registros).
+3. Navega con el menú de arriba.
 
-## Cómo se usa
+Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar.
+Para volver a los datos de ejemplo: abre la consola del navegador y escribe `PIA.reiniciar()`.
 
-1. Abre el archivo **index.html** con doble clic (o sírvelo con un servidor local).
-2. Entra con la **cuenta de prueba** de arriba, o pulsa **Crear una cuenta** y regístrate.
-3. Elige un módulo en el menú de la izquierda.
-4. Llena el formulario y pulsa **Guardar**. El registro aparece en la tabla.
-5. Puedes **buscar**, **editar**, **eliminar** y **exportar** a Excel.
+## Las páginas
 
-Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar la página.
+- **Inicio** (`index.html`) — Portada con el estado del menú del día, el ingreso por rol y el resumen de la jornada.
+- **Terminal de carnet** (`validador-carnet.html`) — Terminal de escaneo: valida el carnet, entrega la ración y bloquea el segundo reclamo del día.
+- **Lotes y sobrantes** (`lotes-dashboard.html`) — Panel del operador PAE: recepción del lote, conciliación, monitor de entregas y beneficiarios.
+- **Mi PAE** (`mi-pae.html`) — Portal del estudiante: modalidad, historial de raciones y buzón de sugerencias nutricionales.
 
-## Módulos
-
-- **👤 Usuarios** — 5 campos
-- **🍽️ Alimentación y pedidos** — 5 campos
-- **🍽️ Sistema debe identificar las faltas de** — 5 campos
-- **📋 Registros** — 5 campos
-- **🍽️ Consultar y analizar los datos de** — 5 campos
-- **📋 Sistema debe manejar el registro de** — 5 campos
-- **📋 Reportes para la coordinación del programa** — 5 campos
-- **🍽️ Sistema debe reducir el personal necesario** — 5 campos
-
-## Archivos
+## Los archivos
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | La estructura: las pantallas y sus contenedores. |
-| `css/estilos.css` | El diseño. Arriba están las variables de color: cambiar una cambia todo. |
-| `js/almacen.js` | Los datos: guardar, listar, editar y eliminar. |
-| `js/modulos.js` | Los módulos y sus campos. Aquí se agrega un campo nuevo. |
-| `js/app.js` | La lógica: menú, formularios, tablas y búsqueda. |
-| `logo.png` | El logo del proyecto. |
+| `index.html` | Portada con el menú del día, el ingreso por rol y el resumen de la jornada.
+| `validador-carnet.html` | Terminal de escaneo del carnet con semáforo y bloqueo del doble reclamo.
+| `lotes-dashboard.html` | Recepción de lotes, conciliación de sobrantes e inasistentes y beneficiarios.
+| `mi-pae.html` | Portal del estudiante: modalidad, historial y sugerencias nutricionales.
+| `construccion.html` | Archivo del proyecto.
+| `css/estilos.css` | Sistema de diseño con la paleta verde y ámbar del PAE.
+| `js/validador-unico.js` | Núcleo común + beneficiarios y validación única diaria del carnet.
+| `js/conciliacion-lotes.js` | Lotes, conciliación de inasistentes y sobrantes, cierre y sugerencias.
+| `data/beneficiarios-pae.json` | Los 9 beneficiarios inscritos en el PAE.
+| `data/lotes-dia.json` | Los 6 lotes diarios con sus cantidades recibidas.
 
-## Cómo publicarlo en internet
+## El equipo
 
-**Opción 1 — GitHub Pages (gratis):**
-1. Crea un repositorio en GitHub.
-2. Sube todos los archivos.
-3. Ve a *Settings → Pages* y elige la rama principal.
-4. GitHub te da una dirección pública.
+| Integrante | Rol en el proyecto |
+|---|---|
+| Thomas Alexis López Robles | Product Owner · visión funcional del PAE y articulación con docentes y alfabetizadores |
+| Emmanuel Ortiz López | Scrum Master · sprints, control de calidad y pruebas del carnet único diario |
+| Sebastián Alexis Pulido Cabrera | Líder de lógica JavaScript · conciliación de lotes y bloqueo del doble reclamo |
+| David Mejía Meneses | Líder UI/UX · terminal de validación y panel del operador |
+| Jerónimo Caicedo Patiño | Datos y documentación · semilla JSON, modelo MySQL y buzón nutricional |
 
-**Opción 2 — Netlify (gratis):**
-1. Entra a netlify.com y elige *Add new site → Deploy manually*.
-2. Arrastra la carpeta del proyecto.
+**Docente articulador:** Jorge Mario Patiño Marín  
+**Docente par:** Alejo Villa A
 
-## Cómo continuarlo
+## Cómo continuar en grado 11°
 
-- Los **campos** de cada módulo están en `js/modulos.js`: es lo primero que se cambia.
-- Los **colores** están en las variables de `css/estilos.css`.
-- Para pasar de localStorage a una base de datos real, solo hay que cambiar `js/almacen.js`.
+En grado 11° el prototipo pasa a PHP 8 y MySQL 8 con las cuatro tablas ya definidas en el documento maestro: beneficiarios_pae, lotes_diarios, entregas_racion y sugerencias_pae. La restricción UNIQUE(id_lote, id_beneficiario) garantiza en la base de datos el mismo bloqueo que hoy se resuelve en JavaScript.
 
 ---
 
-Generado por **Project Manager PasculIA** a partir de los requisitos funcionales del proyecto.
+Generado con **Project Manager PasculIA** · datos de ejemplo incluidos.
