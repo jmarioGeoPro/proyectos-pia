@@ -200,3 +200,14 @@ tr:hover td { background: #fafafc; }
   .solo-movil { display: inline-block; }
   .indicador strong { font-size: 24px; }
 }
+
+
+    /* compacto: mucha información en poco espacio */
+    :root { --radio: 8px; --lateral: 208px; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; }
+    .lateral { background: var(--color-oscuro); }
+    .lateral a { color: #cfd3e0; padding: 8px 12px; border-radius: 6px; font-size: 13px; }
+    .lateral a.activo { background: var(--color); color: #fff; }
+    .tarjeta, .panel { padding: 12px 14px; }
+    th, td { padding: 6px 8px; font-size: 13px; }
+  

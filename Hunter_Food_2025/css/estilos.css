@@ -200,3 +200,14 @@ tr:hover td { background: #fafafc; }
   .solo-movil { display: inline-block; }
   .indicador strong { font-size: 24px; }
 }
+
+
+    /* institucional: sobrio, con banda de color */
+    :root { --radio: 3px; --lateral: 282px; --color-linea: #d8dee8; }
+    body { font-family: Arial, 'Segoe UI', sans-serif; }
+    .lateral { background: #ffffff; border-right: 3px solid var(--color); }
+    .lateral a { border-radius: 0; padding: 11px 14px; border-bottom: 1px solid #eef1f6; }
+    .lateral a.activo { background: var(--color); color: #fff; font-weight: 700; }
+    h1, h2, h3 { letter-spacing: .01em; }
+    .tarjeta, .panel { border: 1px solid #d8dee8; }
+  

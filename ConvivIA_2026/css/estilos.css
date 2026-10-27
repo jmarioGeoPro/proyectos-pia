@@ -200,3 +200,12 @@ tr:hover td { background: #fafafc; }
   .solo-movil { display: inline-block; }
   .indicador strong { font-size: 24px; }
 }
+
+
+    /* suave: fondo cálido y curvas generosas */
+    :root { --radio: 16px; --lateral: 246px; --color-suave: #fbf7f2; --color-linea: #ece2d6; }
+    body { font-family: 'Trebuchet MS', 'Segoe UI', sans-serif; }
+    .lateral { background: #fffdfa; border-right: 1px solid #ece2d6; }
+    .lateral a.activo { background: rgba(0,0,0,.05); color: var(--color); font-weight: 700; border-radius: 8px; }
+    .tarjeta, .panel { border: 1px solid #ece2d6; }
+  

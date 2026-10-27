@@ -200,3 +200,11 @@ tr:hover td { background: #fafafc; }
   .solo-movil { display: inline-block; }
   .indicador strong { font-size: 24px; }
 }
+
+
+    /* clásico: sobrio y legible */
+    :root { --radio: 12px; --lateral: 250px; }
+    body { font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
+    .lateral { background: #ffffff; border-right: 1px solid var(--color-linea); }
+    .lateral a.activo { background: var(--color); color: #fff; border-radius: 10px; }
+  
