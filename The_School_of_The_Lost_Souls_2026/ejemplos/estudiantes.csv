@@ -1,4 +1,4 @@
-id;nombre;grado;faltas;promedio;riesgo;estado
+﻿id;nombre;grado;faltas;promedio;riesgo;estado
 1;Ana Sofía Restrepo;10°01;2;3.9;Medio;En seguimiento
 2;Juan David Ospina;10°02;9;2.8;Alto;En seguimiento
 3;María Fernanda Ríos;10°01;0;4.3;Bajo;Estable

@@ -1,4 +1,4 @@
-id;codigo_institucional;nombre_completo;username_publico;grado;rol;avatar;documento_ti;telefono;correo;clave;debe_cambiar_clave;activo;intereses;privacidad
+﻿id;codigo_institucional;nombre_completo;username_publico;grado;rol;avatar;documento_ti;telefono;correo;clave;debe_cambiar_clave;activo;intereses;privacidad
 1;EST-1005-01;Nicolás Arteaga Mazo;nico.arteaga;10°05;estudiante;🦊;1.036.111.001;300 111 2233;nicolas.arteaga@lola.edu.co;1234;true;true;"Tecnología,Robótica,Deportes";[object Object]
 2;EST-1005-02;Juan Fernando Gómez Hernández;juan.gomez;10°05;estudiante;🐼;1.020.222.002;300 222 3344;juan.gomezhe@lola.edu.co;1234;true;true;"Tecnología,Lectura,Música";[object Object]
 3;EST-1005-03;Luis Yair Vallenilla Tovar;yair.vallenilla;10°05;estudiante;🐙;1.112.333.003;300 333 4455;luis.vallenilla@lola.edu.co;1234;true;true;"Arte,Música,Teatro";[object Object]

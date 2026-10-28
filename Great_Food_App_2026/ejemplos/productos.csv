@@ -1,4 +1,4 @@
-id;nombre;categoria;precio;stock;menu_dia;descripcion;icono;ventas
+﻿id;nombre;categoria;precio;stock;menu_dia;descripcion;icono;ventas
 1;Hamburguesa clásica;Comida_Rapida;5000;24;true;"Carne de res, lechuga, tomate y salsa de la casa.";🍔;58
 2;Perro caliente con papas;Comida_Rapida;4500;30;true;"Salchicha, cebolla caramelizada y papas a la francesa.";🌭;44
 3;Arepa rellena de queso;Comida_Rapida;3500;18;true;Arepa asada con queso campesino derretido.;🫓;39

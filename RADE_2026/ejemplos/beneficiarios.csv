@@ -1,4 +1,4 @@
-id;codigo_carnet;documento_ti;nombre;grado;modalidad;activo;fecha_inscripcion
+﻿id;codigo_carnet;documento_ti;nombre;grado;modalidad;activo;fecha_inscripcion
 1;LG-2026-0101;1.025.887.441;Alejandro Sepúlveda Álvarez;10°01;VASO_LECHE;true;2026-02-02
 2;LG-2026-0102;1.036.221.558;Isabella Torres Madrid;11°01;PLATO_VERDE;true;2026-02-02
 3;LG-2026-0103;1.020.774.309;Samuel Cárdenas Osorio;10°01;VASO_LECHE;true;2026-02-03

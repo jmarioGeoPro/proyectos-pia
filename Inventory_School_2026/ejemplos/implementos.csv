@@ -1,4 +1,4 @@
-id;codigo_qr;nombre;deporte;ubicacion;estado_fisico;disponibilidad;cantidad;fecha_ingreso;veces_prestado
+﻿id;codigo_qr;nombre;deporte;ubicacion;estado_fisico;disponibilidad;cantidad;fecha_ingreso;veces_prestado
 1;QR-FUT-0001;Balón de fútbol N°5;Fútbol;Bodega de Educación Física · estante 1;Excelente;DISPONIBLE;1;2025-02-10;34
 2;QR-MIC-0002;Balón de microfútbol N°4;Microfútbol;Bodega de Educación Física · estante 1;Bueno;PRESTADO;1;2025-02-10;41
 3;QR-BAL-0003;Balón de baloncesto N°7;Baloncesto;Bodega de Educación Física · estante 2;Excelente;PRESTADO;1;2025-03-04;28

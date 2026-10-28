@@ -1,4 +1,4 @@
-id;documento;nombre;rol;curso;correo;clave;acudiente;acudiente_correo;programadas_mes;asistidas_mes
+﻿id;documento;nombre;rol;curso;correo;clave;acudiente;acudiente_correo;programadas_mes;asistidas_mes
 1;1036259276;Miguel Ángel Ruiz Giraldo;estudiante;10°05;miguel.ruizgi@lola.edu.co;lola2026;Claudia Giraldo;claudia.giraldo@gmail.com;30;26
 2;1025896105;Justin Andrés Castillo Seguro;estudiante;10°05;justin.castillos@lola.edu.co;lola2026;Luz Marina Seguro;luzmarina.seguro@gmail.com;30;25
 3;1038264703;Felipe Vallejo Arias;estudiante;10°05;felipe.vallejoa@lola.edu.co;lola2026;Diana Arias;diana.arias@gmail.com;30;21

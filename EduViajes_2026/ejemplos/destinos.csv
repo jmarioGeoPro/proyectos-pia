@@ -1,4 +1,4 @@
-id;nombre;ciudad;area;grado;costo;estado;icono
+﻿id;nombre;ciudad;area;grado;costo;estado;icono
 1;Parque Explora;Medellín;Ciencias;10°;18000;Disponible;🔬
 2;Museo de Antioquia;Medellín;Arte;10°;0;Disponible;🖼
 3;Jardín Botánico;Medellín;Biología;10°;6000;Disponible;🌿

@@ -1,4 +1,4 @@
-id;titulo;materia;fecha;prioridad;duracion;pomodoros;estado;subtareas
+﻿id;titulo;materia;fecha;prioridad;duracion;pomodoros;estado;subtareas
 1;Taller de algoritmos en PSeInt;Herramientas Algorítmicas I;2026-10-28;1;120;5;PENDIENTE;"Leer la guía,Hacer el diagrama de flujo,Probar con 3 casos"
 2;Exposición de sistemas operativos;Sistemas Operativos;2026-10-31;1;90;4;EN_CURSO;"Buscar información,Armar diapositivas,Ensayar 10 minutos"
 3;Ejercicios de lógica matemática;Herramientas Lógicas Matemáticas;2026-11-03;2;60;3;PENDIENTE;Páginas 40 a 55

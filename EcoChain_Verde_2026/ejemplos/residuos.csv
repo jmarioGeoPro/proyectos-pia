@@ -1,4 +1,4 @@
-id;tipo;peso;punto;estudiante;estado;hash
+﻿id;tipo;peso;punto;estudiante;estado;hash
 1;Plástico PET;14.5;Patio central;Ana Sofía Restrepo;Recogido;EC-0001
 2;Cartón;22;Biblioteca;Juan David Ospina;Entregado;EC-0002
 3;Vidrio;8.3;Cafetería;María Fernanda Ríos;Recogido;EC-0003
