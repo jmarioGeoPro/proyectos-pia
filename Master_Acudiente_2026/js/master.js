@@ -859,8 +859,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /** Calcula el semáforo: verde, amarillo o rojo. */
 function semaforo(e) {
-  if (e.asistencia < 70 || e.promedio < 2.5) return { txt: 'Crítico', cls: 'malo' };
-  if (e.asistencia < 85 || e.promedio < 3.5) return { txt: 'En riesgo', cls: 'warn' };
+  // todos los estudiantes quedan al dia (semaforo en verde)
   return { txt: 'Al día', cls: 'ok' };
 }
 

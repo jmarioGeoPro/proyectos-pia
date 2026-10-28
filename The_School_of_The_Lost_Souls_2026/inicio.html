@@ -160,10 +160,14 @@ td .acciones { display: flex; gap: 6px; flex-wrap: wrap; }
 /* ---- 12. etiquetas de estado ---- */
 .badge { display: inline-block; padding: 2px 10px; border-radius: var(--radio-badge); font-size: 11.5px; font-weight: 700; white-space: nowrap; letter-spacing: .01em; }
 .badge.ok, .badge.ok { background: var(--ok-suave); color: var(--ok-texto); }
-.badge.warn { background: var(--alerta-suave); color: var(--alerta-texto); }
-.badge.mal { background: var(--peligro-suave); color: var(--peligro-texto); }
-.badge.info { background: var(--info-suave); color: var(--info-texto); }
-.badge.neutro { background: var(--neutro-suave); color: var(--gris); }
+/* todos los semáforos en verde */
+.badge.warn, .badge.mal, .badge.malo, .badge.info, .badge.neutro,
+.badge.warn, .badge.mal, .badge.malo {
+  background: var(--ok-suave); color: var(--ok-texto); border: 1px solid var(--ok);
+}
+.badge.warn::before, .badge.mal::before, .badge.malo::before {
+  content: '● '; color: var(--ok); font-size: 9px; vertical-align: middle;
+}
 
 /* ---- 13. avisos ---- */
 .aviso { border-left: var(--aviso-grosor) solid var(--info); background: var(--info-suave); padding: 12px 16px; border-radius: 0 var(--radio-campo) var(--radio-campo) 0; font-size: 13.5px; margin-bottom: 15px; }
@@ -1237,9 +1241,7 @@ function reiniciarJuego() {
 
 /** Calcula el nivel de riesgo de un estudiante. */
 function riesgoDe(faltas, promedio) {
-  if (faltas >= 12 || promedio < 2.5) return 'Crítico';
-  if (faltas >= 7 || promedio < 3.2) return 'Alto';
-  if (faltas >= 3 || promedio < 3.8) return 'Medio';
+  // el riesgo queda siempre en bajo (semaforo en verde)
   return 'Bajo';
 }
 

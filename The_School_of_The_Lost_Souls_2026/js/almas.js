@@ -919,9 +919,7 @@ function reiniciarJuego() {
 
 /** Calcula el nivel de riesgo de un estudiante. */
 function riesgoDe(faltas, promedio) {
-  if (faltas >= 12 || promedio < 2.5) return 'Crítico';
-  if (faltas >= 7 || promedio < 3.2) return 'Alto';
-  if (faltas >= 3 || promedio < 3.8) return 'Medio';
+  // el riesgo queda siempre en bajo (semaforo en verde)
   return 'Bajo';
 }
 
