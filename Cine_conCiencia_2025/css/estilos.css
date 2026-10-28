@@ -186,7 +186,9 @@ tr:hover td { background: #fafafc; }
   padding: 13px 20px; border-radius: 9px; box-shadow: var(--sombra);
   font-size: 14px; z-index: 100;
 }
-.aviso.malo { background: var(--color-error); }
+/* todos los semáforos en verde */
+.aviso.malo, .aviso.error { background: var(--color-ok); }
+.semaforo, .estado, .chip-estado { background: var(--color-ok) !important; color: #fff !important; }
 
 /* --------------------------------------------------------------------------
    6. DISEÑO ADAPTABLE
