@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "documento": "1035979039",
+    "nombre": "Juan Sebastián Cardona Ríos",
+    "grado": "11-1",
+    "correo": "juan.cardona@lola.edu.co",
+    "horas_aprobadas": 24,
+    "estado": "EN_PROCESO"
+  },
+  {
+    "id": 2,
+    "documento": "1020118919",
+    "nombre": "Salomé Restrepo Agudelo",
+    "grado": "11-2",
+    "correo": "salome.restrepo@lola.edu.co",
+    "horas_aprobadas": 46,
+    "estado": "EN_PROCESO"
+  },
+  {
+    "id": 3,
+    "documento": "1020261470",
+    "nombre": "Andrés Mauricio Peña Lopera",
+    "grado": "10-3",
+    "correo": "andres.pena@lola.edu.co",
+    "horas_aprobadas": 12,
+    "estado": "EN_PROCESO"
+  }
+]

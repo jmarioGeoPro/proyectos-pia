@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "codigo": "CV-0001",
+    "tipo": "Conflicto entre pares",
+    "grado": "11°01",
+    "gravedad": "Media",
+    "estado": "En mediación",
+    "fecha": "2026-11-02",
+    "anonimo": "Sí"
+  },
+  {
+    "id": 2,
+    "codigo": "CV-0002",
+    "tipo": "Exclusión en grupo",
+    "grado": "11°02",
+    "gravedad": "Alta",
+    "estado": "Abierto",
+    "fecha": "2026-11-03",
+    "anonimo": "Sí"
+  },
+  {
+    "id": 3,
+    "codigo": "CV-0003",
+    "tipo": "Falta de respeto",
+    "grado": "11°01",
+    "gravedad": "Baja",
+    "estado": "Resuelto",
+    "fecha": "2026-11-04",
+    "anonimo": "No"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nombre": "Parque Explora",
+    "ciudad": "Medellín",
+    "area": "Ciencias",
+    "grado": "10°",
+    "costo": 18000,
+    "estado": "Disponible",
+    "icono": "🔬"
+  },
+  {
+    "id": 2,
+    "nombre": "Museo de Antioquia",
+    "ciudad": "Medellín",
+    "area": "Arte",
+    "grado": "10°",
+    "costo": 0,
+    "estado": "Disponible",
+    "icono": "🖼"
+  },
+  {
+    "id": 3,
+    "nombre": "Jardín Botánico",
+    "ciudad": "Medellín",
+    "area": "Biología",
+    "grado": "10°",
+    "costo": 6000,
+    "estado": "Disponible",
+    "icono": "🌿"
+  }
+]

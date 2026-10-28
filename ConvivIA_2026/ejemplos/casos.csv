@@ -1,0 +1,4 @@
+id;codigo;tipo;grado;gravedad;estado;fecha;anonimo
+1;CV-0001;Conflicto entre pares;11°01;Media;En mediación;2026-11-02;Sí
+2;CV-0002;Exclusión en grupo;11°02;Alta;Abierto;2026-11-03;Sí
+3;CV-0003;Falta de respeto;11°01;Baja;Resuelto;2026-11-04;No

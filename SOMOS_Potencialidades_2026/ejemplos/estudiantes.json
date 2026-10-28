@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ana Lucía Romero Pardo",
+    "alias": "Anon_123",
+    "grado": "10°05",
+    "consentimiento": true,
+    "correo": "ana.romerop@lola.edu.co",
+    "bio": "Dibujo y poesía"
+  },
+  {
+    "id": 2,
+    "nombre": "Juan José Doria Ossa",
+    "alias": "Anon_045",
+    "grado": "10°05",
+    "consentimiento": true,
+    "correo": "juan.doriao@lola.edu.co",
+    "bio": "Fotografía de calle"
+  },
+  {
+    "id": 3,
+    "nombre": "María Kamila Piedrahíta Ochoa",
+    "alias": "Anon_078",
+    "grado": "10°05",
+    "consentimiento": false,
+    "correo": "kamila.piedrahitao@lola.edu.co",
+    "bio": "Ilustración y color"
+  }
+]

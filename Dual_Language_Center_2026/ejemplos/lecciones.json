@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "titulo": "Present Simple",
+    "nivel": "A1",
+    "destreza": "Gramática",
+    "duracion": 20,
+    "estado": "Publicada"
+  },
+  {
+    "id": 2,
+    "titulo": "Past Continuous",
+    "nivel": "A2",
+    "destreza": "Gramática",
+    "duracion": 25,
+    "estado": "Publicada"
+  },
+  {
+    "id": 3,
+    "titulo": "Conditionals 0-1",
+    "nivel": "B1",
+    "destreza": "Gramática",
+    "duracion": 30,
+    "estado": "Publicada"
+  }
+]

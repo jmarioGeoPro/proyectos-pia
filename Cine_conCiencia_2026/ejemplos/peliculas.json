@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "titulo": "The Martian",
+    "tituloEs": "Misión Rescate",
+    "anio": 2015,
+    "genero": "Ciencia",
+    "area": "Ciencias",
+    "duracion": 144,
+    "idioma": "Inglés",
+    "subtitulos": "Español",
+    "estado": "En cartelera",
+    "icono": "🚀"
+  },
+  {
+    "id": 2,
+    "titulo": "Coco",
+    "tituloEs": "Coco",
+    "anio": 2017,
+    "genero": "Animación",
+    "area": "Arte",
+    "duracion": 105,
+    "idioma": "Español",
+    "subtitulos": "Inglés",
+    "estado": "En cartelera",
+    "icono": "🎸"
+  },
+  {
+    "id": 3,
+    "titulo": "Hidden Figures",
+    "tituloEs": "Talentos Ocultos",
+    "anio": 2016,
+    "genero": "Historia",
+    "area": "Sociales",
+    "duracion": 127,
+    "idioma": "Inglés",
+    "subtitulos": "Español",
+    "estado": "En cartelera",
+    "icono": "📐"
+  }
+]

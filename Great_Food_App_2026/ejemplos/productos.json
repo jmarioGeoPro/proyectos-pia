@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "nombre": "Hamburguesa clásica",
+    "categoria": "Comida_Rapida",
+    "precio": 5000,
+    "stock": 24,
+    "menu_dia": true,
+    "descripcion": "Carne de res, lechuga, tomate y salsa de la casa.",
+    "icono": "🍔",
+    "ventas": 58
+  },
+  {
+    "id": 2,
+    "nombre": "Perro caliente con papas",
+    "categoria": "Comida_Rapida",
+    "precio": 4500,
+    "stock": 30,
+    "menu_dia": true,
+    "descripcion": "Salchicha, cebolla caramelizada y papas a la francesa.",
+    "icono": "🌭",
+    "ventas": 44
+  },
+  {
+    "id": 3,
+    "nombre": "Arepa rellena de queso",
+    "categoria": "Comida_Rapida",
+    "precio": 3500,
+    "stock": 18,
+    "menu_dia": true,
+    "descripcion": "Arepa asada con queso campesino derretido.",
+    "icono": "🫓",
+    "ventas": 39
+  }
+]

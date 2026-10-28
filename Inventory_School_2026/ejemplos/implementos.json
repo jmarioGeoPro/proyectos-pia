@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "codigo_qr": "QR-FUT-0001",
+    "nombre": "Balón de fútbol N°5",
+    "deporte": "Fútbol",
+    "ubicacion": "Bodega de Educación Física · estante 1",
+    "estado_fisico": "Excelente",
+    "disponibilidad": "DISPONIBLE",
+    "cantidad": 1,
+    "fecha_ingreso": "2025-02-10",
+    "veces_prestado": 34
+  },
+  {
+    "id": 2,
+    "codigo_qr": "QR-MIC-0002",
+    "nombre": "Balón de microfútbol N°4",
+    "deporte": "Microfútbol",
+    "ubicacion": "Bodega de Educación Física · estante 1",
+    "estado_fisico": "Bueno",
+    "disponibilidad": "PRESTADO",
+    "cantidad": 1,
+    "fecha_ingreso": "2025-02-10",
+    "veces_prestado": 41
+  },
+  {
+    "id": 3,
+    "codigo_qr": "QR-BAL-0003",
+    "nombre": "Balón de baloncesto N°7",
+    "deporte": "Baloncesto",
+    "ubicacion": "Bodega de Educación Física · estante 2",
+    "estado_fisico": "Excelente",
+    "disponibilidad": "PRESTADO",
+    "cantidad": 1,
+    "fecha_ingreso": "2025-03-04",
+    "veces_prestado": 28
+  }
+]

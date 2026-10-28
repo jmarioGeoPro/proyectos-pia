@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Portátil HP 01",
+    "tipo": "Portátil",
+    "sala": "Sala TIC",
+    "estado": "Disponible"
+  },
+  {
+    "id": 2,
+    "nombre": "Portátil HP 02",
+    "tipo": "Portátil",
+    "sala": "Sala TIC",
+    "estado": "Prestado"
+  },
+  {
+    "id": 3,
+    "nombre": "Video beam Epson",
+    "tipo": "Proyector",
+    "sala": "Aula 205",
+    "estado": "Disponible"
+  }
+]

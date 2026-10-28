@@ -1,0 +1,4 @@
+id;nombre;grado;acudiente;telefono;asistencia;promedio;alertas;estado
+1;Ana Sofía Restrepo;11°01;Marcela Restrepo;310 000 0001;96;4.3;0;Al día
+2;Juan David Ospina;11°02;Carlos Ospina;310 000 0002;78;3.1;2;En riesgo
+3;María Fernanda Ríos;11°01;Jorge Ríos;310 000 0003;92;4.6;0;Al día

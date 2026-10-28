@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nombre": "Los Tigres 10°01",
+    "deporte": "Fútbol",
+    "capitan": "Juan D. Ospina",
+    "jugadores": 11,
+    "puntos": 9,
+    "estado": "Activo"
+  },
+  {
+    "id": 2,
+    "nombre": "Las Águilas 10°02",
+    "deporte": "Fútbol",
+    "capitan": "Ana S. Restrepo",
+    "jugadores": 11,
+    "puntos": 7,
+    "estado": "Activo"
+  },
+  {
+    "id": 3,
+    "nombre": "Los Cóndores 10°03",
+    "deporte": "Baloncesto",
+    "capitan": "Samuel A. Mejía",
+    "jugadores": 10,
+    "puntos": 10,
+    "estado": "Activo"
+  }
+]

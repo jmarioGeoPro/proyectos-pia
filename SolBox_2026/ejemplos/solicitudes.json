@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "radicado": "SB-2026-0001",
+    "tipo": "Queja",
+    "zona": "Cafetería",
+    "asunto": "El microondas no funciona",
+    "estado": "En revisión",
+    "dias": 1,
+    "autor": "Anon_204"
+  },
+  {
+    "id": 2,
+    "radicado": "SB-2026-0002",
+    "tipo": "Sugerencia",
+    "zona": "Biblioteca",
+    "asunto": "Ampliar el horario en semana de exámenes",
+    "estado": "Respondida",
+    "dias": 2,
+    "autor": "Ana S."
+  },
+  {
+    "id": 3,
+    "radicado": "SB-2026-0003",
+    "tipo": "Petición",
+    "zona": "Baños",
+    "asunto": "Falta jabón en el baño de mujeres",
+    "estado": "En revisión",
+    "dias": 3,
+    "autor": "Anon_118"
+  }
+]

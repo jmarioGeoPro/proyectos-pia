@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ana Sofía Restrepo",
+    "grado": "11°01",
+    "acudiente": "Marcela Restrepo",
+    "telefono": "310 000 0001",
+    "asistencia": 96,
+    "promedio": 4.3,
+    "alertas": 0,
+    "estado": "Al día"
+  },
+  {
+    "id": 2,
+    "nombre": "Juan David Ospina",
+    "grado": "11°02",
+    "acudiente": "Carlos Ospina",
+    "telefono": "310 000 0002",
+    "asistencia": 78,
+    "promedio": 3.1,
+    "alertas": 2,
+    "estado": "En riesgo"
+  },
+  {
+    "id": 3,
+    "nombre": "María Fernanda Ríos",
+    "grado": "11°01",
+    "acudiente": "Jorge Ríos",
+    "telefono": "310 000 0003",
+    "asistencia": 92,
+    "promedio": 4.6,
+    "alertas": 0,
+    "estado": "Al día"
+  }
+]

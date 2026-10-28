@@ -1,0 +1,4 @@
+id;nombre;tipo;sala;estado
+1;Portátil HP 01;Portátil;Sala TIC;Disponible
+2;Portátil HP 02;Portátil;Sala TIC;Prestado
+3;Video beam Epson;Proyector;Aula 205;Disponible

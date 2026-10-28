@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "codigo_institucional": "EST-1005-01",
+    "nombre_completo": "Nicolás Arteaga Mazo",
+    "username_publico": "nico.arteaga",
+    "grado": "10°05",
+    "rol": "estudiante",
+    "avatar": "🦊",
+    "documento_ti": "1.036.111.001",
+    "telefono": "300 111 2233",
+    "correo": "nicolas.arteaga@lola.edu.co",
+    "clave": "1234",
+    "debe_cambiar_clave": true,
+    "activo": true,
+    "intereses": [
+      "Tecnología",
+      "Robótica",
+      "Deportes"
+    ],
+    "privacidad": {
+      "mostrar_grado": true,
+      "permitir_mensajes": true,
+      "perfil_publico": true
+    }
+  },
+  {
+    "id": 2,
+    "codigo_institucional": "EST-1005-02",
+    "nombre_completo": "Juan Fernando Gómez Hernández",
+    "username_publico": "juan.gomez",
+    "grado": "10°05",
+    "rol": "estudiante",
+    "avatar": "🐼",
+    "documento_ti": "1.020.222.002",
+    "telefono": "300 222 3344",
+    "correo": "juan.gomezhe@lola.edu.co",
+    "clave": "1234",
+    "debe_cambiar_clave": true,
+    "activo": true,
+    "intereses": [
+      "Tecnología",
+      "Lectura",
+      "Música"
+    ],
+    "privacidad": {
+      "mostrar_grado": true,
+      "permitir_mensajes": true,
+      "perfil_publico": true
+    }
+  },
+  {
+    "id": 3,
+    "codigo_institucional": "EST-1005-03",
+    "nombre_completo": "Luis Yair Vallenilla Tovar",
+    "username_publico": "yair.vallenilla",
+    "grado": "10°05",
+    "rol": "estudiante",
+    "avatar": "🐙",
+    "documento_ti": "1.112.333.003",
+    "telefono": "300 333 4455",
+    "correo": "luis.vallenilla@lola.edu.co",
+    "clave": "1234",
+    "debe_cambiar_clave": true,
+    "activo": true,
+    "intereses": [
+      "Arte",
+      "Música",
+      "Teatro"
+    ],
+    "privacidad": {
+      "mostrar_grado": true,
+      "permitir_mensajes": true,
+      "perfil_publico": true
+    }
+  }
+]

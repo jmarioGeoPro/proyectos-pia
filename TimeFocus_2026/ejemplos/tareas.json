@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "titulo": "Taller de algoritmos en PSeInt",
+    "materia": "Herramientas Algorítmicas I",
+    "fecha": "2026-10-28",
+    "prioridad": 1,
+    "duracion": 120,
+    "pomodoros": 5,
+    "estado": "PENDIENTE",
+    "subtareas": [
+      "Leer la guía",
+      "Hacer el diagrama de flujo",
+      "Probar con 3 casos"
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Exposición de sistemas operativos",
+    "materia": "Sistemas Operativos",
+    "fecha": "2026-10-31",
+    "prioridad": 1,
+    "duracion": 90,
+    "pomodoros": 4,
+    "estado": "EN_CURSO",
+    "subtareas": [
+      "Buscar información",
+      "Armar diapositivas",
+      "Ensayar 10 minutos"
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "Ejercicios de lógica matemática",
+    "materia": "Herramientas Lógicas Matemáticas",
+    "fecha": "2026-11-03",
+    "prioridad": 2,
+    "duracion": 60,
+    "pomodoros": 3,
+    "estado": "PENDIENTE",
+    "subtareas": [
+      "Páginas 40 a 55"
+    ]
+  }
+]

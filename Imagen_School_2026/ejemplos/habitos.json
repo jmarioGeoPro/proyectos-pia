@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Dormir 8 horas",
+    "area": "Descanso",
+    "frecuencia": "Diario",
+    "estudiantes": 24,
+    "estado": "Activo"
+  },
+  {
+    "id": 2,
+    "nombre": "Desayunar antes de salir",
+    "area": "Alimentación",
+    "frecuencia": "Diario",
+    "estudiantes": 19,
+    "estado": "Activo"
+  },
+  {
+    "id": 3,
+    "nombre": "Caminar 20 minutos",
+    "area": "Movimiento",
+    "frecuencia": "Diario",
+    "estudiantes": 15,
+    "estado": "Activo"
+  }
+]

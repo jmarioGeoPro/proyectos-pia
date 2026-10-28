@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "codigo_carnet": "LG-2026-0101",
+    "documento_ti": "1.025.887.441",
+    "nombre": "Alejandro Sepúlveda Álvarez",
+    "grado": "10°01",
+    "modalidad": "VASO_LECHE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-02"
+  },
+  {
+    "id": 2,
+    "codigo_carnet": "LG-2026-0102",
+    "documento_ti": "1.036.221.558",
+    "nombre": "Isabella Torres Madrid",
+    "grado": "11°01",
+    "modalidad": "PLATO_VERDE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-02"
+  },
+  {
+    "id": 3,
+    "codigo_carnet": "LG-2026-0103",
+    "documento_ti": "1.020.774.309",
+    "nombre": "Samuel Cárdenas Osorio",
+    "grado": "10°01",
+    "modalidad": "VASO_LECHE",
+    "activo": true,
+    "fecha_inscripcion": "2026-02-03"
+  }
+]

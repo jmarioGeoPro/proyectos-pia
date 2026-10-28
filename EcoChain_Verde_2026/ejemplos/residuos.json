@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "tipo": "Plástico PET",
+    "peso": 14.5,
+    "punto": "Patio central",
+    "estudiante": "Ana Sofía Restrepo",
+    "estado": "Recogido",
+    "hash": "EC-0001"
+  },
+  {
+    "id": 2,
+    "tipo": "Cartón",
+    "peso": 22,
+    "punto": "Biblioteca",
+    "estudiante": "Juan David Ospina",
+    "estado": "Entregado",
+    "hash": "EC-0002"
+  },
+  {
+    "id": 3,
+    "tipo": "Vidrio",
+    "peso": 8.3,
+    "punto": "Cafetería",
+    "estudiante": "María Fernanda Ríos",
+    "estado": "Recogido",
+    "hash": "EC-0003"
+  }
+]

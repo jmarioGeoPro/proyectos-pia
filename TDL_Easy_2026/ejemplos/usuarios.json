@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "documento": "1036259276",
+    "nombre": "Miguel Ángel Ruiz Giraldo",
+    "rol": "estudiante",
+    "curso": "10°05",
+    "correo": "miguel.ruizgi@lola.edu.co",
+    "clave": "lola2026",
+    "acudiente": "Claudia Giraldo",
+    "acudiente_correo": "claudia.giraldo@gmail.com",
+    "programadas_mes": 30,
+    "asistidas_mes": 26
+  },
+  {
+    "id": 2,
+    "documento": "1025896105",
+    "nombre": "Justin Andrés Castillo Seguro",
+    "rol": "estudiante",
+    "curso": "10°05",
+    "correo": "justin.castillos@lola.edu.co",
+    "clave": "lola2026",
+    "acudiente": "Luz Marina Seguro",
+    "acudiente_correo": "luzmarina.seguro@gmail.com",
+    "programadas_mes": 30,
+    "asistidas_mes": 25
+  },
+  {
+    "id": 3,
+    "documento": "1038264703",
+    "nombre": "Felipe Vallejo Arias",
+    "rol": "estudiante",
+    "curso": "10°05",
+    "correo": "felipe.vallejoa@lola.edu.co",
+    "clave": "lola2026",
+    "acudiente": "Diana Arias",
+    "acudiente_correo": "diana.arias@gmail.com",
+    "programadas_mes": 30,
+    "asistidas_mes": 21
+  }
+]

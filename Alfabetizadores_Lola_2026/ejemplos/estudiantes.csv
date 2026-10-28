@@ -1,0 +1,4 @@
+id;documento;nombre;grado;correo;horas_aprobadas;estado
+1;1035979039;Juan Sebastián Cardona Ríos;11-1;juan.cardona@lola.edu.co;24;EN_PROCESO
+2;1020118919;Salomé Restrepo Agudelo;11-2;salome.restrepo@lola.edu.co;46;EN_PROCESO
+3;1020261470;Andrés Mauricio Peña Lopera;10-3;andres.pena@lola.edu.co;12;EN_PROCESO
