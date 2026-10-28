@@ -1,0 +1,1 @@
+/* la biblioteca usa el núcleo compartido */

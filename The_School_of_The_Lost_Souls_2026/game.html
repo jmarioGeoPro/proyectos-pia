@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  The School of The Lost Souls — Jugar
+  PIA 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05
+  ----------------------------------------------------------------------------
+  El juego: cinco escenas con dos decisiones cada una y puntaje de permanencia.
+
+  Docente articulador: Jorge Mario Patiño Marín
+  Docente par:         Alejo Villa A
+
+  Este archivo es la ESTRUCTURA de la página. El diseño está en el CSS y la
+  lógica en los archivos de la carpeta js/. Todo está separado a propósito:
+  así se trabaja en VS Code.
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The School of The Lost Souls · Jugar</title>
+  <meta name="description" content="Un juego narrativo que pone al jugador en los zapatos de un estudiante en riesgo de desertar, y un panel que ayuda al docente a detectarlo a tiempo.">
+  <meta name="author" content="Estudiante líder de producto, Estudiante de diseño, Estudiante de lógica, Estudiante de investigación">
+  <meta name="theme-color" content="#d946a8">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23d946a8'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='white' font-family='Segoe UI, sans-serif' font-weight='700'%3ELS%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/estilos.css?v=906869">
+</head>
+<body class="layout-top">
+
+  <div class="armazon">
+
+    <!-- ================= CABECERA ================= -->
+    <header class="barra-sup">
+      <a class="marca" href="index.html">
+        <div class="marca-logo" style="display:grid;place-items:center;font-weight:800">LS</div>
+        <div class="marca-texto">
+          <b>The School of The Lost Souls</b>
+          <span>I.E. Sol de Oriente · Permanencia escolar</span>
+        </div>
+      </a>
+      <div class="fila" style="margin-left:auto;gap:8px"><label class="sr" for="piaRol">Rol</label><select id="piaRol" title="Cambia el rol para ver qué puede hacer cada uno" style="padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px"><option value="Administrador">Administrador</option><option value="Docente">Docente</option><option value="Estudiante">Estudiante</option></select><button class="btn pq" onclick="PIA.ayuda()" title="Cómo se usa esta aplicación">?</button></div>
+    </header>
+
+    <!-- ================= MENÚ ================= -->
+    <nav class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="game.html">Jugar</a>
+      <a href="panel-permanencia.html">Panel de permanencia</a>
+    </nav>
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="contenido">
+      <section class="portada anim">
+        <h1>Jugar</h1>
+        <p>Cada decisión cuenta. Elige bien.</p>
+        <div class="sellos">
+          <span class="sello">I.E. Sol de Oriente</span>
+          <span class="sello">Grado 10°</span>
+          <span class="sello">Permanencia</span>
+        </div>
+      </section>
+
+<div class="rejilla g2">  <div class="escena" id="escena"><p>Cargando la historia…</p></div>  <div class="tarjeta"><h3>Tu marcador</h3>    <div class="cifra" style="margin:10px 0"><strong id="puntos">0</strong><b>Puntos de permanencia</b><span id="progreso">escena 1 de 5</span></div>    <div id="decisiones" style="margin-top:10px"></div>    <button class="btn pq" style="margin-top:12px" onclick="reiniciarJuego()">Volver a empezar</button>  </div></div>
+    </main>
+
+    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->
+    <nav class="barra-movil" aria-label="Navegación principal en móvil">
+      <a href="index.html"><i aria-hidden="true">⌂</i><span>Inicio</span></a>
+      <a href="game.html"><i aria-hidden="true">•</i><span>Jugar</span></a>
+      <a href="panel-permanencia.html"><i aria-hidden="true">•</i><span>Panel de permanencia</span></a>
+    </nav>
+
+    <!-- ================= PIE ================= -->
+    <footer class="pie">
+      
+      <div><b>The School of The Lost Souls</b> — Nadie debería perderse en el camino</div>
+      <div class="equipo">
+        <span>Estudiante líder de producto</span>
+        <span>Estudiante de diseño</span>
+        <span>Estudiante de lógica</span>
+        <span>Estudiante de investigación</span>
+      </div>
+      <div class="linea">
+        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05
+      </div>
+      <div class="linea">
+        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
+      </div>
+      <div class="linea">
+        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="piaToast"></div>
+  <script src="js/almas.js?v=906869"></script>
+  <script src="js/juego.js?v=906869"></script>
+  <script src="js/panel.js?v=906869"></script>
+</body>
+</html>

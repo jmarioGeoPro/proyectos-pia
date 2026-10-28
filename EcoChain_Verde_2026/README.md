@@ -1,79 +1,67 @@
-# EcoChain Verde — aplicación web
+# EcoChain Verde
 
-> Cada residuo cuenta, cada acción suma
+> Cada residuo cuenta, cada canje suma
 
-**Proyecto Integrador de Aula (PIA) · I.E. Sol de Oriente · Grado 11° · 2026**
+**Proyecto Integrador de Aula (PIA) 2026** · I.E. Lola González · Grado 10° · Grupo 10°05
 Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
 
 ---
 
 ## Qué es
 
-Sistema de Gestión Inteligente de Residuos con Tecnología Blockchain
+Registro de residuos reciclables con su peso, canje por puntos y trazabilidad del proceso, como una cadena que no se rompe.
 
-## Cuenta de prueba
+**Problema que resuelve:** El colegio recicla a medias: nadie pesa lo que se recoge ni sabe qué pasó con lo entregado.
 
-Para revisarla **no hace falta registrarse**: la aplicación crea sola una cuenta la primera vez que se abre.
+**Estilo visual:** 20-eco · menú top
 
-| | |
-|---|---|
-| **Correo** | `pruebas@pasculia.edu.co` |
-| **Contraseña** | `PascualBravo2026` |
-| **Rol** | Docente |
+## Cómo abrirlo
 
-> Es la **misma cuenta en las 33 aplicaciones**, para que quien las revise no tenga que memorizar nada.
-> También se puede crear una cuenta propia con el botón *Crear una cuenta*.
+1. Abre **`index.html`** con doble clic (no necesita servidor ni internet).
+2. La primera vez se cargan solos los **datos de ejemplo** (15 registros).
+3. Navega con el menú de arriba.
 
-## Cómo se usa
+Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar.
+Para volver a los datos de ejemplo: abre la consola del navegador y escribe `PIA.reiniciar()`.
 
-1. Abre el archivo **index.html** con doble clic (o sírvelo con un servidor local).
-2. Entra con la **cuenta de prueba** de arriba, o pulsa **Crear una cuenta** y regístrate.
-3. Elige un módulo en el menú de la izquierda.
-4. Llena el formulario y pulsa **Guardar**. El registro aparece en la tabla.
-5. Puedes **buscar**, **editar**, **eliminar** y **exportar** a Excel.
+## Las páginas
 
-Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar la página.
+- **Inicio** (`index.html`) — Portada de la cadena de residuos.
+- **Residuos** (`residuos.html`) — Registro de residuos con peso y trazabilidad.
+- **Canje** (`canje.html`) — Catálogo de premios y canje por puntos.
+- **Panel** (`panel.html`) — Panel con la cadena completa y sus totales.
 
-## Módulos
-
-- **👤 Usuarios** — 5 campos
-- **♻️ Residuos y reciclaje** — 5 campos
-- **♻️ Indicadores de reciclaje y compararlos entre** — 5 campos
-- **📝 Publicaciones** — 5 campos
-- **📋 Registros** — 5 campos
-- **🎬 Catálogo de contenidos** — 5 campos
-- **♻️ Sistema debe integrar a la comunidad** — 5 campos
-- **♻️ Reportes de sostenibilidad para la institución** — 5 campos
-
-## Archivos
+## Los archivos
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | La estructura: las pantallas y sus contenedores. |
-| `css/estilos.css` | El diseño. Arriba están las variables de color: cambiar una cambia todo. |
-| `js/almacen.js` | Los datos: guardar, listar, editar y eliminar. |
-| `js/modulos.js` | Los módulos y sus campos. Aquí se agrega un campo nuevo. |
-| `js/app.js` | La lógica: menú, formularios, tablas y búsqueda. |
-| `logo.png` | El logo del proyecto. |
+| `index.html` | Portada de la cadena.
+| `residuos.html` | Registro de residuos.
+| `canje.html` | Premios y canjes.
+| `panel.html` | Trazabilidad.
+| `construccion.html` | Archivo del proyecto.
+| `css/estilos.css` | Archivo del proyecto.
+| `js/eco.js` | Pesos, puntos y canjes.
+| `js/residuos.js` | Archivo del proyecto.
+| `js/canje.js` | Archivo del proyecto.
+| `js/panel.js` | Archivo del proyecto.
 
-## Cómo publicarlo en internet
+## El equipo
 
-**Opción 1 — GitHub Pages (gratis):**
-1. Crea un repositorio en GitHub.
-2. Sube todos los archivos.
-3. Ve a *Settings → Pages* y elige la rama principal.
-4. GitHub te da una dirección pública.
+| Integrante | Rol en el proyecto |
+|---|---|
+| Estudiante líder de producto | Product Owner · cadena de residuos |
+| Estudiante de diseño | UI/UX · identidad y trazabilidad |
+| Estudiante de lógica | Desarrollo JS · pesos, puntos y canje |
+| Estudiante de datos | Registro de residuos y reportes |
 
-**Opción 2 — Netlify (gratis):**
-1. Entra a netlify.com y elige *Add new site → Deploy manually*.
-2. Arrastra la carpeta del proyecto.
+**Docente articulador:** Jorge Mario Patiño Marín  
+**Docente par:** Alejo Villa A
 
-## Cómo continuarlo
+## Cómo continuar en grado 11°
 
-- Los **campos** de cada módulo están en `js/modulos.js`: es lo primero que se cambia.
-- Los **colores** están en las variables de `css/estilos.css`.
-- Para pasar de localStorage a una base de datos real, solo hay que cambiar `js/almacen.js`.
+En grado 11° conecta con la cooperativa de recicladores y certifica cada entrega con su cadena de custodia.
 
 ---
 
-Generado por **Project Manager PasculIA** a partir de los requisitos funcionales del proyecto.
+Generado con **Project Manager PasculIA** · datos de ejemplo incluidos.

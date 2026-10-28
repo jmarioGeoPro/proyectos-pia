@@ -1,0 +1,1 @@
+/* los retos viven en el núcleo compartido */

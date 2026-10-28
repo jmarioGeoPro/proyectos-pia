@@ -1,79 +1,70 @@
-# EduViajes — aplicación web
+# EduViajes
 
-> Salir a aprender, sin perder el papeleo
+> Se aprende más cuando se sale a ver
 
-**Proyecto Integrador de Aula (PIA) · I.E. Sol de Oriente · Grado 10° · 2026**
+**Proyecto Integrador de Aula (PIA) 2026** · I.E. Lola González · Grado 10° · Grupo 10°05
 Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
 
 ---
 
 ## Qué es
 
-Gestión de Salidas Pedagógicas y Viajes Escolares
+Catálogo de salidas pedagógicas con su bitácora de aprendizaje, planeación docente y autorización del acudiente en un solo lugar.
 
-## Cuenta de prueba
+**Problema que resuelve:** Las salidas se organizan por WhatsApp, las autorizaciones se pierden en papel y al final nadie sabe qué aprendieron los estudiantes.
 
-Para revisarla **no hace falta registrarse**: la aplicación crea sola una cuenta la primera vez que se abre.
+**Estilo visual:** 13-eduviajes · menú top
 
-| | |
-|---|---|
-| **Correo** | `pruebas@pasculia.edu.co` |
-| **Contraseña** | `PascualBravo2026` |
-| **Rol** | Docente |
+## Cómo abrirlo
 
-> Es la **misma cuenta en las 33 aplicaciones**, para que quien las revise no tenga que memorizar nada.
-> También se puede crear una cuenta propia con el botón *Crear una cuenta*.
+1. Abre **`index.html`** con doble clic (no necesita servidor ni internet).
+2. La primera vez se cargan solos los **datos de ejemplo** (20 registros).
+3. Navega con el menú de arriba.
 
-## Cómo se usa
+Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar.
+Para volver a los datos de ejemplo: abre la consola del navegador y escribe `PIA.reiniciar()`.
 
-1. Abre el archivo **index.html** con doble clic (o sírvelo con un servidor local).
-2. Entra con la **cuenta de prueba** de arriba, o pulsa **Crear una cuenta** y regístrate.
-3. Elige un módulo en el menú de la izquierda.
-4. Llena el formulario y pulsa **Guardar**. El registro aparece en la tabla.
-5. Puedes **buscar**, **editar**, **eliminar** y **exportar** a Excel.
+## Las páginas
 
-Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar la página.
+- **Inicio** (`index.html`) — Portada: próximas salidas y acceso a los cuatro espacios.
+- **Destinos** (`catalogo-destinos.html`) — Catálogo de salidas con su área, grado, costo y disponibilidad.
+- **Bitácora** (`bitacora-kolb.html`) — La bitácora de aprendizaje con las cuatro etapas del ciclo de Kolb.
+- **Planificador** (`planificador-docente.html`) — Programación de salidas: fecha, curso, cupos y transporte.
+- **Acudiente** (`acudiente.html`) — Autorización de salidas por parte del acudiente, con su estado.
 
-## Módulos
-
-- **👤 Usuarios** — 5 campos
-- **📋 Registros** — 5 campos
-- **📝 Publicaciones** — 5 campos
-- **🗓️ Actividades y salidas** — 6 campos
-- **📝 Publicar reseñas y calificaciones de los** — 5 campos
-- **📋 Información de interés sobre cada destino** — 5 campos
-- **🗓️ A los directivos programar y distribuir** — 6 campos
-- **🗓️ Sistema debe llevar el registro de** — 6 campos
-
-## Archivos
+## Los archivos
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | La estructura: las pantallas y sus contenedores. |
-| `css/estilos.css` | El diseño. Arriba están las variables de color: cambiar una cambia todo. |
-| `js/almacen.js` | Los datos: guardar, listar, editar y eliminar. |
-| `js/modulos.js` | Los módulos y sus campos. Aquí se agrega un campo nuevo. |
-| `js/app.js` | La lógica: menú, formularios, tablas y búsqueda. |
-| `logo.png` | El logo del proyecto. |
+| `index.html` | Portada y próximas salidas.
+| `catalogo-destinos.html` | Destinos filtrables.
+| `bitacora-kolb.html` | Bitácora del ciclo de Kolb.
+| `planificador-docente.html` | Programación de salidas.
+| `acudiente.html` | Autorizaciones.
+| `construccion.html` | Archivo del proyecto.
+| `css/estilos.css` | Archivo del proyecto.
+| `js/viajes.js` | Bitácora, filtros y tablas.
+| `js/destinos.js` | Archivo del proyecto.
+| `js/bitacora.js` | Archivo del proyecto.
+| `js/planificador.js` | Archivo del proyecto.
+| `js/acudiente.js` | Archivo del proyecto.
 
-## Cómo publicarlo en internet
+## El equipo
 
-**Opción 1 — GitHub Pages (gratis):**
-1. Crea un repositorio en GitHub.
-2. Sube todos los archivos.
-3. Ve a *Settings → Pages* y elige la rama principal.
-4. GitHub te da una dirección pública.
+| Integrante | Rol en el proyecto |
+|---|---|
+| Estudiante líder de producto | Product Owner · alcance y alianza con docentes |
+| Estudiante de diseño | UI/UX · identidad, mapa y accesibilidad |
+| Estudiante de lógica | Desarrollo JS · bitácora y autorizaciones |
+| Estudiante de contenidos | Guías de campo y ciclo de Kolb |
 
-**Opción 2 — Netlify (gratis):**
-1. Entra a netlify.com y elige *Add new site → Deploy manually*.
-2. Arrastra la carpeta del proyecto.
+**Docente articulador:** Jorge Mario Patiño Marín  
+**Docente par:** Alejo Villa A
 
-## Cómo continuarlo
+## Cómo continuar en grado 11°
 
-- Los **campos** de cada módulo están en `js/modulos.js`: es lo primero que se cambia.
-- Los **colores** están en las variables de `css/estilos.css`.
-- Para pasar de localStorage a una base de datos real, solo hay que cambiar `js/almacen.js`.
+En grado 11° suma mapa interactivo, presupuesto por familia y registro fotográfico de cada salida.
 
 ---
 
-Generado por **Project Manager PasculIA** a partir de los requisitos funcionales del proyecto.
+Generado con **Project Manager PasculIA** · datos de ejemplo incluidos.

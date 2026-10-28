@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vista de un solo archivo</title>
+<!--
+  VERSION DE UN SOLO ARCHIVO
+  ------------------------------------------------------------------------
+  La misma aplicación, con el CSS, el JavaScript y las imágenes adentro.
+  Sirve para mostrarla con doble clic, sin servidor y sin internet.
+  La versión para entregar y trabajar en VS Code es la de carpetas separadas.
+  ------------------------------------------------------------------------
+-->
+<style>body{margin:0;font-family:Segoe UI,system-ui,sans-serif}.pia-barra{display:flex;align-items:center;gap:6px;padding:9px 14px;background:#171a22;border-bottom:1px solid #2a2e3a;flex-wrap:wrap;position:sticky;top:0;z-index:99}.pia-barra button{border:1px solid #2f3446;background:#1d2130;color:#cfd3e0;border-radius:8px;padding:6px 13px;font-size:12.5px;cursor:pointer;font-family:inherit}.pia-barra button:hover{background:#252b3d}.pia-barra button.activo{background:#3b82f6;border-color:#3b82f6;color:#fff}.pia-barra .aviso{margin-left:auto;font-size:11px;color:#8b93a7}#pantalla{min-height:calc(100vh - 50px)}.pia-pagina .barra-sup { position: static !important; }.pia-pagina .menu { position: static !important; transform: none !important; left: auto !important; width: 100% !important; max-width: 100% !important; box-shadow: none !important; }.pia-pagina .armazon { padding-top: 0 !important; padding-bottom: 0 !important; }.pia-pagina .pie { padding-bottom: 24px !important; }#piaEjemplos { display: none !important; }</style>
+</head>
+<body>
+<div class="pia-barra" id="barra"></div>
+<div id="pantalla"></div>
+<script id="piaCss" type="text/plain">/* ==========================================================================
+   Mindsport — hoja de estilos
+   PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+   --------------------------------------------------------------------------
+   Estilo: 17-mindsport
+   Este archivo se arma con dos partes:
+     1. el carácter del proyecto (colores, tipografía, formas, detalles)
+     2. la base estructural que comparten los nueve proyectos
+   Cambiando las variables de :root cambia todo el aspecto sin tocar el resto.
+   ========================================================================== */
+/* ==========================================================================
+   BASE ESTRUCTURAL — la comparten los nueve proyectos.
+   Aquí va solo la ESTRUCTURA y los componentes. Los colores, la tipografía,
+   las formas y el menú los pone el tema de cada proyecto.
+   ========================================================================== */
+
+/* ---- 1. reinicio ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { min-height: 100vh; font-family: var(--fuente); color: var(--tinta); background: var(--fondo); line-height: 1.6; }
+img { max-width: 100%; display: block; }
+a { color: var(--acento-texto, var(--primario)); text-decoration: none; }
+button, input, select, textarea { font-family: inherit; font-size: inherit; }
+.oculto { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ---- 2. armazón: cuatro formas de organizar la página ---- */
+/* Cada proyecto usa una: barra arriba, menú lateral, pestañas abajo o mixto. */
+.armazon { display: grid; min-height: 100vh; grid-template-columns: 1fr; }
+
+/* (a) barra arriba: el menú va debajo de la cabecera */
+.layout-top .armazon {
+  grid-template-areas: 'cab' 'menu' 'con' 'pie';
+  grid-template-rows: auto auto 1fr auto;
+}
+
+/* (b) menú lateral: una columna fija a la izquierda */
+.layout-sidebar .armazon {
+  grid-template-areas: 'cab cab' 'menu con' 'pie pie';
+  grid-template-columns: var(--ancho-menu) 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* (c) pestañas abajo: como una aplicación de teléfono */
+.layout-tabs .armazon {
+  grid-template-areas: 'cab' 'con' 'tabs';
+  grid-template-rows: auto 1fr auto;
+}
+
+.barra-sup { grid-area: cab; }
+.menu { grid-area: menu; }
+.contenido { grid-area: con; }
+.pie { grid-area: pie; }
+.menu-tabs { grid-area: tabs; }
+
+/* ---- 3. barra superior ---- */
+.barra-sup { display: flex; align-items: center; gap: 14px; padding: 10px 20px; flex-wrap: wrap; position: sticky; top: 0; z-index: 60; background: var(--barra-fondo); color: var(--barra-tinta); backdrop-filter: blur(8px); }
+.layout-sidebar .barra-sup, .layout-split .barra-sup { grid-column: 1 / -1; }
+.marca { display: flex; align-items: center; gap: 12px; color: inherit; }
+.marca-logo { width: 46px; height: 46px; object-fit: contain; border-radius: var(--radio-logo); background: var(--logo-fondo); padding: 4px; flex: none; }
+.marca-texto b { display: block; font-size: 15.5px; line-height: 1.15; letter-spacing: var(--letra-titulo); }
+.marca-texto span { font-size: 11px; opacity: .72; }
+
+/* ---- 4. menú ---- */
+/* (a) y (c): barra horizontal bajo la cabecera */
+.layout-top .menu { display: flex; gap: 4px; flex-wrap: wrap; padding: 8px clamp(14px, 3vw, 34px); background: var(--barra-fondo); border-bottom: 1px solid var(--linea); }
+
+/* (b) menú lateral: columna completa */
+.layout-sidebar .menu { display: flex; flex-direction: column; gap: 3px; padding: 16px 12px; background: var(--superficie); border-right: 1px solid var(--linea); }
+.menu a { padding: 8px 14px; border-radius: var(--radio-boton); font-size: var(--menu-tam); font-weight: var(--menu-peso); color: inherit; opacity: .74; white-space: nowrap; transition: background .18s, opacity .18s, transform .18s; }
+.menu a:hover { opacity: 1; background: var(--menu-hover); }
+.menu a.activo { opacity: 1; background: var(--menu-activo-fondo); color: var(--menu-activo-tinta); box-shadow: var(--menu-activo-sombra); }
+
+/* el menú lateral ocupa todo el ancho de su columna */
+.layout-sidebar .menu a { width: 100%; }
+
+/* menú inferior tipo aplicación */
+.menu-tabs { position: sticky; bottom: 0; z-index: 60; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); background: var(--barra-fondo); border-top: 1px solid var(--linea); }
+.menu-tabs a { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 7px 4px; border-radius: 12px; font-size: 10.5px; color: var(--barra-tinta); opacity: .6; }
+.menu-tabs a b { font-size: 17px; font-weight: 400; line-height: 1; }
+.menu-tabs a.activo { opacity: 1; background: var(--menu-activo-fondo); color: var(--menu-activo-tinta); }
+
+/* ---- 5. contenido ---- */
+.contenido { padding: var(--espacio) clamp(14px, 3vw, 34px) calc(var(--espacio) * 2); max-width: var(--ancho-contenido); width: 100%; margin: 0 auto; }
+.volanta { display: flex; align-items: center; gap: 10px; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--acento-texto); margin-bottom: 8px; }
+.volanta::before { content: ''; width: 26px; height: 2px; background: currentColor; border-radius: 2px; }
+
+/* ---- 6. pie ---- */
+.pie { padding: 26px 20px; text-align: center; font-size: 12px; color: var(--pie-tinta); background: var(--pie-fondo); border-top: 1px solid var(--linea); }
+.pie .equipo { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.pie .equipo span { background: var(--chip-fondo); padding: 3px 11px; border-radius: 20px; font-size: 11px; }
+.pie .linea { margin-top: 5px; opacity: .82; }
+
+/* ---- 7. tarjetas ---- */
+.tarjeta { background: var(--superficie); border: var(--borde-tarjeta); border-radius: var(--radio-tarjeta); box-shadow: var(--sombra); padding: clamp(16px, 2vw, 24px); margin-bottom: 18px; position: relative; transition: box-shadow .2s, transform .2s; }
+.tarjeta:hover { box-shadow: var(--sombra-alta); }
+.tarjeta > h2 { font-size: var(--h2); margin-bottom: 4px; letter-spacing: var(--letra-titulo); }
+.tarjeta > h2 + .ayuda { margin-top: 0; }
+.tarjeta .ayuda { font-size: 13.5px; color: var(--gris); margin-bottom: 16px; }
+.tarjeta h3 { font-size: 14.5px; margin: 18px 0 8px; }
+.tarjeta.destacada { border: var(--borde-destacado); }
+
+/* ---- 8. rejillas ---- */
+.rejilla { display: grid; gap: var(--hueco); }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.g3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
+.g4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+
+/* ---- 9. formularios ---- */
+.campo { display: flex; flex-direction: column; gap: 5px; margin-bottom: 13px; }
+.campo label { font-size: 12.5px; font-weight: var(--label-peso); color: var(--label-color); letter-spacing: .01em; }
+.campo label .req { color: var(--peligro); }
+.campo input, .campo select, .campo textarea { width: 100%; border: var(--borde-campo); border-radius: var(--radio-campo); padding: 10px 13px; background: var(--campo-fondo); color: var(--tinta); transition: border-color .16s, box-shadow .16s; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--primario); box-shadow: 0 0 0 3px var(--foco); }
+.campo textarea { min-height: 92px; resize: vertical; }
+.campo .pista { font-size: 11.5px; color: var(--gris); }
+
+/* ---- 10. botones ---- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: var(--borde-boton); background: var(--boton-fondo); color: var(--boton-tinta); border-radius: var(--radio-boton); padding: 10px 18px; font-size: 13.5px; font-weight: var(--boton-peso); cursor: pointer; text-decoration: none; transition: transform .14s, box-shadow .14s, background .14s, border-color .14s; letter-spacing: var(--letra-boton); }
+.btn:hover { transform: var(--boton-hover); box-shadow: var(--sombra); }
+.btn:active { transform: translateY(0) scale(.985); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.btn.p { background: var(--primario); border-color: var(--primario); color: var(--primario-tinta); }
+.btn.a { background: var(--acento); border-color: var(--acento); color: var(--acento-tinta); }
+.btn.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
+.btn.pel { background: var(--peligro); border-color: var(--peligro); color: #fff; }
+.btn.fantasma { background: transparent; border-color: var(--linea-fuerte); }
+.btn.pq { padding: 5px 11px; font-size: 12px; }
+.btn.gr { width: 100%; }
+
+/* ---- 11. tablas ---- */
+.tabla-envoltura { overflow-x: auto; border-radius: var(--radio-tabla); border: 1px solid var(--linea); }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--superficie); }
+th, td { padding: 10px 13px; text-align: left; border-bottom: 1px solid var(--linea); vertical-align: top; }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--th-tinta); background: var(--th-fondo); font-weight: 700; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+tbody tr { transition: background .12s; }
+tbody tr:hover td { background: var(--fila-hover); }
+td .acciones { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* ---- 12. etiquetas de estado ---- */
+.badge { display: inline-block; padding: 2px 10px; border-radius: var(--radio-badge); font-size: 11.5px; font-weight: 700; white-space: nowrap; letter-spacing: .01em; }
+.badge.ok, .badge.ok { background: var(--ok-suave); color: var(--ok-texto); }
+.badge.warn { background: var(--alerta-suave); color: var(--alerta-texto); }
+.badge.mal { background: var(--peligro-suave); color: var(--peligro-texto); }
+.badge.info { background: var(--info-suave); color: var(--info-texto); }
+.badge.neutro { background: var(--neutro-suave); color: var(--gris); }
+
+/* ---- 13. avisos ---- */
+.aviso { border-left: var(--aviso-grosor) solid var(--info); background: var(--info-suave); padding: 12px 16px; border-radius: 0 var(--radio-campo) var(--radio-campo) 0; font-size: 13.5px; margin-bottom: 15px; }
+.aviso.ok { border-color: var(--ok); background: var(--ok-suave); color: var(--ok-texto); }
+.aviso.mal { border-color: var(--peligro); background: var(--peligro-suave); color: var(--peligro-texto); }
+.aviso.warn { border-color: var(--alerta); background: var(--alerta-suave); color: var(--alerta-texto); }
+
+/* ---- 14. indicadores ---- */
+.indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: var(--hueco); margin-bottom: 20px; }
+.indicador { background: var(--superficie); border-radius: var(--radio-tarjeta); padding: 16px 18px; border: var(--borde-tarjeta); box-shadow: var(--sombra); position: relative; overflow: hidden; }
+.indicador b { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .09em; color: var(--gris); font-weight: 700; }
+.indicador strong { display: block; font-size: clamp(24px, 3vw, 32px); color: var(--primario); line-height: 1.15; letter-spacing: -0.02em; }
+.indicador span { font-size: 11.5px; color: var(--gris); }
+
+/* ---- 15. aviso flotante ---- */
+.toast { position: fixed; right: 20px; bottom: 20px; z-index: 900; background: var(--ok); color: #fff; padding: 13px 20px; border-radius: var(--radio-toast); font-size: 13.5px; box-shadow: var(--sombra-alta); max-width: min(380px, calc(100vw - 40px)); animation: toastEntra .26s cubic-bezier(.2,.9,.3,1.2); }
+.toast.mal { background: var(--peligro); }
+.toast.warn { background: var(--alerta); }
+@keyframes toastEntra { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
+
+/* ---- 16. ventana ---- */
+.modal-fondo { position: fixed; inset: 0; background: rgba(8, 12, 22, .55); z-index: 1000; display: flex; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow-y: auto; backdrop-filter: blur(3px); animation: funde .18s; }
+@keyframes funde { from { opacity: 0; } to { opacity: 1; } }
+.modal { background: var(--superficie); border-radius: var(--radio-modal); width: 100%; max-width: 640px; box-shadow: var(--sombra-alta); animation: sube .22s cubic-bezier(.2,.9,.3,1.1); }
+@keyframes sube { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: none; } }
+.modal .cabeza { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--linea); }
+.modal .cabeza h3 { font-size: 16px; margin: 0; }
+.modal .cuerpo { padding: 18px 20px; max-height: 66vh; overflow-y: auto; }
+.modal .pie2 { display: flex; justify-content: flex-end; gap: 9px; padding: 14px 20px; border-top: 1px solid var(--linea); background: var(--fondo); border-radius: 0 0 var(--radio-modal) var(--radio-modal); }
+.cerrar { border: 0; background: transparent; font-size: 16px; cursor: pointer; color: var(--gris); padding: 5px 9px; border-radius: 8px; }
+.cerrar:hover { background: var(--fila-hover); }
+
+/* ---- 17. barra de progreso ---- */
+.barra { height: 9px; background: var(--linea); border-radius: 20px; overflow: hidden; }
+.barra i { display: block; height: 100%; background: var(--primario); border-radius: 20px; transition: width .5s cubic-bezier(.3,.9,.3,1); }
+
+/* ---- 18. utilidades ---- */
+.fila { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.derecha { margin-left: auto; }
+.centro { text-align: center; }
+.gris { color: var(--gris); }
+.pequeno { font-size: 12px; }
+.mono { font-family: var(--fuente-mono); letter-spacing: .04em; }
+.vacio { text-align: center; color: var(--gris); padding: 30px 20px; font-size: 13.5px; }
+.vacio::before { content: '○'; display: block; font-size: 30px; opacity: .4; margin-bottom: 6px; }
+.oculto-impresion { }
+
+/* ---- 18b. bloque de pseudocódigo ---- */
+.codigo {
+  background: var(--superficie); border: var(--borde-tarjeta); border-radius: var(--radio-tarjeta);
+  padding: 16px 18px; overflow-x: auto; margin: 0;
+  font-family: var(--fuente-mono); font-size: 12.5px; line-height: 1.7;
+  white-space: pre; color: var(--tinta); tab-size: 2;
+}
+
+/* ---- 19. animaciones de entrada ---- */
+@keyframes aparece { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.anim { animation: aparece .34s ease-out both; }
+
+/* ---- 20. adaptación ---- */
+@media (max-width: 900px) {
+  /* en pantallas pequeñas el menú lateral se vuelve una barra arriba */
+  .layout-sidebar .armazon { grid-template-areas: 'cab' 'menu' 'con' 'pie'; grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; }
+  .layout-sidebar .menu { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--linea); padding: 8px 12px; }
+  .layout-sidebar .menu a { width: auto; padding: 8px 13px; white-space: nowrap; }
+}
+@media (max-width: 640px) {
+  .contenido { padding: 16px 13px 46px; }
+  .barra-sup { padding: 9px 13px; gap: 9px; }
+  .marca-logo { width: 38px; height: 38px; }
+  .marca-texto b { font-size: 14px; }
+  .menu { width: 100%; margin-left: 0; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 3px; }
+  .btn { width: 100%; }
+  .fila .btn { width: auto; }
+}
+@media print {
+  .barra-sup, .pie, .menu, .menu-tabs, .btn, .toast, .modal-fondo, .no-impresion { display: none !important; }
+  body { background: #fff; }
+  .tarjeta { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+}
+
+/* TEMA MINDSPORT — gestión deportiva · azul marino + verde césped */
+:root{
+  --fuente:'Segoe UI',system-ui,sans-serif; --fuente-mono:'Consolas',monospace;
+  --tinta:#101d2e; --fondo:#eef3f8; --superficie:#ffffff; --gris:#5c6d82;
+  --linea:#d9e3ee; --linea-fuerte:#bccbdd;
+  --primario:#152a45; --primario-tinta:#fff; --acento:#16a34a; --acento-tinta:#052e16; --acento-texto:#15803d;
+  --ok:#15803d; --ok-suave:#dcfce7; --ok-texto:#14532d;
+  --alerta:#b45309; --alerta-suave:#fef3c7; --alerta-texto:#78350f;
+  --peligro:#b91c1c; --peligro-suave:#fee2e2; --peligro-texto:#7f1d1d;
+  --info:#152a45; --info-suave:#e3ebf4; --info-texto:#1e3a5f; --neutro-suave:#e9eff6;
+  --barra-fondo:#fff; --barra-tinta:#152a45;
+  --menu-hover:#e9eff6; --menu-activo-fondo:#16a34a; --menu-activo-tinta:#fff; --menu-activo-sombra:0 5px 16px rgba(22,163,74,.32);
+  --pie-fondo:#101d2e; --pie-tinta:#bccbdd; --chip-fondo:rgba(255,255,255,.1);
+  --radio-tarjeta:12px; --radio-boton:8px; --radio-campo:10px; --radio-modal:14px; --radio-tabla:12px;
+  --radio-badge:999px; --radio-toast:8px; --radio-logo:10px;
+  --sombra:0 2px 12px rgba(16,29,46,.07); --sombra-alta:0 18px 42px rgba(16,29,46,.18);
+  --borde-tarjeta:1px solid #d9e3ee; --borde-destacado:2px solid #16a34a; --borde-campo:1px solid #c9d7e6;
+  --borde-boton:1px solid #d9e3ee; --campo-fondo:#fbfdff;
+  --th-fondo:#eef3f8; --th-tinta:#5c6d82; --fila-hover:#f7fafc; --foco:rgba(22,163,74,.28); --logo-fondo:#fff;
+  --boton-fondo:#fff; --boton-tinta:#152a45; --boton-peso:700; --boton-hover:translateY(-1px); --letra-boton:.02em;
+  --h2:18px; --letra-titulo:-.01em; --menu-tam:13px; --menu-peso:700;
+  --label-peso:700; --label-color:#2c3f56; --espacio:26px; --hueco:16px;
+  --ancho-contenido:1140px; --ancho-menu:242px; --aviso-grosor:4px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{background:#eef3f8;background-image:linear-gradient(180deg,rgba(22,163,74,.07),transparent 280px);color:#101d2e}
+.marca-logo{width:46px;height:46px;border-radius:10px;object-fit:contain;background:#fff;box-shadow:0 2px 9px rgba(21,42,69,.18)}
+.marca-texto b{color:#152a45;font-size:16.5px;display:block;line-height:1.15}
+.marca-texto span{color:#6b7d92;font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+.layout-top .menu{display:flex;justify-content:center;gap:3px;flex-wrap:wrap;padding:8px clamp(14px,3vw,30px);background:#fff;border-bottom:1px solid #d9e3ee}
+.layout-top .menu a{color:#5c6d82;font-size:13px;font-weight:700;padding:9px 17px;border-radius:999px;transition:background .16s,color .16s,transform .12s}
+.layout-top .menu a:hover{background:#e9eff6;color:#152a45}
+.layout-top .menu a:active{transform:scale(.97)}
+.layout-top .menu a.activo,.layout-top .menu a.activo:hover{background:#16a34a!important;color:#fff!important;box-shadow:0 5px 16px rgba(22,163,74,.32)}
+.portada{background:linear-gradient(140deg,#152a45 0%,#1e3a5f 58%,#16a34a 150%);color:#fff;border-radius:14px;padding:clamp(24px,3.6vw,40px);margin-bottom:22px;position:relative;overflow:hidden}
+.portada::after{content:'⚽';position:absolute;right:26px;bottom:-18px;font-size:110px;opacity:.14;line-height:1}
+.portada h1{font-size:clamp(26px,4vw,40px);line-height:1.08;margin-bottom:9px;letter-spacing:-.02em;position:relative}
+.portada p{color:#c4d3e3;max-width:58ch;position:relative}
+.portada .sellos{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px;position:relative}
+.portada .sello{background:rgba(22,163,74,.22);border:1px solid rgba(22,163,74,.5);padding:5px 14px;border-radius:999px;font-size:11.5px;font-weight:700;color:#bbf7d0}
+.servicio{background:#fff;border:1px solid #d9e3ee;border-radius:12px;padding:20px 18px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.servicio:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(21,42,69,.13);border-color:#bccbdd}
+.servicio .ico{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font-size:20px;margin-bottom:11px;background:#e9eff6}
+.servicio h3{color:#152a45;font-size:15px;margin-bottom:4px}
+.servicio p{color:#5c6d82;font-size:13px}
+.cifra{text-align:center;padding:15px 10px;background:#fff;border:1px solid #d9e3ee;border-radius:12px;border-bottom:3px solid #16a34a}
+.cifra strong{display:block;font-size:clamp(26px,3.8vw,40px);color:#152a45;letter-spacing:-.03em;line-height:1}
+.cifra b{display:block;color:#15803d;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;margin-top:7px}
+.cifra span{color:#6b7d92;font-size:12px}
+.persona{text-align:center}
+.persona .foto{width:62px;height:62px;border-radius:50%;margin:0 auto 9px;display:grid;place-items:center;background:#152a45;color:#86efac;font-size:19px;font-weight:800}
+.persona b{display:block;color:#152a45;font-size:13px}
+.persona span{color:#6b7d92;font-size:11.5px}
+.aviso{background:#e9eff6;border-left:4px solid #16a34a;padding:11px 14px;border-radius:8px;font-size:13.5px;margin-bottom:14px}
+.codigo{background:#fbfdff;border:1px solid #d9e3ee;border-radius:10px;padding:16px 18px;overflow-x:auto;font-family:var(--fuente-mono);font-size:12.5px;line-height:1.7;white-space:pre;color:#101d2e}
+.pie{background:#101d2e;color:#bccbdd;padding-top:26px}
+.pie b{color:#fff}
+.pie .equipo span{background:rgba(255,255,255,.1);color:#d6e3f0;border-radius:999px;padding:4px 11px;font-size:11.5px}
+.pie .linea{color:#8ea3ba;font-size:11.5px}
+.pie a{color:#86efac}
+@media(max-width:820px){.layout-top .menu{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}.layout-top .menu a{white-space:nowrap;padding:8px 13px}.portada{border-radius:10px}}
+
+
+
+</script>
+<script id="piaJs" type="text/plain">/* ==========================================================================
+   NÚCLEO COMÚN — viaja igual en los nueve proyectos del Lola
+   --------------------------------------------------------------------------
+   Aquí está todo lo que se repite: la bóveda de datos, las utilidades y los
+   avisos en pantalla. Los demás archivos usan este núcleo y solo se encargan
+   de su propia función.
+
+   La bóveda guarda en localStorage (el almacén del navegador), así los datos
+   no se pierden al cerrar la página y no hace falta un servidor.
+   ========================================================================== */
+
+'use strict';
+
+/* El nombre con el que este proyecto guarda sus datos. */
+var CLAVE_DATOS = "pia_mindsport";
+
+/* Los datos de ejemplo. Se cargan solo la primera vez, cuando no hay nada.
+   Son los mismos que están en la carpeta data/ del proyecto. */
+var SEMILLA = {
+  "equipos": [
+    {
+      "id": 1,
+      "nombre": "Los Tigres 10°01",
+      "deporte": "Fútbol",
+      "capitan": "Juan D. Ospina",
+      "jugadores": 11,
+      "puntos": 9,
+      "estado": "Activo"
+    },
+    {
+      "id": 2,
+      "nombre": "Las Águilas 10°02",
+      "deporte": "Fútbol",
+      "capitan": "Ana S. Restrepo",
+      "jugadores": 11,
+      "puntos": 7,
+      "estado": "Activo"
+    },
+    {
+      "id": 3,
+      "nombre": "Los Cóndores 10°03",
+      "deporte": "Baloncesto",
+      "capitan": "Samuel A. Mejía",
+      "jugadores": 10,
+      "puntos": 10,
+      "estado": "Activo"
+    },
+    {
+      "id": 4,
+      "nombre": "Las Panteras 11°01",
+      "deporte": "Baloncesto",
+      "capitan": "Valentina Cardona",
+      "jugadores": 10,
+      "puntos": 5,
+      "estado": "Eliminado"
+    },
+    {
+      "id": 5,
+      "nombre": "Los Delfines 11°02",
+      "deporte": "Voleibol",
+      "capitan": "María F. Ríos",
+      "jugadores": 12,
+      "puntos": 8,
+      "estado": "Activo"
+    }
+  ],
+  "partidos": [
+    {
+      "id": 1,
+      "local": "Los Tigres 10°01",
+      "visitante": "Las Águilas 10°02",
+      "deporte": "Fútbol",
+      "fecha": "2026-11-05",
+      "golesLocal": 3,
+      "golesVisitante": 1,
+      "estado": "Jugado"
+    },
+    {
+      "id": 2,
+      "local": "Los Cóndores 10°03",
+      "visitante": "Las Panteras 11°01",
+      "deporte": "Baloncesto",
+      "fecha": "2026-11-06",
+      "golesLocal": 48,
+      "golesVisitante": 39,
+      "estado": "Jugado"
+    },
+    {
+      "id": 3,
+      "local": "Los Delfines 11°02",
+      "visitante": "Los Tigres 10°01",
+      "deporte": "Voleibol",
+      "fecha": "2026-11-12",
+      "golesLocal": 2,
+      "golesVisitante": 3,
+      "estado": "Jugado"
+    },
+    {
+      "id": 4,
+      "local": "Las Águilas 10°02",
+      "visitante": "Los Cóndores 10°03",
+      "deporte": "Fútbol",
+      "fecha": "2026-11-19",
+      "golesLocal": 0,
+      "golesVisitante": 0,
+      "estado": "Programado"
+    },
+    {
+      "id": 5,
+      "local": "Las Panteras 11°01",
+      "visitante": "Los Delfines 11°02",
+      "deporte": "Baloncesto",
+      "fecha": "2026-11-26",
+      "golesLocal": 0,
+      "golesVisitante": 0,
+      "estado": "Programado"
+    }
+  ],
+  "planillas": []
+};
+
+var PIA = (function () {
+
+  /* ---------------- 1. LA BÓVEDA DE DATOS ---------------- */
+
+  /*
+   * Algunos navegadores no dejan usar localStorage (por ejemplo dentro de un
+   * marco sin origen propio). En ese caso se guarda en memoria: la aplicación
+   * funciona igual, solo que los datos no sobreviven al cerrar la página.
+   */
+  var MEMORIA = null;
+
+  function almacenDisponible() {
+    try { localStorage.setItem('__pia_prueba__', '1'); localStorage.removeItem('__pia_prueba__'); return true; }
+    catch (e) { return false; }
+  }
+  var HAY_ALMACEN = almacenDisponible();
+
+  /** Lee todo lo guardado. Si algo está dañado, empieza de cero. */
+  function leerTodo() {
+    if (!HAY_ALMACEN) return MEMORIA ? JSON.parse(JSON.stringify(MEMORIA)) : {};
+    try {
+      var crudo = localStorage.getItem(CLAVE_DATOS);
+      return crudo ? JSON.parse(crudo) : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  /** Guarda todo. */
+  function guardarTodo(todo) {
+    if (!HAY_ALMACEN) { MEMORIA = JSON.parse(JSON.stringify(todo)); return; }
+    try { localStorage.setItem(CLAVE_DATOS, JSON.stringify(todo)); }
+    catch (e) { MEMORIA = JSON.parse(JSON.stringify(todo)); HAY_ALMACEN = false; }
+  }
+
+  /** Carga la semilla si el proyecto todavía no tiene datos. */
+  function sembrar() {
+    var todo = leerTodo();
+    if (Object.keys(todo).length > 0) return;
+    guardarTodo(JSON.parse(JSON.stringify(SEMILLA)));
+  }
+
+  /** Devuelve todas las filas de una tabla. */
+  function listar(tabla) {
+    var todo = leerTodo();
+    return (todo[tabla] || []).slice();
+  }
+
+  /** Reemplaza todas las filas de una tabla. */
+  function guardar(tabla, filas) {
+    var todo = leerTodo();
+    todo[tabla] = filas;
+    guardarTodo(todo);
+  }
+
+  /** Inserta una fila y le pone un id que no se repite. */
+  function insertar(tabla, fila) {
+    var filas = listar(tabla);
+    var id = filas.reduce(function (m, f) { return Math.max(m, Number(f.id) || 0); }, 0) + 1;
+    var nueva = Object.assign({}, fila, { id: id, creado: new Date().toISOString() });
+    filas.push(nueva);
+    guardar(tabla, filas);
+    return nueva;
+  }
+
+  /** Actualiza una fila que ya existe. */
+  function actualizar(tabla, id, cambios) {
+    var filas = listar(tabla);
+    for (var i = 0; i < filas.length; i++) {
+      if (Number(filas[i].id) === Number(id)) {
+        filas[i] = Object.assign({}, filas[i], cambios, { id: Number(id) });
+        guardar(tabla, filas);
+        return filas[i];
+      }
+    }
+    return null;
+  }
+
+  /** Elimina una fila. */
+  function eliminar(tabla, id) {
+    guardar(tabla, listar(tabla).filter(function (f) { return Number(f.id) !== Number(id); }));
+  }
+
+  /** Cuenta las filas de una tabla. */
+  function contar(tabla) { return listar(tabla).length; }
+
+  /** Borra todo y vuelve a la semilla. */
+  function reiniciar() {
+    MEMORIA = null;
+    try { localStorage.removeItem(CLAVE_DATOS); } catch (e) {}
+    sembrar();
+  }
+
+  /* ---------------- 2. UTILIDADES ---------------- */
+
+  /** Evita que un texto se interprete como código (protege de inyecciones). */
+  function esc(t) {
+    return String(t == null ? '' : t)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  /** Quita tildes y mayúsculas, para comparar textos escritos a mano. */
+  function normalizar(t) {
+    return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  /** Fecha de hoy en formato aaaa-mm-dd (el que entienden los campos de fecha). */
+  function hoy() { return new Date().toISOString().slice(0, 10); }
+
+  /** Da formato a una fecha para mostrarla. */
+  function fecha(v) {
+    if (!v) return '—';
+    var d = new Date(String(v).length === 10 ? v + 'T00:00:00' : v);
+    if (isNaN(d.getTime())) return String(v);
+    return d.toLocaleDateString('es-CO', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+  /** Fecha y hora para mostrarla. */
+  function fechaHora(v) {
+    if (!v) return '—';
+    var d = new Date(v);
+    if (isNaN(d.getTime())) return String(v);
+    return d.toLocaleDateString('es-CO') + ' ' + d.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  /** Suma días hábiles (salta sábados y domingos). Se usa para los plazos. */
+  function sumarDiasHabiles(fechaBase, dias) {
+    var d = new Date(String(fechaBase).length === 10 ? fechaBase + 'T00:00:00' : fechaBase);
+    var sumados = 0;
+    while (sumados < dias) {
+      d.setDate(d.getDate() + 1);
+      var dia = d.getDay();
+      if (dia !== 0 && dia !== 6) sumados++;
+    }
+    return d.toISOString().slice(0, 10);
+  }
+
+  /** Cuenta las palabras de un texto. */
+  function palabras(t) { return String(t || '').trim().split(/\s+/).filter(Boolean).length; }
+
+  /** Da formato de pesos colombianos. */
+  function moneda(n) { return '$' + Number(n || 0).toLocaleString('es-CO'); }
+
+  /** Deja un número con los decimales indicados. */
+  function num(n, dec) { return Number(n || 0).toFixed(dec == null ? 1 : dec); }
+
+  /** Genera un código único con prefijo y consecutivo de 4 dígitos. */
+  function codigo(prefijo, tabla, campo) {
+    var filas = listar(tabla);
+    var mayor = 0;
+    filas.forEach(function (f) {
+      var m = String(f[campo] || '').match(/(\d+)$/);
+      if (m) mayor = Math.max(mayor, Number(m[1]));
+    });
+    return prefijo + String(mayor + 1).padStart(4, '0');
+  }
+
+  /** Devuelve el parámetro de la dirección (?codigo=TOC-2026-0001). */
+  function parametro(nombre) { return new URLSearchParams(window.location.search).get(nombre) || ''; }
+
+  /* ---------------- 3. AVISOS EN PANTALLA ---------------- */
+
+  /** Muestra un aviso flotante que desaparece solo. */
+  function toast(mensaje, tipo) {
+    var viejo = document.getElementById('piaToast');
+    if (viejo) viejo.remove();
+    var caja = document.createElement('div');
+    caja.id = 'piaToast';
+    caja.className = 'toast' + (tipo === 'mal' ? ' mal' : tipo === 'warn' ? ' warn' : '');
+    caja.textContent = mensaje;
+    document.body.appendChild(caja);
+    setTimeout(function () { caja.remove(); }, 4200);
+  }
+
+  /** Pinta una tabla a partir de los encabezados y las filas. */
+  function tabla(encabezados, filas, opciones) {
+    var o = opciones || {};
+    if (!filas.length) return '<div class="vacio">' + esc(o.vacio || 'Todavía no hay registros.') + '</div>';
+    var h = '<div class="tabla-envoltura"><table><thead><tr>';
+    h += encabezados.map(function (e) { return '<th>' + e + '</th>'; }).join('');
+    h += '</tr></thead><tbody>';
+    filas.forEach(function (f) {
+      h += '<tr>' + f.map(function (c) { return '<td>' + c + '</td>'; }).join('') + '</tr>';
+    });
+    return h + '</tbody></table></div>';
+  }
+
+  /** Abre una ventana con un contenido y unos botones. */
+  function modal(titulo, cuerpoHtml, botones) {
+    cerrarModal();
+    var fondo = document.createElement('div');
+    fondo.className = 'modal-fondo';
+    fondo.id = 'piaModal';
+    fondo.innerHTML = '<div class="modal"><div class="cabeza"><h3>' + esc(titulo) +
+      '</h3><button class="cerrar" onclick="PIA.cerrarModal()" title="Cerrar">✕</button></div>' +
+      '<div class="cuerpo">' + cuerpoHtml + '</div>' +
+      '<div class="pie2">' + (botones || '<button class="btn" onclick="PIA.cerrarModal()">Cerrar</button>') + '</div></div>';
+    document.body.appendChild(fondo);
+    fondo.addEventListener('click', function (ev) { if (ev.target === fondo) cerrarModal(); });
+    return fondo;
+  }
+
+  /** Cierra la ventana abierta. */
+  function cerrarModal() { var m = document.getElementById('piaModal'); if (m) m.remove(); }
+
+  /** Devuelve el valor de un campo del formulario. */
+  function valor(id) { var el = document.getElementById(id); return el ? String(el.value || '').trim() : ''; }
+
+  /** Pone un valor en un campo del formulario. */
+  function poner(id, v) { var el = document.getElementById(id); if (el) el.value = v == null ? '' : v; }
+
+  /** Marca la página actual en el menú. */
+  function marcarMenu() {
+    var actual = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.menu a, .menu-tabs a').forEach(function (a) {
+      var destino = (a.getAttribute('href') || '').split('?')[0].split('#')[0];
+      if (destino === actual) a.classList.add('activo');
+    });
+  }
+
+  /* ---------------- 4. ARRANQUE ---------------- */
+
+  /* Los datos quedan listos de inmediato, no cuando el navegador avise:
+     así cualquier otro archivo puede leerlos desde su primera línea. */
+  sembrar();
+
+  document.addEventListener('DOMContentLoaded', function () {
+    sembrar();
+    marcarMenu();
+  });
+
+  return {
+    clave: CLAVE_DATOS, semilla: SEMILLA,
+    leerTodo: leerTodo, guardarTodo: guardarTodo, sembrar: sembrar, reiniciar: reiniciar,
+    listar: listar, guardar: guardar, insertar: insertar, actualizar: actualizar, eliminar: eliminar, contar: contar,
+    esc: esc, normalizar: normalizar, hoy: hoy, fecha: fecha, fechaHora: fechaHora,
+    sumarDiasHabiles: sumarDiasHabiles, palabras: palabras, moneda: moneda, num: num, codigo: codigo,
+    parametro: parametro, toast: toast, tabla: tabla, modal: modal, cerrarModal: cerrarModal,
+    valor: valor, poner: poner, marcarMenu: marcarMenu
+  };
+})();
+
+
+/* la ficha oficial, tal como está en el documento PIA */
+PIA.ficha = null;
+PIA.equipo = [
+  {
+    "nombre": "Estudiante líder de producto",
+    "rol": "Product Owner · reglamento y fixture"
+  },
+  {
+    "nombre": "Estudiante de diseño",
+    "rol": "UI/UX · identidad y marcadores"
+  },
+  {
+    "nombre": "Estudiante de lógica",
+    "rol": "Desarrollo JS · tabla de posiciones"
+  },
+  {
+    "nombre": "Estudiante de datos",
+    "rol": "Planillas y estadísticas"
+  }
+];
+PIA.construccion = {
+  "algoritmo": [],
+  "tablas": []
+};
+
+/* ==========================================================================
+   EXTRAS COMUNES — Mindsport
+   --------------------------------------------------------------------------
+   Aquí van las funciones que hacen que la aplicación se sienta viva y que
+   no son propias de un solo proyecto: roles, exportar, imprimir, ordenar,
+   buscar, confirmaciones elegantes, deshacer, atajos y celebraciones.
+   ========================================================================== */
+
+/* ---------------- 1. ROLES ---------------- */
+
+PIA.ROLES = ['Administrador', 'Docente', 'Estudiante'];
+
+/** El rol con el que se está usando la aplicación. */
+PIA.rol = (function () {
+  try { return localStorage.getItem(CLAVE_DATOS + '_rol') || 'Administrador'; }
+  catch (e) { return 'Administrador'; }
+})();
+
+/** Cambia el rol y vuelve a pintar la página. */
+PIA.cambiarRol = function (rol) {
+  PIA.rol = rol;
+  try { localStorage.setItem(CLAVE_DATOS + '_rol', rol); } catch (e) {}
+  PIA.toast('Ahora estás como ' + rol + '. Las acciones disponibles cambiaron.');
+  document.querySelectorAll('[data-solo-admin]').forEach(function (el) {
+    el.classList.toggle('oculto', rol !== 'Administrador');
+  });
+  document.querySelectorAll('[data-roles]').forEach(function (el) {
+    el.classList.toggle('oculto', el.getAttribute('data-roles').indexOf(rol) === -1);
+  });
+  if (typeof pintarTodo === 'function') pintarTodo();
+};
+
+/** Devuelve true si el rol actual puede hacer la acción. */
+PIA.puede = function (accion) {
+  if (PIA.rol === 'Administrador') return true;
+  if (PIA.rol === 'Docente') return ['crear', 'editar', 'exportar', 'imprimir'].indexOf(accion) !== -1;
+  return ['crear', 'exportar'].indexOf(accion) !== -1;
+};
+
+/* ---------------- 2. EXPORTAR E IMPRIMIR ---------------- */
+
+/** Descarga una tabla en CSV (se abre en Excel). */
+PIA.csv = function (tabla, columnas) {
+  var filas = PIA.listar(tabla);
+  if (!filas.length) { PIA.toast('No hay datos para exportar.', 'warn'); return; }
+  var cols = columnas || Object.keys(filas[0]).filter(function (k) { return k !== 'creado'; });
+  var lineas = [cols.join(';')];
+  filas.forEach(function (f) {
+    lineas.push(cols.map(function (c) {
+      var v = f[c];
+      if (Array.isArray(v)) v = v.join(' | ');
+      return String(v == null ? '' : v).replace(/;/g, ',').replace(/[\r\n]+/g, ' ');
+    }).join(';'));
+  });
+  var contenido = '\ufeff' + lineas.join('\r\n');
+  var enlace = document.createElement('a');
+  enlace.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(contenido);
+  enlace.download = 'Mindsport-' + tabla + '-' + PIA.hoy() + '.csv';
+  document.body.appendChild(enlace);
+  enlace.click();
+  enlace.remove();
+  PIA.toast('Archivo exportado: ' + enlace.download);
+};
+
+/** Imprime la página tal como se ve. */
+PIA.imprimir = function () { window.print(); };
+
+/** Copia un texto al portapapeles. */
+PIA.copiar = function (texto) {
+  var t = String(texto || '');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(t).then(function () { PIA.toast('Copiado: ' + t); }, function () { PIA.toast(t); });
+  } else { PIA.toast(t); }
+};
+
+/* ---------------- 3. CONFIRMACIÓN ELEGANTE ---------------- */
+
+/** Pide confirmación con una ventana bonita en vez del confirm() del navegador. */
+PIA.confirmar = function (titulo, texto, alAceptar, opciones) {
+  var o = opciones || {};
+  var botones = '<button class="btn" onclick="PIA.cerrarModal()">Cancelar</button>' +
+    '<button class="btn ' + (o.peligro ? 'pel' : 'p') + '" id="piaConfirmarSi">' + (o.textoBoton || 'Sí, continuar') + '</button>';
+  PIA.modal(titulo, '<p style="font-size:14px">' + PIA.esc(texto) + '</p>', botones);
+  document.getElementById('piaConfirmarSi').onclick = function () {
+    PIA.cerrarModal();
+    if (typeof alAceptar === 'function') alAceptar();
+  };
+};
+
+/* ---------------- 4. DESHACER ---------------- */
+
+var ULTIMO_BORRADO = null;
+
+/** Elimina un registro guardando una copia para poder deshacer. */
+PIA.borrarConDeshacer = function (tabla, id, alTerminar) {
+  var fila = PIA.listar(tabla).filter(function (f) { return Number(f.id) === Number(id); })[0];
+  if (!fila) return;
+  PIA.confirmar('¿Eliminar este registro?', 'Se puede deshacer durante unos segundos.', function () {
+    ULTIMO_BORRADO = { tabla: tabla, fila: fila };
+    PIA.eliminar(tabla, id);
+    PIA.toast('Registro eliminado. Pulsa Deshacer para recuperarlo.', 'warn');
+    mostrarDeshacer();
+    if (typeof alTerminar === 'function') alTerminar();
+  }, { peligro: true, textoBoton: 'Sí, eliminar' });
+};
+
+var CAJA_DESHACER = null;
+
+/** Muestra el botón flotante de deshacer. */
+function mostrarDeshacer() {
+  if (CAJA_DESHACER) CAJA_DESHACER.remove();
+  CAJA_DESHACER = document.createElement('div');
+  CAJA_DESHACER.className = 'toast warn';
+  CAJA_DESHACER.style.bottom = '80px';
+  CAJA_DESHACER.innerHTML = 'Registro eliminado <button class="btn pq" style="margin-left:10px" id="piaDeshacer">Deshacer</button>';
+  document.body.appendChild(CAJA_DESHACER);
+  document.getElementById('piaDeshacer').onclick = function () {
+    if (!ULTIMO_BORRADO) return;
+    PIA.insertar(ULTIMO_BORRADO.tabla, ULTIMO_BORRADO.fila);
+    CAJA_DESHACER.remove(); CAJA_DESHACER = null; ULTIMO_BORRADO = null;
+    PIA.toast('Registro recuperado.');
+    if (typeof pintarTodo === 'function') pintarTodo();
+  };
+  setTimeout(function () { if (CAJA_DESHACER) { CAJA_DESHACER.remove(); CAJA_DESHACER = null; ULTIMO_BORRADO = null; } }, 9000);
+}
+
+/* ---------------- 5. BÚSQUEDA Y ORDEN EN TABLAS ---------------- */
+
+var ORDEN_ACTUAL = {};
+
+/** Filtra las filas de una tabla por un texto, en cualquier columna. */
+PIA.filtrar = function (filas, texto) {
+  var t = PIA.normalizar(texto);
+  if (!t) return filas;
+  return filas.filter(function (f) { return PIA.normalizar(JSON.stringify(f)).indexOf(t) !== -1; });
+};
+
+/** Ordena las filas por una columna (alterna ascendente y descendente). */
+PIA.ordenar = function (filas, columna) {
+  var clave = ORDEN_ACTUAL.clave === columna && ORDEN_ACTUAL.dir === 'asc' ? 'desc' : 'asc';
+  ORDEN_ACTUAL = { clave: columna, dir: clave };
+  return filas.slice().sort(function (a, b) {
+    var x = a[columna], y = b[columna];
+    var num = !isNaN(Number(x)) && !isNaN(Number(y)) && x !== '' && y !== '';
+    var r = num ? Number(x) - Number(y) : PIA.normalizar(x).localeCompare(PIA.normalizar(y));
+    return clave === 'asc' ? r : -r;
+  });
+};
+
+/* ---------------- 6. CONTADORES ANIMADOS ---------------- */
+
+/** Anima un número desde 0 hasta su valor final. */
+PIA.contar = function (idElemento, hasta, sufijo) {
+  var el = document.getElementById(idElemento);
+  if (!el) return;
+  var meta = Number(hasta) || 0;
+  var inicio = 0;
+  var paso = Math.max(1, Math.ceil(meta / 26));
+  var timer = setInterval(function () {
+    inicio += paso;
+    if (inicio >= meta) { inicio = meta; clearInterval(timer); }
+    el.textContent = inicio + (sufijo || '');
+  }, 22);
+};
+
+/* ---------------- 7. CELEBRACIÓN ---------------- */
+
+/** Lanza una lluvia de colores al completar algo importante. */
+PIA.brindis = function () {
+  var colores = ['#f97316', '#22c55e', '#0284c7', '#a78bfa', '#f59e0b', '#ef4444'];
+  for (var i = 0; i < 34; i++) {
+    var p = document.createElement('div');
+    p.style.cssText = 'position:fixed;z-index:2000;pointer-events:none;width:9px;height:9px;border-radius:2px;' +
+      'left:' + (Math.random() * 100) + 'vw;top:-14px;background:' + colores[i % colores.length] + ';' +
+      'transition:transform 1.5s cubic-bezier(.2,.7,.4,1), opacity 1.5s;';
+    document.body.appendChild(p);
+    (function (el) {
+      requestAnimationFrame(function () {
+        el.style.transform = 'translateY(' + (window.innerHeight + 40) + 'px) rotate(' + (Math.random() * 720) + 'deg)';
+        el.style.opacity = '0';
+      });
+      setTimeout(function () { el.remove(); }, 1700);
+    })(p);
+  }
+};
+
+/* ---------------- 8. ATAJOS DE TECLADO ---------------- */
+
+document.addEventListener('keydown', function (ev) {
+  /* Escape cierra la ventana abierta */
+  if (ev.key === 'Escape') PIA.cerrarModal();
+  /* Ctrl+F enfoca la búsqueda de la página */
+  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'f') {
+    var caja = document.querySelector('input[type=search], #buscador, #buscar');
+    if (caja) { ev.preventDefault(); caja.focus(); caja.select(); }
+  }
+  /* Ctrl+P imprime */
+  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'p') { /* deja el navegador */ }
+});
+
+/* ---------------- 9. BARRA DE ACCIONES PARA TABLAS ---------------- */
+
+/**
+ * Pinta la barra de herramientas de una tabla: buscar, exportar e imprimir.
+ * Se usa igual en los nueve proyectos.
+ * @param {string} tabla      nombre de la tabla de datos
+ * @param {string} idBuscador id del campo de búsqueda
+ * @param {string} texto      texto de ayuda
+ */
+PIA.barraTabla = function (tabla, idBuscador, texto) {
+  return '<div class="fila" style="margin-bottom:12px">' +
+    '<input type="search" id="' + idBuscador + '" placeholder="' + (texto || 'Buscar en los registros…') + '" style="flex:1;min-width:180px;padding:9px 13px;border-radius:var(--radio-campo);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta)">' +
+    '<button class="btn pq" onclick="PIA.csv(\'' + tabla + '\')">⬇ Exportar</button>' +
+    '<button class="btn pq" onclick="PIA.imprimir()">🖨 Imprimir</button>' +
+  '</div>';
+};
+
+/* ---------------- 10. EJEMPLOS DE DEMOSTRACIÓN ---------------- */
+
+/**
+ * Carga cinco registros de ejemplo escritos para este proyecto.
+ * Sirve para mostrar el CRUD sin tener que escribir todo a mano.
+ */
+PIA.cargarEjemplos = function (tabla, ejemplos, alTerminar) {
+  var actuales = PIA.listar(tabla);
+  var nuevos = 0;
+  ejemplos.forEach(function (e) {
+    /* se evita duplicar si ya existe uno con el mismo título o nombre */
+    var clave = e.titulo || e.nombre || e.codigo || '';
+    var repetido = actuales.some(function (a) { return (a.titulo || a.nombre || a.codigo || '') === clave; });
+    if (!repetido) { PIA.insertar(tabla, e); nuevos++; }
+  });
+  PIA.toast(nuevos ? 'Se agregaron ' + nuevos + ' ejemplos.' : 'Los ejemplos ya estaban cargados.', nuevos ? 'ok' : 'warn');
+  if (nuevos) PIA.brindis();
+  if (typeof alTerminar === 'function') alTerminar();
+};
+
+/* ---------------- 11. AYUDA ---------------- */
+
+/** Explica en dos palabras cómo se usa la aplicación. */
+PIA.ayuda = function () {
+  var cuerpo = '<div class="aviso"><b>Esta es la aplicación de Mindsport.</b> Todo lo que hagas se guarda en tu navegador.</div>' +
+    '<h3 style="margin:14px 0 6px">Roles</h3>' +
+    '<p style="font-size:13.5px">Arriba a la derecha puedes cambiar entre <b>Administrador</b>, <b>Docente</b> y <b>Estudiante</b>. ' +
+    'Cada uno ve acciones distintas: el administrador puede todo, el docente crea y edita, el estudiante solo crea y consulta.</p>' +
+    '<h3 style="margin:14px 0 6px">Atajos</h3>' +
+    '<p style="font-size:13.5px"><b>Ctrl + F</b> busca en la página · <b>Escape</b> cierra esta ventana · <b>Ctrl + P</b> imprime.</p>' +
+    '<h3 style="margin:14px 0 6px">Si algo se borra</h3>' +
+    '<p style="font-size:13.5px">Al eliminar aparece un botón <b>Deshacer</b> durante unos segundos.</p>';
+  PIA.modal('Cómo se usa', cuerpo);
+};
+
+/* ---------------- 12. CINCO EJEMPLOS DESDE LA PÁGINA ---------------- */
+
+/* Palabras que se cambian para que los ejemplos no queden idénticos. */
+var VARIANTES = ['Nuevo', 'Actualizado', 'Urgente', 'Revisado', 'Pendiente'];
+
+/**
+ * Crea cinco registros de ejemplo a partir de los que ya existen.
+ * Toma la tabla con más datos, copia un registro y le cambia algunos valores
+ * para que se vea como si alguien los hubiera escrito desde la página.
+ */
+PIA.crearEjemplos = function () {
+  var todo = PIA.leerTodo();
+  var tablas = Object.keys(todo).filter(function (t) { return Array.isArray(todo[t]) && todo[t].length; });
+  if (!tablas.length) { PIA.toast('No hay datos base para crear ejemplos.', 'mal'); return; }
+  /* la tabla con más registros suele ser la principal */
+  tablas.sort(function (a, b) { return todo[b].length - todo[a].length; });
+  var tabla = tablas[0];
+  var base = todo[tabla];
+  var creados = 0;
+
+  for (var i = 0; i < 5; i++) {
+    var modelo = base[i % base.length];
+    var copia = JSON.parse(JSON.stringify(modelo));
+    delete copia.id;
+    delete copia.creado;
+    var marca = VARIANTES[i % VARIANTES.length] + ' ' + (i + 1);
+    Object.keys(copia).forEach(function (k) {
+      var v = copia[k];
+      if (typeof v !== 'string' || !v) return;
+      var kl = k.toLowerCase();
+      /* se cambian los textos visibles; los códigos y correos se dejan válidos */
+      if (kl.indexOf('codigo') !== -1 || kl.indexOf('radicado') !== -1 || kl.indexOf('carnet') !== -1) {
+        copia[k] = v.replace(/\d+$/, function (m) { return String(Number(m) + 100 + i); });
+      } else if (kl.indexOf('correo') !== -1 || kl.indexOf('email') !== -1) {
+        copia[k] = v.replace('@', '.' + (i + 1) + '@');
+      } else if (kl.indexOf('fecha') !== -1) {
+        var d = new Date(); d.setDate(d.getDate() + i + 1);
+        copia[k] = d.toISOString().slice(0, 10);
+      } else if (kl.indexOf('titulo') !== -1 || kl.indexOf('nombre') !== -1 || kl.indexOf('asunto') !== -1 || kl.indexOf('descripcion') !== -1 || kl.indexOf('mensaje') !== -1) {
+        copia[k] = v + ' · ' + marca;
+      }
+    });
+    PIA.insertar(tabla, copia);
+    creados++;
+  }
+
+  PIA.brindis();
+  PIA.toast('Se crearon ' + creados + ' ejemplos en la tabla "' + tabla + '".');
+  setTimeout(function () { window.location.reload(); }, 900);
+};
+
+/** El botón flotante para crear los cinco ejemplos. */
+function pintarBotonEjemplos() {
+  if (document.getElementById('piaEjemplos')) return;
+  var b = document.createElement('button');
+  b.id = 'piaEjemplos';
+  b.className = 'btn a';
+  b.style.cssText = 'position:fixed;left:18px;bottom:18px;z-index:800;box-shadow:0 6px 20px rgba(0,0,0,.25)';
+  b.innerHTML = '＋ Crear 5 ejemplos';
+  b.title = 'Agrega cinco registros de muestra para probar el CRUD';
+  b.onclick = function () {
+    PIA.confirmar('¿Crear cinco ejemplos?',
+      'Se agregarán cinco registros nuevos a la tabla principal, como si los hubieras escrito tú. Después puedes editarlos o eliminarlos.',
+      function () { PIA.crearEjemplos(); });
+  };
+  document.body.appendChild(b);
+}
+
+/* ---------------- 12b. LA FICHA OFICIAL DEL PROYECTO ---------------- */
+
+/** Muestra la ficha que está en el documento PIA: código, objetivos y palabras clave. */
+PIA.mostrarFicha = function () {
+  var f = PIA.ficha || {};
+  var equipo = PIA.equipo || [];
+  var partes = [];
+
+  if (f.codigo) {
+    partes.push('<div class="aviso" style="font-size:12.5px;letter-spacing:.04em"><b>Código del hilo:</b> ' + PIA.esc(f.codigo) + '</div>');
+  }
+  if (f.objetivo) {
+    partes.push('<h3 style="margin:16px 0 6px">Objetivo general</h3>');
+    partes.push('<p style="font-size:14px;line-height:1.7">' + PIA.esc(f.objetivo) + '</p>');
+  }
+  if (f.especificos && f.especificos.length) {
+    partes.push('<h3 style="margin:16px 0 6px">Objetivos específicos</h3>');
+    partes.push('<ol style="margin-left:18px;font-size:13.5px;line-height:1.8">' +
+      f.especificos.map(function (o) { return '<li>' + PIA.esc(o) + '</li>'; }).join('') + '</ol>');
+  }
+  if (f.palabrasClave && f.palabrasClave.length) {
+    partes.push('<h3 style="margin:16px 0 8px">Palabras clave</h3>');
+    partes.push('<div class="fila" style="gap:6px;flex-wrap:wrap">' +
+      f.palabrasClave.map(function (p) { return '<span class="badge neutro">' + PIA.esc(p) + '</span>'; }).join('') + '</div>');
+  }
+  if (equipo.length) {
+    partes.push('<h3 style="margin:16px 0 8px">Equipo</h3>');
+    partes.push('<ul style="margin-left:18px;font-size:13px;line-height:1.8">' +
+      equipo.map(function (i) { return '<li><b>' + PIA.esc(i.nombre) + '</b> — ' + PIA.esc(i.rol) + '</li>'; }).join('') + '</ul>');
+  }
+  if (f.normativa) {
+    partes.push('<h3 style="margin:16px 0 6px">Marco normativo</h3>');
+    partes.push('<p style="font-size:13px">' + PIA.esc(f.normativa) + '</p>');
+  }
+  partes.push('<p class="pequeno gris" style="margin-top:16px">Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05<br>' +
+    'Técnico Auxiliar en Desarrollo de Software — I.U. Pascual Bravo<br>' +
+    'Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b></p>');
+
+  PIA.modal('Ficha del proyecto', partes.join(''));
+};
+
+/** Pone el botón de la ficha en el pie de página. */
+function pintarBotonFicha() {
+  var pie = document.querySelector('.pie');
+  if (!pie || !PIA.ficha || document.getElementById('piaFichaBtn')) return;
+  var b = document.createElement('button');
+  b.id = 'piaFichaBtn';
+  b.className = 'btn pq';
+  b.type = 'button';
+  b.textContent = 'Ficha del proyecto';
+  b.style.marginTop = '10px';
+  b.onclick = PIA.mostrarFicha;
+  pie.appendChild(b);
+}
+
+/* ---------------- 12c. CÓMO SE CONSTRUYÓ ---------------- */
+
+/** Pinta el pseudocódigo y el modelo de tablas que vienen del documento PIA. */
+function pintarConstruccion() {
+  var cont = document.getElementById('construccion');
+  if (!cont) return;
+  var c = PIA.construccion || {};
+  var alg = c.algoritmo || [];
+  var tab = c.tablas || [];
+  var partes = [];
+
+  partes.push('<div class="aviso"><b>De dónde sale esto:</b> el pseudocódigo y el modelo de tablas están en el documento del proyecto (PIA 2026). Aquí se muestran tal cual para que se entienda cómo está construida la aplicación.</div>');
+
+  if (alg.length) {
+    partes.push('<h2 style="margin:22px 0 10px">El algoritmo</h2>');
+    partes.push('<p class="ayuda">El paso a paso que resuelve el problema central del proyecto.</p>');
+    partes.push('<pre class="codigo">' + PIA.esc(alg.join(String.fromCharCode(10))) + '</pre>');
+  }
+
+  if (tab.length) {
+    partes.push('<h2 style="margin:26px 0 10px">El modelo de datos</h2>');
+    partes.push('<p class="ayuda">Las tablas con sus campos, tal como se proyectan para grado 11°.</p>');
+    partes.push('<div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Tabla</th><th>Campos</th></tr></thead><tbody>' +
+      tab.map(function (t) {
+        return '<tr><td><b>' + PIA.esc(t.nombre) + '</b></td><td>' + PIA.esc(t.campos) + '</td></tr>';
+      }).join('') + '</tbody></table></div>');
+  }
+
+  if (!alg.length && !tab.length) {
+    partes.push('<p class="vacio">El documento de este proyecto no incluye pseudocódigo ni modelo de tablas.</p>');
+  }
+
+  partes.push('<p style="margin-top:22px"><button class="btn p" type="button" onclick="PIA.mostrarFicha()">Ver la ficha del proyecto</button></p>');
+  cont.innerHTML = partes.join('');
+}
+
+/** Pone el enlace a «Cómo se construyó» en el pie. */
+function pintarEnlaceConstruccion() {
+  var pie = document.querySelector('.pie');
+  if (!pie || document.getElementById('piaConstruccion')) return;
+  var a = document.createElement('a');
+  a.id = 'piaConstruccion';
+  a.href = 'construccion.html';
+  a.className = 'btn pq';
+  a.textContent = 'Cómo se construyó';
+  a.style.marginTop = '10px';
+  a.style.marginLeft = '8px';
+  pie.appendChild(a);
+}
+
+/* ---------------- 13. ARRANQUE ---------------- */
+
+document.addEventListener('DOMContentLoaded', function () {
+  /* el selector de rol, si está en la página */
+  var selector = document.getElementById('piaRol');
+  if (selector) {
+    selector.value = PIA.rol;
+    selector.onchange = function () { PIA.cambiarRol(selector.value); };
+  }
+  document.querySelectorAll('[data-solo-admin]').forEach(function (el) {
+    el.classList.toggle('oculto', PIA.rol !== 'Administrador');
+  });
+  /* los contadores de los indicadores se animan solos */
+  document.querySelectorAll('.indicador strong[data-contar]').forEach(function (el) {
+    var valor = el.getAttribute('data-contar');
+    var sufijo = el.getAttribute('data-sufijo') || '';
+    PIA.contar(el.id, valor, sufijo);
+  });
+  /* las tarjetas entran con una animación suave */
+  /* las tarjetas entran con una animación suave */
+  document.querySelectorAll('.tarjeta, .indicador, .producto, .obra').forEach(function (el, i) {
+    el.style.animation = 'aparece .34s ease-out both';
+    el.style.animationDelay = Math.min(i * 0.04, 0.5) + 's';
+  });
+  /* el botón para crear los cinco ejemplos */
+  pintarBotonEjemplos();
+  /* el botón de la ficha oficial */
+  pintarBotonFicha();
+  /* el enlace y la página de la construcción */
+  pintarEnlaceConstruccion();
+  pintarConstruccion();
+});
+
+
+/**
+ * mindsport.js — planillas, marcadores y tabla de posiciones.
+ */
+'use strict';
+
+/** Recalcula los puntos de cada equipo según los partidos jugados. */
+function recalcular() {
+  var equipos = PIA.listar('equipos');
+  var partidos = PIA.listar('partidos').filter(function (p) { return p.estado === 'Jugado'; });
+  equipos.forEach(function (e) {
+    var pts = 0;
+    partidos.forEach(function (p) {
+      if (p.local === e.nombre) pts += Number(p.golesLocal) > Number(p.golesVisitante) ? 3 : (Number(p.golesLocal) === Number(p.golesVisitante) ? 1 : 0);
+      if (p.visitante === e.nombre) pts += Number(p.golesVisitante) > Number(p.golesLocal) ? 3 : (Number(p.golesLocal) === Number(p.golesVisitante) ? 1 : 0);
+    });
+    PIA.actualizar('equipos', e.id, { puntos: pts });
+  });
+}
+
+/** Registra el resultado de un partido. */
+function registrarPartido() {
+  var local = PIA.valor('pLocal'), vis = PIA.valor('pVisitante');
+  var gl = Number(PIA.valor('pGolesL')) || 0, gv = Number(PIA.valor('pGolesV')) || 0;
+  if (!local || !vis || local === vis) { PIA.toast('Elige dos equipos distintos.', 'mal'); return; }
+  PIA.insertar('partidos', { local: local, visitante: vis, deporte: 'Interclases', fecha: PIA.hoy(), golesLocal: gl, golesVisitante: gv, estado: 'Jugado' });
+  recalcular();
+  var ganador = gl > gv ? local : (gv > gl ? vis : 'empate');
+  document.getElementById('planillaAviso').innerHTML = '<div class="aviso"><b>Planilla guardada.</b> ' +
+    PIA.esc(local) + ' ' + gl + ' — ' + gv + ' ' + PIA.esc(vis) + (ganador !== 'empate' ? ' · gana ' + PIA.esc(ganador) : ' · empate') + '</div>';
+  PIA.brindis();
+  PIA.toast('Resultado registrado.');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  recalcular();
+  var equipos = PIA.listar('equipos');
+  var partidos = PIA.listar('partidos');
+  var jugados = partidos.filter(function (p) { return p.estado === 'Jugado'; }).length;
+  var puntos = equipos.reduce(function (a, e) { return a + Number(e.puntos || 0); }, 0);
+  [['kEquipos', equipos.length], ['kPartidos', partidos.length], ['kJugados', jugados], ['kPuntos', puntos]].forEach(function (p) {
+    var el = document.getElementById(p[0]); if (el) el.textContent = p[1];
+  });
+
+  // selects de la planilla
+  ['pLocal', 'pVisitante'].forEach(function (id) {
+    var sel = document.getElementById(id);
+    if (sel) sel.innerHTML = '<option value="">— Elige —</option>' + equipos.map(function (e) {
+      return '<option>' + PIA.esc(e.nombre) + '</option>';
+    }).join('');
+  });
+
+  var te = document.getElementById('tablaEquipos');
+  if (te) {
+    var orden = equipos.slice().sort(function (a, b) { return Number(b.puntos) - Number(a.puntos); });
+    te.innerHTML = PIA.tabla(['#', 'Equipo', 'Deporte', 'Capitán', 'Jugadores', 'Puntos', 'Estado'], orden.map(function (e, i) {
+      return ['<b>' + (i + 1) + '</b>', '<b>' + PIA.esc(e.nombre) + '</b>', PIA.esc(e.deporte), PIA.esc(e.capitan), e.jugadores,
+        '<b style="color:' + (i === 0 ? '#16a34a' : '#152a45') + '">' + e.puntos + '</b>',
+        '<span class="badge ' + (e.estado === 'Activo' ? 'ok' : 'neutro') + '">' + PIA.esc(e.estado) + '</span>'];
+    }), { vacio: 'Sin equipos.' });
+  }
+
+  var tp = document.getElementById('tablaPartidos');
+  if (tp) {
+    tp.innerHTML = PIA.tabla(['Local', 'Marcador', 'Visitante', 'Fecha', 'Estado'], partidos.map(function (p) {
+      var marcador = p.estado === 'Jugado' ? '<b>' + p.golesLocal + ' — ' + p.golesVisitante + '</b>' : 'vs';
+      return [PIA.esc(p.local), marcador, PIA.esc(p.visitante), PIA.esc(p.fecha),
+        '<span class="badge ' + (p.estado === 'Jugado' ? 'ok' : 'warn') + '">' + PIA.esc(p.estado) + '</span>'];
+    }), { vacio: 'Sin partidos.' });
+  }
+});
+
+/* usa el núcleo compartido */
+/* usa el núcleo compartido */
+/* usa el núcleo compartido */
+</script>
+<script id="piaPaginas" type="application/json">[{"archivo":"index.html","nombre":"Inicio","cuerpo":"\n\n  <div class=\"armazon\">\n\n    <!-- ================= CABECERA ================= -->\n    <header class=\"barra-sup\">\n      <a class=\"marca\" href=\"index.html\">\n        <div class=\"marca-logo\" style=\"display:grid;place-items:center;font-weight:800\">MS</div>\n        <div class=\"marca-texto\">\n          <b>Mindsport</b>\n          <span>I.E. Sol de Oriente · Gestión deportiva</span>\n        </div>\n      </a>\n      <div class=\"fila\" style=\"margin-left:auto;gap:8px\"><label class=\"sr\" for=\"piaRol\">Rol</label><select id=\"piaRol\" title=\"Cambia el rol para ver qué puede hacer cada uno\" style=\"padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px\"><option value=\"Administrador\">Administrador</option><option value=\"Docente\">Docente</option><option value=\"Estudiante\">Estudiante</option></select><button class=\"btn pq\" onclick=\"PIA.ayuda()\" title=\"Cómo se usa esta aplicación\">?</button></div>\n    </header>\n\n    <!-- ================= MENÚ ================= -->\n    <nav class=\"menu\">\n      <a href=\"index.html\">Inicio</a>\n      <a href=\"torneos.html\">Torneos</a>\n      <a href=\"planillas.html\">Planillas</a>\n      <a href=\"panel.html\">Panel</a>\n    </nav>\n\n    <!-- ================= CONTENIDO ================= -->\n    <main class=\"contenido\">\n      <section class=\"portada anim\">\n        <h1>Mindsport</h1>\n        <p>El deporte también se organiza.</p>\n        <div class=\"sellos\">\n          <span class=\"sello\">I.E. Sol de Oriente</span>\n          <span class=\"sello\">Grado 11°</span>\n          <span class=\"sello\">Gestión deportiva</span>\n        </div>\n      </section>\n\n<div class=\"rejilla g4\" style=\"margin-bottom:18px\">  <div class=\"cifra\"><strong id=\"kEquipos\">0</strong><b>Equipos</b><span>inscritos</span></div>  <div class=\"cifra\"><strong id=\"kPartidos\">0</strong><b>Partidos</b><span>del torneo</span></div>  <div class=\"cifra\"><strong id=\"kJugados\">0</strong><b>Jugados</b><span>hasta hoy</span></div>  <div class=\"cifra\"><strong id=\"kPuntos\">0</strong><b>Puntos</b><span>en juego</span></div></div><div class=\"rejilla g3\" style=\"margin-bottom:16px\">  <a class=\"servicio\" href=\"torneos.html\" style=\"text-decoration:none\"><div class=\"ico\">🏆</div><h3>Torneos</h3><p>Equipos y tabla de posiciones.</p></a>  <a class=\"servicio\" href=\"planillas.html\" style=\"text-decoration:none\"><div class=\"ico\">📋</div><h3>Planillas</h3><p>Registra el resultado de un partido.</p></a>  <a class=\"servicio\" href=\"panel.html\" style=\"text-decoration:none\"><div class=\"ico\">📊</div><h3>Panel</h3><p>Todos los partidos y marcadores.</p></a></div><div class=\"aviso\"><b>Regla del torneo:</b> tres puntos por victoria, uno por empate. La planilla se registra al final del partido, con el marcador real.</div>\n    </main>\n\n    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->\n    <nav class=\"barra-movil\" aria-label=\"Navegación principal en móvil\">\n      <a href=\"index.html\"><i aria-hidden=\"true\">⌂</i><span>Inicio</span></a>\n      <a href=\"torneos.html\"><i aria-hidden=\"true\">•</i><span>Torneos</span></a>\n      <a href=\"planillas.html\"><i aria-hidden=\"true\">•</i><span>Planillas</span></a>\n      <a href=\"panel.html\"><i aria-hidden=\"true\">•</i><span>Panel</span></a>\n    </nav>\n\n    <!-- ================= PIE ================= -->\n    <footer class=\"pie\">\n      \n      <div><b>Mindsport</b> — El deporte también se organiza</div>\n      <div class=\"equipo\">\n        <span>Estudiante líder de producto</span>\n        <span>Estudiante de diseño</span>\n        <span>Estudiante de lógica</span>\n        <span>Estudiante de datos</span>\n      </div>\n      <div class=\"linea\">\n        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05\n      </div>\n      <div class=\"linea\">\n        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo\n      </div>\n      <div class=\"linea\">\n        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>\n      </div>\n    </footer>\n\n  </div>\n\n  <div id=\"piaToast\"></div>\n  \n  \n  \n  \n","layout":"layout-top"},{"archivo":"torneos.html","nombre":"Torneos","cuerpo":"\n\n  <div class=\"armazon\">\n\n    <!-- ================= CABECERA ================= -->\n    <header class=\"barra-sup\">\n      <a class=\"marca\" href=\"index.html\">\n        <div class=\"marca-logo\" style=\"display:grid;place-items:center;font-weight:800\">MS</div>\n        <div class=\"marca-texto\">\n          <b>Mindsport</b>\n          <span>I.E. Sol de Oriente · Gestión deportiva</span>\n        </div>\n      </a>\n      <div class=\"fila\" style=\"margin-left:auto;gap:8px\"><label class=\"sr\" for=\"piaRol\">Rol</label><select id=\"piaRol\" title=\"Cambia el rol para ver qué puede hacer cada uno\" style=\"padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px\"><option value=\"Administrador\">Administrador</option><option value=\"Docente\">Docente</option><option value=\"Estudiante\">Estudiante</option></select><button class=\"btn pq\" onclick=\"PIA.ayuda()\" title=\"Cómo se usa esta aplicación\">?</button></div>\n    </header>\n\n    <!-- ================= MENÚ ================= -->\n    <nav class=\"menu\">\n      <a href=\"index.html\">Inicio</a>\n      <a href=\"torneos.html\">Torneos</a>\n      <a href=\"planillas.html\">Planillas</a>\n      <a href=\"panel.html\">Panel</a>\n    </nav>\n\n    <!-- ================= CONTENIDO ================= -->\n    <main class=\"contenido\">\n      <section class=\"portada anim\">\n        <h1>Torneos</h1>\n        <p>Quién juega, en qué deporte y con cuántos puntos.</p>\n        <div class=\"sellos\">\n          <span class=\"sello\">I.E. Sol de Oriente</span>\n          <span class=\"sello\">Grado 11°</span>\n          <span class=\"sello\">Gestión deportiva</span>\n        </div>\n      </section>\n\n<div class=\"tarjeta\"><h3>Tabla de posiciones</h3><div id=\"tablaEquipos\"></div></div><div class=\"aviso\" style=\"margin-top:14px\"><b>Desempate:</b> primero puntos, luego diferencia de gol.</div>\n    </main>\n\n    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->\n    <nav class=\"barra-movil\" aria-label=\"Navegación principal en móvil\">\n      <a href=\"index.html\"><i aria-hidden=\"true\">⌂</i><span>Inicio</span></a>\n      <a href=\"torneos.html\"><i aria-hidden=\"true\">•</i><span>Torneos</span></a>\n      <a href=\"planillas.html\"><i aria-hidden=\"true\">•</i><span>Planillas</span></a>\n      <a href=\"panel.html\"><i aria-hidden=\"true\">•</i><span>Panel</span></a>\n    </nav>\n\n    <!-- ================= PIE ================= -->\n    <footer class=\"pie\">\n      \n      <div><b>Mindsport</b> — El deporte también se organiza</div>\n      <div class=\"equipo\">\n        <span>Estudiante líder de producto</span>\n        <span>Estudiante de diseño</span>\n        <span>Estudiante de lógica</span>\n        <span>Estudiante de datos</span>\n      </div>\n      <div class=\"linea\">\n        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05\n      </div>\n      <div class=\"linea\">\n        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo\n      </div>\n      <div class=\"linea\">\n        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>\n      </div>\n    </footer>\n\n  </div>\n\n  <div id=\"piaToast\"></div>\n  \n  \n  \n  \n","layout":"layout-top"},{"archivo":"planillas.html","nombre":"Planillas","cuerpo":"\n\n  <div class=\"armazon\">\n\n    <!-- ================= CABECERA ================= -->\n    <header class=\"barra-sup\">\n      <a class=\"marca\" href=\"index.html\">\n        <div class=\"marca-logo\" style=\"display:grid;place-items:center;font-weight:800\">MS</div>\n        <div class=\"marca-texto\">\n          <b>Mindsport</b>\n          <span>I.E. Sol de Oriente · Gestión deportiva</span>\n        </div>\n      </a>\n      <div class=\"fila\" style=\"margin-left:auto;gap:8px\"><label class=\"sr\" for=\"piaRol\">Rol</label><select id=\"piaRol\" title=\"Cambia el rol para ver qué puede hacer cada uno\" style=\"padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px\"><option value=\"Administrador\">Administrador</option><option value=\"Docente\">Docente</option><option value=\"Estudiante\">Estudiante</option></select><button class=\"btn pq\" onclick=\"PIA.ayuda()\" title=\"Cómo se usa esta aplicación\">?</button></div>\n    </header>\n\n    <!-- ================= MENÚ ================= -->\n    <nav class=\"menu\">\n      <a href=\"index.html\">Inicio</a>\n      <a href=\"torneos.html\">Torneos</a>\n      <a href=\"planillas.html\">Planillas</a>\n      <a href=\"panel.html\">Panel</a>\n    </nav>\n\n    <!-- ================= CONTENIDO ================= -->\n    <main class=\"contenido\">\n      <section class=\"portada anim\">\n        <h1>Planillas</h1>\n        <p>El marcador se registra una sola vez.</p>\n        <div class=\"sellos\">\n          <span class=\"sello\">I.E. Sol de Oriente</span>\n          <span class=\"sello\">Grado 11°</span>\n          <span class=\"sello\">Gestión deportiva</span>\n        </div>\n      </section>\n\n<div class=\"tarjeta\"><h3>Registrar resultado</h3>  <div class=\"rejilla g2\">    <div class=\"campo\"><label for=\"pLocal\">Equipo local</label><select id=\"pLocal\"></select></div>    <div class=\"campo\"><label for=\"pVisitante\">Equipo visitante</label><select id=\"pVisitante\"></select></div>    <div class=\"campo\"><label for=\"pGolesL\">Marcador local</label><input id=\"pGolesL\" type=\"number\" placeholder=\"0\"></div>    <div class=\"campo\"><label for=\"pGolesV\">Marcador visitante</label><input id=\"pGolesV\" type=\"number\" placeholder=\"0\"></div>  </div>  <button class=\"btn p gr\" onclick=\"registrarPartido()\">Guardar planilla</button>  <div id=\"planillaAviso\" style=\"margin-top:12px\"></div></div>\n    </main>\n\n    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->\n    <nav class=\"barra-movil\" aria-label=\"Navegación principal en móvil\">\n      <a href=\"index.html\"><i aria-hidden=\"true\">⌂</i><span>Inicio</span></a>\n      <a href=\"torneos.html\"><i aria-hidden=\"true\">•</i><span>Torneos</span></a>\n      <a href=\"planillas.html\"><i aria-hidden=\"true\">•</i><span>Planillas</span></a>\n      <a href=\"panel.html\"><i aria-hidden=\"true\">•</i><span>Panel</span></a>\n    </nav>\n\n    <!-- ================= PIE ================= -->\n    <footer class=\"pie\">\n      \n      <div><b>Mindsport</b> — El deporte también se organiza</div>\n      <div class=\"equipo\">\n        <span>Estudiante líder de producto</span>\n        <span>Estudiante de diseño</span>\n        <span>Estudiante de lógica</span>\n        <span>Estudiante de datos</span>\n      </div>\n      <div class=\"linea\">\n        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05\n      </div>\n      <div class=\"linea\">\n        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo\n      </div>\n      <div class=\"linea\">\n        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>\n      </div>\n    </footer>\n\n  </div>\n\n  <div id=\"piaToast\"></div>\n  \n  \n  \n  \n","layout":"layout-top"},{"archivo":"panel.html","nombre":"Panel","cuerpo":"\n\n  <div class=\"armazon\">\n\n    <!-- ================= CABECERA ================= -->\n    <header class=\"barra-sup\">\n      <a class=\"marca\" href=\"index.html\">\n        <div class=\"marca-logo\" style=\"display:grid;place-items:center;font-weight:800\">MS</div>\n        <div class=\"marca-texto\">\n          <b>Mindsport</b>\n          <span>I.E. Sol de Oriente · Gestión deportiva</span>\n        </div>\n      </a>\n      <div class=\"fila\" style=\"margin-left:auto;gap:8px\"><label class=\"sr\" for=\"piaRol\">Rol</label><select id=\"piaRol\" title=\"Cambia el rol para ver qué puede hacer cada uno\" style=\"padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px\"><option value=\"Administrador\">Administrador</option><option value=\"Docente\">Docente</option><option value=\"Estudiante\">Estudiante</option></select><button class=\"btn pq\" onclick=\"PIA.ayuda()\" title=\"Cómo se usa esta aplicación\">?</button></div>\n    </header>\n\n    <!-- ================= MENÚ ================= -->\n    <nav class=\"menu\">\n      <a href=\"index.html\">Inicio</a>\n      <a href=\"torneos.html\">Torneos</a>\n      <a href=\"planillas.html\">Planillas</a>\n      <a href=\"panel.html\">Panel</a>\n    </nav>\n\n    <!-- ================= CONTENIDO ================= -->\n    <main class=\"contenido\">\n      <section class=\"portada anim\">\n        <h1>Panel del torneo</h1>\n        <p>Todos los partidos, en orden.</p>\n        <div class=\"sellos\">\n          <span class=\"sello\">I.E. Sol de Oriente</span>\n          <span class=\"sello\">Grado 11°</span>\n          <span class=\"sello\">Gestión deportiva</span>\n        </div>\n      </section>\n\n<div class=\"tarjeta\"><h3>Partidos</h3><div id=\"tablaPartidos\"></div></div>\n    </main>\n\n    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->\n    <nav class=\"barra-movil\" aria-label=\"Navegación principal en móvil\">\n      <a href=\"index.html\"><i aria-hidden=\"true\">⌂</i><span>Inicio</span></a>\n      <a href=\"torneos.html\"><i aria-hidden=\"true\">•</i><span>Torneos</span></a>\n      <a href=\"planillas.html\"><i aria-hidden=\"true\">•</i><span>Planillas</span></a>\n      <a href=\"panel.html\"><i aria-hidden=\"true\">•</i><span>Panel</span></a>\n    </nav>\n\n    <!-- ================= PIE ================= -->\n    <footer class=\"pie\">\n      \n      <div><b>Mindsport</b> — El deporte también se organiza</div>\n      <div class=\"equipo\">\n        <span>Estudiante líder de producto</span>\n        <span>Estudiante de diseño</span>\n        <span>Estudiante de lógica</span>\n        <span>Estudiante de datos</span>\n      </div>\n      <div class=\"linea\">\n        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05\n      </div>\n      <div class=\"linea\">\n        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo\n      </div>\n      <div class=\"linea\">\n        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>\n      </div>\n    </footer>\n\n  </div>\n\n  <div id=\"piaToast\"></div>\n  \n  \n  \n  \n","layout":"layout-top"},{"archivo":"construccion.html","nombre":"Cómo se construyó","cuerpo":"\n\n  <div class=\"armazon\">\n\n    <!-- ================= CABECERA ================= -->\n    <header class=\"barra-sup\">\n      <a class=\"marca\" href=\"index.html\">\n        <div class=\"marca-logo\" style=\"display:grid;place-items:center;font-weight:800\">MS</div>\n        <div class=\"marca-texto\">\n          <b>Mindsport</b>\n          <span>I.E. Sol de Oriente · Gestión deportiva</span>\n        </div>\n      </a>\n      <div class=\"fila\" style=\"margin-left:auto;gap:8px\"><label class=\"sr\" for=\"piaRol\">Rol</label><select id=\"piaRol\" title=\"Cambia el rol para ver qué puede hacer cada uno\" style=\"padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px\"><option value=\"Administrador\">Administrador</option><option value=\"Docente\">Docente</option><option value=\"Estudiante\">Estudiante</option></select><button class=\"btn pq\" onclick=\"PIA.ayuda()\" title=\"Cómo se usa esta aplicación\">?</button></div>\n    </header>\n\n    <!-- ================= MENÚ ================= -->\n    <nav class=\"menu\">\n      <a href=\"index.html\">Inicio</a>\n      <a href=\"torneos.html\">Torneos</a>\n      <a href=\"planillas.html\">Planillas</a>\n      <a href=\"panel.html\">Panel</a>\n    </nav>\n\n    <!-- ================= CONTENIDO ================= -->\n    <main class=\"contenido\">\n\n<section id=\"construccion\" aria-label=\"Cómo se construyó\"></section>\n    </main>\n\n    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->\n\n\n    <!-- ================= PIE ================= -->\n    <footer class=\"pie\">\n      \n      <div><b>Mindsport</b> — El deporte también se organiza</div>\n      <div class=\"equipo\">\n        <span>Estudiante líder de producto</span>\n        <span>Estudiante de diseño</span>\n        <span>Estudiante de lógica</span>\n        <span>Estudiante de datos</span>\n      </div>\n      <div class=\"linea\">\n        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05\n      </div>\n      <div class=\"linea\">\n        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo\n      </div>\n      <div class=\"linea\">\n        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>\n      </div>\n    </footer>\n\n  </div>\n\n  <div id=\"piaToast\"></div>\n  \n  \n  \n  \n","layout":"layout-top"}]</script>
+<script id="piaImagenes" type="application/json">{}</script>
+<script>(function () {
+  var paginas = JSON.parse(document.getElementById("piaPaginas").textContent);
+  var js = document.getElementById("piaJs").textContent;
+  var css = document.getElementById("piaCss").textContent;
+  var imagenes = JSON.parse(document.getElementById("piaImagenes").textContent);
+  var pantalla = document.getElementById("pantalla");
+  var barra = document.getElementById("barra");
+
+  /* el CSS del proyecto se aplica una sola vez */
+  var hoja = document.createElement("style");
+  hoja.textContent = css;
+  document.head.appendChild(hoja);
+
+  function pintar(i) {
+    var pagina = paginas[i];
+    var cuerpo = pagina.cuerpo;
+    Object.keys(imagenes).forEach(function (nombre) {
+      cuerpo = cuerpo.split(nombre).join(imagenes[nombre]);
+    });
+    document.body.className = pagina.layout || "layout-top";
+    var COMILLA = String.fromCharCode(34);
+    pantalla.innerHTML = "<div class=" + COMILLA + "pia-pagina" + COMILLA + ">" + cuerpo + "</div>";
+
+    /* se vuelve a ejecutar el JavaScript del proyecto para esta página */
+    var viejo = document.getElementById("piaJsVivo");
+    if (viejo) viejo.parentNode.removeChild(viejo);
+    var nuevo = document.createElement("script");
+    nuevo.id = "piaJsVivo";
+    nuevo.textContent = js;
+    document.body.appendChild(nuevo);
+
+    /* se avisa que la página cargó, para que los módulos pinten sus datos */
+    setTimeout(function () {
+      document.dispatchEvent(new Event("DOMContentLoaded"));
+      window.dispatchEvent(new Event("load"));
+    }, 40);
+
+    /* los enlaces del menú cambian de página dentro del mismo archivo */
+    var enlaces = pantalla.querySelectorAll(".menu a, .menu-tabs a");
+    Array.prototype.forEach.call(enlaces, function (a) {
+      a.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        var destino = a.getAttribute("href");
+        for (var j = 0; j < paginas.length; j++) {
+          if (paginas[j].archivo === destino) { ir(j); return; }
+        }
+      });
+    });
+    window.scrollTo(0, 0);
+  }
+
+  function ir(i) {
+    var botones = barra.querySelectorAll("button");
+    Array.prototype.forEach.call(botones, function (b, j) {
+      if (j === i) b.classList.add("activo"); else b.classList.remove("activo");
+    });
+    pintar(i);
+  }
+
+  window.PIA_ir = function (archivo) {
+    for (var j = 0; j < paginas.length; j++) if (paginas[j].archivo === archivo) return ir(j);
+  };
+
+  paginas.forEach(function (p, i) {
+    var b = document.createElement("button");
+    b.textContent = p.nombre;
+    if (i === 0) b.className = "activo";
+    b.onclick = function () { ir(i); };
+    barra.appendChild(b);
+  });
+
+  var info = document.createElement("span");
+  info.className = "aviso";
+  info.textContent = paginas.length + " páginas · un solo archivo";
+  barra.appendChild(info);
+
+  pintar(0);
+})();</script>
+</body>
+</html>

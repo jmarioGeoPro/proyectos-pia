@@ -1,0 +1,1 @@
+/* el panel docente usa el núcleo compartido */

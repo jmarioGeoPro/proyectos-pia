@@ -1,79 +1,70 @@
-# The TechFlow — aplicación web
+# The TechFlow
 
-> La tecnología, fluyendo
+> La tecnología del colegio, ordenada y a la mano
 
-**Proyecto Integrador de Aula (PIA) · I.E. Sol de Oriente · Grado 10° · 2026**
+**Proyecto Integrador de Aula (PIA) 2026** · I.E. Lola González · Grado 10° · Grupo 10°05
 Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
 
 ---
 
 ## Qué es
 
-Gestión de Recursos y Flujos Tecnológicos
+Mesa de ayuda y reservas de la sala TIC: turnos claros, cabina automática para trámites y votación de la emisora escolar.
 
-## Cuenta de prueba
+**Problema que resuelve:** Los equipos y la sala de sistemas se piden de palabra, se cruzan los turnos y nadie sabe quién los tiene ni cuándo se liberan.
 
-Para revisarla **no hace falta registrarse**: la aplicación crea sola una cuenta la primera vez que se abre.
+**Estilo visual:** 11-techflow · menú top
 
-| | |
-|---|---|
-| **Correo** | `pruebas@pasculia.edu.co` |
-| **Contraseña** | `PascualBravo2026` |
-| **Rol** | Docente |
+## Cómo abrirlo
 
-> Es la **misma cuenta en las 33 aplicaciones**, para que quien las revise no tenga que memorizar nada.
-> También se puede crear una cuenta propia con el botón *Crear una cuenta*.
+1. Abre **`index.html`** con doble clic (no necesita servidor ni internet).
+2. La primera vez se cargan solos los **datos de ejemplo** (20 registros).
+3. Navega con el menú de arriba.
 
-## Cómo se usa
+Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar.
+Para volver a los datos de ejemplo: abre la consola del navegador y escribe `PIA.reiniciar()`.
 
-1. Abre el archivo **index.html** con doble clic (o sírvelo con un servidor local).
-2. Entra con la **cuenta de prueba** de arriba, o pulsa **Crear una cuenta** y regístrate.
-3. Elige un módulo en el menú de la izquierda.
-4. Llena el formulario y pulsa **Guardar**. El registro aparece en la tabla.
-5. Puedes **buscar**, **editar**, **eliminar** y **exportar** a Excel.
+## Las páginas
 
-Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar la página.
+- **Inicio** (`index.html`) — Portada: estado de la sala TIC y accesos a los cuatro servicios.
+- **Reservas TIC** (`reservas-tic.html`) — Inventario de equipos y reservas por bloque, con CRUD.
+- **Cabina** (`cabina-automatica.html`) — Cabina automática: genera un turno para el trámite elegido.
+- **Radio y votación** (`easy-radio-votacion.html`) — La emisora escolar: canciones y votación en vivo.
+- **Mesa de ayuda** (`mesa-ayuda.html`) — Reporte de fallas con radicado y seguimiento de estado.
 
-## Módulos
-
-- **👤 Usuarios** — 5 campos
-- **📦 Inventario y préstamos** — 5 campos
-- **📦 Sistema debe gestionar el préstamo y** — 5 campos
-- **📦 Estado de conservación y las novedades** — 5 campos
-- **📋 Registros** — 5 campos
-- **📦 Reportes del inventario y de los** — 5 campos
-- **📦 Identificar quién es responsable de cada** — 5 campos
-- **📦 Sobre equipos dañados o con mantenimiento** — 5 campos
-
-## Archivos
+## Los archivos
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | La estructura: las pantallas y sus contenedores. |
-| `css/estilos.css` | El diseño. Arriba están las variables de color: cambiar una cambia todo. |
-| `js/almacen.js` | Los datos: guardar, listar, editar y eliminar. |
-| `js/modulos.js` | Los módulos y sus campos. Aquí se agrega un campo nuevo. |
-| `js/app.js` | La lógica: menú, formularios, tablas y búsqueda. |
-| `logo.png` | El logo del proyecto. |
+| `index.html` | Portada y estado de la sala TIC.
+| `reservas-tic.html` | Equipos y reservas.
+| `cabina-automatica.html` | Turnos.
+| `easy-radio-votacion.html` | Emisora y votación.
+| `mesa-ayuda.html` | Reporte de fallas.
+| `construccion.html` | Archivo del proyecto.
+| `css/estilos.css` | Archivo del proyecto.
+| `js/techflow.js` | Turnos, votos y radicados.
+| `js/reservas.js` | Archivo del proyecto.
+| `js/cabina.js` | Archivo del proyecto.
+| `js/radio.js` | Archivo del proyecto.
+| `js/mesa-ayuda.js` | Archivo del proyecto.
 
-## Cómo publicarlo en internet
+## El equipo
 
-**Opción 1 — GitHub Pages (gratis):**
-1. Crea un repositorio en GitHub.
-2. Sube todos los archivos.
-3. Ve a *Settings → Pages* y elige la rama principal.
-4. GitHub te da una dirección pública.
+| Integrante | Rol en el proyecto |
+|---|---|
+| Estudiante líder de producto | Product Owner · alcance y validación con la sala TIC |
+| Estudiante de diseño | UI/UX · identidad, prototipos y accesibilidad |
+| Estudiante de lógica | Desarrollo JS · turnos, reservas y mesa de ayuda |
+| Estudiante de soporte | Guiones de atención y base de conocimiento |
 
-**Opción 2 — Netlify (gratis):**
-1. Entra a netlify.com y elige *Add new site → Deploy manually*.
-2. Arrastra la carpeta del proyecto.
+**Docente articulador:** Jorge Mario Patiño Marín  
+**Docente par:** Alejo Villa A
 
-## Cómo continuarlo
+## Cómo continuar en grado 11°
 
-- Los **campos** de cada módulo están en `js/modulos.js`: es lo primero que se cambia.
-- Los **colores** están en las variables de `css/estilos.css`.
-- Para pasar de localStorage a una base de datos real, solo hay que cambiar `js/almacen.js`.
+En grado 11° pasa a backend con inventario real, notificaciones y reportes de uso por dependencia.
 
 ---
 
-Generado por **Project Manager PasculIA** a partir de los requisitos funcionales del proyecto.
+Generado con **Project Manager PasculIA** · datos de ejemplo incluidos.

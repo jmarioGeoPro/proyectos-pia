@@ -28,35 +28,35 @@ del proyecto y su código está **comentado línea por línea**.
 |---|---|---|---|---|---|
 | 1 | [Alfabetizadores Lola](Alfabetizadores_Lola_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 2 | [Cine conCiencia](Cine_conCiencia_2025/) | I.E. Sol de Oriente | 11° | 2025 | 8 |
-| 3 | [Cine conCiencia](Cine_conCiencia_2026/) | I.E. Sol de Oriente | 10° | 2026 | 8 |
+| 3 | [Cine conCiencia](Cine_conCiencia_2026/) | I.E. Sol de Oriente | 10° | 2026 | 0 |
 | 4 | [ConvivIA](ConvivIA_2025/) | I.E. Sol de Oriente | 10° | 2025 | 8 |
-| 5 | [ConvivIA](ConvivIA_2026/) | I.E. Sol de Oriente | 11° | 2026 | 8 |
-| 6 | [Dual Language Center](Dual_Language_Center_2026/) | I.E. Sol de Oriente | 10° | 2026 | 7 |
+| 5 | [ConvivIA](ConvivIA_2026/) | I.E. Sol de Oriente | 11° | 2026 | 0 |
+| 6 | [Dual Language Center](Dual_Language_Center_2026/) | I.E. Sol de Oriente | 10° | 2026 | 0 |
 | 7 | [EcoChain Verde](EcoChain_Verde_2025/) | I.E. Sol de Oriente | 10° | 2025 | 8 |
-| 8 | [EcoChain Verde](EcoChain_Verde_2026/) | I.E. Sol de Oriente | 11° | 2026 | 8 |
+| 8 | [EcoChain Verde](EcoChain_Verde_2026/) | I.E. Sol de Oriente | 11° | 2026 | 0 |
 | 9 | [EduCompu](EduCompu_2025/) | I.E. Sol de Oriente | 11° | 2025 | 8 |
 | 10 | [EduConnect.IA](EduConnectIA_2025/) | I.E. Sol de Oriente | 11° | 2025 | 7 |
-| 11 | [EduConnect.IA](EduConnectIA_2026/) | I.E. Sol de Oriente | 10° | 2026 | 7 |
+| 11 | [EduConnect.IA](EduConnectIA_2026/) | I.E. Sol de Oriente | 10° | 2026 | 0 |
 | 12 | [EduViajes](EduViajes_2025/) | I.E. Sol de Oriente | 11° | 2025 | 8 |
-| 13 | [EduViajes](EduViajes_2026/) | I.E. Sol de Oriente | 10° | 2026 | 8 |
+| 13 | [EduViajes](EduViajes_2026/) | I.E. Sol de Oriente | 10° | 2026 | 0 |
 | 14 | [Great Food App](Great_Food_App_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 15 | [Hunter Food](Hunter_Food_2025/) | I.E. Sol de Oriente | 11° | 2025 | 8 |
 | 16 | [Hyper Emotion](Hyper_Emotion_2025/) | I.E. Sol de Oriente | 11° | 2025 | 7 |
 | 17 | [Imagen School](Imagen_School_2025/) | I.E. Sol de Oriente | 10° | 2025 | 7 |
-| 18 | [Imagen School](Imagen_School_2026/) | I.E. Sol de Oriente | 11° | 2026 | 7 |
+| 18 | [Imagen School](Imagen_School_2026/) | I.E. Sol de Oriente | 11° | 2026 | 0 |
 | 19 | [Inventory School](Inventory_School_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 20 | [LolaConnect](LolaConnect_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 21 | [Master Acudiente](Master_Acudiente_2025/) | I.E. Sol de Oriente | 10° | 2025 | 8 |
-| 22 | [Master Acudiente](Master_Acudiente_2026/) | I.E. Sol de Oriente | 11° | 2026 | 8 |
+| 22 | [Master Acudiente](Master_Acudiente_2026/) | I.E. Sol de Oriente | 11° | 2026 | 0 |
 | 23 | [Mindsport](Mindsport_2025/) | I.E. Sol de Oriente | 10° | 2025 | 8 |
-| 24 | [Mindsport](Mindsport_2026/) | I.E. Sol de Oriente | 11° | 2026 | 8 |
+| 24 | [Mindsport](Mindsport_2026/) | I.E. Sol de Oriente | 11° | 2026 | 0 |
 | 25 | [R.A.D.E](RADE_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 26 | [SolBox](SolBox_2025/) | I.E. Sol de Oriente | 10° | 2025 | 8 |
-| 27 | [SolBox](SolBox_2026/) | I.E. Sol de Oriente | 11° | 2026 | 8 |
+| 27 | [SolBox](SolBox_2026/) | I.E. Sol de Oriente | 11° | 2026 | 0 |
 | 28 | [SOMOS Potencialidades](SOMOS_Potencialidades_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 29 | [TDL Easy](TDL_Easy_2026/) | I.E. Lola González | 10° | 2026 | 0 |
-| 30 | [The School of The Lost Souls](The_School_of_The_Lost_Souls_2026/) | I.E. Sol de Oriente | 10° | 2026 | 7 |
-| 31 | [The TechFlow](The_TechFlow_2026/) | I.E. Sol de Oriente | 10° | 2026 | 8 |
+| 30 | [The School of The Lost Souls](The_School_of_The_Lost_Souls_2026/) | I.E. Sol de Oriente | 10° | 2026 | 0 |
+| 31 | [The TechFlow](The_TechFlow_2026/) | I.E. Sol de Oriente | 10° | 2026 | 0 |
 | 32 | [TimeFocus](TimeFocus_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 | 33 | [Tu Opinion Cuenta](Tu_Opinion_Cuenta_2026/) | I.E. Lola González | 10° | 2026 | 0 |
 

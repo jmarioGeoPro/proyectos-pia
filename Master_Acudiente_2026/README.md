@@ -1,79 +1,67 @@
-# Master Acudiente — aplicación web
+# Master Acudiente
 
-> La familia informada, el estudiante acompañado
+> Saber dónde está, cómo va y qué necesita
 
-**Proyecto Integrador de Aula (PIA) · I.E. Sol de Oriente · Grado 11° · 2026**
+**Proyecto Integrador de Aula (PIA) 2026** · I.E. Lola González · Grado 10° · Grupo 10°05
 Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo
 
 ---
 
 ## Qué es
 
-Monitoreo Académico en Tiempo Real
+Panel de monitoreo para el acudiente: asistencia, notas, novedades y alertas en tiempo real de su estudiante.
 
-## Cuenta de prueba
+**Problema que resuelve:** El acudiente solo se entera de los problemas cuando llega el boletín, y para entonces ya pasó el trimestre.
 
-Para revisarla **no hace falta registrarse**: la aplicación crea sola una cuenta la primera vez que se abre.
+**Estilo visual:** 18-master · menú top
 
-| | |
-|---|---|
-| **Correo** | `pruebas@pasculia.edu.co` |
-| **Contraseña** | `PascualBravo2026` |
-| **Rol** | Docente |
+## Cómo abrirlo
 
-> Es la **misma cuenta en las 33 aplicaciones**, para que quien las revise no tenga que memorizar nada.
-> También se puede crear una cuenta propia con el botón *Crear una cuenta*.
+1. Abre **`index.html`** con doble clic (no necesita servidor ni internet).
+2. La primera vez se cargan solos los **datos de ejemplo** (10 registros).
+3. Navega con el menú de arriba.
 
-## Cómo se usa
+Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar.
+Para volver a los datos de ejemplo: abre la consola del navegador y escribe `PIA.reiniciar()`.
 
-1. Abre el archivo **index.html** con doble clic (o sírvelo con un servidor local).
-2. Entra con la **cuenta de prueba** de arriba, o pulsa **Crear una cuenta** y regístrate.
-3. Elige un módulo en el menú de la izquierda.
-4. Llena el formulario y pulsa **Guardar**. El registro aparece en la tabla.
-5. Puedes **buscar**, **editar**, **eliminar** y **exportar** a Excel.
+## Las páginas
 
-Los datos se guardan en el navegador (localStorage), así que **no se pierden** al cerrar la página.
+- **Inicio** (`index.html`) — Portada del monitoreo.
+- **Estudiantes** (`estudiantes.html`) — Ficha de cada estudiante con su semáforo.
+- **Alertas** (`alertas.html`) — Alertas de inasistencia, notas y convivencia.
+- **Panel** (`panel.html`) — Panel completo del grupo.
 
-## Módulos
-
-- **👤 Usuarios** — 5 campos
-- **📋 Registros** — 5 campos
-- **🔔 Casos y seguimiento** — 6 campos
-- **📋 Al acudiente una vista general de** — 5 campos
-- **✉️ Mensajes y solicitudes** — 7 campos
-- **📋 Sistema debe manejar perfiles diferenciados** — 5 campos
-- **📋 Al docente registrar la asistencia de** — 5 campos
-- **📋 Historial consultable de las novedades de** — 5 campos
-
-## Archivos
+## Los archivos
 
 | Archivo | Para qué sirve |
 |---|---|
-| `index.html` | La estructura: las pantallas y sus contenedores. |
-| `css/estilos.css` | El diseño. Arriba están las variables de color: cambiar una cambia todo. |
-| `js/almacen.js` | Los datos: guardar, listar, editar y eliminar. |
-| `js/modulos.js` | Los módulos y sus campos. Aquí se agrega un campo nuevo. |
-| `js/app.js` | La lógica: menú, formularios, tablas y búsqueda. |
-| `logo.png` | El logo del proyecto. |
+| `index.html` | Portada del monitoreo.
+| `estudiantes.html` | Semáforo por estudiante.
+| `alertas.html` | Alertas abiertas.
+| `panel.html` | Grupo completo.
+| `construccion.html` | Archivo del proyecto.
+| `css/estilos.css` | Archivo del proyecto.
+| `js/master.js` | Semáforos y tablas.
+| `js/estudiantes.js` | Archivo del proyecto.
+| `js/alertas.js` | Archivo del proyecto.
+| `js/panel.js` | Archivo del proyecto.
 
-## Cómo publicarlo en internet
+## El equipo
 
-**Opción 1 — GitHub Pages (gratis):**
-1. Crea un repositorio en GitHub.
-2. Sube todos los archivos.
-3. Ve a *Settings → Pages* y elige la rama principal.
-4. GitHub te da una dirección pública.
+| Integrante | Rol en el proyecto |
+|---|---|
+| Estudiante líder de producto | Product Owner · qué necesita el acudiente |
+| Estudiante de diseño | UI/UX · paneles y alertas |
+| Estudiante de lógica | Desarrollo JS · semáforos y alertas |
+| Estudiante de datos | Asistencia, notas y novedades |
 
-**Opción 2 — Netlify (gratis):**
-1. Entra a netlify.com y elige *Add new site → Deploy manually*.
-2. Arrastra la carpeta del proyecto.
+**Docente articulador:** Jorge Mario Patiño Marín  
+**Docente par:** Alejo Villa A
 
-## Cómo continuarlo
+## Cómo continuar en grado 11°
 
-- Los **campos** de cada módulo están en `js/modulos.js`: es lo primero que se cambia.
-- Los **colores** están en las variables de `css/estilos.css`.
-- Para pasar de localStorage a una base de datos real, solo hay que cambiar `js/almacen.js`.
+En grado 11° integra notificaciones push y canal directo con el director de grupo.
 
 ---
 
-Generado por **Project Manager PasculIA** a partir de los requisitos funcionales del proyecto.
+Generado con **Project Manager PasculIA** · datos de ejemplo incluidos.

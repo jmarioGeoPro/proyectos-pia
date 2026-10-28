@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vista de un solo archivo</title>
+<!--
+  VERSION DE UN SOLO ARCHIVO
+  ------------------------------------------------------------------------
+  La misma aplicación, con el CSS, el JavaScript y las imágenes adentro.
+  Sirve para mostrarla con doble clic, sin servidor y sin internet.
+  La versión para entregar y trabajar en VS Code es la de carpetas separadas.
+  ------------------------------------------------------------------------
+-->
+<style>body{margin:0;font-family:Segoe UI,system-ui,sans-serif}.pia-barra{display:flex;align-items:center;gap:6px;padding:9px 14px;background:#171a22;border-bottom:1px solid #2a2e3a;flex-wrap:wrap;position:sticky;top:0;z-index:99}.pia-barra button{border:1px solid #2f3446;background:#1d2130;color:#cfd3e0;border-radius:8px;padding:6px 13px;font-size:12.5px;cursor:pointer;font-family:inherit}.pia-barra button:hover{background:#252b3d}.pia-barra button.activo{background:#3b82f6;border-color:#3b82f6;color:#fff}.pia-barra .aviso{margin-left:auto;font-size:11px;color:#8b93a7}#pantalla{min-height:calc(100vh - 50px)}.pia-pagina .barra-sup { position: static !important; }.pia-pagina .menu { position: static !important; transform: none !important; left: auto !important; width: 100% !important; max-width: 100% !important; box-shadow: none !important; }.pia-pagina .armazon { padding-top: 0 !important; padding-bottom: 0 !important; }.pia-pagina .pie { padding-bottom: 24px !important; }#piaEjemplos { display: none !important; }</style>
+</head>
+<body>
+<div class="pia-barra" id="barra"></div>
+<div id="pantalla"></div>
+<script id="piaCss" type="text/plain">/* ==========================================================================
+   SolBox — hoja de estilos
+   PIA 2026 · I.E. Lola González · Grado 10° · Grupo 10°05
+   --------------------------------------------------------------------------
+   Estilo: 16-solbox
+   Este archivo se arma con dos partes:
+     1. el carácter del proyecto (colores, tipografía, formas, detalles)
+     2. la base estructural que comparten los nueve proyectos
+   Cambiando las variables de :root cambia todo el aspecto sin tocar el resto.
+   ========================================================================== */
+/* ==========================================================================
+   BASE ESTRUCTURAL — la comparten los nueve proyectos.
+   Aquí va solo la ESTRUCTURA y los componentes. Los colores, la tipografía,
+   las formas y el menú los pone el tema de cada proyecto.
+   ========================================================================== */
+
+/* ---- 1. reinicio ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { min-height: 100vh; font-family: var(--fuente); color: var(--tinta); background: var(--fondo); line-height: 1.6; }
+img { max-width: 100%; display: block; }
+a { color: var(--acento-texto, var(--primario)); text-decoration: none; }
+button, input, select, textarea { font-family: inherit; font-size: inherit; }
+.oculto { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* ---- 2. armazón: cuatro formas de organizar la página ---- */
+/* Cada proyecto usa una: barra arriba, menú lateral, pestañas abajo o mixto. */
+.armazon { display: grid; min-height: 100vh; grid-template-columns: 1fr; }
+
+/* (a) barra arriba: el menú va debajo de la cabecera */
+.layout-top .armazon {
+  grid-template-areas: 'cab' 'menu' 'con' 'pie';
+  grid-template-rows: auto auto 1fr auto;
+}
+
+/* (b) menú lateral: una columna fija a la izquierda */
+.layout-sidebar .armazon {
+  grid-template-areas: 'cab cab' 'menu con' 'pie pie';
+  grid-template-columns: var(--ancho-menu) 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* (c) pestañas abajo: como una aplicación de teléfono */
+.layout-tabs .armazon {
+  grid-template-areas: 'cab' 'con' 'tabs';
+  grid-template-rows: auto 1fr auto;
+}
+
+.barra-sup { grid-area: cab; }
+.menu { grid-area: menu; }
+.contenido { grid-area: con; }
+.pie { grid-area: pie; }
+.menu-tabs { grid-area: tabs; }
+
+/* ---- 3. barra superior ---- */
+.barra-sup { display: flex; align-items: center; gap: 14px; padding: 10px 20px; flex-wrap: wrap; position: sticky; top: 0; z-index: 60; background: var(--barra-fondo); color: var(--barra-tinta); backdrop-filter: blur(8px); }
+.layout-sidebar .barra-sup, .layout-split .barra-sup { grid-column: 1 / -1; }
+.marca { display: flex; align-items: center; gap: 12px; color: inherit; }
+.marca-logo { width: 46px; height: 46px; object-fit: contain; border-radius: var(--radio-logo); background: var(--logo-fondo); padding: 4px; flex: none; }
+.marca-texto b { display: block; font-size: 15.5px; line-height: 1.15; letter-spacing: var(--letra-titulo); }
+.marca-texto span { font-size: 11px; opacity: .72; }
+
+/* ---- 4. menú ---- */
+/* (a) y (c): barra horizontal bajo la cabecera */
+.layout-top .menu { display: flex; gap: 4px; flex-wrap: wrap; padding: 8px clamp(14px, 3vw, 34px); background: var(--barra-fondo); border-bottom: 1px solid var(--linea); }
+
+/* (b) menú lateral: columna completa */
+.layout-sidebar .menu { display: flex; flex-direction: column; gap: 3px; padding: 16px 12px; background: var(--superficie); border-right: 1px solid var(--linea); }
+.menu a { padding: 8px 14px; border-radius: var(--radio-boton); font-size: var(--menu-tam); font-weight: var(--menu-peso); color: inherit; opacity: .74; white-space: nowrap; transition: background .18s, opacity .18s, transform .18s; }
+.menu a:hover { opacity: 1; background: var(--menu-hover); }
+.menu a.activo { opacity: 1; background: var(--menu-activo-fondo); color: var(--menu-activo-tinta); box-shadow: var(--menu-activo-sombra); }
+
+/* el menú lateral ocupa todo el ancho de su columna */
+.layout-sidebar .menu a { width: 100%; }
+
+/* menú inferior tipo aplicación */
+.menu-tabs { position: sticky; bottom: 0; z-index: 60; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); background: var(--barra-fondo); border-top: 1px solid var(--linea); }
+.menu-tabs a { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 7px 4px; border-radius: 12px; font-size: 10.5px; color: var(--barra-tinta); opacity: .6; }
+.menu-tabs a b { font-size: 17px; font-weight: 400; line-height: 1; }
+.menu-tabs a.activo { opacity: 1; background: var(--menu-activo-fondo); color: var(--menu-activo-tinta); }
+
+/* ---- 5. contenido ---- */
+.contenido { padding: var(--espacio) clamp(14px, 3vw, 34px) calc(var(--espacio) * 2); max-width: var(--ancho-contenido); width: 100%; margin: 0 auto; }
+.volanta { display: flex; align-items: center; gap: 10px; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--acento-texto); margin-bottom: 8px; }
+.volanta::before { content: ''; width: 26px; height: 2px; background: currentColor; border-radius: 2px; }
+
+/* ---- 6. pie ---- */
+.pie { padding: 26px 20px; text-align: center; font-size: 12px; color: var(--pie-tinta); background: var(--pie-fondo); border-top: 1px solid var(--linea); }
+.pie .equipo { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.pie .equipo span { background: var(--chip-fondo); padding: 3px 11px; border-radius: 20px; font-size: 11px; }
+.pie .linea { margin-top: 5px; opacity: .82; }
+
+/* ---- 7. tarjetas ---- */
+.tarjeta { background: var(--superficie); border: var(--borde-tarjeta); border-radius: var(--radio-tarjeta); box-shadow: var(--sombra); padding: clamp(16px, 2vw, 24px); margin-bottom: 18px; position: relative; transition: box-shadow .2s, transform .2s; }
+.tarjeta:hover { box-shadow: var(--sombra-alta); }
+.tarjeta > h2 { font-size: var(--h2); margin-bottom: 4px; letter-spacing: var(--letra-titulo); }
+.tarjeta > h2 + .ayuda { margin-top: 0; }
+.tarjeta .ayuda { font-size: 13.5px; color: var(--gris); margin-bottom: 16px; }
+.tarjeta h3 { font-size: 14.5px; margin: 18px 0 8px; }
+.tarjeta.destacada { border: var(--borde-destacado); }
+
+/* ---- 8. rejillas ---- */
+.rejilla { display: grid; gap: var(--hueco); }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.g3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); }
+.g4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+
+/* ---- 9. formularios ---- */
+.campo { display: flex; flex-direction: column; gap: 5px; margin-bottom: 13px; }
+.campo label { font-size: 12.5px; font-weight: var(--label-peso); color: var(--label-color); letter-spacing: .01em; }
+.campo label .req { color: var(--peligro); }
+.campo input, .campo select, .campo textarea { width: 100%; border: var(--borde-campo); border-radius: var(--radio-campo); padding: 10px 13px; background: var(--campo-fondo); color: var(--tinta); transition: border-color .16s, box-shadow .16s; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--primario); box-shadow: 0 0 0 3px var(--foco); }
+.campo textarea { min-height: 92px; resize: vertical; }
+.campo .pista { font-size: 11.5px; color: var(--gris); }
+
+/* ---- 10. botones ---- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: var(--borde-boton); background: var(--boton-fondo); color: var(--boton-tinta); border-radius: var(--radio-boton); padding: 10px 18px; font-size: 13.5px; font-weight: var(--boton-peso); cursor: pointer; text-decoration: none; transition: transform .14s, box-shadow .14s, background .14s, border-color .14s; letter-spacing: var(--letra-boton); }
+.btn:hover { transform: var(--boton-hover); box-shadow: var(--sombra); }
+.btn:active { transform: translateY(0) scale(.985); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.btn.p { background: var(--primario); border-color: var(--primario); color: var(--primario-tinta); }
+.btn.a { background: var(--acento); border-color: var(--acento); color: var(--acento-tinta); }
+.btn.ok { background: var(--ok); border-color: var(--ok); color: #fff; }
+.btn.pel { background: var(--peligro); border-color: var(--peligro); color: #fff; }
+.btn.fantasma { background: transparent; border-color: var(--linea-fuerte); }
+.btn.pq { padding: 5px 11px; font-size: 12px; }
+.btn.gr { width: 100%; }
+
+/* ---- 11. tablas ---- */
+.tabla-envoltura { overflow-x: auto; border-radius: var(--radio-tabla); border: 1px solid var(--linea); }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--superficie); }
+th, td { padding: 10px 13px; text-align: left; border-bottom: 1px solid var(--linea); vertical-align: top; }
+th { font-size: 11px; text-transform: uppercase; letter-spacing: .07em; color: var(--th-tinta); background: var(--th-fondo); font-weight: 700; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+tbody tr { transition: background .12s; }
+tbody tr:hover td { background: var(--fila-hover); }
+td .acciones { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* ---- 12. etiquetas de estado ---- */
+.badge { display: inline-block; padding: 2px 10px; border-radius: var(--radio-badge); font-size: 11.5px; font-weight: 700; white-space: nowrap; letter-spacing: .01em; }
+.badge.ok, .badge.ok { background: var(--ok-suave); color: var(--ok-texto); }
+.badge.warn { background: var(--alerta-suave); color: var(--alerta-texto); }
+.badge.mal { background: var(--peligro-suave); color: var(--peligro-texto); }
+.badge.info { background: var(--info-suave); color: var(--info-texto); }
+.badge.neutro { background: var(--neutro-suave); color: var(--gris); }
+
+/* ---- 13. avisos ---- */
+.aviso { border-left: var(--aviso-grosor) solid var(--info); background: var(--info-suave); padding: 12px 16px; border-radius: 0 var(--radio-campo) var(--radio-campo) 0; font-size: 13.5px; margin-bottom: 15px; }
+.aviso.ok { border-color: var(--ok); background: var(--ok-suave); color: var(--ok-texto); }
+.aviso.mal { border-color: var(--peligro); background: var(--peligro-suave); color: var(--peligro-texto); }
+.aviso.warn { border-color: var(--alerta); background: var(--alerta-suave); color: var(--alerta-texto); }
+
+/* ---- 14. indicadores ---- */
+.indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: var(--hueco); margin-bottom: 20px; }
+.indicador { background: var(--superficie); border-radius: var(--radio-tarjeta); padding: 16px 18px; border: var(--borde-tarjeta); box-shadow: var(--sombra); position: relative; overflow: hidden; }
+.indicador b { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .09em; color: var(--gris); font-weight: 700; }
+.indicador strong { display: block; font-size: clamp(24px, 3vw, 32px); color: var(--primario); line-height: 1.15; letter-spacing: -0.02em; }
+.indicador span { font-size: 11.5px; color: var(--gris); }
+
+/* ---- 15. aviso flotante ---- */
+.toast { position: fixed; right: 20px; bottom: 20px; z-index: 900; background: var(--ok); color: #fff; padding: 13px 20px; border-radius: var(--radio-toast); font-size: 13.5px; box-shadow: var(--sombra-alta); max-width: min(380px, calc(100vw - 40px)); animation: toastEntra .26s cubic-bezier(.2,.9,.3,1.2); }
+.toast.mal { background: var(--peligro); }
+.toast.warn { background: var(--alerta); }
+@keyframes toastEntra { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
+
+/* ---- 16. ventana ---- */
+.modal-fondo { position: fixed; inset: 0; background: rgba(8, 12, 22, .55); z-index: 1000; display: flex; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow-y: auto; backdrop-filter: blur(3px); animation: funde .18s; }
+@keyframes funde { from { opacity: 0; } to { opacity: 1; } }
+.modal { background: var(--superficie); border-radius: var(--radio-modal); width: 100%; max-width: 640px; box-shadow: var(--sombra-alta); animation: sube .22s cubic-bezier(.2,.9,.3,1.1); }
+@keyframes sube { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: none; } }
+.modal .cabeza { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--linea); }
+.modal .cabeza h3 { font-size: 16px; margin: 0; }
+.modal .cuerpo { padding: 18px 20px; max-height: 66vh; overflow-y: auto; }
+.modal .pie2 { display: flex; justify-content: flex-end; gap: 9px; padding: 14px 20px; border-top: 1px solid var(--linea); background: var(--fondo); border-radius: 0 0 var(--radio-modal) var(--radio-modal); }
+.cerrar { border: 0; background: transparent; font-size: 16px; cursor: pointer; color: var(--gris); padding: 5px 9px; border-radius: 8px; }
+.cerrar:hover { background: var(--fila-hover); }
+
+/* ---- 17. barra de progreso ---- */
+.barra { height: 9px; background: var(--linea); border-radius: 20px; overflow: hidden; }
+.barra i { display: block; height: 100%; background: var(--primario); border-radius: 20px; transition: width .5s cubic-bezier(.3,.9,.3,1); }
+
+/* ---- 18. utilidades ---- */
+.fila { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.derecha { margin-left: auto; }
+.centro { text-align: center; }
+.gris { color: var(--gris); }
+.pequeno { font-size: 12px; }
+.mono { font-family: var(--fuente-mono); letter-spacing: .04em; }
+.vacio { text-align: center; color: var(--gris); padding: 30px 20px; font-size: 13.5px; }
+.vacio::before { content: '○'; display: block; font-size: 30px; opacity: .4; margin-bottom: 6px; }
+.oculto-impresion { }
+
+/* ---- 18b. bloque de pseudocódigo ---- */
+.codigo {
+  background: var(--superficie); border: var(--borde-tarjeta); border-radius: var(--radio-tarjeta);
+  padding: 16px 18px; overflow-x: auto; margin: 0;
+  font-family: var(--fuente-mono); font-size: 12.5px; line-height: 1.7;
+  white-space: pre; color: var(--tinta); tab-size: 2;
+}
+
+/* ---- 19. animaciones de entrada ---- */
+@keyframes aparece { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.anim { animation: aparece .34s ease-out both; }
+
+/* ---- 20. adaptación ---- */
+@media (max-width: 900px) {
+  /* en pantallas pequeñas el menú lateral se vuelve una barra arriba */
+  .layout-sidebar .armazon { grid-template-areas: 'cab' 'menu' 'con' 'pie'; grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; }
+  .layout-sidebar .menu { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--linea); padding: 8px 12px; }
+  .layout-sidebar .menu a { width: auto; padding: 8px 13px; white-space: nowrap; }
+}
+@media (max-width: 640px) {
+  .contenido { padding: 16px 13px 46px; }
+  .barra-sup { padding: 9px 13px; gap: 9px; }
+  .marca-logo { width: 38px; height: 38px; }
+  .marca-texto b { font-size: 14px; }
+  .menu { width: 100%; margin-left: 0; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 3px; }
+  .btn { width: 100%; }
+  .fila .btn { width: auto; }
+}
+@media print {
+  .barra-sup, .pie, .menu, .menu-tabs, .btn, .toast, .modal-fondo, .no-impresion { display: none !important; }
+  body { background: #fff; }
+  .tarjeta { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+}
+
+/* TEMA SOLBOX — buzón ciudadano · océano nocturno + cobre, formas firmes */
+:root{
+  --fuente:'Segoe UI',system-ui,sans-serif; --fuente-mono:'Consolas',monospace;
+  --tinta:#0b1a2b; --fondo:#eef4fb; --superficie:#ffffff; --gris:#5a6b80;
+  --linea:#d8e3f0; --linea-fuerte:#b9cde2;
+  --primario:#0b3d6b; --primario-tinta:#fff; --acento:#c2703d; --acento-tinta:#fff; --acento-texto:#9a4f22;
+  --ok:#15803d; --ok-suave:#dcfce7; --ok-texto:#14532d;
+  --alerta:#b45309; --alerta-suave:#fef3c7; --alerta-texto:#78350f;
+  --peligro:#b91c1c; --peligro-suave:#fee2e2; --peligro-texto:#7f1d1d;
+  --info:#0b3d6b; --info-suave:#dbeafe; --info-texto:#1e3a8a; --neutro-suave:#e8eef6;
+  --barra-fondo:#ffffff; --barra-tinta:#0b3d6b;
+  --menu-hover:#e8eef6; --menu-activo-fondo:#0b3d6b; --menu-activo-tinta:#fff; --menu-activo-sombra:0 4px 14px rgba(11,61,107,.3);
+  --pie-fondo:#0b1a2b; --pie-tinta:#b9cde2; --chip-fondo:rgba(255,255,255,.1);
+  --radio-tarjeta:5px; --radio-boton:5px; --radio-campo:5px; --radio-modal:8px; --radio-tabla:5px;
+  --radio-badge:3px; --radio-toast:5px; --radio-logo:6px;
+  --sombra:0 1px 4px rgba(11,26,43,.08),0 6px 20px rgba(11,26,43,.06); --sombra-alta:0 18px 44px rgba(11,26,43,.2);
+  --borde-tarjeta:1px solid #d8e3f0; --borde-destacado:2px solid #c2703d; --borde-campo:1px solid #c7d6e6;
+  --borde-boton:1px solid #d8e3f0; --campo-fondo:#fbfdff;
+  --th-fondo:#eef4fb; --th-tinta:#5a6b80; --fila-hover:#f7fafd; --foco:rgba(11,61,107,.28); --logo-fondo:#fff;
+  --boton-fondo:#fff; --boton-tinta:#0b3d6b; --boton-peso:700; --boton-hover:translateY(-1px); --letra-boton:.02em;
+  --h2:18px; --letra-titulo:0em; --menu-tam:13px; --menu-peso:700;
+  --label-peso:700; --label-color:#2c4058; --espacio:26px; --hueco:16px;
+  --ancho-contenido:1120px; --ancho-menu:242px; --aviso-grosor:4px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{background:#eef4fb;background-image:linear-gradient(180deg,rgba(11,61,107,.07),transparent 300px);color:#0b1a2b}
+.marca-logo{width:46px;height:46px;border-radius:6px;object-fit:contain;background:#fff;box-shadow:0 2px 8px rgba(11,61,107,.18)}
+.marca-texto b{color:#0b3d6b;font-size:16.5px;display:block;line-height:1.15}
+.marca-texto span{color:#6a7b90;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.layout-top .menu{display:flex;justify-content:center;gap:2px;flex-wrap:wrap;padding:0 clamp(14px,3vw,30px);background:#fff;border-bottom:3px solid #0b3d6b}
+.layout-top .menu a{color:#5a6b80;font-size:13px;font-weight:700;padding:12px 16px;border-radius:0;position:relative;transition:color .16s,background .16s}
+.layout-top .menu a:hover{color:#0b3d6b;background:#eef4fb}
+.layout-top .menu a.activo,.layout-top .menu a.activo:hover{color:#0b3d6b!important;background:transparent!important;box-shadow:none!important}
+.layout-top .menu a.activo::after{content:'';position:absolute;left:10px;right:10px;bottom:0;height:3px;background:#c2703d}
+.portada{background:linear-gradient(150deg,#0b1a2b 0%,#0b3d6b 60%,#1d5c94 100%);color:#fff;border-radius:6px;padding:clamp(24px,3.6vw,40px);margin-bottom:22px;position:relative;overflow:hidden;border-left:6px solid #c2703d}
+.portada::after{content:'';position:absolute;right:-50px;bottom:-70px;width:240px;height:240px;border:2px solid rgba(194,112,61,.35);border-radius:50%}
+.portada h1{font-size:clamp(26px,4vw,40px);line-height:1.08;margin-bottom:9px;letter-spacing:-.02em;position:relative}
+.portada p{color:#c7d9ec;max-width:58ch;position:relative}
+.portada .sellos{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;position:relative}
+.portada .sello{font-size:11px;color:#e8a97a;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.portada .sello::before{content:'▪ ';}
+.servicio{background:#fff;border:1px solid #d8e3f0;border-radius:5px;padding:20px 18px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.servicio:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(11,61,107,.13);border-color:#b9cde2}
+.servicio .ico{width:44px;height:44px;border-radius:5px;display:grid;place-items:center;font-size:20px;margin-bottom:11px;background:#eef4fb}
+.servicio h3{color:#0b3d6b;font-size:15px;margin-bottom:4px}
+.servicio p{color:#5a6b80;font-size:13px}
+.cifra{text-align:center;padding:15px 10px;background:#fff;border:1px solid #d8e3f0;border-radius:5px;border-top:3px solid #c2703d}
+.cifra strong{display:block;font-size:clamp(26px,3.8vw,40px);color:#0b3d6b;letter-spacing:-.03em;line-height:1}
+.cifra b{display:block;color:#9a4f22;font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;margin-top:7px}
+.cifra span{color:#6a7b90;font-size:12px}
+.persona{text-align:center}
+.persona .foto{width:62px;height:62px;border-radius:5px;margin:0 auto 9px;display:grid;place-items:center;background:#0b3d6b;color:#e8a97a;font-size:19px;font-weight:800}
+.persona b{display:block;color:#0b3d6b;font-size:13px}
+.persona span{color:#6a7b90;font-size:11.5px}
+.aviso{background:#eef4fb;border-left:4px solid #0b3d6b;padding:11px 14px;border-radius:4px;font-size:13.5px;margin-bottom:14px}
+.radicado{background:#fff;border:2px dashed #c2703d;border-radius:6px;padding:16px;text-align:center}
+.radicado b{display:block;font-family:var(--fuente-mono);font-size:24px;color:#0b3d6b;letter-spacing:.06em}
+.codigo{background:#fbfdff;border:1px solid #d8e3f0;border-radius:5px;padding:16px 18px;overflow-x:auto;font-family:var(--fuente-mono);font-size:12.5px;line-height:1.7;white-space:pre;color:#0b1a2b}
+.pie{background:#0b1a2b;color:#b9cde2;padding-top:26px}
+.pie b{color:#fff}
+.pie .equipo span{background:rgba(255,255,255,.1);color:#d8e6f4;border-radius:3px;padding:4px 11px;font-size:11.5px}
+.pie .linea{color:#8ea6bf;font-size:11.5px}
+.pie a{color:#e8a97a}
+@media(max-width:820px){.layout-top .menu{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}.layout-top .menu a{white-space:nowrap;padding:11px 13px}.portada{border-left-width:5px}}
+
+
+
+</script>
+<script id="piaJs" type="text/plain">/* ==========================================================================
+   NÚCLEO COMÚN — viaja igual en los nueve proyectos del Lola
+   --------------------------------------------------------------------------
+   Aquí está todo lo que se repite: la bóveda de datos, las utilidades y los
+   avisos en pantalla. Los demás archivos usan este núcleo y solo se encargan
+   de su propia función.
+
+   La bóveda guarda en localStorage (el almacén del navegador), así los datos
+   no se pierden al cerrar la página y no hace falta un servidor.
+   ========================================================================== */
+
+'use strict';
+
+/* El nombre con el que este proyecto guarda sus datos. */
+var CLAVE_DATOS = "pia_solbox";
+
+/* Los datos de ejemplo. Se cargan solo la primera vez, cuando no hay nada.
+   Son los mismos que están en la carpeta data/ del proyecto. */
+var SEMILLA = {
+  "solicitudes": [
+    {
+      "id": 1,
+      "radicado": "SB-2026-0001",
+      "tipo": "Queja",
+      "zona": "Cafetería",
+      "asunto": "El microondas no funciona",
+      "estado": "En revisión",
+      "dias": 1,
+      "autor": "Anon_204"
+    },
+    {
+      "id": 2,
+      "radicado": "SB-2026-0002",
+      "tipo": "Sugerencia",
+      "zona": "Biblioteca",
+      "asunto": "Ampliar el horario en semana de exámenes",
+      "estado": "Respondida",
+      "dias": 2,
+      "autor": "Ana S."
+    },
+    {
+      "id": 3,
+      "radicado": "SB-2026-0003",
+      "tipo": "Petición",
+      "zona": "Baños",
+      "asunto": "Falta jabón en el baño de mujeres",
+      "estado": "En revisión",
+      "dias": 3,
+      "autor": "Anon_118"
+    },
+    {
+      "id": 4,
+      "radicado": "SB-2026-0004",
+      "tipo": "Reconocimiento",
+      "zona": "Aulas",
+      "asunto": "Gracias al profe de matemáticas por la nivelación",
+      "estado": "Respondida",
+      "dias": 0,
+      "autor": "Juan D."
+    },
+    {
+      "id": 5,
+      "radicado": "SB-2026-0005",
+      "tipo": "Queja",
+      "zona": "Canchas",
+      "asunto": "El arco de la cancha está roto",
+      "estado": "Vencida",
+      "dias": 6,
+      "autor": "Samuel A."
+    }
+  ],
+  "zonas": [
+    {
+      "id": 1,
+      "nombre": "Cafetería",
+      "responsable": "Coordinación",
+      "total": 12
+    },
+    {
+      "id": 2,
+      "nombre": "Biblioteca",
+      "responsable": "Rectoría",
+      "total": 8
+    },
+    {
+      "id": 3,
+      "nombre": "Baños",
+      "responsable": "Servicios generales",
+      "total": 15
+    },
+    {
+      "id": 4,
+      "nombre": "Canchas",
+      "responsable": "Educación física",
+      "total": 9
+    },
+    {
+      "id": 5,
+      "nombre": "Aulas",
+      "responsable": "Coordinación",
+      "total": 21
+    }
+  ],
+  "mensajes": []
+};
+
+var PIA = (function () {
+
+  /* ---------------- 1. LA BÓVEDA DE DATOS ---------------- */
+
+  /*
+   * Algunos navegadores no dejan usar localStorage (por ejemplo dentro de un
+   * marco sin origen propio). En ese caso se guarda en memoria: la aplicación
+   * funciona igual, solo que los datos no sobreviven al cerrar la página.
+   */
+  var MEMORIA = null;
+
+  function almacenDisponible() {
+    try { localStorage.setItem('__pia_prueba__', '1'); localStorage.removeItem('__pia_prueba__'); return true; }
+    catch (e) { return false; }
+  }
+  var HAY_ALMACEN = almacenDisponible();
+
+  /** Lee todo lo guardado. Si algo está dañado, empieza de cero. */
+  function leerTodo() {
+    if (!HAY_ALMACEN) return MEMORIA ? JSON.parse(JSON.stringify(MEMORIA)) : {};
+    try {
+      var crudo = localStorage.getItem(CLAVE_DATOS);
+      return crudo ? JSON.parse(crudo) : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  /** Guarda todo. */
+  function guardarTodo(todo) {
+    if (!HAY_ALMACEN) { MEMORIA = JSON.parse(JSON.stringify(todo)); return; }
+    try { localStorage.setItem(CLAVE_DATOS, JSON.stringify(todo)); }
+    catch (e) { MEMORIA = JSON.parse(JSON.stringify(todo)); HAY_ALMACEN = false; }
+  }
+
+  /** Carga la semilla si el proyecto todavía no tiene datos. */
+  function sembrar() {
+    var todo = leerTodo();
+    if (Object.keys(todo).length > 0) return;
+    guardarTodo(JSON.parse(JSON.stringify(SEMILLA)));
+  }
+
+  /** Devuelve todas las filas de una tabla. */
+  function listar(tabla) {
+    var todo = leerTodo();
+    return (todo[tabla] || []).slice();
+  }
+
+  /** Reemplaza todas las filas de una tabla. */
+  function guardar(tabla, filas) {
+    var todo = leerTodo();
+    todo[tabla] = filas;
+    guardarTodo(todo);
+  }
+
+  /** Inserta una fila y le pone un id que no se repite. */
+  function insertar(tabla, fila) {
+    var filas = listar(tabla);
+    var id = filas.reduce(function (m, f) { return Math.max(m, Number(f.id) || 0); }, 0) + 1;
+    var nueva = Object.assign({}, fila, { id: id, creado: new Date().toISOString() });
+    filas.push(nueva);
+    guardar(tabla, filas);
+    return nueva;
+  }
+
+  /** Actualiza una fila que ya existe. */
+  function actualizar(tabla, id, cambios) {
+    var filas = listar(tabla);
+    for (var i = 0; i < filas.length; i++) {
+      if (Number(filas[i].id) === Number(id)) {
+        filas[i] = Object.assign({}, filas[i], cambios, { id: Number(id) });
+        guardar(tabla, filas);
+        return filas[i];
+      }
+    }
+    return null;
+  }
+
+  /** Elimina una fila. */
+  function eliminar(tabla, id) {
+    guardar(tabla, listar(tabla).filter(function (f) { return Number(f.id) !== Number(id); }));
+  }
+
+  /** Cuenta las filas de una tabla. */
+  function contar(tabla) { return listar(tabla).length; }
+
+  /** Borra todo y vuelve a la semilla. */
+  function reiniciar() {
+    MEMORIA = null;
+    try { localStorage.removeItem(CLAVE_DATOS); } catch (e) {}
+    sembrar();
+  }
+
+  /* ---------------- 2. UTILIDADES ---------------- */
+
+  /** Evita que un texto se interprete como código (protege de inyecciones). */
+  function esc(t) {
+    return String(t == null ? '' : t)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  /** Quita tildes y mayúsculas, para comparar textos escritos a mano. */
+  function normalizar(t) {
+    return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  /** Fecha de hoy en formato aaaa-mm-dd (el que entienden los campos de fecha). */
+  function hoy() { return new Date().toISOString().slice(0, 10); }
+
+  /** Da formato a una fecha para mostrarla. */
+  function fecha(v) {
+    if (!v) return '—';
+    var d = new Date(String(v).length === 10 ? v + 'T00:00:00' : v);
+    if (isNaN(d.getTime())) return String(v);
+    return d.toLocaleDateString('es-CO', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+  /** Fecha y hora para mostrarla. */
+  function fechaHora(v) {
+    if (!v) return '—';
+    var d = new Date(v);
+    if (isNaN(d.getTime())) return String(v);
+    return d.toLocaleDateString('es-CO') + ' ' + d.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  /** Suma días hábiles (salta sábados y domingos). Se usa para los plazos. */
+  function sumarDiasHabiles(fechaBase, dias) {
+    var d = new Date(String(fechaBase).length === 10 ? fechaBase + 'T00:00:00' : fechaBase);
+    var sumados = 0;
+    while (sumados < dias) {
+      d.setDate(d.getDate() + 1);
+      var dia = d.getDay();
+      if (dia !== 0 && dia !== 6) sumados++;
+    }
+    return d.toISOString().slice(0, 10);
+  }
+
+  /** Cuenta las palabras de un texto. */
+  function palabras(t) { return String(t || '').trim().split(/\s+/).filter(Boolean).length; }
+
+  /** Da formato de pesos colombianos. */
+  function moneda(n) { return '$' + Number(n || 0).toLocaleString('es-CO'); }
+
+  /** Deja un número con los decimales indicados. */
+  function num(n, dec) { return Number(n || 0).toFixed(dec == null ? 1 : dec); }
+
+  /** Genera un código único con prefijo y consecutivo de 4 dígitos. */
+  function codigo(prefijo, tabla, campo) {
+    var filas = listar(tabla);
+    var mayor = 0;
+    filas.forEach(function (f) {
+      var m = String(f[campo] || '').match(/(\d+)$/);
+      if (m) mayor = Math.max(mayor, Number(m[1]));
+    });
+    return prefijo + String(mayor + 1).padStart(4, '0');
+  }
+
+  /** Devuelve el parámetro de la dirección (?codigo=TOC-2026-0001). */
+  function parametro(nombre) { return new URLSearchParams(window.location.search).get(nombre) || ''; }
+
+  /* ---------------- 3. AVISOS EN PANTALLA ---------------- */
+
+  /** Muestra un aviso flotante que desaparece solo. */
+  function toast(mensaje, tipo) {
+    var viejo = document.getElementById('piaToast');
+    if (viejo) viejo.remove();
+    var caja = document.createElement('div');
+    caja.id = 'piaToast';
+    caja.className = 'toast' + (tipo === 'mal' ? ' mal' : tipo === 'warn' ? ' warn' : '');
+    caja.textContent = mensaje;
+    document.body.appendChild(caja);
+    setTimeout(function () { caja.remove(); }, 4200);
+  }
+
+  /** Pinta una tabla a partir de los encabezados y las filas. */
+  function tabla(encabezados, filas, opciones) {
+    var o = opciones || {};
+    if (!filas.length) return '<div class="vacio">' + esc(o.vacio || 'Todavía no hay registros.') + '</div>';
+    var h = '<div class="tabla-envoltura"><table><thead><tr>';
+    h += encabezados.map(function (e) { return '<th>' + e + '</th>'; }).join('');
+    h += '</tr></thead><tbody>';
+    filas.forEach(function (f) {
+      h += '<tr>' + f.map(function (c) { return '<td>' + c + '</td>'; }).join('') + '</tr>';
+    });
+    return h + '</tbody></table></div>';
+  }
+
+  /** Abre una ventana con un contenido y unos botones. */
+  function modal(titulo, cuerpoHtml, botones) {
+    cerrarModal();
+    var fondo = document.createElement('div');
+    fondo.className = 'modal-fondo';
+    fondo.id = 'piaModal';
+    fondo.innerHTML = '<div class="modal"><div class="cabeza"><h3>' + esc(titulo) +
+      '</h3><button class="cerrar" onclick="PIA.cerrarModal()" title="Cerrar">✕</button></div>' +
+      '<div class="cuerpo">' + cuerpoHtml + '</div>' +
+      '<div class="pie2">' + (botones || '<button class="btn" onclick="PIA.cerrarModal()">Cerrar</button>') + '</div></div>';
+    document.body.appendChild(fondo);
+    fondo.addEventListener('click', function (ev) { if (ev.target === fondo) cerrarModal(); });
+    return fondo;
+  }
+
+  /** Cierra la ventana abierta. */
+  function cerrarModal() { var m = document.getElementById('piaModal'); if (m) m.remove(); }
+
+  /** Devuelve el valor de un campo del formulario. */
+  function valor(id) { var el = document.getElementById(id); return el ? String(el.value || '').trim() : ''; }
+
+  /** Pone un valor en un campo del formulario. */
+  function poner(id, v) { var el = document.getElementById(id); if (el) el.value = v == null ? '' : v; }
+
+  /** Marca la página actual en el menú. */
+  function marcarMenu() {
+    var actual = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.menu a, .menu-tabs a').forEach(function (a) {
+      var destino = (a.getAttribute('href') || '').split('?')[0].split('#')[0];
+      if (destino === actual) a.classList.add('activo');
+    });
+  }
+
+  /* ---------------- 4. ARRANQUE ---------------- */
+
+  /* Los datos quedan listos de inmediato, no cuando el navegador avise:
+     así cualquier otro archivo puede leerlos desde su primera línea. */
+  sembrar();
+
+  document.addEventListener('DOMContentLoaded', function () {
+    sembrar();
+    marcarMenu();
+  });
+
+  return {
+    clave: CLAVE_DATOS, semilla: SEMILLA,
+    leerTodo: leerTodo, guardarTodo: guardarTodo, sembrar: sembrar, reiniciar: reiniciar,
+    listar: listar, guardar: guardar, insertar: insertar, actualizar: actualizar, eliminar: eliminar, contar: contar,
+    esc: esc, normalizar: normalizar, hoy: hoy, fecha: fecha, fechaHora: fechaHora,
+    sumarDiasHabiles: sumarDiasHabiles, palabras: palabras, moneda: moneda, num: num, codigo: codigo,
+    parametro: parametro, toast: toast, tabla: tabla, modal: modal, cerrarModal: cerrarModal,
+    valor: valor, poner: poner, marcarMenu: marcarMenu
+  };
+})();
+
+
+/* la ficha oficial, tal como está en el documento PIA */
+PIA.ficha = null;
+PIA.equipo = [
+  {
+    "nombre": "Estudiante líder de producto",
+    "rol": "Product Owner · proceso PQRS y plazos"
+  },
+  {
+    "nombre": "Estudiante de diseño",
+    "rol": "UI/UX · identidad y accesibilidad"
+  },
+  {
+    "nombre": "Estudiante de lógica",
+    "rol": "Desarrollo JS · radicado y filtro"
+  },
+  {
+    "nombre": "Estudiante de análisis",
+    "rol": "Panel de gestión y reportes"
+  }
+];
+PIA.construccion = {
+  "algoritmo": [],
+  "tablas": []
+};
+
+/* ==========================================================================
+   EXTRAS COMUNES — SolBox
+   --------------------------------------------------------------------------
+   Aquí van las funciones que hacen que la aplicación se sienta viva y que
+   no son propias de un solo proyecto: roles, exportar, imprimir, ordenar,
+   buscar, confirmaciones elegantes, deshacer, atajos y celebraciones.
+   ========================================================================== */
+
+/* ---------------- 1. ROLES ---------------- */
+
+PIA.ROLES = ['Administrador', 'Docente', 'Estudiante'];
+
+/** El rol con el que se está usando la aplicación. */
+PIA.rol = (function () {
+  try { return localStorage.getItem(CLAVE_DATOS + '_rol') || 'Administrador'; }
+  catch (e) { return 'Administrador'; }
+})();
+
+/** Cambia el rol y vuelve a pintar la página. */
+PIA.cambiarRol = function (rol) {
+  PIA.rol = rol;
+  try { localStorage.setItem(CLAVE_DATOS + '_rol', rol); } catch (e) {}
+  PIA.toast('Ahora estás como ' + rol + '. Las acciones disponibles cambiaron.');
+  document.querySelectorAll('[data-solo-admin]').forEach(function (el) {
+    el.classList.toggle('oculto', rol !== 'Administrador');
+  });
+  document.querySelectorAll('[data-roles]').forEach(function (el) {
+    el.classList.toggle('oculto', el.getAttribute('data-roles').indexOf(rol) === -1);
+  });
+  if (typeof pintarTodo === 'function') pintarTodo();
+};
+
+/** Devuelve true si el rol actual puede hacer la acción. */
+PIA.puede = function (accion) {
+  if (PIA.rol === 'Administrador') return true;
+  if (PIA.rol === 'Docente') return ['crear', 'editar', 'exportar', 'imprimir'].indexOf(accion) !== -1;
+  return ['crear', 'exportar'].indexOf(accion) !== -1;
+};
+
+/* ---------------- 2. EXPORTAR E IMPRIMIR ---------------- */
+
+/** Descarga una tabla en CSV (se abre en Excel). */
+PIA.csv = function (tabla, columnas) {
+  var filas = PIA.listar(tabla);
+  if (!filas.length) { PIA.toast('No hay datos para exportar.', 'warn'); return; }
+  var cols = columnas || Object.keys(filas[0]).filter(function (k) { return k !== 'creado'; });
+  var lineas = [cols.join(';')];
+  filas.forEach(function (f) {
+    lineas.push(cols.map(function (c) {
+      var v = f[c];
+      if (Array.isArray(v)) v = v.join(' | ');
+      return String(v == null ? '' : v).replace(/;/g, ',').replace(/[\r\n]+/g, ' ');
+    }).join(';'));
+  });
+  var contenido = '\ufeff' + lineas.join('\r\n');
+  var enlace = document.createElement('a');
+  enlace.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(contenido);
+  enlace.download = 'SolBox-' + tabla + '-' + PIA.hoy() + '.csv';
+  document.body.appendChild(enlace);
+  enlace.click();
+  enlace.remove();
+  PIA.toast('Archivo exportado: ' + enlace.download);
+};
+
+/** Imprime la página tal como se ve. */
+PIA.imprimir = function () { window.print(); };
+
+/** Copia un texto al portapapeles. */
+PIA.copiar = function (texto) {
+  var t = String(texto || '');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(t).then(function () { PIA.toast('Copiado: ' + t); }, function () { PIA.toast(t); });
+  } else { PIA.toast(t); }
+};
+
+/* ---------------- 3. CONFIRMACIÓN ELEGANTE ---------------- */
+
+/** Pide confirmación con una ventana bonita en vez del confirm() del navegador. */
+PIA.confirmar = function (titulo, texto, alAceptar, opciones) {
+  var o = opciones || {};
+  var botones = '<button class="btn" onclick="PIA.cerrarModal()">Cancelar</button>' +
+    '<button class="btn ' + (o.peligro ? 'pel' : 'p') + '" id="piaConfirmarSi">' + (o.textoBoton || 'Sí, continuar') + '</button>';
+  PIA.modal(titulo, '<p style="font-size:14px">' + PIA.esc(texto) + '</p>', botones);
+  document.getElementById('piaConfirmarSi').onclick = function () {
+    PIA.cerrarModal();
+    if (typeof alAceptar === 'function') alAceptar();
+  };
+};
+
+/* ---------------- 4. DESHACER ---------------- */
+
+var ULTIMO_BORRADO = null;
+
+/** Elimina un registro guardando una copia para poder deshacer. */
+PIA.borrarConDeshacer = function (tabla, id, alTerminar) {
+  var fila = PIA.listar(tabla).filter(function (f) { return Number(f.id) === Number(id); })[0];
+  if (!fila) return;
+  PIA.confirmar('¿Eliminar este registro?', 'Se puede deshacer durante unos segundos.', function () {
+    ULTIMO_BORRADO = { tabla: tabla, fila: fila };
+    PIA.eliminar(tabla, id);
+    PIA.toast('Registro eliminado. Pulsa Deshacer para recuperarlo.', 'warn');
+    mostrarDeshacer();
+    if (typeof alTerminar === 'function') alTerminar();
+  }, { peligro: true, textoBoton: 'Sí, eliminar' });
+};
+
+var CAJA_DESHACER = null;
+
+/** Muestra el botón flotante de deshacer. */
+function mostrarDeshacer() {
+  if (CAJA_DESHACER) CAJA_DESHACER.remove();
+  CAJA_DESHACER = document.createElement('div');
+  CAJA_DESHACER.className = 'toast warn';
+  CAJA_DESHACER.style.bottom = '80px';
+  CAJA_DESHACER.innerHTML = 'Registro eliminado <button class="btn pq" style="margin-left:10px" id="piaDeshacer">Deshacer</button>';
+  document.body.appendChild(CAJA_DESHACER);
+  document.getElementById('piaDeshacer').onclick = function () {
+    if (!ULTIMO_BORRADO) return;
+    PIA.insertar(ULTIMO_BORRADO.tabla, ULTIMO_BORRADO.fila);
+    CAJA_DESHACER.remove(); CAJA_DESHACER = null; ULTIMO_BORRADO = null;
+    PIA.toast('Registro recuperado.');
+    if (typeof pintarTodo === 'function') pintarTodo();
+  };
+  setTimeout(function () { if (CAJA_DESHACER) { CAJA_DESHACER.remove(); CAJA_DESHACER = null; ULTIMO_BORRADO = null; } }, 9000);
+}
+
+/* ---------------- 5. BÚSQUEDA Y ORDEN EN TABLAS ---------------- */
+
+var ORDEN_ACTUAL = {};
+
+/** Filtra las filas de una tabla por un texto, en cualquier columna. */
+PIA.filtrar = function (filas, texto) {
+  var t = PIA.normalizar(texto);
+  if (!t) return filas;
+  return filas.filter(function (f) { return PIA.normalizar(JSON.stringify(f)).indexOf(t) !== -1; });
+};
+
+/** Ordena las filas por una columna (alterna ascendente y descendente). */
+PIA.ordenar = function (filas, columna) {
+  var clave = ORDEN_ACTUAL.clave === columna && ORDEN_ACTUAL.dir === 'asc' ? 'desc' : 'asc';
+  ORDEN_ACTUAL = { clave: columna, dir: clave };
+  return filas.slice().sort(function (a, b) {
+    var x = a[columna], y = b[columna];
+    var num = !isNaN(Number(x)) && !isNaN(Number(y)) && x !== '' && y !== '';
+    var r = num ? Number(x) - Number(y) : PIA.normalizar(x).localeCompare(PIA.normalizar(y));
+    return clave === 'asc' ? r : -r;
+  });
+};
+
+/* ---------------- 6. CONTADORES ANIMADOS ---------------- */
+
+/** Anima un número desde 0 hasta su valor final. */
+PIA.contar = function (idElemento, hasta, sufijo) {
+  var el = document.getElementById(idElemento);
+  if (!el) return;
+  var meta = Number(hasta) || 0;
+  var inicio = 0;
+  var paso = Math.max(1, Math.ceil(meta / 26));
+  var timer = setInterval(function () {
+    inicio += paso;
+    if (inicio >= meta) { inicio = meta; clearInterval(timer); }
+    el.textContent = inicio + (sufijo || '');
+  }, 22);
+};
+
+/* ---------------- 7. CELEBRACIÓN ---------------- */
+
+/** Lanza una lluvia de colores al completar algo importante. */
+PIA.brindis = function () {
+  var colores = ['#f97316', '#22c55e', '#0284c7', '#a78bfa', '#f59e0b', '#ef4444'];
+  for (var i = 0; i < 34; i++) {
+    var p = document.createElement('div');
+    p.style.cssText = 'position:fixed;z-index:2000;pointer-events:none;width:9px;height:9px;border-radius:2px;' +
+      'left:' + (Math.random() * 100) + 'vw;top:-14px;background:' + colores[i % colores.length] + ';' +
+      'transition:transform 1.5s cubic-bezier(.2,.7,.4,1), opacity 1.5s;';
+    document.body.appendChild(p);
+    (function (el) {
+      requestAnimationFrame(function () {
+        el.style.transform = 'translateY(' + (window.innerHeight + 40) + 'px) rotate(' + (Math.random() * 720) + 'deg)';
+        el.style.opacity = '0';
+      });
+      setTimeout(function () { el.remove(); }, 1700);
+    })(p);
+  }
+};
+
+/* ---------------- 8. ATAJOS DE TECLADO ---------------- */
+
+document.addEventListener('keydown', function (ev) {
+  /* Escape cierra la ventana abierta */
+  if (ev.key === 'Escape') PIA.cerrarModal();
+  /* Ctrl+F enfoca la búsqueda de la página */
+  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'f') {
+    var caja = document.querySelector('input[type=search], #buscador, #buscar');
+    if (caja) { ev.preventDefault(); caja.focus(); caja.select(); }
+  }
+  /* Ctrl+P imprime */
+  if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'p') { /* deja el navegador */ }
+});
+
+/* ---------------- 9. BARRA DE ACCIONES PARA TABLAS ---------------- */
+
+/**
+ * Pinta la barra de herramientas de una tabla: buscar, exportar e imprimir.
+ * Se usa igual en los nueve proyectos.
+ * @param {string} tabla      nombre de la tabla de datos
+ * @param {string} idBuscador id del campo de búsqueda
+ * @param {string} texto      texto de ayuda
+ */
+PIA.barraTabla = function (tabla, idBuscador, texto) {
+  return '<div class="fila" style="margin-bottom:12px">' +
+    '<input type="search" id="' + idBuscador + '" placeholder="' + (texto || 'Buscar en los registros…') + '" style="flex:1;min-width:180px;padding:9px 13px;border-radius:var(--radio-campo);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta)">' +
+    '<button class="btn pq" onclick="PIA.csv(\'' + tabla + '\')">⬇ Exportar</button>' +
+    '<button class="btn pq" onclick="PIA.imprimir()">🖨 Imprimir</button>' +
+  '</div>';
+};
+
+/* ---------------- 10. EJEMPLOS DE DEMOSTRACIÓN ---------------- */
+
+/**
+ * Carga cinco registros de ejemplo escritos para este proyecto.
+ * Sirve para mostrar el CRUD sin tener que escribir todo a mano.
+ */
+PIA.cargarEjemplos = function (tabla, ejemplos, alTerminar) {
+  var actuales = PIA.listar(tabla);
+  var nuevos = 0;
+  ejemplos.forEach(function (e) {
+    /* se evita duplicar si ya existe uno con el mismo título o nombre */
+    var clave = e.titulo || e.nombre || e.codigo || '';
+    var repetido = actuales.some(function (a) { return (a.titulo || a.nombre || a.codigo || '') === clave; });
+    if (!repetido) { PIA.insertar(tabla, e); nuevos++; }
+  });
+  PIA.toast(nuevos ? 'Se agregaron ' + nuevos + ' ejemplos.' : 'Los ejemplos ya estaban cargados.', nuevos ? 'ok' : 'warn');
+  if (nuevos) PIA.brindis();
+  if (typeof alTerminar === 'function') alTerminar();
+};
+
+/* ---------------- 11. AYUDA ---------------- */
+
+/** Explica en dos palabras cómo se usa la aplicación. */
+PIA.ayuda = function () {
+  var cuerpo = '<div class="aviso"><b>Esta es la aplicación de SolBox.</b> Todo lo que hagas se guarda en tu navegador.</div>' +
+    '<h3 style="margin:14px 0 6px">Roles</h3>' +
+    '<p style="font-size:13.5px">Arriba a la derecha puedes cambiar entre <b>Administrador</b>, <b>Docente</b> y <b>Estudiante</b>. ' +
+    'Cada uno ve acciones distintas: el administrador puede todo, el docente crea y edita, el estudiante solo crea y consulta.</p>' +
+    '<h3 style="margin:14px 0 6px">Atajos</h3>' +
+    '<p style="font-size:13.5px"><b>Ctrl + F</b> busca en la página · <b>Escape</b> cierra esta ventana · <b>Ctrl + P</b> imprime.</p>' +
+    '<h3 style="margin:14px 0 6px">Si algo se borra</h3>' +
+    '<p style="font-size:13.5px">Al eliminar aparece un botón <b>Deshacer</b> durante unos segundos.</p>';
+  PIA.modal('Cómo se usa', cuerpo);
+};
+
+/* ---------------- 12. CINCO EJEMPLOS DESDE LA PÁGINA ---------------- */
+
+/* Palabras que se cambian para que los ejemplos no queden idénticos. */
+var VARIANTES = ['Nuevo', 'Actualizado', 'Urgente', 'Revisado', 'Pendiente'];
+
+/**
+ * Crea cinco registros de ejemplo a partir de los que ya existen.
+ * Toma la tabla con más datos, copia un registro y le cambia algunos valores
+ * para que se vea como si alguien los hubiera escrito desde la página.
+ */
+PIA.crearEjemplos = function () {
+  var todo = PIA.leerTodo();
+  var tablas = Object.keys(todo).filter(function (t) { return Array.isArray(todo[t]) && todo[t].length; });
+  if (!tablas.length) { PIA.toast('No hay datos base para crear ejemplos.', 'mal'); return; }
+  /* la tabla con más registros suele ser la principal */
+  tablas.sort(function (a, b) { return todo[b].length - todo[a].length; });
+  var tabla = tablas[0];
+  var base = todo[tabla];
+  var creados = 0;
+
+  for (var i = 0; i < 5; i++) {
+    var modelo = base[i % base.length];
+    var copia = JSON.parse(JSON.stringify(modelo));
+    delete copia.id;
+    delete copia.creado;
+    var marca = VARIANTES[i % VARIANTES.length] + ' ' + (i + 1);
+    Object.keys(copia).forEach(function (k) {
+      var v = copia[k];
+      if (typeof v !== 'string' || !v) return;
+      var kl = k.toLowerCase();
+      /* se cambian los textos visibles; los códigos y correos se dejan válidos */
+      if (kl.indexOf('codigo') !== -1 || kl.indexOf('radicado') !== -1 || kl.indexOf('carnet') !== -1) {
+        copia[k] = v.replace(/\d+$/, function (m) { return String(Number(m) + 100 + i); });
+      } else if (kl.indexOf('correo') !== -1 || kl.indexOf('email') !== -1) {
+        copia[k] = v.replace('@', '.' + (i + 1) + '@');
+      } else if (kl.indexOf('fecha') !== -1) {
+        var d = new Date(); d.setDate(d.getDate() + i + 1);
+        copia[k] = d.toISOString().slice(0, 10);
+      } else if (kl.indexOf('titulo') !== -1 || kl.indexOf('nombre') !== -1 || kl.indexOf('asunto') !== -1 || kl.indexOf('descripcion') !== -1 || kl.indexOf('mensaje') !== -1) {
+        copia[k] = v + ' · ' + marca;
+      }
+    });
+    PIA.insertar(tabla, copia);
+    creados++;
+  }
+
+  PIA.brindis();
+  PIA.toast('Se crearon ' + creados + ' ejemplos en la tabla "' + tabla + '".');
+  setTimeout(function () { window.location.reload(); }, 900);
+};
+
+/** El botón flotante para crear los cinco ejemplos. */
+function pintarBotonEjemplos() {
+  if (document.getElementById('piaEjemplos')) return;
+  var b = document.createElement('button');
+  b.id = 'piaEjemplos';
+  b.className = 'btn a';
+  b.style.cssText = 'position:fixed;left:18px;bottom:18px;z-index:800;box-shadow:0 6px 20px rgba(0,0,0,.25)';
+  b.innerHTML = '＋ Crear 5 ejemplos';
+  b.title = 'Agrega cinco registros de muestra para probar el CRUD';
+  b.onclick = function () {
+    PIA.confirmar('¿Crear cinco ejemplos?',
+      'Se agregarán cinco registros nuevos a la tabla principal, como si los hubieras escrito tú. Después puedes editarlos o eliminarlos.',
+      function () { PIA.crearEjemplos(); });
+  };
+  document.body.appendChild(b);
+}
+
+/* ---------------- 12b. LA FICHA OFICIAL DEL PROYECTO ---------------- */
+
+/** Muestra la ficha que está en el documento PIA: código, objetivos y palabras clave. */
+PIA.mostrarFicha = function () {
+  var f = PIA.ficha || {};
+  var equipo = PIA.equipo || [];
+  var partes = [];
+
+  if (f.codigo) {
+    partes.push('<div class="aviso" style="font-size:12.5px;letter-spacing:.04em"><b>Código del hilo:</b> ' + PIA.esc(f.codigo) + '</div>');
+  }
+  if (f.objetivo) {
+    partes.push('<h3 style="margin:16px 0 6px">Objetivo general</h3>');
+    partes.push('<p style="font-size:14px;line-height:1.7">' + PIA.esc(f.objetivo) + '</p>');
+  }
+  if (f.especificos && f.especificos.length) {
+    partes.push('<h3 style="margin:16px 0 6px">Objetivos específicos</h3>');
+    partes.push('<ol style="margin-left:18px;font-size:13.5px;line-height:1.8">' +
+      f.especificos.map(function (o) { return '<li>' + PIA.esc(o) + '</li>'; }).join('') + '</ol>');
+  }
+  if (f.palabrasClave && f.palabrasClave.length) {
+    partes.push('<h3 style="margin:16px 0 8px">Palabras clave</h3>');
+    partes.push('<div class="fila" style="gap:6px;flex-wrap:wrap">' +
+      f.palabrasClave.map(function (p) { return '<span class="badge neutro">' + PIA.esc(p) + '</span>'; }).join('') + '</div>');
+  }
+  if (equipo.length) {
+    partes.push('<h3 style="margin:16px 0 8px">Equipo</h3>');
+    partes.push('<ul style="margin-left:18px;font-size:13px;line-height:1.8">' +
+      equipo.map(function (i) { return '<li><b>' + PIA.esc(i.nombre) + '</b> — ' + PIA.esc(i.rol) + '</li>'; }).join('') + '</ul>');
+  }
+  if (f.normativa) {
+    partes.push('<h3 style="margin:16px 0 6px">Marco normativo</h3>');
+    partes.push('<p style="font-size:13px">' + PIA.esc(f.normativa) + '</p>');
+  }
+  partes.push('<p class="pequeno gris" style="margin-top:16px">Proyecto Integrador de Aula (PIA) 2026 · I.E. Lola González · Grado 10° · Grupo 10°05<br>' +
+    'Técnico Auxiliar en Desarrollo de Software — I.U. Pascual Bravo<br>' +
+    'Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b></p>');
+
+  PIA.modal('Ficha del proyecto', partes.join(''));
+};
+
+/** Pone el botón de la ficha en el pie de página. */
+function pintarBotonFicha() {
+  var pie = document.querySelector('.pie');
+  if (!pie || !PIA.ficha || document.getElementById('piaFichaBtn')) return;
+  var b = document.createElement('button');
+  b.id = 'piaFichaBtn';
+  b.className = 'btn pq';
+  b.type = 'button';
+  b.textContent = 'Ficha del proyecto';
+  b.style.marginTop = '10px';
+  b.onclick = PIA.mostrarFicha;
+  pie.appendChild(b);
+}
+
+/* ---------------- 12c. CÓMO SE CONSTRUYÓ ---------------- */
+
+/** Pinta el pseudocódigo y el modelo de tablas que vienen del documento PIA. */
+function pintarConstruccion() {
+  var cont = document.getElementById('construccion');
+  if (!cont) return;
+  var c = PIA.construccion || {};
+  var alg = c.algoritmo || [];
+  var tab = c.tablas || [];
+  var partes = [];
+
+  partes.push('<div class="aviso"><b>De dónde sale esto:</b> el pseudocódigo y el modelo de tablas están en el documento del proyecto (PIA 2026). Aquí se muestran tal cual para que se entienda cómo está construida la aplicación.</div>');
+
+  if (alg.length) {
+    partes.push('<h2 style="margin:22px 0 10px">El algoritmo</h2>');
+    partes.push('<p class="ayuda">El paso a paso que resuelve el problema central del proyecto.</p>');
+    partes.push('<pre class="codigo">' + PIA.esc(alg.join(String.fromCharCode(10))) + '</pre>');
+  }
+
+  if (tab.length) {
+    partes.push('<h2 style="margin:26px 0 10px">El modelo de datos</h2>');
+    partes.push('<p class="ayuda">Las tablas con sus campos, tal como se proyectan para grado 11°.</p>');
+    partes.push('<div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Tabla</th><th>Campos</th></tr></thead><tbody>' +
+      tab.map(function (t) {
+        return '<tr><td><b>' + PIA.esc(t.nombre) + '</b></td><td>' + PIA.esc(t.campos) + '</td></tr>';
+      }).join('') + '</tbody></table></div>');
+  }
+
+  if (!alg.length && !tab.length) {
+    partes.push('<p class="vacio">El documento de este proyecto no incluye pseudocódigo ni modelo de tablas.</p>');
+  }
+
+  partes.push('<p style="margin-top:22px"><button class="btn p" type="button" onclick="PIA.mostrarFicha()">Ver la ficha del proyecto</button></p>');
+  cont.innerHTML = partes.join('');
+}
+
+/** Pone el enlace a «Cómo se construyó» en el pie. */
+function pintarEnlaceConstruccion() {
+  var pie = document.querySelector('.pie');
+  if (!pie || document.getElementById('piaConstruccion')) return;
+  var a = document.createElement('a');
+  a.id = 'piaConstruccion';
+  a.href = 'construccion.html';
+  a.className = 'btn pq';
+  a.textContent = 'Cómo se construyó';
+  a.style.marginTop = '10px';
+  a.style.marginLeft = '8px';
+  pie.appendChild(a);
+}
+
+/* ---------------- 13. ARRANQUE ---------------- */
+
+document.addEventListener('DOMContentLoaded', function () {
+  /* el selector de rol, si está en la página */
+  var selector = document.getElementById('piaRol');
+  if (selector) {
+    selector.value = PIA.rol;
+    selector.onchange = function () { PIA.cambiarRol(selector.value); };
+  }
+  document.querySelectorAll('[data-solo-admin]').forEach(function (el) {
+    el.classList.toggle('oculto', PIA.rol !== 'Administrador');
+  });
+  /* los contadores de los indicadores se animan solos */
+  document.querySelectorAll('.indicador strong[data-contar]').forEach(function (el) {
+    var valor = el.getAttribute('data-contar');
+    var sufijo = el.getAttribute('data-sufijo') || '';
+    PIA.contar(el.id, valor, sufijo);
+  });
+  /* las tarjetas entran con una animación suave */
+  /* las tarjetas entran con una animación suave */
+  document.querySelectorAll('.tarjeta, .indicador, .producto, .obra').forEach(function (el, i) {
+    el.style.animation = 'aparece .34s ease-out both';
+    el.style.animationDelay = Math.min(i * 0.04, 0.5) + 's';
+  });
+  /* el botón para crear los cinco ejemplos */
+  pintarBotonEjemplos();
+  /* el botón de la ficha oficial */
+  pintarBotonFicha();
+  /* el enlace y la página de la construcción */
+  pintarEnlaceConstruccion();
+  pintarConstruccion();
+});
+
+
+/**
+ * solbox.js — radicación con filtro léxico, seguimiento y panel de gestión.
+ */
+'use strict';
+
+var OFENSIVAS = ['hp', 'hijueputa', 'gonorrea', 'malparido', 'puta', 'mierda', 'idiota', 'estupido'];
+
+function tieneGroserias(t) {
+  var n = PIA.normalizar(t);
+  for (var i = 0; i < OFENSIVAS.length; i++) if (n.indexOf(OFENSIVAS[i]) !== -1) return true;
+  return false;
+}
+
+/** Radica una solicitud con filtro y código único. */
+function radicar() {
+  var tipo = PIA.valor('rTipo'), zona = PIA.valor('rZona');
+  var asunto = PIA.valor('rAsunto'), texto = PIA.valor('rTexto');
+  var anonimo = document.getElementById('rAnonimo') && document.getElementById('rAnonimo').checked;
+  var aviso = document.getElementById('radicarAviso');
+
+  if (!asunto.trim()) { PIA.toast('Escribe el asunto.', 'mal'); return; }
+  var palabras = PIA.palabras(texto);
+  if (palabras < 5 || palabras > 120) { PIA.toast('El mensaje debe tener entre 5 y 120 palabras.', 'mal'); return; }
+  if (tieneGroserias(texto)) {
+    aviso.innerHTML = '<div class="aviso" style="border-left-color:#b91c1c"><b>Mensaje bloqueado.</b> Evita el lenguaje ofensivo: promovemos el respeto.</div>';
+    return;
+  }
+
+  var lista = PIA.listar('solicitudes');
+  var num = String(lista.length + 1).padStart(4, '0');
+  var radicado = 'SB-2026-' + num;
+  PIA.insertar('solicitudes', {
+    radicado: radicado, tipo: tipo, zona: zona, asunto: asunto,
+    estado: 'En revisión', dias: 0, autor: anonimo ? 'Anon_' + (100 + lista.length) : 'Estudiante'
+  });
+  aviso.innerHTML = '<div class="radicado"><span style="font-size:11px;letter-spacing:.14em;color:#9a4f22;text-transform:uppercase">Tu radicado</span>' +
+    '<b>' + radicado + '</b><span style="font-size:12px;color:#5a6b80">Guárdalo para consultar el estado</span></div>';
+  var ult = document.getElementById('ultimoRadicado');
+  if (ult) ult.innerHTML = '<div class="aviso" style="margin-top:12px">Último: <b>' + radicado + '</b></div>';
+  PIA.poner('rAsunto', ''); PIA.poner('rTexto', '');
+  PIA.brindis();
+  PIA.toast('Solicitud radicada: ' + radicado);
+}
+
+/** Busca un radicado y muestra su estado. */
+function consultar() {
+  var codigo = PIA.valor('sCodigo').trim().toUpperCase();
+  var cont = document.getElementById('resultadoConsulta');
+  if (!codigo) { PIA.toast('Escribe el radicado.', 'mal'); return; }
+  var s = PIA.listar('solicitudes').filter(function (x) { return String(x.radicado).toUpperCase() === codigo; })[0];
+  if (!s) {
+    cont.innerHTML = '<div class="aviso" style="border-left-color:#b91c1c">No encontramos el radicado <b>' + PIA.esc(codigo) + '</b>.</div>';
+    return;
+  }
+  var cls = s.estado === 'Respondida' ? 'ok' : s.estado === 'Vencida' ? 'malo' : 'warn';
+  cont.innerHTML = '<div class="tarjeta"><div class="fila" style="justify-content:space-between"><b style="font-family:var(--fuente-mono);color:#0b3d6b">' + PIA.esc(s.radicado) + '</b>' +
+    '<span class="badge ' + cls + '">' + PIA.esc(s.estado) + '</span></div>' +
+    '<p style="margin-top:10px;font-size:14px"><b>' + PIA.esc(s.asunto) + '</b></p>' +
+    '<p class="pequeno gris">' + PIA.esc(s.tipo) + ' · ' + PIA.esc(s.zona) + ' · ' + s.dias + ' día(s) de espera</p></div>';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  var lista = PIA.listar('solicitudes');
+  var pend = lista.filter(function (s) { return s.estado === 'En revisión'; }).length;
+  var resp = lista.filter(function (s) { return s.estado === 'Respondida'; }).length;
+  var venc = lista.filter(function (s) { return s.estado === 'Vencida'; }).length;
+  [['kTotal', lista.length], ['kPend', pend], ['kResp', resp], ['kVenc', venc]].forEach(function (p) {
+    var el = document.getElementById(p[0]); if (el) el.textContent = p[1];
+  });
+
+  var ts = document.getElementById('tablaSolicitudes');
+  if (ts) {
+    ts.innerHTML = PIA.tabla(['Radicado', 'Tipo', 'Zona', 'Asunto', 'Días', 'Estado'], lista.map(function (s) {
+      var cls = s.estado === 'Respondida' ? 'ok' : s.estado === 'Vencida' ? 'malo' : 'warn';
+      return ['<b style="font-family:var(--fuente-mono)">' + PIA.esc(s.radicado) + '</b>', PIA.esc(s.tipo), PIA.esc(s.zona),
+        PIA.esc(s.asunto), s.dias, '<span class="badge ' + cls + '">' + PIA.esc(s.estado) + '</span>'];
+    }), { vacio: 'Sin solicitudes.' });
+  }
+  var tz = document.getElementById('tablaZonas');
+  if (tz) {
+    tz.innerHTML = PIA.tabla(['Zona', 'Responsable', 'Radicados'], PIA.listar('zonas').map(function (z) {
+      return ['<b>' + PIA.esc(z.nombre) + '</b>', PIA.esc(z.responsable), '<b>' + z.total + '</b>'];
+    }), { vacio: 'Sin zonas.' });
+  }
+});
+
+/* usa el núcleo compartido */
+/* usa el núcleo compartido */
+/* usa el núcleo compartido */
+</script>
+<script id="piaPaginas" type="application/json">[{"archivo":"index.html","nombre":"Inicio","cuerpo":"\n\n  <div class=\"armazon\">\n\n    <!-- ================= CABECERA ================= -->\n    <header class=\"barra-sup\">\n      <a class=\"marca\" href=\"index.html\">\n        <div class=\"marca-logo\" style=\"display:grid;place-items:center;font-weight:800\">SB</div>\n        <div class=\"marca-texto\">\n          <b>SolBox</b>\n          <span>I.E. Sol de Oriente · Buzón virtual PQRS</span>\n        </div>\n      </a>\n      <div class=\"fila\" style=\"margin-left:auto;gap:8px\"><label class=\"sr\" for=\"piaRol\">Rol</label><select id=\"piaRol\" title=\"Cambia el rol para ver qué puede hacer cada uno\" style=\"padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px\"><option value=\"Administrador\">Administrador</option><option value=\"Docente\">Docente</option><option value=\"Estudiante\">Estudiante</option></select><button class=\"btn pq\" onclick=\"PIA.ayuda()\" title=\"Cómo se usa esta aplicación\">?</button></div>\n    </header>\n\n    <!-- ================= MENÚ ================= -->\n    <nav class=\"menu\">\n      <a href=\"index.html\">Inicio</a>\n      <a href=\"radicar.html\">Radicar</a>\n      <a href=\"seguimiento.html\">Seguimiento</a>\n      <a href=\"panel-gestion.html\">Panel de gestión</a>\n    </nav>\n\n    <!-- ================= CONTENIDO ================= -->\n    <main class=\"contenido\">\n      <section class=\"portada anim\">\n        <h1>SolBox</h1>\n        <p>Tu voz llega, tu caso se resuelve.</p>\n        <div class=\"sellos\">\n          <span class=\"sello\">I.E. Sol de Oriente</span>\n          <span class=\"sello\">Grado 11°</span>\n          <span class=\"sello\">Buzón PQRS</span>\n        </div>\n      </section>\n\n<div class=\"rejilla g4\" style=\"margin-bottom:18px\">  <div class=\"cifra\"><strong id=\"kTotal\">0</strong><b>Radicados</b><span>en total</span></div>  <div class=\"cifra\"><strong id=\"kPend\">0</strong><b>En revisión</b><span>sin respuesta</span></div>  <div class=\"cifra\"><strong id=\"kResp\">0</strong><b>Respondidos</b><span>atendidos</span></div>  <div class=\"cifra\"><strong id=\"kVenc\">0</strong><b>Vencidos</b><span>fuera de plazo</span></div></div><div class=\"rejilla g4\" style=\"margin-bottom:16px\">  <a class=\"servicio\" href=\"radicar.html\" style=\"text-decoration:none\"><div class=\"ico\">✍️</div><h3>Radicar</h3><p>Escribe tu caso y recibe un código.</p></a>  <a class=\"servicio\" href=\"seguimiento.html\" style=\"text-decoration:none\"><div class=\"ico\">🔎</div><h3>Seguimiento</h3><p>Consulta con tu radicado.</p></a>  <a class=\"servicio\" href=\"panel-gestion.html\" style=\"text-decoration:none\"><div class=\"ico\">📊</div><h3>Panel de gestión</h3><p>Qué se ha atendido y qué no.</p></a>  <a class=\"servicio\" href=\"index.html\" style=\"text-decoration:none\"><div class=\"ico\">⏱️</div><h3>3 días hábiles</h3><p>El plazo que nos comprometemos a cumplir.</p></a></div><div class=\"aviso\"><b>Cuatro reglas del buzón:</b> solo correo institucional · filtro de lenguaje ofensivo · radicado único para seguir el caso · respuesta en 3 días hábiles.</div>\n    </main>\n\n    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->\n    <nav class=\"barra-movil\" aria-label=\"Navegación principal en móvil\">\n      <a href=\"index.html\"><i aria-hidden=\"true\">⌂</i><span>Inicio</span></a>\n      <a href=\"radicar.html\"><i aria-hidden=\"true\">•</i><span>Radicar</span></a>\n      <a href=\"seguimiento.html\"><i aria-hidden=\"true\">•</i><span>Seguimiento</span></a>\n      <a href=\"panel-gestion.html\"><i aria-hidden=\"true\">•</i><span>Panel de gestión</span></a>\n    </nav>\n\n    <!-- ================= PIE ================= -->\n    <footer class=\"pie\">\n      \n      <div><b>SolBox</b> — Tu voz llega, tu caso se resuelve</div>\n      <div class=\"equipo\">\n        <span>Estudiante líder de producto</span>\n        <span>Estudiante de diseño</span>\n        <span>Estudiante de lógica</span>\n        <span>Estudiante de análisis</span>\n      </div>\n      <div class=\"linea\">\n        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05\n      </div>\n      <div class=\"linea\">\n        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo\n      </div>\n      <div class=\"linea\">\n        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>\n      </div>\n    </footer>\n\n  </div>\n\n  <div id=\"piaToast\"></div>\n  \n  \n  \n  \n","layout":"layout-top"},{"archivo":"radicar.html","nombre":"Radicar","cuerpo":"\n\n  <div class=\"armazon\">\n\n    <!-- ================= CABECERA ================= -->\n    <header class=\"barra-sup\">\n      <a class=\"marca\" href=\"index.html\">\n        <div class=\"marca-logo\" style=\"display:grid;place-items:center;font-weight:800\">SB</div>\n        <div class=\"marca-texto\">\n          <b>SolBox</b>\n          <span>I.E. Sol de Oriente · Buzón virtual PQRS</span>\n        </div>\n      </a>\n      <div class=\"fila\" style=\"margin-left:auto;gap:8px\"><label class=\"sr\" for=\"piaRol\">Rol</label><select id=\"piaRol\" title=\"Cambia el rol para ver qué puede hacer cada uno\" style=\"padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px\"><option value=\"Administrador\">Administrador</option><option value=\"Docente\">Docente</option><option value=\"Estudiante\">Estudiante</option></select><button class=\"btn pq\" onclick=\"PIA.ayuda()\" title=\"Cómo se usa esta aplicación\">?</button></div>\n    </header>\n\n    <!-- ================= MENÚ ================= -->\n    <nav class=\"menu\">\n      <a href=\"index.html\">Inicio</a>\n      <a href=\"radicar.html\">Radicar</a>\n      <a href=\"seguimiento.html\">Seguimiento</a>\n      <a href=\"panel-gestion.html\">Panel de gestión</a>\n    </nav>\n\n    <!-- ================= CONTENIDO ================= -->\n    <main class=\"contenido\">\n      <section class=\"portada anim\">\n        <h1>Radicar una solicitud</h1>\n        <p>Cuéntanos qué pasa. Te damos un código.</p>\n        <div class=\"sellos\">\n          <span class=\"sello\">I.E. Sol de Oriente</span>\n          <span class=\"sello\">Grado 11°</span>\n          <span class=\"sello\">Buzón PQRS</span>\n        </div>\n      </section>\n\n<div class=\"rejilla g2\">  <div class=\"tarjeta\"><h3>Tu solicitud</h3>    <div class=\"campo\"><label for=\"rTipo\">Tipo</label><select id=\"rTipo\"><option>Queja</option><option>Petición</option><option>Sugerencia</option><option>Reconocimiento</option></select></div>    <div class=\"campo\"><label for=\"rZona\">¿Dónde ocurre?</label><select id=\"rZona\"><option>Cafetería</option><option>Biblioteca</option><option>Baños</option><option>Canchas</option><option>Aulas</option></select></div>    <div class=\"campo\"><label for=\"rAsunto\">Asunto</label><input id=\"rAsunto\" placeholder=\"Resume en una frase\"></div>    <div class=\"campo\"><label for=\"rTexto\">¿Qué pasó?</label><textarea id=\"rTexto\" placeholder=\"Entre 5 y 120 palabras\"></textarea></div>    <div class=\"campo\"><label><input type=\"checkbox\" id=\"rAnonimo\" style=\"width:auto;margin-right:6px\">Quiero que mi nombre no se vea</label></div>    <button class=\"btn p gr\" onclick=\"radicar()\">Radicar</button>    <div id=\"radicarAviso\" style=\"margin-top:14px\"></div>  </div>  <div class=\"tarjeta\"><h3>Antes de enviar</h3>    <div class=\"aviso\">El mensaje debe tener entre <b>5 y 120 palabras</b> y no puede usar lenguaje ofensivo.</div>    <p class=\"ayuda\">Tu radicado te sirve para consultar el estado cuando quieras. Guárdalo.</p>    <div id=\"ultimoRadicado\"></div>  </div></div>\n    </main>\n\n    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->\n    <nav class=\"barra-movil\" aria-label=\"Navegación principal en móvil\">\n      <a href=\"index.html\"><i aria-hidden=\"true\">⌂</i><span>Inicio</span></a>\n      <a href=\"radicar.html\"><i aria-hidden=\"true\">•</i><span>Radicar</span></a>\n      <a href=\"seguimiento.html\"><i aria-hidden=\"true\">•</i><span>Seguimiento</span></a>\n      <a href=\"panel-gestion.html\"><i aria-hidden=\"true\">•</i><span>Panel de gestión</span></a>\n    </nav>\n\n    <!-- ================= PIE ================= -->\n    <footer class=\"pie\">\n      \n      <div><b>SolBox</b> — Tu voz llega, tu caso se resuelve</div>\n      <div class=\"equipo\">\n        <span>Estudiante líder de producto</span>\n        <span>Estudiante de diseño</span>\n        <span>Estudiante de lógica</span>\n        <span>Estudiante de análisis</span>\n      </div>\n      <div class=\"linea\">\n        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05\n      </div>\n      <div class=\"linea\">\n        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo\n      </div>\n      <div class=\"linea\">\n        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>\n      </div>\n    </footer>\n\n  </div>\n\n  <div id=\"piaToast\"></div>\n  \n  \n  \n  \n","layout":"layout-top"},{"archivo":"seguimiento.html","nombre":"Seguimiento","cuerpo":"\n\n  <div class=\"armazon\">\n\n    <!-- ================= CABECERA ================= -->\n    <header class=\"barra-sup\">\n      <a class=\"marca\" href=\"index.html\">\n        <div class=\"marca-logo\" style=\"display:grid;place-items:center;font-weight:800\">SB</div>\n        <div class=\"marca-texto\">\n          <b>SolBox</b>\n          <span>I.E. Sol de Oriente · Buzón virtual PQRS</span>\n        </div>\n      </a>\n      <div class=\"fila\" style=\"margin-left:auto;gap:8px\"><label class=\"sr\" for=\"piaRol\">Rol</label><select id=\"piaRol\" title=\"Cambia el rol para ver qué puede hacer cada uno\" style=\"padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px\"><option value=\"Administrador\">Administrador</option><option value=\"Docente\">Docente</option><option value=\"Estudiante\">Estudiante</option></select><button class=\"btn pq\" onclick=\"PIA.ayuda()\" title=\"Cómo se usa esta aplicación\">?</button></div>\n    </header>\n\n    <!-- ================= MENÚ ================= -->\n    <nav class=\"menu\">\n      <a href=\"index.html\">Inicio</a>\n      <a href=\"radicar.html\">Radicar</a>\n      <a href=\"seguimiento.html\">Seguimiento</a>\n      <a href=\"panel-gestion.html\">Panel de gestión</a>\n    </nav>\n\n    <!-- ================= CONTENIDO ================= -->\n    <main class=\"contenido\">\n      <section class=\"portada anim\">\n        <h1>Seguimiento</h1>\n        <p>Escribe tu radicado y mira cómo va.</p>\n        <div class=\"sellos\">\n          <span class=\"sello\">I.E. Sol de Oriente</span>\n          <span class=\"sello\">Grado 11°</span>\n          <span class=\"sello\">Buzón PQRS</span>\n        </div>\n      </section>\n\n<div class=\"tarjeta\">  <div class=\"fila\" style=\"flex-wrap:wrap;gap:10px\">    <div class=\"campo\" style=\"flex:2;min-width:220px\"><label for=\"sCodigo\">Radicado</label><input id=\"sCodigo\" placeholder=\"SB-2026-0001\"></div>    <button class=\"btn p\" style=\"align-self:flex-end\" onclick=\"consultar()\">Consultar</button>  </div>  <div id=\"resultadoConsulta\" style=\"margin-top:14px\"></div></div>\n    </main>\n\n    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->\n    <nav class=\"barra-movil\" aria-label=\"Navegación principal en móvil\">\n      <a href=\"index.html\"><i aria-hidden=\"true\">⌂</i><span>Inicio</span></a>\n      <a href=\"radicar.html\"><i aria-hidden=\"true\">•</i><span>Radicar</span></a>\n      <a href=\"seguimiento.html\"><i aria-hidden=\"true\">•</i><span>Seguimiento</span></a>\n      <a href=\"panel-gestion.html\"><i aria-hidden=\"true\">•</i><span>Panel de gestión</span></a>\n    </nav>\n\n    <!-- ================= PIE ================= -->\n    <footer class=\"pie\">\n      \n      <div><b>SolBox</b> — Tu voz llega, tu caso se resuelve</div>\n      <div class=\"equipo\">\n        <span>Estudiante líder de producto</span>\n        <span>Estudiante de diseño</span>\n        <span>Estudiante de lógica</span>\n        <span>Estudiante de análisis</span>\n      </div>\n      <div class=\"linea\">\n        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05\n      </div>\n      <div class=\"linea\">\n        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo\n      </div>\n      <div class=\"linea\">\n        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>\n      </div>\n    </footer>\n\n  </div>\n\n  <div id=\"piaToast\"></div>\n  \n  \n  \n  \n","layout":"layout-top"},{"archivo":"panel-gestion.html","nombre":"Panel de gestión","cuerpo":"\n\n  <div class=\"armazon\">\n\n    <!-- ================= CABECERA ================= -->\n    <header class=\"barra-sup\">\n      <a class=\"marca\" href=\"index.html\">\n        <div class=\"marca-logo\" style=\"display:grid;place-items:center;font-weight:800\">SB</div>\n        <div class=\"marca-texto\">\n          <b>SolBox</b>\n          <span>I.E. Sol de Oriente · Buzón virtual PQRS</span>\n        </div>\n      </a>\n      <div class=\"fila\" style=\"margin-left:auto;gap:8px\"><label class=\"sr\" for=\"piaRol\">Rol</label><select id=\"piaRol\" title=\"Cambia el rol para ver qué puede hacer cada uno\" style=\"padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px\"><option value=\"Administrador\">Administrador</option><option value=\"Docente\">Docente</option><option value=\"Estudiante\">Estudiante</option></select><button class=\"btn pq\" onclick=\"PIA.ayuda()\" title=\"Cómo se usa esta aplicación\">?</button></div>\n    </header>\n\n    <!-- ================= MENÚ ================= -->\n    <nav class=\"menu\">\n      <a href=\"index.html\">Inicio</a>\n      <a href=\"radicar.html\">Radicar</a>\n      <a href=\"seguimiento.html\">Seguimiento</a>\n      <a href=\"panel-gestion.html\">Panel de gestión</a>\n    </nav>\n\n    <!-- ================= CONTENIDO ================= -->\n    <main class=\"contenido\">\n      <section class=\"portada anim\">\n        <h1>Panel de gestión</h1>\n        <p>Qué llegó, qué se atendió y qué se venció.</p>\n        <div class=\"sellos\">\n          <span class=\"sello\">I.E. Sol de Oriente</span>\n          <span class=\"sello\">Grado 11°</span>\n          <span class=\"sello\">Buzón PQRS</span>\n        </div>\n      </section>\n\n<div class=\"tarjeta\"><h3>Solicitudes</h3><div id=\"tablaSolicitudes\"></div></div><div class=\"tarjeta\" style=\"margin-top:16px\"><h3>Por zona</h3><div id=\"tablaZonas\"></div></div>\n    </main>\n\n    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->\n    <nav class=\"barra-movil\" aria-label=\"Navegación principal en móvil\">\n      <a href=\"index.html\"><i aria-hidden=\"true\">⌂</i><span>Inicio</span></a>\n      <a href=\"radicar.html\"><i aria-hidden=\"true\">•</i><span>Radicar</span></a>\n      <a href=\"seguimiento.html\"><i aria-hidden=\"true\">•</i><span>Seguimiento</span></a>\n      <a href=\"panel-gestion.html\"><i aria-hidden=\"true\">•</i><span>Panel de gestión</span></a>\n    </nav>\n\n    <!-- ================= PIE ================= -->\n    <footer class=\"pie\">\n      \n      <div><b>SolBox</b> — Tu voz llega, tu caso se resuelve</div>\n      <div class=\"equipo\">\n        <span>Estudiante líder de producto</span>\n        <span>Estudiante de diseño</span>\n        <span>Estudiante de lógica</span>\n        <span>Estudiante de análisis</span>\n      </div>\n      <div class=\"linea\">\n        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05\n      </div>\n      <div class=\"linea\">\n        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo\n      </div>\n      <div class=\"linea\">\n        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>\n      </div>\n    </footer>\n\n  </div>\n\n  <div id=\"piaToast\"></div>\n  \n  \n  \n  \n","layout":"layout-top"},{"archivo":"construccion.html","nombre":"Cómo se construyó","cuerpo":"\n\n  <div class=\"armazon\">\n\n    <!-- ================= CABECERA ================= -->\n    <header class=\"barra-sup\">\n      <a class=\"marca\" href=\"index.html\">\n        <div class=\"marca-logo\" style=\"display:grid;place-items:center;font-weight:800\">SB</div>\n        <div class=\"marca-texto\">\n          <b>SolBox</b>\n          <span>I.E. Sol de Oriente · Buzón virtual PQRS</span>\n        </div>\n      </a>\n      <div class=\"fila\" style=\"margin-left:auto;gap:8px\"><label class=\"sr\" for=\"piaRol\">Rol</label><select id=\"piaRol\" title=\"Cambia el rol para ver qué puede hacer cada uno\" style=\"padding:7px 11px;border-radius:var(--radio-boton);border:var(--borde-campo);background:var(--campo-fondo);color:var(--tinta);font-size:12.5px\"><option value=\"Administrador\">Administrador</option><option value=\"Docente\">Docente</option><option value=\"Estudiante\">Estudiante</option></select><button class=\"btn pq\" onclick=\"PIA.ayuda()\" title=\"Cómo se usa esta aplicación\">?</button></div>\n    </header>\n\n    <!-- ================= MENÚ ================= -->\n    <nav class=\"menu\">\n      <a href=\"index.html\">Inicio</a>\n      <a href=\"radicar.html\">Radicar</a>\n      <a href=\"seguimiento.html\">Seguimiento</a>\n      <a href=\"panel-gestion.html\">Panel de gestión</a>\n    </nav>\n\n    <!-- ================= CONTENIDO ================= -->\n    <main class=\"contenido\">\n\n<section id=\"construccion\" aria-label=\"Cómo se construyó\"></section>\n    </main>\n\n    <!-- ============== BARRA INFERIOR (MÓVIL) ============== -->\n\n\n    <!-- ================= PIE ================= -->\n    <footer class=\"pie\">\n      \n      <div><b>SolBox</b> — Tu voz llega, tu caso se resuelve</div>\n      <div class=\"equipo\">\n        <span>Estudiante líder de producto</span>\n        <span>Estudiante de diseño</span>\n        <span>Estudiante de lógica</span>\n        <span>Estudiante de análisis</span>\n      </div>\n      <div class=\"linea\">\n        Proyecto Integrador de Aula (PIA) 2026 · I.E. Sol de Oriente · Grado 10° · Grupo 10°05\n      </div>\n      <div class=\"linea\">\n        Técnico Auxiliar en Desarrollo de Software — Institución Universitaria Pascual Bravo\n      </div>\n      <div class=\"linea\">\n        Docente articulador: <b>Jorge Mario Patiño Marín</b> · Docente par: <b>Alejo Villa A</b>\n      </div>\n    </footer>\n\n  </div>\n\n  <div id=\"piaToast\"></div>\n  \n  \n  \n  \n","layout":"layout-top"}]</script>
+<script id="piaImagenes" type="application/json">{}</script>
+<script>(function () {
+  var paginas = JSON.parse(document.getElementById("piaPaginas").textContent);
+  var js = document.getElementById("piaJs").textContent;
+  var css = document.getElementById("piaCss").textContent;
+  var imagenes = JSON.parse(document.getElementById("piaImagenes").textContent);
+  var pantalla = document.getElementById("pantalla");
+  var barra = document.getElementById("barra");
+
+  /* el CSS del proyecto se aplica una sola vez */
+  var hoja = document.createElement("style");
+  hoja.textContent = css;
+  document.head.appendChild(hoja);
+
+  function pintar(i) {
+    var pagina = paginas[i];
+    var cuerpo = pagina.cuerpo;
+    Object.keys(imagenes).forEach(function (nombre) {
+      cuerpo = cuerpo.split(nombre).join(imagenes[nombre]);
+    });
+    document.body.className = pagina.layout || "layout-top";
+    var COMILLA = String.fromCharCode(34);
+    pantalla.innerHTML = "<div class=" + COMILLA + "pia-pagina" + COMILLA + ">" + cuerpo + "</div>";
+
+    /* se vuelve a ejecutar el JavaScript del proyecto para esta página */
+    var viejo = document.getElementById("piaJsVivo");
+    if (viejo) viejo.parentNode.removeChild(viejo);
+    var nuevo = document.createElement("script");
+    nuevo.id = "piaJsVivo";
+    nuevo.textContent = js;
+    document.body.appendChild(nuevo);
+
+    /* se avisa que la página cargó, para que los módulos pinten sus datos */
+    setTimeout(function () {
+      document.dispatchEvent(new Event("DOMContentLoaded"));
+      window.dispatchEvent(new Event("load"));
+    }, 40);
+
+    /* los enlaces del menú cambian de página dentro del mismo archivo */
+    var enlaces = pantalla.querySelectorAll(".menu a, .menu-tabs a");
+    Array.prototype.forEach.call(enlaces, function (a) {
+      a.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        var destino = a.getAttribute("href");
+        for (var j = 0; j < paginas.length; j++) {
+          if (paginas[j].archivo === destino) { ir(j); return; }
+        }
+      });
+    });
+    window.scrollTo(0, 0);
+  }
+
+  function ir(i) {
+    var botones = barra.querySelectorAll("button");
+    Array.prototype.forEach.call(botones, function (b, j) {
+      if (j === i) b.classList.add("activo"); else b.classList.remove("activo");
+    });
+    pintar(i);
+  }
+
+  window.PIA_ir = function (archivo) {
+    for (var j = 0; j < paginas.length; j++) if (paginas[j].archivo === archivo) return ir(j);
+  };
+
+  paginas.forEach(function (p, i) {
+    var b = document.createElement("button");
+    b.textContent = p.nombre;
+    if (i === 0) b.className = "activo";
+    b.onclick = function () { ir(i); };
+    barra.appendChild(b);
+  });
+
+  var info = document.createElement("span");
+  info.className = "aviso";
+  info.textContent = paginas.length + " páginas · un solo archivo";
+  barra.appendChild(info);
+
+  pintar(0);
+})();</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+/* usa el núcleo compartido */
