@@ -328,6 +328,29 @@ h1,h2,h3{letter-spacing:.04em;text-transform:uppercase}
 
 
 </style>
+<style>
+/* ===== CAPA RESPONSIVA DE LA VERSION PORTATIL ===== */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { min-height: 100vh; }
+/* computador grande */
+@media (min-width: 1400px) {
+  :root { --ancho-contenido: 1320px; }
+  html { font-size: 17.5px; }
+  .contenido { max-width: 1320px; }
+}
+/* televisor */
+@media (min-width: 1800px) {
+  :root { --ancho-contenido: 1640px; }
+  html { font-size: 20px; }
+  .contenido { max-width: 1640px; }
+  body { zoom: 1.06; }
+}
+/* celular: todo a una columna y comodo al dedo */
+@media (max-width: 640px) {
+  html { font-size: 16px; }
+  .boton, button { min-height: 44px; }
+}
+</style>
 </head>
 <body class="layout-top">
 
