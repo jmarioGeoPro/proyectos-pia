@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ana Sofía Restrepo",
+    "grado": "10°01",
+    "nivel": "Explorador",
+    "insignias": 2,
+    "consultas": 14
+  },
+  {
+    "id": 2,
+    "nombre": "Juan David Ospina",
+    "grado": "10°02",
+    "nivel": "Aprendiz",
+    "insignias": 1,
+    "consultas": 8
+  },
+  {
+    "id": 3,
+    "nombre": "María Fernanda Ríos",
+    "grado": "10°01",
+    "nivel": "Mentor",
+    "insignias": 4,
+    "consultas": 26
+  }
+]

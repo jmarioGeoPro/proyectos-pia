@@ -1,0 +1,1 @@
+/* el panel usa el núcleo compartido */
